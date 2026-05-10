@@ -163,6 +163,51 @@
       color: var(--text-dim);
     }
 
+    .disclaimer-btn {
+      font-size: 0.68rem;
+      color: #475569;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      background: transparent;
+      cursor: pointer;
+      margin-top: 0.75rem;
+      transition: all 0.2s;
+    }
+
+    .disclaimer-btn:hover {
+      color: #94A3B8;
+      border-color: rgba(255,255,255,0.14);
+    }
+
+    .disclaimer-panel {
+      display: none;
+      border: 1px solid rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.01);
+      padding: 1rem 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .disclaimer-panel.visible {
+      display: block;
+    }
+
+    .disclaimer-panel p {
+      font-size: 0.78rem;
+      color: #475569;
+      line-height: 1.8;
+    }
+
+    .disclaimer-panel a {
+      color: #64748B;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .disclaimer-panel a:hover {
+      color: #9DFF00;
+    }
+
     /* Mode Toggle */
     .mode-toggle {
       display: flex;
@@ -752,6 +797,10 @@
         <span class="pill pill-dim">No account required</span>
       </div>
       <div class="hero-updated">Vendor and framework data last updated May 2026</div>
+      <button type="button" class="disclaimer-btn" onclick="toggleDisclaimer()">Disclaimer</button>
+      <div class="disclaimer-panel" id="disclaimer-panel">
+        <p>The capabilities matrix was assembled from publicly available documentation and professional experience. It is assumed incomplete and may contain errors. If you spot something incorrect or missing, please let us know — <a href="mailto:thepaminsider@gmail.com">thepaminsider@gmail.com</a></p>
+      </div>
     </section>
 
     <div class="mode-toggle">
@@ -1905,6 +1954,11 @@
     function mapVendors() {
       const resultsDiv = document.getElementById('vendor-results');
       resultsDiv.style.display = 'block';
+    }
+
+    function toggleDisclaimer() {
+      const panel = document.getElementById('disclaimer-panel');
+      panel.classList.toggle('visible');
     }
 
     // Vendor framework toggle
