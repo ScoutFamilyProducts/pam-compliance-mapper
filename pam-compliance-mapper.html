@@ -379,6 +379,40 @@
       color: var(--partial-text);
     }
 
+    /* Configured dropdown */
+    .config-wrap {
+      display: none;
+      margin-top: 0.6rem;
+    }
+
+    .config-wrap.visible {
+      display: block;
+    }
+
+    .config-label {
+      font-size: 0.72rem;
+      color: #334155;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    .config-select {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #94A3B8;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      padding: 0.3rem 0.6rem;
+      font-family: var(--font);
+      cursor: pointer;
+      min-width: 280px;
+    }
+
+    .config-select:focus {
+      outline: none;
+      border-color: rgba(157,255,0,0.3);
+    }
+
     /* Threshold dropdown */
     .threshold-wrap {
       display: none;
@@ -574,6 +608,12 @@
     }
 
     .status-badge.meets {
+      background: var(--meets-bg);
+      color: var(--meets-text);
+      border: 1px solid var(--meets-border);
+    }
+
+    .status-badge.meets-unverified {
       background: var(--meets-bg);
       color: var(--meets-text);
       border: 1px solid var(--meets-border);
@@ -833,6 +873,15 @@
               <textarea class="partial-note" id="q1-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q1')"></textarea>
               <div class="char-counter" id="q1-counter">0 / 140</div>
             </div>
+            <div class="config-wrap" id="q1-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q1-config" onchange="updateConfigStatus('q1')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
+            </div>
           </div>
 
           <div class="question-row" data-qid="q2">
@@ -850,6 +899,15 @@
             <div class="partial-note-wrap" id="q2-note-wrap">
               <textarea class="partial-note" id="q2-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q2')"></textarea>
               <div class="char-counter" id="q2-counter">0 / 140</div>
+            </div>
+            <div class="config-wrap" id="q2-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q2-config" onchange="updateConfigStatus('q2')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
             </div>
           </div>
         </div>
@@ -873,6 +931,15 @@
               <textarea class="partial-note" id="q3-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q3')"></textarea>
               <div class="char-counter" id="q3-counter">0 / 140</div>
             </div>
+            <div class="config-wrap" id="q3-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q3-config" onchange="updateConfigStatus('q3')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
+            </div>
           </div>
 
           <div class="question-row" data-qid="q4">
@@ -889,6 +956,15 @@
             <div class="partial-note-wrap" id="q4-note-wrap">
               <textarea class="partial-note" id="q4-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q4')"></textarea>
               <div class="char-counter" id="q4-counter">0 / 140</div>
+            </div>
+            <div class="config-wrap" id="q4-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q4-config" onchange="updateConfigStatus('q4')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
             </div>
           </div>
 
@@ -907,6 +983,15 @@
               <textarea class="partial-note" id="q5-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q5')"></textarea>
               <div class="char-counter" id="q5-counter">0 / 140</div>
             </div>
+            <div class="config-wrap" id="q5-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q5-config" onchange="updateConfigStatus('q5')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
+            </div>
           </div>
 
           <div class="question-row" data-qid="q6">
@@ -923,6 +1008,15 @@
             <div class="partial-note-wrap" id="q6-note-wrap">
               <textarea class="partial-note" id="q6-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q6')"></textarea>
               <div class="char-counter" id="q6-counter">0 / 140</div>
+            </div>
+            <div class="config-wrap" id="q6-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q6-config" onchange="updateConfigStatus('q6')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
             </div>
             <div class="threshold-wrap" id="q6-threshold-wrap">
               <div class="threshold-label">What is your inactivity threshold before an account is disabled?</div>
@@ -958,6 +1052,15 @@
               <textarea class="partial-note" id="q7-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q7')"></textarea>
               <div class="char-counter" id="q7-counter">0 / 140</div>
             </div>
+            <div class="config-wrap" id="q7-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q7-config" onchange="updateConfigStatus('q7')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
+            </div>
           </div>
 
           <div class="question-row" data-qid="q8">
@@ -974,6 +1077,15 @@
             <div class="partial-note-wrap" id="q8-note-wrap">
               <textarea class="partial-note" id="q8-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q8')"></textarea>
               <div class="char-counter" id="q8-counter">0 / 140</div>
+            </div>
+            <div class="config-wrap" id="q8-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q8-config" onchange="updateConfigStatus('q8')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
             </div>
           </div>
 
@@ -993,6 +1105,15 @@
               <textarea class="partial-note" id="q9-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q9')"></textarea>
               <div class="char-counter" id="q9-counter">0 / 140</div>
             </div>
+            <div class="config-wrap" id="q9-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q9-config" onchange="updateConfigStatus('q9')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
+            </div>
           </div>
 
           <div class="question-row" data-qid="q10">
@@ -1009,6 +1130,15 @@
             <div class="partial-note-wrap" id="q10-note-wrap">
               <textarea class="partial-note" id="q10-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q10')"></textarea>
               <div class="char-counter" id="q10-counter">0 / 140</div>
+            </div>
+            <div class="config-wrap" id="q10-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q10-config" onchange="updateConfigStatus('q10')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
             </div>
           </div>
         </div>
@@ -1032,6 +1162,15 @@
               <textarea class="partial-note" id="q11-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q11')"></textarea>
               <div class="char-counter" id="q11-counter">0 / 140</div>
             </div>
+            <div class="config-wrap" id="q11-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q11-config" onchange="updateConfigStatus('q11')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
+            </div>
           </div>
 
           <div class="question-row" data-qid="q12">
@@ -1048,6 +1187,15 @@
             <div class="partial-note-wrap" id="q12-note-wrap">
               <textarea class="partial-note" id="q12-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q12')"></textarea>
               <div class="char-counter" id="q12-counter">0 / 140</div>
+            </div>
+            <div class="config-wrap" id="q12-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q12-config" onchange="updateConfigStatus('q12')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
             </div>
           </div>
 
@@ -1066,6 +1214,15 @@
               <textarea class="partial-note" id="q13-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q13')"></textarea>
               <div class="char-counter" id="q13-counter">0 / 140</div>
             </div>
+            <div class="config-wrap" id="q13-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q13-config" onchange="updateConfigStatus('q13')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
+            </div>
           </div>
 
           <div class="question-row" data-qid="q14">
@@ -1082,6 +1239,15 @@
             <div class="partial-note-wrap" id="q14-note-wrap">
               <textarea class="partial-note" id="q14-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q14')"></textarea>
               <div class="char-counter" id="q14-counter">0 / 140</div>
+            </div>
+            <div class="config-wrap" id="q14-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q14-config" onchange="updateConfigStatus('q14')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
             </div>
             <div class="threshold-wrap" id="q14-threshold-wrap">
               <div class="threshold-label">What is your session idle timeout threshold?</div>
@@ -1113,6 +1279,15 @@
               <textarea class="partial-note" id="q15-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q15')"></textarea>
               <div class="char-counter" id="q15-counter">0 / 140</div>
             </div>
+            <div class="config-wrap" id="q15-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q15-config" onchange="updateConfigStatus('q15')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -1135,6 +1310,15 @@
               <textarea class="partial-note" id="q16-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q16')"></textarea>
               <div class="char-counter" id="q16-counter">0 / 140</div>
             </div>
+            <div class="config-wrap" id="q16-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q16-config" onchange="updateConfigStatus('q16')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
+            </div>
           </div>
 
           <div class="question-row" data-qid="q17">
@@ -1151,6 +1335,15 @@
             <div class="partial-note-wrap" id="q17-note-wrap">
               <textarea class="partial-note" id="q17-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q17')"></textarea>
               <div class="char-counter" id="q17-counter">0 / 140</div>
+            </div>
+            <div class="config-wrap" id="q17-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q17-config" onchange="updateConfigStatus('q17')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
             </div>
           </div>
 
@@ -1169,6 +1362,15 @@
             <div class="partial-note-wrap" id="q18-note-wrap">
               <textarea class="partial-note" id="q18-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q18')"></textarea>
               <div class="char-counter" id="q18-counter">0 / 140</div>
+            </div>
+            <div class="config-wrap" id="q18-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q18-config" onchange="updateConfigStatus('q18')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
             </div>
           </div>
         </div>
@@ -1193,6 +1395,15 @@
               <textarea class="partial-note" id="q19-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q19')"></textarea>
               <div class="char-counter" id="q19-counter">0 / 140</div>
             </div>
+            <div class="config-wrap" id="q19-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q19-config" onchange="updateConfigStatus('q19')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
+            </div>
           </div>
 
           <div class="question-row" data-qid="q20">
@@ -1210,6 +1421,15 @@
               <textarea class="partial-note" id="q20-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q20')"></textarea>
               <div class="char-counter" id="q20-counter">0 / 140</div>
             </div>
+            <div class="config-wrap" id="q20-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q20-config" onchange="updateConfigStatus('q20')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
+            </div>
           </div>
 
           <div class="question-row" data-qid="q21">
@@ -1226,6 +1446,15 @@
             <div class="partial-note-wrap" id="q21-note-wrap">
               <textarea class="partial-note" id="q21-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q21')"></textarea>
               <div class="char-counter" id="q21-counter">0 / 140</div>
+            </div>
+            <div class="config-wrap" id="q21-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q21-config" onchange="updateConfigStatus('q21')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
             </div>
           </div>
         </div>
@@ -1249,6 +1478,15 @@
               <textarea class="partial-note" id="q22-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q22')"></textarea>
               <div class="char-counter" id="q22-counter">0 / 140</div>
             </div>
+            <div class="config-wrap" id="q22-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q22-config" onchange="updateConfigStatus('q22')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
+            </div>
           </div>
 
           <div class="question-row" data-qid="q23">
@@ -1267,6 +1505,15 @@
               <textarea class="partial-note" id="q23-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q23')"></textarea>
               <div class="char-counter" id="q23-counter">0 / 140</div>
             </div>
+            <div class="config-wrap" id="q23-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q23-config" onchange="updateConfigStatus('q23')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
+            </div>
           </div>
 
           <div class="question-row" data-qid="q24">
@@ -1283,6 +1530,15 @@
             <div class="partial-note-wrap" id="q24-note-wrap">
               <textarea class="partial-note" id="q24-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q24')"></textarea>
               <div class="char-counter" id="q24-counter">0 / 140</div>
+            </div>
+            <div class="config-wrap" id="q24-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q24-config" onchange="updateConfigStatus('q24')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
             </div>
           </div>
         </div>
@@ -1306,6 +1562,15 @@
               <textarea class="partial-note" id="q25-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q25')"></textarea>
               <div class="char-counter" id="q25-counter">0 / 140</div>
             </div>
+            <div class="config-wrap" id="q25-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q25-config" onchange="updateConfigStatus('q25')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
+            </div>
           </div>
 
           <div class="question-row" data-qid="q26">
@@ -1323,6 +1588,15 @@
             <div class="partial-note-wrap" id="q26-note-wrap">
               <textarea class="partial-note" id="q26-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q26')"></textarea>
               <div class="char-counter" id="q26-counter">0 / 140</div>
+            </div>
+            <div class="config-wrap" id="q26-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q26-config" onchange="updateConfigStatus('q26')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
             </div>
           </div>
         </div>
@@ -1347,6 +1621,15 @@
               <textarea class="partial-note" id="q27-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q27')"></textarea>
               <div class="char-counter" id="q27-counter">0 / 140</div>
             </div>
+            <div class="config-wrap" id="q27-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q27-config" onchange="updateConfigStatus('q27')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
+            </div>
           </div>
 
           <div class="question-row" data-qid="q28">
@@ -1365,6 +1648,15 @@
               <textarea class="partial-note" id="q28-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q28')"></textarea>
               <div class="char-counter" id="q28-counter">0 / 140</div>
             </div>
+            <div class="config-wrap" id="q28-config-wrap">
+              <label class="config-label">Is this fully configured and verified as operational?</label>
+              <select class="config-select" id="q28-config" onchange="updateConfigStatus('q28')">
+                <option value="">Select configuration status...</option>
+                <option value="verified">Fully configured and verified as operational</option>
+                <option value="configured">Configured but not verified</option>
+                <option value="available">Available but not configured</option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -1381,6 +1673,10 @@
           <div class="legend-item">
             <div class="legend-badge meets"></div>
             <span class="legend-text">Meets</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-badge meets"></div>
+            <span class="legend-text">Meets* (unverified)</span>
           </div>
           <div class="legend-item">
             <div class="legend-badge partial"></div>
@@ -1678,7 +1974,7 @@
 
     // Initialize state
     Object.keys(questions).forEach(qid => {
-      questionState[qid] = { answer: null, note: '', threshold: null };
+      questionState[qid] = { answer: null, note: '', threshold: null, configStatus: null };
     });
 
     function switchMode(mode) {
@@ -1703,6 +1999,7 @@
       const row = document.querySelector(`[data-qid="${qid}"]`);
       const btns = row.querySelectorAll('.answer-btn');
       const noteWrap = document.getElementById(`${qid}-note-wrap`);
+      const configWrap = document.getElementById(`${qid}-config-wrap`);
       const thresholdWrap = document.getElementById(`${qid}-threshold-wrap`);
 
       // Update buttons
@@ -1721,14 +2018,23 @@
       // Update state
       questionState[qid].answer = value;
 
-      // Show/hide partial note
+      // Show/hide partial note (only on partial)
       if (value === 'partial') {
         noteWrap.classList.add('visible');
       } else {
         noteWrap.classList.remove('visible');
       }
 
-      // Show/hide threshold dropdown for Q6 and Q14
+      // Show/hide config dropdown (only on yes)
+      if (configWrap) {
+        if (value === 'yes') {
+          configWrap.classList.add('visible');
+        } else {
+          configWrap.classList.remove('visible');
+        }
+      }
+
+      // Show/hide threshold dropdown for Q6 and Q14 (on yes or partial)
       if (thresholdWrap) {
         if (value === 'yes' || value === 'partial') {
           thresholdWrap.classList.add('visible');
@@ -1758,6 +2064,11 @@
       questionState[qid].threshold = select.value;
     }
 
+    function updateConfigStatus(qid) {
+      const select = document.getElementById(`${qid}-config`);
+      questionState[qid].configStatus = select.value || null;
+    }
+
     function generateReport() {
       // Build control scores
       const controlScores = {};
@@ -1769,16 +2080,40 @@
 
         if (state.answer === null) return;
 
-        const score = state.answer === 'yes' ? 1 : (state.answer === 'partial' ? 0.5 : 0);
+        // Calculate score based on answer and configStatus
+        let score;
+        let effectiveAnswer = state.answer;
+        let unverified = false;
+
+        if (state.answer === 'yes') {
+          if (state.configStatus === 'verified') {
+            score = 1.0;
+          } else if (state.configStatus === 'configured') {
+            score = 0.5;
+            effectiveAnswer = 'partial';
+          } else if (state.configStatus === 'available') {
+            score = 0.0;
+            effectiveAnswer = 'no';
+          } else {
+            // configStatus is null - benefit of the doubt
+            score = 0.75;
+            unverified = true;
+          }
+        } else if (state.answer === 'partial') {
+          score = 0.5;
+        } else {
+          score = 0.0;
+        }
 
         q.controls.forEach(controlId => {
           if (controlScores[controlId] === undefined) {
-            controlScores[controlId] = { score: score, answer: state.answer, processFlag: q.processFlag };
+            controlScores[controlId] = { score: score, answer: effectiveAnswer, processFlag: q.processFlag, unverified: unverified };
           } else {
             // Use lowest score
             if (score < controlScores[controlId].score) {
               controlScores[controlId].score = score;
-              controlScores[controlId].answer = state.answer;
+              controlScores[controlId].answer = effectiveAnswer;
+              controlScores[controlId].unverified = unverified;
             }
           }
 
@@ -1834,6 +2169,9 @@
               if (scoreData.processFlag) {
                 badgeClass = 'process';
                 badgeText = 'Process';
+              } else if (scoreData.unverified) {
+                badgeClass = 'meets-unverified';
+                badgeText = 'Meets*';
               } else {
                 badgeClass = 'meets';
                 badgeText = 'Meets';
@@ -1908,6 +2246,17 @@
       // Q24 (PAM-029) check
       if (questionState.q24.answer === 'no') {
         callouts.push('HIPAA Security Rule explicitly requires emergency access procedures as a named required control (164.312(a)(2)(ii)). This is the only framework in this assessment to do so.');
+      }
+
+      // Check for any unverified answers
+      let hasUnverified = false;
+      Object.keys(questionState).forEach(qid => {
+        if (questionState[qid].answer === 'yes' && !questionState[qid].configStatus) {
+          hasUnverified = true;
+        }
+      });
+      if (hasUnverified) {
+        callouts.push('* Configuration status not confirmed. Select a configuration status for each Yes answer to improve result accuracy.');
       }
 
       calloutsDiv.innerHTML = callouts.map(c => `<div class="callout-note">${c}</div>`).join('');
