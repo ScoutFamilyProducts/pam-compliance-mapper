@@ -2594,7 +2594,7 @@
             const impliedClass = coverage === 'implied' ? ' implied' : '';
 
             td.innerHTML = `<div class="badge-wrap">
-              <span class="status-badge ${badgeClass}${impliedClass}">${badgeText}${suffix}</span><span class="info-icon" onclick="togglePopover('${popoverId}', event)">ⓘ</span>
+              <span class="status-badge ${badgeClass}${impliedClass}">${badgeText}${suffix}</span><span class="info-icon" data-popover="${popoverId}">ⓘ</span>
               <div class="ref-popover" id="${popoverId}">${popoverHtml}</div>
             </div>`;
           }
@@ -2732,31 +2732,48 @@
 
     let currentOpenPopover = null;
 
-    function togglePopover(popoverId, event) {
-      event.stopPropagation();
-
-      // Close any currently open popover
-      if (currentOpenPopover && currentOpenPopover !== popoverId) {
-        const openPopover = document.getElementById(currentOpenPopover);
-        if (openPopover) {
-          openPopover.classList.remove('visible');
+    function closeAllPopovers() {
+      if (currentOpenPopover) {
+        const popover = document.getElementById(currentOpenPopover);
+        if (popover) {
+          popover.classList.remove('visible');
         }
-      }
-
-      const popover = document.getElementById(popoverId);
-      if (popover) {
-        popover.classList.toggle('visible');
-        currentOpenPopover = popover.classList.contains('visible') ? popoverId : null;
+        currentOpenPopover = null;
       }
     }
+
+    function openPopover(popoverId) {
+      closeAllPopovers();
+      const popover = document.getElementById(popoverId);
+      if (popover) {
+        popover.classList.add('visible');
+        currentOpenPopover = popoverId;
+      }
+    }
+
+    // Event delegation for info icon clicks on results table
+    document.getElementById('results-table').addEventListener('click', function(event) {
+      const infoIcon = event.target.closest('.info-icon');
+      if (infoIcon) {
+        event.stopPropagation();
+        const popoverId = infoIcon.getAttribute('data-popover');
+        if (popoverId) {
+          if (currentOpenPopover === popoverId) {
+            closeAllPopovers();
+          } else {
+            openPopover(popoverId);
+          }
+        }
+      }
+    });
 
     // Close popovers when clicking outside
     document.addEventListener('click', function(event) {
       if (currentOpenPopover) {
         const popover = document.getElementById(currentOpenPopover);
-        if (popover && !popover.contains(event.target) && !event.target.classList.contains('info-icon')) {
-          popover.classList.remove('visible');
-          currentOpenPopover = null;
+        const infoIcon = event.target.closest('.info-icon');
+        if (popover && !popover.contains(event.target) && !infoIcon) {
+          closeAllPopovers();
         }
       }
     });
