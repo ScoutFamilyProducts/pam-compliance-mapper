@@ -929,28 +929,34 @@
       color: #94A3B8;
     }
 
-    /* Print header */
-    .print-header {
-      display: none;
-    }
-
-    /* Print-only reference spans */
+    /* Print-only elements - hidden on screen */
+    .print-header,
+    .print-disclaimer,
+    .print-legend,
+    .print-footer,
     .print-ref {
       display: none;
     }
 
     /* Print styles */
     @media print {
+      @page {
+        margin: 1.5cm 1.8cm;
+        size: A4 landscape;
+      }
+
       body {
         background: #fff;
         color: #000;
-        font-size: 10pt;
+        font-size: 9px;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
       }
 
       nav, .hero, .mode-toggle, #assessment-form,
       .legend-row, .framework-filter, .button-row,
-      .threshold-callouts, .footer-callouts, footer,
-      .info-icon, .ref-popover {
+      .footer-callouts, footer,
+      .info-icon, .ref-popover, .results-label {
         display: none !important;
       }
 
@@ -961,73 +967,358 @@
         border: none;
       }
 
-      .results-label {
-        display: none;
-      }
-
+      /* Print Header */
       .print-header {
-        display: block;
-        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #0f172a;
       }
 
-      .print-header h1 {
-        font-size: 16pt;
+      .print-header-left h1 {
+        font-size: 22px;
         font-weight: 700;
-        margin-bottom: 0.25rem;
-        color: #000;
+        color: #0f172a;
+        margin-bottom: 3px;
+        letter-spacing: -0.02em;
       }
 
-      .print-header p {
-        font-size: 9pt;
-        color: #666;
+      .print-header-left p {
+        font-size: 10px;
+        color: #64748b;
+        margin-bottom: 2px;
       }
 
+      .print-header-left p:last-child {
+        margin-bottom: 0;
+      }
+
+      .print-header-right {
+        text-align: right;
+      }
+
+      .print-header-right img {
+        height: 32px;
+        opacity: 0.85;
+      }
+
+      .print-logo-fallback {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        color: #64748b;
+        text-transform: uppercase;
+      }
+
+      /* Print Disclaimer */
+      .print-disclaimer {
+        display: block;
+        font-size: 8px;
+        color: #94a3b8;
+        margin-bottom: 14px;
+        font-style: italic;
+      }
+
+      /* Print Legend */
+      .print-legend {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        font-size: 8px;
+        margin-bottom: 10px;
+        color: #64748b;
+      }
+
+      .print-legend-label {
+        font-weight: 600;
+        color: #0f172a;
+      }
+
+      .print-legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+      }
+
+      .print-legend-badge {
+        display: inline-block;
+        font-size: 6px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        padding: 1px 4px;
+        border-radius: 2px;
+      }
+
+      .print-legend-badge.meets {
+        color: #166534;
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        border-left: 2px solid #16a34a;
+      }
+
+      .print-legend-badge.partial {
+        color: #92400e;
+        background: #fffbeb;
+        border: 1px solid #fde68a;
+        border-left: 2px solid #d97706;
+      }
+
+      .print-legend-badge.gap {
+        color: #991b1b;
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        border-left: 2px solid #dc2626;
+      }
+
+      .print-legend-badge.process {
+        color: #5b21b6;
+        background: #f5f3ff;
+        border: 1px solid #ddd6fe;
+        border-left: 2px solid #7c3aed;
+      }
+
+      .print-legend-badge.na {
+        color: #9ca3af;
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-left: 2px solid #d1d5db;
+        font-weight: 400;
+      }
+
+      .print-legend-suffix {
+        color: #94a3b8;
+        font-size: 7px;
+      }
+
+      /* Results Table */
       .results-table-wrap {
         overflow: visible;
       }
 
       .results-table {
         width: 100%;
-        font-size: 8pt;
         border-collapse: collapse;
+        font-size: 9px;
+        table-layout: fixed;
       }
 
-      .results-table th,
-      .results-table td {
-        border: 1px solid #ccc;
-        padding: 4px 6px;
-        text-align: left;
+      .results-table colgroup .col-control { width: 20%; }
+      .results-table colgroup .col-framework { width: 11.4%; }
+
+      /* Header row */
+      .results-table thead tr {
+        background: #0f172a !important;
       }
 
       .results-table th {
-        background: #f0f0f0;
+        background: #0f172a !important;
+        color: white !important;
+        font-size: 7.5px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 5px 6px;
+        border: none;
+        text-align: center;
+      }
+
+      .results-table th.control-cell {
+        text-align: left;
+      }
+
+      /* Control column */
+      .results-table td.control-cell {
+        background: #f8fafc !important;
         font-weight: 600;
+        font-size: 9px;
+        color: #0f172a;
+        padding: 7px 8px;
+        border-right: 2px solid #e2e8f0;
+        border-bottom: 1px solid #e2e8f0;
+        vertical-align: top;
+        text-align: left;
+      }
+
+      .control-id {
+        font-size: 7px;
+        color: #94a3b8;
+        display: block;
+        margin-bottom: 1px;
+        font-weight: 400;
+      }
+
+      .control-name {
+        font-size: 9px;
+        font-weight: 600;
+        color: #0f172a;
+        display: block;
+      }
+
+      /* Framework cells */
+      .results-table td {
+        background: white;
+        padding: 7px 6px;
+        border-bottom: 1px solid #f1f5f9;
+        border-right: 1px solid #f1f5f9;
+        text-align: center;
+        vertical-align: top;
+      }
+
+      /* Alternating rows */
+      .results-table tbody tr:nth-child(odd) td {
+        background: #fafafa;
+      }
+
+      .results-table tbody tr:nth-child(odd) td.control-cell {
+        background: #f1f5f9 !important;
+      }
+
+      .results-table tbody tr:nth-child(even) td {
+        background: #ffffff;
+      }
+
+      .results-table tbody tr:nth-child(even) td.control-cell {
+        background: #f8fafc !important;
+      }
+
+      /* Page break control */
+      .results-table tbody tr {
+        page-break-inside: avoid;
+      }
+
+      /* Badge styles for print */
+      .badge-wrap {
+        display: block;
+        text-align: center;
       }
 
       .status-badge {
-        background: none !important;
-        border: none !important;
-        padding: 0;
-        font-size: 8pt;
+        display: inline-block;
+        font-size: 7.5px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        padding: 2px 5px;
+        border-radius: 3px;
+        text-align: center;
         text-transform: uppercase;
       }
 
-      .status-badge.meets,
-      .status-badge.meets-unverified { color: #2d7a00; }
-      .status-badge.partial { color: #b8860b; }
-      .status-badge.gap { color: #c00; }
-      .status-badge.process { color: #6b21a8; }
-      .status-badge.na { color: #999; }
-
-      .print-ref {
-        display: inline;
-        font-size: 7pt;
-        color: #666;
-        margin-left: 4px;
+      .status-badge.meets {
+        color: #166534 !important;
+        background: #f0fdf4 !important;
+        border: 1px solid #bbf7d0 !important;
+        border-left: 3px solid #16a34a !important;
       }
 
+      .status-badge.meets-unverified {
+        color: #166534 !important;
+        background: #f0fdf4 !important;
+        border: 1px solid #bbf7d0 !important;
+        border-left: 3px solid #86efac !important;
+      }
+
+      .status-badge.partial {
+        color: #92400e !important;
+        background: #fffbeb !important;
+        border: 1px solid #fde68a !important;
+        border-left: 3px solid #d97706 !important;
+      }
+
+      .status-badge.gap {
+        color: #991b1b !important;
+        background: #fef2f2 !important;
+        border: 1px solid #fecaca !important;
+        border-left: 3px solid #dc2626 !important;
+      }
+
+      .status-badge.process {
+        color: #5b21b6 !important;
+        background: #f5f3ff !important;
+        border: 1px solid #ddd6fe !important;
+        border-left: 3px solid #7c3aed !important;
+      }
+
+      .status-badge.na {
+        color: #9ca3af !important;
+        background: #f9fafb !important;
+        border: 1px solid #e5e7eb !important;
+        border-left: 3px solid #d1d5db !important;
+        font-weight: 400;
+      }
+
+      .status-badge .suffix {
+        font-size: 6px;
+        opacity: 0.85;
+      }
+
+      /* Print reference */
+      .print-ref {
+        display: block;
+        font-size: 7px;
+        color: #94a3b8;
+        margin-top: 2px;
+        text-align: center;
+        font-weight: 400;
+      }
+
+      /* Partial note in results */
+      .partial-note-display {
+        display: block;
+        font-size: 7.5px;
+        color: #6b7280;
+        font-style: italic;
+        margin-top: 3px;
+        line-height: 1.5;
+        text-align: left;
+      }
+
+      /* Threshold callouts / notes */
+      .threshold-callouts {
+        display: block !important;
+        font-size: 8px;
+        color: #64748b;
+        line-height: 1.7;
+        border-top: 1px solid #e2e8f0;
+        padding-top: 10px;
+        margin-top: 10px;
+        page-break-before: auto;
+      }
+
+      .callout-note {
+        margin-bottom: 4px;
+        padding-left: 0;
+        border-left: none;
+        color: #64748b;
+        font-size: 8px;
+      }
+
+      .callout-note::before {
+        content: "· ";
+        color: #94a3b8;
+      }
+
+      /* Print footer */
+      .print-footer {
+        display: flex;
+        justify-content: space-between;
+        font-size: 7.5px;
+        color: #94a3b8;
+        border-top: 1px solid #e2e8f0;
+        padding-top: 8px;
+        margin-top: 12px;
+      }
+
+      /* Show all columns in print regardless of filter */
       .col-hidden {
         display: table-cell !important;
+      }
+
+      /* Hide unanswered dashes - show empty */
+      .status-badge.na-unanswered {
+        visibility: hidden;
       }
     }
   </style>
@@ -1914,8 +2205,29 @@
         </div>
 
         <div class="print-header">
-          <h1>PAM Compliance Posture Report</h1>
-          <p>Generated by PAM Compliance Mapper — thepaminsider.com</p>
+          <div class="print-header-left">
+            <h1>PAM Compliance Posture Report</h1>
+            <p>The PAM Insider · thepaminsider.com</p>
+            <p id="print-date">Assessment generated</p>
+          </div>
+          <div class="print-header-right">
+            <img src="/pam_insider_logo.png" alt="The PAM Insider" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <span class="print-logo-fallback" style="display:none;">THE PAM INSIDER</span>
+          </div>
+        </div>
+
+        <div class="print-disclaimer">
+          This report was generated using publicly available compliance framework documentation and professional experience. It is assumed incomplete and may contain errors. · thepaminsider@gmail.com
+        </div>
+
+        <div class="print-legend">
+          <span class="print-legend-label">Legend:</span>
+          <span class="print-legend-item"><span class="print-legend-badge meets">MEETS</span></span>
+          <span class="print-legend-item"><span class="print-legend-badge partial">PARTIAL</span></span>
+          <span class="print-legend-item"><span class="print-legend-badge gap">GAP</span></span>
+          <span class="print-legend-item"><span class="print-legend-badge process">PROCESS</span></span>
+          <span class="print-legend-item"><span class="print-legend-badge na">N/A</span></span>
+          <span class="print-legend-suffix">(OB) = Outcomes-based framework · (Addr.) = Addressable specification</span>
         </div>
 
         <div class="framework-filter" id="framework-filter">
@@ -1930,6 +2242,16 @@
 
         <div class="results-table-wrap">
           <table class="results-table" id="results-table">
+            <colgroup>
+              <col class="col-control" style="width: 20%;">
+              <col class="col-framework" style="width: 11.4%;">
+              <col class="col-framework" style="width: 11.4%;">
+              <col class="col-framework" style="width: 11.4%;">
+              <col class="col-framework" style="width: 11.4%;">
+              <col class="col-framework" style="width: 11.4%;">
+              <col class="col-framework" style="width: 11.4%;">
+              <col class="col-framework" style="width: 11.4%;">
+            </colgroup>
             <thead>
               <tr>
                 <th class="control-cell">Control</th>
@@ -1948,6 +2270,11 @@
         </div>
 
         <div class="threshold-callouts" id="threshold-callouts">
+        </div>
+
+        <div class="print-footer">
+          <span>© 2026 The PAM Insider llc · Vendor-neutral · No agenda</span>
+          <span>PAM Compliance Mapper · thepaminsider.com</span>
         </div>
       </div>
     </div>
@@ -2711,7 +3038,7 @@
           if (coverage === 'not_stated') {
             td.innerHTML = '<span class="status-badge na">N/A</span>';
           } else if (!scoreData) {
-            td.innerHTML = '<span class="status-badge na">—</span>';
+            td.innerHTML = '<span class="status-badge na na-unanswered">—</span>';
           } else {
             let badgeClass = '';
             let badgeText = '';
@@ -2941,6 +3268,11 @@
     });
 
     function downloadReport() {
+      // Set current date in print header
+      const now = new Date();
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const formattedDate = now.toLocaleDateString('en-US', options);
+      document.getElementById('print-date').textContent = 'Assessment generated ' + formattedDate;
       window.print();
     }
 
