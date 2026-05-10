@@ -961,13 +961,13 @@
     /* Print styles */
     @media print {
       @page {
-        margin: 1cm 1.5cm;
+        margin: 1.2cm 1.6cm;
         size: A4 landscape;
       }
 
       body {
-        background: #fff;
-        color: #000;
+        background: #ffffff;
+        color: #0f172a;
         font-size: 8.5px;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
@@ -987,32 +987,36 @@
         border: none;
       }
 
-      /* Print Header */
+      /* Print Header - Row 1 */
       .print-header {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .print-header-row1 {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
-        margin-bottom: 10px;
-        padding-bottom: 8px;
-        border-bottom: 2px solid #0f172a;
+        margin-bottom: 8px;
       }
 
       .print-header-left h1 {
         font-size: 20px;
-        font-weight: 700;
+        font-weight: 800;
         color: #0f172a;
+        letter-spacing: -0.03em;
         margin-bottom: 2px;
-        letter-spacing: -0.02em;
+        padding-bottom: 2px;
+        border-bottom: 3px solid #4d8c00;
+        width: fit-content;
       }
 
-      .print-header-left p {
+      .print-header-left .print-brand {
         font-size: 9px;
-        color: #64748b;
-        margin-bottom: 1px;
-      }
-
-      .print-header-left p:last-child {
-        margin-bottom: 0;
+        color: #94a3b8;
+        margin-top: 4px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
       }
 
       .print-header-right {
@@ -1020,41 +1024,64 @@
       }
 
       .print-header-right img {
-        height: 28px;
-        opacity: 0.85;
+        height: 36px;
       }
 
       .print-logo-fallback {
         font-size: 8px;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        color: #64748b;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        color: #4d8c00;
         text-transform: uppercase;
+      }
+
+      /* Print Header - Row 2 */
+      .print-header-row2 {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 6px;
+        border-top: 1px solid #e2e8f0;
+        margin-bottom: 6px;
+      }
+
+      .print-header-row2 .print-date {
+        font-size: 8px;
+        color: #64748b;
+      }
+
+      .print-header-row2 .print-updated {
+        font-size: 8px;
+        color: #94a3b8;
       }
 
       /* Print Disclaimer */
       .print-disclaimer {
         display: block;
-        font-size: 7px;
+        font-size: 7.5px;
         color: #94a3b8;
-        margin-bottom: 8px;
         font-style: italic;
+        line-height: 1.6;
+        margin-bottom: 8px;
+        border-left: 2px solid #4d8c00;
+        padding-left: 8px;
       }
 
       /* Print Legend */
       .print-legend {
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 10px;
         flex-wrap: wrap;
-        font-size: 7px;
-        margin-bottom: 6px;
-        color: #64748b;
+        margin-bottom: 8px;
       }
 
       .print-legend-label {
-        font-weight: 600;
-        color: #0f172a;
+        font-size: 7.5px;
+        font-weight: 700;
+        color: #64748b;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
       }
 
       .print-legend-item {
@@ -1065,10 +1092,11 @@
 
       .print-legend-badge {
         display: inline-block;
-        font-size: 5.5px;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        padding: 1px 3px;
+        font-size: 6px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 1px 4px;
         border-radius: 2px;
       }
 
@@ -1076,7 +1104,7 @@
         color: #166534;
         background: #f0fdf4;
         border: 1px solid #bbf7d0;
-        border-left: 2px solid #16a34a;
+        border-left: 2px solid #4d8c00;
       }
 
       .print-legend-badge.partial {
@@ -1101,16 +1129,16 @@
       }
 
       .print-legend-badge.na {
-        color: #9ca3af;
+        color: #94a3b8;
         background: #f9fafb;
         border: 1px solid #e5e7eb;
-        border-left: 2px solid #d1d5db;
+        border-left: 2px solid #cbd5e1;
         font-weight: 400;
       }
 
       .print-legend-suffix {
+        font-size: 7px;
         color: #94a3b8;
-        font-size: 6px;
       }
 
       /* Results Table */
@@ -1125,8 +1153,8 @@
         table-layout: fixed;
       }
 
-      .results-table colgroup .col-control { width: 20%; }
-      .results-table colgroup .col-framework { width: 11.4%; }
+      .results-table colgroup .col-control { width: 21%; }
+      .results-table colgroup .col-framework { width: 11.28%; }
 
       /* Header row */
       .results-table thead tr {
@@ -1137,11 +1165,12 @@
         background: #0f172a !important;
         color: white !important;
         font-size: 7px;
-        font-weight: 700;
-        letter-spacing: 0.08em;
+        font-weight: 800;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
-        padding: 4px 5px;
+        padding: 5px 6px;
         border: none;
+        border-bottom: 2px solid #4d8c00;
         text-align: center;
       }
 
@@ -1152,11 +1181,10 @@
       /* Control column */
       .results-table td.control-cell {
         background: #f8fafc !important;
-        font-weight: 600;
         font-size: 8.5px;
         color: #0f172a;
-        padding: 5px 6px;
-        border-right: 2px solid #e2e8f0;
+        padding: 6px 8px;
+        border-right: 2px solid #0f172a;
         border-bottom: 1px solid #e2e8f0;
         vertical-align: top;
         text-align: left;
@@ -1165,22 +1193,38 @@
       .control-id {
         font-size: 6.5px;
         color: #94a3b8;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
         display: block;
         margin-bottom: 1px;
-        font-weight: 400;
       }
 
       .control-name {
         font-size: 8.5px;
-        font-weight: 600;
+        font-weight: 700;
         color: #0f172a;
         display: block;
+        line-height: 1.3;
+      }
+
+      /* Partial note in control column */
+      .partial-note-display {
+        display: block;
+        font-size: 7px;
+        color: #64748b;
+        font-style: italic;
+        margin-top: 2px;
+        line-height: 1.4;
+        white-space: normal;
+        word-wrap: break-word;
+        text-align: left;
       }
 
       /* Framework cells */
       .results-table td {
         background: white;
-        padding: 5px 5px;
+        padding: 6px 5px;
         border-bottom: 1px solid #f1f5f9;
         border-right: 1px solid #f1f5f9;
         text-align: center;
@@ -1193,7 +1237,7 @@
       }
 
       .results-table tbody tr:nth-child(odd) td.control-cell {
-        background: #f1f5f9 !important;
+        background: #f8fafc !important;
       }
 
       .results-table tbody tr:nth-child(even) td {
@@ -1201,7 +1245,15 @@
       }
 
       .results-table tbody tr:nth-child(even) td.control-cell {
-        background: #f8fafc !important;
+        background: #f1f5f9 !important;
+      }
+
+      /* Section divider rows */
+      .results-table tbody tr.section-divider td {
+        background: #0f172a !important;
+        height: 2px;
+        padding: 0;
+        border: none;
       }
 
       /* Page break control */
@@ -1218,19 +1270,19 @@
       .status-badge {
         display: inline-block;
         font-size: 7px;
-        font-weight: 700;
-        letter-spacing: 0.06em;
-        padding: 2px 4px;
-        border-radius: 3px;
-        text-align: center;
+        font-weight: 800;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
+        padding: 2px 5px;
+        border-radius: 2px;
+        text-align: center;
       }
 
       .status-badge.meets {
         color: #166534 !important;
         background: #f0fdf4 !important;
         border: 1px solid #bbf7d0 !important;
-        border-left: 3px solid #16a34a !important;
+        border-left: 3px solid #4d8c00 !important;
       }
 
       .status-badge.meets-unverified {
@@ -1262,16 +1314,16 @@
       }
 
       .status-badge.na {
-        color: #9ca3af !important;
+        color: #94a3b8 !important;
         background: #f9fafb !important;
         border: 1px solid #e5e7eb !important;
-        border-left: 3px solid #d1d5db !important;
+        border-left: 3px solid #cbd5e1 !important;
         font-weight: 400;
       }
 
       .status-badge .suffix {
-        font-size: 5.5px;
-        opacity: 0.85;
+        font-size: 6px;
+        color: #94a3b8;
       }
 
       /* Print reference */
@@ -1282,33 +1334,18 @@
         margin-top: 2px;
         text-align: center;
         font-weight: 400;
+        letter-spacing: 0.03em;
       }
 
-      /* Partial note in results */
-      .partial-note-display {
-        display: block;
-        font-size: 7px;
-        color: #6b7280;
-        font-style: italic;
-        margin-top: 2px;
-        line-height: 1.5;
-        text-align: left;
-        white-space: normal;
-        overflow: visible;
-        text-overflow: clip;
-        word-wrap: break-word;
-        max-width: 100%;
-      }
-
-      /* Threshold callouts / notes */
+      /* Threshold callouts / notes section */
       .threshold-callouts {
         display: block !important;
-        font-size: 7px;
-        color: #64748b;
-        line-height: 1.6;
-        border-top: 1px solid #e2e8f0;
-        padding-top: 6px;
-        margin-top: 6px;
+        font-size: 7.5px;
+        color: #475569;
+        line-height: 1.7;
+        border-top: 2px solid #0f172a;
+        padding-top: 8px;
+        margin-top: 10px;
         page-break-before: avoid;
       }
 
@@ -1316,25 +1353,38 @@
         margin-bottom: 3px;
         padding-left: 0;
         border-left: none;
-        color: #64748b;
-        font-size: 7px;
+        color: #475569;
+        font-size: 7.5px;
       }
 
       .callout-note::before {
-        content: "· ";
-        color: #94a3b8;
+        content: "▪ ";
+        color: #4d8c00;
       }
 
       /* Print footer */
       .print-footer {
         display: flex;
         justify-content: space-between;
-        font-size: 7px;
-        color: #94a3b8;
+        align-items: center;
         border-top: 1px solid #e2e8f0;
         padding-top: 6px;
         margin-top: 8px;
-        page-break-before: avoid;
+        page-break-inside: avoid;
+      }
+
+      .print-footer-left {
+        font-size: 7px;
+        color: #94a3b8;
+        letter-spacing: 0.03em;
+      }
+
+      .print-footer-right {
+        font-size: 7px;
+        color: #4d8c00;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
       }
 
       /* Show all columns in print regardless of filter */
@@ -2235,14 +2285,19 @@
         </div>
 
         <div class="print-header">
-          <div class="print-header-left">
-            <h1>PAM Compliance Posture Report</h1>
-            <p>The PAM Insider · thepaminsider.com</p>
-            <p id="print-date">Assessment generated</p>
+          <div class="print-header-row1">
+            <div class="print-header-left">
+              <h1>PAM Compliance Posture Report</h1>
+              <div class="print-brand">The PAM Insider · thepaminsider.com</div>
+            </div>
+            <div class="print-header-right">
+              <img src="/pam_insider_logo.png" alt="The PAM Insider" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+              <span class="print-logo-fallback" style="display:none;">THE PAM INSIDER</span>
+            </div>
           </div>
-          <div class="print-header-right">
-            <img src="/pam_insider_logo.png" alt="The PAM Insider" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-            <span class="print-logo-fallback" style="display:none;">THE PAM INSIDER</span>
+          <div class="print-header-row2">
+            <span class="print-date" id="print-date">Assessment generated</span>
+            <span class="print-updated">Vendor and framework data last updated May 2026</span>
           </div>
         </div>
 
@@ -2257,7 +2312,7 @@
           <span class="print-legend-item"><span class="print-legend-badge gap">GAP</span></span>
           <span class="print-legend-item"><span class="print-legend-badge process">PROCESS</span></span>
           <span class="print-legend-item"><span class="print-legend-badge na">N/A</span></span>
-          <span class="print-legend-suffix">(OB) = Outcomes-based framework · (Addr.) = Addressable specification</span>
+          <span class="print-legend-suffix">(OB) = Outcomes-based · (Addr.) = Addressable</span>
         </div>
 
         <div class="framework-filter" id="framework-filter">
@@ -2273,14 +2328,14 @@
         <div class="results-table-wrap">
           <table class="results-table" id="results-table">
             <colgroup>
-              <col class="col-control" style="width: 20%;">
-              <col class="col-framework" style="width: 11.4%;">
-              <col class="col-framework" style="width: 11.4%;">
-              <col class="col-framework" style="width: 11.4%;">
-              <col class="col-framework" style="width: 11.4%;">
-              <col class="col-framework" style="width: 11.4%;">
-              <col class="col-framework" style="width: 11.4%;">
-              <col class="col-framework" style="width: 11.4%;">
+              <col class="col-control" style="width: 21%;">
+              <col class="col-framework" style="width: 11.28%;">
+              <col class="col-framework" style="width: 11.28%;">
+              <col class="col-framework" style="width: 11.28%;">
+              <col class="col-framework" style="width: 11.28%;">
+              <col class="col-framework" style="width: 11.28%;">
+              <col class="col-framework" style="width: 11.28%;">
+              <col class="col-framework" style="width: 11.28%;">
             </colgroup>
             <thead>
               <tr>
@@ -2303,8 +2358,8 @@
         </div>
 
         <div class="print-footer">
-          <span>© 2026 The PAM Insider llc · Vendor-neutral · No agenda</span>
-          <span>PAM Compliance Mapper · thepaminsider.com</span>
+          <span class="print-footer-left">© 2026 The PAM Insider llc · Vendor-neutral · No agenda · No vendor sponsorship</span>
+          <span class="print-footer-right">PAM Compliance Mapper · thepaminsider.com</span>
         </div>
       </div>
     </div>
@@ -3115,6 +3170,17 @@
         });
 
         tbody.appendChild(tr);
+
+        // Add section divider after PAM-010 and PAM-020
+        if (controlId === 'PAM-010' || controlId === 'PAM-020') {
+          const dividerRow = document.createElement('tr');
+          dividerRow.className = 'section-divider';
+          for (let i = 0; i < 8; i++) {
+            const dividerTd = document.createElement('td');
+            dividerRow.appendChild(dividerTd);
+          }
+          tbody.appendChild(dividerRow);
+        }
       });
 
       // Update column visibility
