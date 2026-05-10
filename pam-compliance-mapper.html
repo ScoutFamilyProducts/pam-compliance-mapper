@@ -652,6 +652,75 @@
       opacity: 0.7;
     }
 
+    /* Info icon and popover */
+    .badge-wrap {
+      display: inline-block;
+      position: relative;
+    }
+
+    .info-icon {
+      font-size: 0.6rem;
+      color: #334155;
+      cursor: pointer;
+      margin-left: 4px;
+      vertical-align: middle;
+      transition: color 0.15s;
+    }
+
+    .info-icon:hover {
+      color: #64748B;
+    }
+
+    .ref-popover {
+      display: none;
+      background: #0a0d0f;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 0.5rem 0.75rem;
+      max-width: 260px;
+      margin-top: 4px;
+    }
+
+    .ref-popover.visible {
+      display: block;
+    }
+
+    .ref-popover-header {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #F8FAFC;
+      margin-bottom: 0.2rem;
+    }
+
+    .ref-popover-ref {
+      font-size: 0.7rem;
+      color: #64748B;
+      margin-bottom: 0.3rem;
+    }
+
+    .ref-popover-notes {
+      font-size: 0.68rem;
+      color: #475569;
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 0.3rem;
+    }
+
+    .ref-popover-addressable {
+      font-size: 0.68rem;
+      color: #8B5CF6;
+    }
+
+    .ref-popover-outcomes {
+      font-size: 0.68rem;
+      color: #64748B;
+    }
+
+    .ref-popover-implied {
+      font-size: 0.68rem;
+      color: #334155;
+    }
+
     /* Threshold callouts */
     .threshold-callouts {
       margin-top: 1.5rem;
@@ -1960,6 +2029,336 @@
       "PAM-035": { nist_800_53: "required", nist_800_171: "implied", cmmc: "implied", cis_v8: "implied", pci_dss_401: "implied", hipaa: "implied", nist_csf_20: "outcomes_based", name: "Cybersecurity Roles and Governance" }
     };
 
+    // Control reference data for popovers
+    const controlRefs = {
+      "PAM-001": {
+        nist_800_53: { ref: "IA-2(1)", covered: "required" },
+        nist_800_171: { ref: "3.5.3", covered: "required" },
+        cmmc: { ref: "IA.L2-3.5.3", covered: "required" },
+        cis_v8: { ref: "6.5", covered: "required" },
+        pci_dss_401: { ref: "8.4.1", covered: "required" },
+        hipaa: { ref: "164.312(d)", covered: "required" },
+        nist_csf_20: { ref: "PR.AA-03", covered: "outcomes_based" }
+      },
+      "PAM-002": {
+        nist_800_53: { ref: "IA-2", covered: "required" },
+        nist_800_171: { ref: "3.5.3", covered: "required" },
+        cmmc: { ref: "IA.L2-3.5.3", covered: "required" },
+        cis_v8: { ref: "6.3", covered: "required" },
+        pci_dss_401: { ref: "8.4.2", covered: "required" },
+        hipaa: { ref: "164.312(d)", covered: "required" },
+        nist_csf_20: { ref: "PR.AA-03", covered: "outcomes_based" }
+      },
+      "PAM-003": {
+        nist_800_53: { ref: "AC-17", covered: "required" },
+        nist_800_171: { ref: "3.1.12", covered: "required" },
+        cmmc: { ref: "AC.L2-3.1.12", covered: "required" },
+        cis_v8: { ref: "6.4", covered: "required" },
+        pci_dss_401: { ref: "8.4.3", covered: "required" },
+        hipaa: { ref: "164.312(d)", covered: "implied" },
+        nist_csf_20: { ref: "PR.AA-03", covered: "outcomes_based" }
+      },
+      "PAM-004": {
+        nist_800_53: { ref: "IA-2", covered: "required" },
+        nist_800_171: { ref: "N/A", covered: "not_stated" },
+        cmmc: { ref: "N/A", covered: "not_stated" },
+        cis_v8: { ref: "N/A", covered: "not_stated" },
+        pci_dss_401: { ref: "8.5", covered: "required" },
+        hipaa: { ref: "N/A", covered: "not_stated" },
+        nist_csf_20: { ref: "PR.AA-04", covered: "outcomes_based" }
+      },
+      "PAM-005": {
+        nist_800_53: { ref: "AC-6", covered: "required" },
+        nist_800_171: { ref: "3.1.5", covered: "required" },
+        cmmc: { ref: "AC.L2-3.1.5", covered: "required" },
+        cis_v8: { ref: "6.8", covered: "required" },
+        pci_dss_401: { ref: "7.2.1", covered: "required" },
+        hipaa: { ref: "164.308(a)(4)", covered: "required" },
+        nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" }
+      },
+      "PAM-006": {
+        nist_800_53: { ref: "AC-6", covered: "required" },
+        nist_800_171: { ref: "3.1.5", covered: "required" },
+        cmmc: { ref: "AC.L2-3.1.5", covered: "required" },
+        cis_v8: { ref: "6.8", covered: "required" },
+        pci_dss_401: { ref: "7.2.5", covered: "required" },
+        hipaa: { ref: "164.308(a)(4)", covered: "required" },
+        nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" }
+      },
+      "PAM-007": {
+        nist_800_53: { ref: "AC-5", covered: "required" },
+        nist_800_171: { ref: "3.1.4", covered: "required" },
+        cmmc: { ref: "AC.L2-3.1.4", covered: "required" },
+        cis_v8: { ref: "6.8", covered: "required" },
+        pci_dss_401: { ref: "7.2.1", covered: "required" },
+        hipaa: { ref: "164.308(a)(3)", covered: "required" },
+        nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" }
+      },
+      "PAM-008": {
+        nist_800_53: { ref: "AC-2", covered: "required" },
+        nist_800_171: { ref: "3.1.1", covered: "required" },
+        cmmc: { ref: "AC.L1-3.1.1", covered: "required" },
+        cis_v8: { ref: "5.1", covered: "required" },
+        pci_dss_401: { ref: "8.2.1", covered: "required" },
+        hipaa: { ref: "164.308(a)(3)", covered: "required" },
+        nist_csf_20: { ref: "ID.AM-01", covered: "outcomes_based" }
+      },
+      "PAM-009": {
+        nist_800_53: { ref: "AC-6(2)", covered: "required" },
+        nist_800_171: { ref: "3.1.6", covered: "required" },
+        cmmc: { ref: "AC.L2-3.1.6", covered: "required" },
+        cis_v8: { ref: "5.4", covered: "required" },
+        pci_dss_401: { ref: "8.2.1", covered: "required" },
+        hipaa: { ref: "164.308(a)(4)", covered: "required" },
+        nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" }
+      },
+      "PAM-010": {
+        nist_800_53: { ref: "AC-2(3)", covered: "required" },
+        nist_800_171: { ref: "3.1.1", covered: "implied" },
+        cmmc: { ref: "AC.L1-3.1.1", covered: "implied" },
+        cis_v8: { ref: "5.3", covered: "required" },
+        pci_dss_401: { ref: "8.2.6", covered: "required" },
+        hipaa: { ref: "164.308(a)(3)", covered: "implied" },
+        nist_csf_20: { ref: "PR.AA-01", covered: "outcomes_based" }
+      },
+      "PAM-011": {
+        nist_800_53: { ref: "AC-2", covered: "required" },
+        nist_800_171: { ref: "3.1.1", covered: "required" },
+        cmmc: { ref: "AC.L1-3.1.1", covered: "required" },
+        cis_v8: { ref: "6.1", covered: "required" },
+        pci_dss_401: { ref: "8.2.4", covered: "required" },
+        hipaa: { ref: "164.308(a)(4)", covered: "required" },
+        nist_csf_20: { ref: "PR.AA-01", covered: "outcomes_based" }
+      },
+      "PAM-012": {
+        nist_800_53: { ref: "AC-2", covered: "required" },
+        nist_800_171: { ref: "3.1.1", covered: "required" },
+        cmmc: { ref: "AC.L1-3.1.1", covered: "required" },
+        cis_v8: { ref: "6.1", covered: "required" },
+        pci_dss_401: { ref: "8.2.5", covered: "required" },
+        hipaa: { ref: "164.308(a)(3)", covered: "required" },
+        nist_csf_20: { ref: "PR.AA-01", covered: "outcomes_based" }
+      },
+      "PAM-013": {
+        nist_800_53: { ref: "AC-2(6)", covered: "required" },
+        nist_800_171: { ref: "3.1.1", covered: "required" },
+        cmmc: { ref: "AC.L1-3.1.1", covered: "required" },
+        cis_v8: { ref: "6.1", covered: "required" },
+        pci_dss_401: { ref: "8.2.7", covered: "required" },
+        hipaa: { ref: "164.308(a)(4)", covered: "required" },
+        nist_csf_20: { ref: "PR.AA-01", covered: "outcomes_based" }
+      },
+      "PAM-014": {
+        nist_800_53: { ref: "AC-11", covered: "required" },
+        nist_800_171: { ref: "3.1.10", covered: "required" },
+        cmmc: { ref: "AC.L2-3.1.10", covered: "required" },
+        cis_v8: { ref: "N/A", covered: "implied" },
+        pci_dss_401: { ref: "8.2.8", covered: "required" },
+        hipaa: { ref: "164.312(a)(2)(iii)", covered: "addressable" },
+        nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" }
+      },
+      "PAM-015": {
+        nist_800_53: { ref: "AC-2", covered: "required" },
+        nist_800_171: { ref: "3.1.1", covered: "required" },
+        cmmc: { ref: "AC.L1-3.1.1", covered: "required" },
+        cis_v8: { ref: "5.1", covered: "required" },
+        pci_dss_401: { ref: "8.2.1", covered: "required" },
+        hipaa: { ref: "164.312(a)(2)(i)", covered: "required" },
+        nist_csf_20: { ref: "PR.AA-01", covered: "outcomes_based" }
+      },
+      "PAM-016": {
+        nist_800_53: { ref: "AC-6(10)", covered: "required" },
+        nist_800_171: { ref: "3.1.7", covered: "required" },
+        cmmc: { ref: "AC.L2-3.1.7", covered: "required" },
+        cis_v8: { ref: "6.8", covered: "required" },
+        pci_dss_401: { ref: "7.2.1", covered: "required" },
+        hipaa: { ref: "164.308(a)(4)", covered: "required" },
+        nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" }
+      },
+      "PAM-017": {
+        nist_800_53: { ref: "AC-2", covered: "required" },
+        nist_800_171: { ref: "3.1.1", covered: "implied" },
+        cmmc: { ref: "AC.L1-3.1.1", covered: "implied" },
+        cis_v8: { ref: "6.6", covered: "required" },
+        pci_dss_401: { ref: "8.1", covered: "required" },
+        hipaa: { ref: "164.308(a)(4)", covered: "required" },
+        nist_csf_20: { ref: "ID.AM-01", covered: "outcomes_based" }
+      },
+      "PAM-018": {
+        nist_800_53: { ref: "AC-2", covered: "implied" },
+        nist_800_171: { ref: "N/A", covered: "implied" },
+        cmmc: { ref: "N/A", covered: "implied" },
+        cis_v8: { ref: "6.7", covered: "required" },
+        pci_dss_401: { ref: "N/A", covered: "implied" },
+        hipaa: { ref: "N/A", covered: "implied" },
+        nist_csf_20: { ref: "PR.AA-03", covered: "outcomes_based" }
+      },
+      "PAM-019": {
+        nist_800_53: { ref: "AU-9", covered: "required" },
+        nist_800_171: { ref: "3.3.1", covered: "required" },
+        cmmc: { ref: "AU.L2-3.3.1", covered: "required" },
+        cis_v8: { ref: "8.2", covered: "required" },
+        pci_dss_401: { ref: "10.2", covered: "required" },
+        hipaa: { ref: "164.312(b)", covered: "required" },
+        nist_csf_20: { ref: "DE.CM-01", covered: "outcomes_based" }
+      },
+      "PAM-020": {
+        nist_800_53: { ref: "AU-2", covered: "required" },
+        nist_800_171: { ref: "3.3.2", covered: "required" },
+        cmmc: { ref: "AU.L2-3.3.2", covered: "required" },
+        cis_v8: { ref: "8.5", covered: "required" },
+        pci_dss_401: { ref: "10.2.1", covered: "required" },
+        hipaa: { ref: "164.312(b)", covered: "required" },
+        nist_csf_20: { ref: "DE.CM-03", covered: "outcomes_based" }
+      },
+      "PAM-021": {
+        nist_800_53: { ref: "AU-6", covered: "required" },
+        nist_800_171: { ref: "3.3.1", covered: "required" },
+        cmmc: { ref: "AU.L2-3.3.1", covered: "required" },
+        cis_v8: { ref: "8.2", covered: "required" },
+        pci_dss_401: { ref: "10.4", covered: "required" },
+        hipaa: { ref: "164.308(a)(1)(ii)(D)", covered: "required" },
+        nist_csf_20: { ref: "DE.AE-02", covered: "outcomes_based" }
+      },
+      "PAM-022": {
+        nist_800_53: { ref: "AC-2(7)", covered: "required" },
+        nist_800_171: { ref: "N/A", covered: "implied" },
+        cmmc: { ref: "N/A", covered: "implied" },
+        cis_v8: { ref: "6.8", covered: "required" },
+        pci_dss_401: { ref: "8.3", covered: "required" },
+        hipaa: { ref: "164.308(a)(4)", covered: "required" },
+        nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" }
+      },
+      "PAM-023": {
+        nist_800_53: { ref: "IA-5", covered: "required" },
+        nist_800_171: { ref: "3.5.7", covered: "required" },
+        cmmc: { ref: "IA.L2-3.5.7", covered: "required" },
+        cis_v8: { ref: "5.2", covered: "required" },
+        pci_dss_401: { ref: "8.6", covered: "required" },
+        hipaa: { ref: "164.312(d)", covered: "required" },
+        nist_csf_20: { ref: "PR.AA-01", covered: "outcomes_based" }
+      },
+      "PAM-024": {
+        nist_800_53: { ref: "IA-5", covered: "required" },
+        nist_800_171: { ref: "3.5.7", covered: "required" },
+        cmmc: { ref: "IA.L2-3.5.7", covered: "required" },
+        cis_v8: { ref: "N/A", covered: "implied" },
+        pci_dss_401: { ref: "8.6", covered: "required" },
+        hipaa: { ref: "164.312(d)", covered: "required" },
+        nist_csf_20: { ref: "PR.AA-01", covered: "outcomes_based" }
+      },
+      "PAM-025": {
+        nist_800_53: { ref: "IA-5(1)", covered: "required" },
+        nist_800_171: { ref: "3.5.7", covered: "required" },
+        cmmc: { ref: "IA.L2-3.5.8", covered: "required" },
+        cis_v8: { ref: "5.2", covered: "required" },
+        pci_dss_401: { ref: "8.3.6", covered: "required" },
+        hipaa: { ref: "N/A", covered: "implied" },
+        nist_csf_20: { ref: "PR.AA-03", covered: "outcomes_based" }
+      },
+      "PAM-026": {
+        nist_800_53: { ref: "IA-5(1)", covered: "required" },
+        nist_800_171: { ref: "3.5.8", covered: "required" },
+        cmmc: { ref: "IA.L2-3.5.8", covered: "required" },
+        cis_v8: { ref: "5.2", covered: "required" },
+        pci_dss_401: { ref: "8.3.7", covered: "required" },
+        hipaa: { ref: "N/A", covered: "implied" },
+        nist_csf_20: { ref: "PR.AA-03", covered: "outcomes_based" }
+      },
+      "PAM-027": {
+        nist_800_53: { ref: "AC-7", covered: "required" },
+        nist_800_171: { ref: "3.1.8", covered: "required" },
+        cmmc: { ref: "AC.L2-3.1.8", covered: "required" },
+        cis_v8: { ref: "N/A", covered: "implied" },
+        pci_dss_401: { ref: "8.3.4", covered: "required" },
+        hipaa: { ref: "N/A", covered: "implied" },
+        nist_csf_20: { ref: "PR.AA-03", covered: "outcomes_based" }
+      },
+      "PAM-028": {
+        nist_800_53: { ref: "IA-5", covered: "required" },
+        nist_800_171: { ref: "3.5.7", covered: "required" },
+        cmmc: { ref: "IA.L2-3.5.7", covered: "required" },
+        cis_v8: { ref: "N/A", covered: "implied" },
+        pci_dss_401: { ref: "8.3.5", covered: "required" },
+        hipaa: { ref: "N/A", covered: "implied" },
+        nist_csf_20: { ref: "PR.AA-01", covered: "outcomes_based" }
+      },
+      "PAM-029": {
+        nist_800_53: { ref: "AC-2(2)", covered: "required" },
+        nist_800_171: { ref: "N/A", covered: "not_stated" },
+        cmmc: { ref: "N/A", covered: "not_stated" },
+        cis_v8: { ref: "N/A", covered: "not_stated" },
+        pci_dss_401: { ref: "N/A", covered: "not_stated" },
+        hipaa: { ref: "164.312(a)(2)(ii)", covered: "required" },
+        nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" }
+      },
+      "PAM-030": {
+        nist_800_53: { ref: "AU-2", covered: "required" },
+        nist_800_171: { ref: "N/A", covered: "implied" },
+        cmmc: { ref: "N/A", covered: "implied" },
+        cis_v8: { ref: "8.5", covered: "implied" },
+        pci_dss_401: { ref: "N/A", covered: "implied" },
+        hipaa: { ref: "164.312(b)", covered: "implied" },
+        nist_csf_20: { ref: "DE.CM-03", covered: "outcomes_based" }
+      },
+      "PAM-031": {
+        nist_800_53: { ref: "AC-6", covered: "implied" },
+        nist_800_171: { ref: "3.1.5", covered: "implied" },
+        cmmc: { ref: "AC.L2-3.1.5", covered: "implied" },
+        cis_v8: { ref: "N/A", covered: "implied" },
+        pci_dss_401: { ref: "N/A", covered: "implied" },
+        hipaa: { ref: "N/A", covered: "implied" },
+        nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" }
+      },
+      "PAM-032": {
+        nist_800_53: { ref: "SI-4", covered: "required" },
+        nist_800_171: { ref: "3.14.6", covered: "required" },
+        cmmc: { ref: "SI.L2-3.14.6", covered: "required" },
+        cis_v8: { ref: "N/A", covered: "implied" },
+        pci_dss_401: { ref: "10.7", covered: "required" },
+        hipaa: { ref: "164.308(a)(1)(ii)(D)", covered: "required" },
+        nist_csf_20: { ref: "DE.CM-03", covered: "outcomes_based" }
+      },
+      "PAM-033": {
+        nist_800_53: { ref: "AC-17", covered: "implied" },
+        nist_800_171: { ref: "N/A", covered: "implied" },
+        cmmc: { ref: "N/A", covered: "implied" },
+        cis_v8: { ref: "6.5", covered: "implied" },
+        pci_dss_401: { ref: "N/A", covered: "implied" },
+        hipaa: { ref: "N/A", covered: "implied" },
+        nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" }
+      },
+      "PAM-034": {
+        nist_800_53: { ref: "RA-3", covered: "required" },
+        nist_800_171: { ref: "3.11.1", covered: "required" },
+        cmmc: { ref: "CA.L2-3.12.1", covered: "required" },
+        cis_v8: { ref: "N/A", covered: "implied" },
+        pci_dss_401: { ref: "N/A", covered: "implied" },
+        hipaa: { ref: "164.308(a)(1)", covered: "required" },
+        nist_csf_20: { ref: "ID.RA", covered: "outcomes_based" }
+      },
+      "PAM-035": {
+        nist_800_53: { ref: "PM-2", covered: "required" },
+        nist_800_171: { ref: "N/A", covered: "implied" },
+        cmmc: { ref: "N/A", covered: "implied" },
+        cis_v8: { ref: "N/A", covered: "implied" },
+        pci_dss_401: { ref: "N/A", covered: "implied" },
+        hipaa: { ref: "N/A", covered: "implied" },
+        nist_csf_20: { ref: "GV.RR-02", covered: "outcomes_based" }
+      }
+    };
+
+    // Framework display names
+    const frameworkDisplayNames = {
+      nist_800_53: "NIST SP 800-53 Rev 5",
+      nist_800_171: "NIST SP 800-171 Rev 3",
+      cmmc: "CMMC 2.0 Level 2",
+      cis_v8: "CIS Controls v8",
+      pci_dss_401: "PCI DSS 4.0.1",
+      hipaa: "HIPAA Security Rule",
+      nist_csf_20: "NIST CSF 2.0"
+    };
+
     // State
     const questionState = {};
     const frameworkVisibility = {
@@ -2190,11 +2589,14 @@
               suffix = ' <span class="suffix">(OB)</span>';
             }
 
-            if (coverage === 'implied') {
-              td.innerHTML = `<span class="status-badge ${badgeClass} implied">${badgeText}${suffix}</span>`;
-            } else {
-              td.innerHTML = `<span class="status-badge ${badgeClass}">${badgeText}${suffix}</span>`;
-            }
+            const popoverId = `popover-${controlId}-${fw}`;
+            const popoverHtml = buildPopoverHtml(controlId, fw);
+            const impliedClass = coverage === 'implied' ? ' implied' : '';
+
+            td.innerHTML = `<div class="badge-wrap">
+              <span class="status-badge ${badgeClass}${impliedClass}">${badgeText}${suffix}</span><span class="info-icon" onclick="togglePopover('${popoverId}', event)">ⓘ</span>
+              <div class="ref-popover" id="${popoverId}">${popoverHtml}</div>
+            </div>`;
           }
 
           tr.appendChild(td);
@@ -2307,6 +2709,57 @@
       const panel = document.getElementById('disclaimer-panel');
       panel.classList.toggle('visible');
     }
+
+    function buildPopoverHtml(controlId, fw) {
+      const refData = controlRefs[controlId] && controlRefs[controlId][fw];
+      if (!refData) return '';
+
+      const fwName = frameworkDisplayNames[fw] || fw;
+      let html = `<div class="ref-popover-header">${fwName}</div>`;
+      html += `<div class="ref-popover-ref">${refData.ref}</div>`;
+
+      // Add coverage type notes
+      if (refData.covered === 'addressable') {
+        html += `<div class="ref-popover-addressable">Addressable — implement or document equivalent alternative</div>`;
+      } else if (refData.covered === 'outcomes_based') {
+        html += `<div class="ref-popover-outcomes">Outcomes-based framework — no hard pass/fail</div>`;
+      } else if (refData.covered === 'implied') {
+        html += `<div class="ref-popover-implied">Implied by framework requirements — not explicitly stated</div>`;
+      }
+
+      return html;
+    }
+
+    let currentOpenPopover = null;
+
+    function togglePopover(popoverId, event) {
+      event.stopPropagation();
+
+      // Close any currently open popover
+      if (currentOpenPopover && currentOpenPopover !== popoverId) {
+        const openPopover = document.getElementById(currentOpenPopover);
+        if (openPopover) {
+          openPopover.classList.remove('visible');
+        }
+      }
+
+      const popover = document.getElementById(popoverId);
+      if (popover) {
+        popover.classList.toggle('visible');
+        currentOpenPopover = popover.classList.contains('visible') ? popoverId : null;
+      }
+    }
+
+    // Close popovers when clicking outside
+    document.addEventListener('click', function(event) {
+      if (currentOpenPopover) {
+        const popover = document.getElementById(currentOpenPopover);
+        if (popover && !popover.contains(event.target) && !event.target.classList.contains('info-icon')) {
+          popover.classList.remove('visible');
+          currentOpenPopover = null;
+        }
+      }
+    });
 
     // Vendor framework toggle
     document.querySelectorAll('.framework-pill[data-vfw]').forEach(pill => {
