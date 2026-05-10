@@ -812,6 +812,255 @@
       font-size: 0.85rem;
     }
 
+    /* Vendor mode error and loading */
+    .vendor-error {
+      color: #ef4444;
+      font-size: 0.78rem;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    .vendor-loading {
+      display: none;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .vendor-loading.visible {
+      display: block;
+    }
+
+    .vendor-loading-bar {
+      position: relative;
+      width: 100%;
+      height: 2px;
+      background: rgba(157,255,0,0.3);
+      border-radius: 1px;
+      overflow: hidden;
+      margin-top: 0.75rem;
+    }
+
+    .vendor-loading-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 30%;
+      height: 100%;
+      background: #9DFF00;
+      animation: loadingSlide 1.5s ease-in-out infinite;
+    }
+
+    @keyframes loadingSlide {
+      0% { left: -30%; }
+      100% { left: 100%; }
+    }
+
+    /* Vendor results panel */
+    .vendor-results-panel {
+      display: none;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 2rem;
+      margin-top: 2rem;
+    }
+
+    .vendor-results-panel.visible {
+      display: block;
+    }
+
+    .vendor-results-label {
+      color: var(--accent-green);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      opacity: 0.7;
+      margin-bottom: 0.75rem;
+    }
+
+    .vendor-results-summary {
+      color: #94A3B8;
+      font-size: 0.88rem;
+      line-height: 1.85;
+      margin-bottom: 2rem;
+    }
+
+    .vendor-results-empty {
+      color: #475569;
+      font-size: 0.82rem;
+    }
+
+    /* Strengths */
+    .strength-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .strength-check {
+      color: #9DFF00;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .strength-content .strength-name {
+      color: #F8FAFC;
+      font-size: 0.83rem;
+      font-weight: 700;
+      display: block;
+    }
+
+    .strength-content .strength-covered {
+      color: #64748B;
+      font-size: 0.75rem;
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* Gaps */
+    .gap-item {
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 0.5rem;
+      background: rgba(255,255,255,0.01);
+    }
+
+    .gap-item.severity-high { border-left: 3px solid #ef4444; }
+    .gap-item.severity-medium { border-left: 3px solid #eab308; }
+    .gap-item.severity-low { border-left: 3px solid #64748b; }
+
+    .gap-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.35rem;
+    }
+
+    .gap-header .gap-id {
+      color: #334155;
+      font-size: 0.65rem;
+      margin-right: 0.35rem;
+    }
+
+    .gap-header .gap-name {
+      color: #F8FAFC;
+      font-size: 0.83rem;
+      font-weight: 700;
+    }
+
+    .gap-severity {
+      font-size: 0.6rem;
+      font-weight: 600;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .gap-severity.high {
+      background: rgba(239,68,68,0.1);
+      color: #ef4444;
+      border: 1px solid rgba(239,68,68,0.2);
+    }
+
+    .gap-severity.medium {
+      background: rgba(234,179,8,0.1);
+      color: #eab308;
+      border: 1px solid rgba(234,179,8,0.2);
+    }
+
+    .gap-severity.low {
+      background: rgba(100,116,139,0.1);
+      color: #64748b;
+      border: 1px solid rgba(100,116,139,0.2);
+    }
+
+    .gap-frameworks {
+      color: #64748B;
+      font-size: 0.75rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .gap-recommendation {
+      color: #94A3B8;
+      font-size: 0.8rem;
+      line-height: 1.6;
+    }
+
+    /* Recommendations */
+    .recommendation-item {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .recommendation-num {
+      width: 16px;
+      height: 16px;
+      background: #9DFF00;
+      color: #050607;
+      border-radius: 50%;
+      font-size: 0.6rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .recommendation-text {
+      color: #94A3B8;
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+
+    /* Vendor coverage detail */
+    .vendor-detail-item {
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .vendor-detail-name {
+      color: #F8FAFC;
+      font-size: 0.83rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .vendor-detail-count {
+      color: #64748B;
+      font-size: 0.75rem;
+    }
+
+    .vendor-detail-notes {
+      color: #475569;
+      font-size: 0.78rem;
+      line-height: 1.6;
+      margin-top: 0.25rem;
+    }
+
+    /* Disclaimer */
+    .vendor-disclaimer {
+      color: #334155;
+      font-size: 0.72rem;
+      line-height: 1.7;
+      font-style: italic;
+      border-left: 2px solid rgba(157,255,0,0.2);
+      padding-left: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .vendor-results-section {
+      margin-bottom: 2rem;
+    }
+
     /* Footer callouts */
     .footer-callouts {
       margin-top: 4rem;
@@ -2574,11 +2823,41 @@
       </div>
 
       <div class="submit-wrap">
-        <button type="button" class="submit-btn" onclick="mapVendors()">Map My Vendors</button>
+        <button type="button" class="submit-btn" id="vendor-submit-btn" onclick="mapVendors()">Map My Vendors</button>
+        <div class="vendor-error" id="vendor-error"></div>
+        <div class="vendor-loading" id="vendor-loading">
+          <span style="color: #94A3B8; font-size: 0.8rem;">Analyzing your stack...</span>
+          <div class="vendor-loading-bar"></div>
+        </div>
       </div>
 
-      <div class="vendor-placeholder" id="vendor-results" style="display: none;">
-        Vendor mapping analysis requires the AI backend. This feature is coming soon.
+      <div class="vendor-results-panel" id="vendor-results">
+        <div class="vendor-results-section" id="vendor-summary-section">
+          <div class="vendor-results-label">ANALYSIS SUMMARY</div>
+          <div class="vendor-results-summary" id="vendor-summary-text"></div>
+        </div>
+
+        <div class="vendor-results-section" id="vendor-strengths-section">
+          <div class="vendor-results-label">COVERAGE STRENGTHS</div>
+          <div id="vendor-strengths-list"></div>
+        </div>
+
+        <div class="vendor-results-section" id="vendor-gaps-section">
+          <div class="vendor-results-label">COMPLIANCE GAPS</div>
+          <div id="vendor-gaps-list"></div>
+        </div>
+
+        <div class="vendor-results-section" id="vendor-recommendations-section">
+          <div class="vendor-results-label">RECOMMENDATIONS</div>
+          <div id="vendor-recommendations-list"></div>
+        </div>
+
+        <div class="vendor-results-section" id="vendor-coverage-section">
+          <div class="vendor-results-label">VENDOR COVERAGE DETAIL</div>
+          <div id="vendor-coverage-list"></div>
+        </div>
+
+        <div class="vendor-disclaimer" id="vendor-disclaimer-text"></div>
       </div>
     </div>
 
@@ -3362,9 +3641,180 @@
       }
     }
 
-    function mapVendors() {
-      const resultsDiv = document.getElementById('vendor-results');
-      resultsDiv.style.display = 'block';
+    const frameworkKeyMap = {
+      'NIST 800-53': 'nist_800_53',
+      'NIST 800-171': 'nist_800_171',
+      'CMMC': 'cmmc',
+      'CIS v8': 'cis_v8',
+      'PCI DSS 4.0.1': 'pci_dss_401',
+      'HIPAA': 'hipaa',
+      'NIST CSF 2.0': 'nist_csf_20'
+    };
+
+    const frameworkDisplayMap = {
+      'nist_800_53': 'NIST 800-53',
+      'nist_800_171': 'NIST 800-171',
+      'cmmc': 'CMMC',
+      'cis_v8': 'CIS v8',
+      'pci_dss_401': 'PCI DSS 4.0.1',
+      'hipaa': 'HIPAA',
+      'nist_csf_20': 'NIST CSF 2.0'
+    };
+
+    async function mapVendors() {
+      const errorDiv = document.getElementById('vendor-error');
+      const loadingDiv = document.getElementById('vendor-loading');
+      const submitBtn = document.getElementById('vendor-submit-btn');
+      const resultsPanel = document.getElementById('vendor-results');
+
+      // Clear previous errors
+      errorDiv.textContent = '';
+
+      // Collect selected vendors
+      const vendorCheckboxes = document.querySelectorAll('#mode-vendor .vendor-item input[type="checkbox"]:checked');
+      const selectedVendors = Array.from(vendorCheckboxes).map(cb => {
+        const label = cb.nextElementSibling || document.querySelector(`label[for="${cb.id}"]`);
+        return label ? label.textContent.trim() : '';
+      }).filter(v => v);
+
+      // Collect selected frameworks
+      const frameworkPills = document.querySelectorAll('#mode-vendor .framework-pill.active');
+      const selectedFrameworks = Array.from(frameworkPills).map(pill => {
+        const label = pill.textContent.trim();
+        return frameworkKeyMap[label] || null;
+      }).filter(f => f);
+
+      // Validation
+      if (selectedVendors.length === 0) {
+        errorDiv.textContent = 'Please select at least one vendor.';
+        return;
+      }
+
+      if (selectedFrameworks.length === 0) {
+        errorDiv.textContent = 'Please select at least one framework.';
+        return;
+      }
+
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Analyzing your stack...';
+      loadingDiv.classList.add('visible');
+      resultsPanel.classList.remove('visible');
+
+      try {
+        const response = await fetch('https://pam-compliance-mapper-api-production.up.railway.app/api/analyze-vendors', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ vendors: selectedVendors, frameworks: selectedFrameworks })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.error || 'Analysis failed');
+        }
+
+        // Render results
+        renderVendorResults(data.analysis);
+
+        // Show results panel
+        resultsPanel.classList.add('visible');
+
+        // Scroll to results
+        setTimeout(() => {
+          resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+
+      } catch (error) {
+        console.error('Vendor analysis error:', error);
+        errorDiv.textContent = 'Analysis unavailable. Please try again or contact thepaminsider@gmail.com';
+      } finally {
+        // Reset button state
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Map My Vendors';
+        loadingDiv.classList.remove('visible');
+      }
+    }
+
+    function renderVendorResults(analysis) {
+      // Summary
+      document.getElementById('vendor-summary-text').textContent = analysis.summary || '';
+
+      // Strengths
+      const strengthsList = document.getElementById('vendor-strengths-list');
+      if (analysis.strengths && analysis.strengths.length > 0) {
+        strengthsList.innerHTML = analysis.strengths.map(s => `
+          <div class="strength-item">
+            <span class="strength-check">✓</span>
+            <div class="strength-content">
+              <span class="strength-name">${escapeHtml(s.controlName)}</span>
+              <span class="strength-covered">Covered by: ${escapeHtml(s.coveredBy.join(', '))}</span>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        strengthsList.innerHTML = '<div class="vendor-results-empty">No complete coverage areas identified with selected vendors.</div>';
+      }
+
+      // Gaps
+      const gapsList = document.getElementById('vendor-gaps-list');
+      if (analysis.gaps && analysis.gaps.length > 0) {
+        gapsList.innerHTML = analysis.gaps.map(g => {
+          const frameworkNames = g.frameworks.map(f => frameworkDisplayMap[f] || f).join(' · ');
+          return `
+            <div class="gap-item severity-${g.severity}">
+              <div class="gap-header">
+                <div>
+                  <span class="gap-id">${escapeHtml(g.controlId)}</span>
+                  <span class="gap-name">${escapeHtml(g.controlName)}</span>
+                </div>
+                <span class="gap-severity ${g.severity}">${g.severity}</span>
+              </div>
+              <div class="gap-frameworks">Affects: ${escapeHtml(frameworkNames)}</div>
+              <div class="gap-recommendation">${escapeHtml(g.recommendation)}</div>
+            </div>
+          `;
+        }).join('');
+      } else {
+        gapsList.innerHTML = '<div class="vendor-results-empty">No significant gaps identified with selected vendors.</div>';
+      }
+
+      // Recommendations
+      const recommendationsList = document.getElementById('vendor-recommendations-list');
+      if (analysis.recommendations && analysis.recommendations.length > 0) {
+        recommendationsList.innerHTML = analysis.recommendations.map((r, i) => `
+          <div class="recommendation-item">
+            <span class="recommendation-num">${i + 1}</span>
+            <span class="recommendation-text">${escapeHtml(r)}</span>
+          </div>
+        `).join('');
+      } else {
+        recommendationsList.innerHTML = '<div class="vendor-results-empty">No additional recommendations.</div>';
+      }
+
+      // Vendor coverage detail
+      const coverageList = document.getElementById('vendor-coverage-list');
+      if (analysis.vendorCoverage && analysis.vendorCoverage.length > 0) {
+        coverageList.innerHTML = analysis.vendorCoverage.map(v => `
+          <div class="vendor-detail-item">
+            <div class="vendor-detail-name">${escapeHtml(v.vendorName)}</div>
+            <div class="vendor-detail-count">Covers ${v.controls.length} PAM controls</div>
+            ${v.notes ? `<div class="vendor-detail-notes">${escapeHtml(v.notes)}</div>` : ''}
+          </div>
+        `).join('');
+      } else {
+        coverageList.innerHTML = '<div class="vendor-results-empty">No vendor coverage data available.</div>';
+      }
+
+      // Disclaimer
+      document.getElementById('vendor-disclaimer-text').textContent = analysis.disclaimer || '';
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
     }
 
     function toggleDisclaimer() {
