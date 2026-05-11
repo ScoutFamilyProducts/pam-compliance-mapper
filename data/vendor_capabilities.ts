@@ -1477,5 +1477,41 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://www.opentext.com/products/netiq-access-manager"
       }
     ]
+  },
+  {
+    vendorId: "V-048",
+    vendorName: "Beyond Identity",
+    products: [
+      {
+        productId: "V-048-P-001",
+        productName: "Beyond Identity Secure Workforce",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004"],
+        partialCapabilities: ["PAM-015", "PAM-019", "PAM-032"],
+        notes: "Phishing-resistant passwordless MFA for enterprise workforce — eliminates all phishable authentication factors (passwords, OTPs, push notifications, SMS). Core capabilities: Universal Passkeys (FIDO2, device-bound, non-syncable — private key stored in device TPM and cannot leave the device), continuous device trust verification on every auth request checking firewall, disk encryption, biometrics enabled, screen lock, OS patch level, MDM enrollment active, and EDR/XDR signals, integration with CrowdStrike Falcon, SentinelOne, and other EDR platforms for real-time device risk signals, adaptive step-up authentication when device risk increases mid-session, integrates with all major IdPs (Okta, Microsoft Entra, Ping, ForgeRock) as external authentication method without requiring replacement of existing IAM stack. Distinguishing architectural difference from other phishing-resistant MFA: simultaneous identity authentication and device security validation on every request — standard FIDO2 implementations do not verify ongoing device security posture. PAM-004 full — device-bound FIDO2 passkeys, no phishable fallback methods, no bypass path. PAM-032 partial — device risk signals provide behavioral and posture-based risk intelligence.",
+        docsUrl: "https://docs.beyondidentity.com/"
+      },
+      {
+        productId: "V-048-P-002",
+        productName: "Beyond Identity Secure DevOps",
+        capabilities: ["PAM-001", "PAM-002", "PAM-004"],
+        partialCapabilities: ["PAM-019", "PAM-023", "PAM-024", "PAM-028"],
+        notes: "Phishing-resistant authentication for developer workflows and CI/CD pipelines. FIDO2-based authentication for code commits, pipeline access, and development tooling. Eliminates shared credentials, SSH keys, and passwords in DevOps workflows. Code signing and commit verification. Integrates with GitHub, GitLab, and major CI/CD platforms.",
+        docsUrl: "https://docs.beyondidentity.com/"
+      }
+    ]
+  },
+  {
+    vendorId: "V-049",
+    vendorName: "ServiceNow",
+    products: [
+      {
+        productId: "V-049-P-001",
+        productName: "ServiceNow Identity Security (Veza)",
+        capabilities: ["PAM-008", "PAM-010", "PAM-016"],
+        partialCapabilities: ["PAM-005", "PAM-017", "PAM-019", "PAM-022", "PAM-032"],
+        notes: "AI-native identity security platform — Veza Access Platform embedded in ServiceNow AI. Core capability: the Access Graph, a continuous real-time graph of every identity (human, non-human, AI agents) and every permission across an enterprise's entire technology estate. Supports hundreds of systems including cloud providers (AWS, Azure, GCP), SaaS applications, on-premises directories, and databases natively. Key capabilities: fine-grained permission visibility (maps what each identity can actually do, not just what roles are assigned — detects unused permissions, excessive entitlements, toxic combinations), privileged access monitoring (surfaces which accounts have privileged access and what they are doing with it), NHI governance (service accounts, API keys, OAuth tokens, AI agent credentials), ISPM (continuous security posture assessment and remediation), access entitlement management, dormant account detection (38% of accounts dormant per Veza research), next-gen IGA workflows via ServiceNow platform integration (access reviews triggered, assignments remediated, tickets auto-created). AI Agent Security: visibility into AI agent identities, their permissions, and their activity — governs agentic access at instance level. Integration with ServiceNow's CMDB, Vulnerability Response, Incident Response, and Integrated Risk Management provides identity context to security and risk workflows. PAM-008 full — Access Graph discovers all privileged identities and their actual permissions across all systems. PAM-010 full — identifies dormant accounts at scale. PAM-016 full — identifies toxic privilege combinations and excessive entitlements with remediation workflows.",
+        docsUrl: "https://www.servicenow.com/products/autonomous-security-risk.html"
+      }
+    ]
   }
 ];
