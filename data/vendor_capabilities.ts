@@ -681,5 +681,19 @@ export const vendorCapabilities: VendorCapability[] = [
         addOnOf: "V-011-P-001"
       }
     ]
+  },
+  {
+    vendorId: "V-012",
+    vendorName: "Saviynt",
+    products: [
+      {
+        productId: "V-012-P-001",
+        productName: "Saviynt Identity Cloud",
+        capabilities: ["PAM-005", "PAM-007", "PAM-008", "PAM-011", "PAM-012", "PAM-019", "PAM-020", "PAM-021", "PAM-022", "PAM-023", "PAM-029", "PAM-030", "PAM-031"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-006", "PAM-009", "PAM-010", "PAM-013", "PAM-014", "PAM-015", "PAM-032", "PAM-035"],
+        notes: "Converged identity security platform — IGA, PAM, Application Access Governance (AAG), and Identity Security Posture Management (ISPM) organically built on a single code base. Key differentiator from SailPoint: includes a built-in PAM module with actual credential vaulting and session recording, not governance-adjacent capabilities only. Raised $700M from KKR in December 2025 at ~$3B valuation. Named Gartner Customers Choice for IGA 5 consecutive years. Core capabilities by module: IGA — lifecycle management (joiner-mover-leaver), access certifications with AI-driven Intelligent Recommendations, access request workflows, provisioning and deprovisioning, SOD enforcement; PAM — agentless Cloud PAM (zero-touch, no heavyweight agents), credential vaulting, session recording, discovery of high-risk accounts and shared accounts; AAG — fine-grained application-level SOD and entitlement governance within applications (SAP, Oracle, Workday, Salesforce, etc.); JIT Access — Just-in-Time Access GA 2025, zero standing privileges for cloud/SaaS high-risk accounts, discovers high-risk shared accounts, removes standing privileges, provisions JIT just-enough access; External Identity Management — contractor, vendor, and partner identity lifecycle governance; ISPM — AI-native Identity Security Posture Management launched 2025, continuous risk assessment across identity posture. PAM-001-003 partial — MFA via integrated IdP, not native. PAM-013 partial — external identity management covers vendor access governance but not dedicated RPAM session controls. PAM-030 full — session recording via PAM module. PAM-032 partial — ISPM provides AI-driven risk intelligence and behavioral context.",
+        docsUrl: "https://docs.saviyntcloud.com/"
+      }
+    ]
   }
 ];
