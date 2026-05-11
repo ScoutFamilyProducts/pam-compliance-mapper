@@ -732,5 +732,27 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://help.splunk.com/en/splunk-enterprise-security-8"
       }
     ]
+  },
+  {
+    vendorId: "V-015",
+    vendorName: "Semperis",
+    products: [
+      {
+        productId: "V-015-P-001",
+        productName: "Semperis Directory Services Protector",
+        capabilities: ["PAM-008", "PAM-032"],
+        partialCapabilities: ["PAM-010", "PAM-016", "PAM-017", "PAM-019", "PAM-020", "PAM-021"],
+        notes: "ITDR solution for hybrid AD and Entra ID — Gartner-recognized ITDR product. Continuous monitoring using multiple data sources including the AD replication stream, which catches changes that evade agent-based and log-based detection (distinguishing capability — catches DCSync, DCShadow, and other attacks that bypass traditional SIEM). Hundreds of built-in, continuously updated security indicators covering indicators of exposure (IOEs) and indicators of compromise (IOCs). Automatic rollback of malicious changes with single-click remediation. Tamperproof audit trail of all AD changes. DSP Intelligence module provides automated security posture assessments. Integration with Microsoft Sentinel to extend visibility into previously hidden AD security data. Detects: privilege escalation paths, shadow admins, attack paths to Tier 0 assets, backdoors, persistence mechanisms, Kerberoasting indicators, Pass-the-Hash, Pass-the-Ticket, Golden Ticket, DCSync. PAM-016 partial — identifies privilege escalation paths but does not enforce access controls. PAM-019 partial — tamperproof audit trail for AD changes specifically, not general PAM audit logging. Not a PAM product — detection and remediation only, no credential management or access control.",
+        docsUrl: "https://www.semperis.com/active-directory-security/"
+      },
+      {
+        productId: "V-015-P-002",
+        productName: "Semperis Active Directory Forest Recovery",
+        capabilities: [],
+        partialCapabilities: ["PAM-019", "PAM-029", "PAM-034"],
+        notes: "Cyber-first AD forest recovery — purpose-built for ransomware and cyberattack recovery scenarios. Automates complete AD forest recovery in minutes or hours (Forrester-validated 90% reduction in recovery time). Recovers to known-secure state to prevent malware reinfection — critical distinguishing capability. Post-breach identity forensics to close backdoors and remove persistence before returning to production. Staged minimum viable company restore — recovers critical authentication first, remaining DCs in subsequent waves. Fault-tolerant recovery handling complex multi-forest, alternate IP, and mixed hardware environments. PAM-029 partial — ADFR ensures break glass and emergency access workflows can be restored after AD-targeting ransomware; does not manage break glass access itself. PAM-034 partial — validated DR capability contributes to risk posture and annual risk analysis. PAM-019 partial — forensics capability provides audit evidence of changes made during an attack. Not a PAM product — operational resilience product that protects the identity infrastructure PAM depends on.",
+        docsUrl: "https://www.semperis.com/active-directory-forest-recovery/"
+      }
+    ]
   }
 ];
