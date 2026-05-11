@@ -800,5 +800,19 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://netwrix.com/en/products/password-secure/"
       }
     ]
+  },
+  {
+    vendorId: "V-017",
+    vendorName: "Varonis",
+    products: [
+      {
+        productId: "V-017-P-001",
+        productName: "Varonis Data Security Platform",
+        capabilities: ["PAM-032"],
+        partialCapabilities: ["PAM-005", "PAM-008", "PAM-010", "PAM-016", "PAM-019", "PAM-020", "PAM-021"],
+        notes: "Unified data security platform covering data access governance, DSPM, ITDR, identity protection, and UEBA. Not a PAM product — does not vault credentials, manage JIT access, record privileged sessions, or enforce access controls. Value for PAM compliance is entirely from detection, visibility, and behavioral analytics. Core PAM-relevant capability modules: Data Access Governance — discovers who has access to sensitive data files, shares, and cloud storage; identifies over-privileged users and toxic access combinations; Identity Protection (launched June 2025) — Identity Posture Management identifies risky and misconfigured identities and excessive entitlements across the environment; ITDR detects failed logins, password resets, MFA policy changes, lateral movement, brute force, password spray, and other identity-based threats aligned to MITRE ATT&CK; Identity Resolution maps related identities across all connected systems to a single individual for unified investigation; UEBA — ML-driven user and entity behavior analytics with automated alerting and touchless response. PAM-032 full — ITDR with UEBA is the distinguishing capability, integrating identity threat detection directly with data access context. PAM-005 partial — data access governance enforces least privilege for data access but not general infrastructure access. PAM-008 partial — Identity Posture Management discovers over-privileged identities and excessive entitlements. PAM-010 partial — identifies dormant accounts and stale data access rights. PAM-016 partial — identifies privilege escalation risk paths but detection only, no enforcement. PAM-019/020/021 partial — audit trail and investigation for data access activity, not general PAM audit logging.",
+        docsUrl: "https://www.varonis.com/data-security-platform"
+      }
+    ]
   }
 ];
