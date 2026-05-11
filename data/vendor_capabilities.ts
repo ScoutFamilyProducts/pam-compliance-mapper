@@ -997,5 +997,63 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://www.quest.com/change-auditor/"
       }
     ]
+  },
+  {
+    vendorId: "V-024",
+    vendorName: "ARCON",
+    products: [
+      {
+        productId: "V-024-P-001",
+        productName: "ARCON PAM",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-005", "PAM-007", "PAM-008", "PAM-009", "PAM-013", "PAM-015", "PAM-019", "PAM-020", "PAM-021", "PAM-023", "PAM-024", "PAM-025", "PAM-026", "PAM-027", "PAM-028", "PAM-029", "PAM-030", "PAM-031", "PAM-033"],
+        partialCapabilities: ["PAM-004", "PAM-006", "PAM-010", "PAM-014", "PAM-017", "PAM-018", "PAM-032"],
+        notes: "Full-stack PAM platform available on-premises and SaaS. Core capabilities: Digital Vault (encrypted credential vaulting), password rotation and management, session recording and monitoring for RDP, SSH, Telnet, and web applications, JIT access, built-in dual-factor MFA plus integrations with Google Authenticator, Microsoft Authenticator, biometrics, hardware tokens, facial recognition, SMS/email OTP, SSO with 200+ plug-and-play connectors supporting OAuth 2.0, OIDC, and SAML, RBAC, auto-discovery of privileged accounts from AD, AWS, Azure, and GCP, remote access via secure web gateways (VPN-less), ITSM integration with ticketing workflows, DevOps and CI/CD pipeline integration, database monitoring via TDS Proxy (captures all SQL queries and transactions), behavioral analytics and ITDR capabilities, compliance-ready reporting for PCI-DSS, HIPAA, SOX, dual control approvals, break glass. Trusted by banking organizations, government agencies, and healthcare chains. PAM-004 partial — phishing-resistant MFA enforcement depends on configured MFA methods. PAM-032 partial — behavioral analytics and anomaly detection included but not a dedicated ITDR product.",
+        docsUrl: "https://arconnet.com/privileged-access-management/"
+      },
+      {
+        productId: "V-024-P-002",
+        productName: "ARCON EPM",
+        capabilities: ["PAM-005", "PAM-009", "PAM-016"],
+        partialCapabilities: ["PAM-006", "PAM-007", "PAM-008", "PAM-019", "PAM-020", "PAM-027"],
+        notes: "Endpoint Privilege Management — continuously learning and adaptive endpoint protection. Removes unnecessary local admin rights, enforces least privilege at endpoints, application controls (allowlisting/blocklisting), privilege elevation workflows for specific applications. Integrates with ARCON PAM for unified privileged identity governance across infrastructure and endpoints.",
+        docsUrl: "https://arconnet.com/"
+      }
+    ]
+  },
+  {
+    vendorId: "V-025",
+    vendorName: "Cisco Duo",
+    products: [
+      {
+        productId: "V-025-P-001",
+        productName: "Cisco Duo",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004", "PAM-015", "PAM-017", "PAM-018", "PAM-025", "PAM-026", "PAM-027"],
+        partialCapabilities: ["PAM-005", "PAM-008", "PAM-010", "PAM-019", "PAM-032"],
+        notes: "MFA-first identity security platform. Core capabilities: phishing-resistant MFA (FIDO2, WebAuthn, hardware keys — distinguishing capability), Duo Push (mobile app-based approval), OTP, biometrics, passwordless authentication (single gesture replacing password + MFA), SSO via cloud-hosted identity provider (SAML, OIDC) with Duo Central, Duo Directory (standalone cloud directory for primary authentication), Device Trust (differentiates corporate vs personal devices, blocks access from unmanaged devices), adaptive access policies based on user identity, device health, network context, geographic location, and risk signals, Duo Passport (continuous authentication throughout session), ITDR and ISPM capabilities (Premier edition) detecting identity-based threats. Integrates with on-premises legacy systems, VPNs, AD, SaaS tools, custom applications, and offline devices. PAM-004 full — phishing-resistant FIDO2 enforcement available and anti-bypass policies configurable. Does not provide credential vaulting, session recording, account discovery, password rotation, or JIT access — those require a separate PAM product. Duo is the most commonly used MFA layer in front of PAM vaults (most PAM vendors list Duo as a first-tier integration).",
+        docsUrl: "https://duo.com/docs"
+      }
+    ]
+  },
+  {
+    vendorId: "V-026",
+    vendorName: "Omada",
+    products: [
+      {
+        productId: "V-026-P-001",
+        productName: "Omada Identity Cloud",
+        capabilities: ["PAM-011", "PAM-012", "PAM-022"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-007", "PAM-021", "PAM-035"],
+        notes: "Cloud-native SaaS IGA platform. Full-featured identity governance covering: lifecycle management (joiner-mover-leaver automation), access certifications and attestation campaigns, access request workflows with approval routing, SOD policy enforcement, intelligent compliance, NHI governance, provisioning and deprovisioning across hybrid platforms (on-premises, cloud, SaaS). High configurability without code using best-practice framework. Manages identities and access across hybrid environments. Strong in European regulated industries. Governance for Identity Fabric. Does not provide MFA, credential vaulting, session recording, or infrastructure PAM controls.",
+        docsUrl: "https://omadaidentity.com/resources/product_news/"
+      },
+      {
+        productId: "V-026-P-002",
+        productName: "Omada Identity On-Premises",
+        capabilities: ["PAM-011", "PAM-012", "PAM-022"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-007", "PAM-021", "PAM-035"],
+        notes: "On-premises deployment of Omada Identity — full feature parity with Omada Identity Cloud. Complete tenant ownership and enforceable data boundaries. Designed for regulated enterprises and government organizations with strict data residency requirements. Same governance capabilities as cloud version: lifecycle management, certifications, SOD, access requests, NHI governance.",
+        docsUrl: "https://omadaidentity.com/"
+      }
+    ]
   }
 ];
