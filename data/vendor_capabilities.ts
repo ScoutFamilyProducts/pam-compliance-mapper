@@ -695,5 +695,28 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://docs.saviyntcloud.com/"
       }
     ]
+  },
+  {
+    vendorId: "V-013",
+    vendorName: "JumpCloud",
+    products: [
+      {
+        productId: "V-013-P-001",
+        productName: "JumpCloud Directory Platform",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-015", "PAM-017", "PAM-018", "PAM-025", "PAM-026", "PAM-027"],
+        partialCapabilities: ["PAM-004", "PAM-005", "PAM-009", "PAM-011", "PAM-012", "PAM-019"],
+        notes: "Cloud directory platform providing identity, access, and device management from a single console. Core capabilities: SSO to SAML and OIDC applications, MFA (TOTP, WebAuthn, push), conditional access policies, device management (Windows, macOS, Linux, iOS, Android), RADIUS for network authentication, LDAP-as-a-Service, cross-OS device policies and patch management. User lifecycle management via HR integrations (Workday, BambooHR, etc.) and SCIM. Password management capabilities — centralized password policies, self-service reset. RBAC via user groups and device groups. Event logging and SIEM integrations. PAM-005 partial — manages device-level credentials and directory passwords, not privileged account vaulting. PAM-009 partial — discovery limited to directory-joined devices and identities, not infrastructure-wide privileged account discovery. PAM-011/012 partial — identity governance via groups and HR-driven lifecycle, not full IGA certification campaigns. PAM-019 partial — conditional access and device trust, not session-level privileged access workflows.",
+        docsUrl: "https://jumpcloud.com/support"
+      },
+      {
+        productId: "V-013-P-002",
+        productName: "JumpCloud PAM",
+        capabilities: ["PAM-019", "PAM-020", "PAM-023", "PAM-029", "PAM-030", "PAM-033"],
+        partialCapabilities: ["PAM-005", "PAM-007", "PAM-013", "PAM-014", "PAM-015", "PAM-031"],
+        notes: "PAM module added via VaultOne acquisition (May 2025). Extends the JumpCloud Directory Platform with privileged access management capabilities. Session recording for SSH and RDP sessions. Access request workflows with approval chains. Time-limited access grants. Audit logging with tamper-evident trails. Remote browser isolation for web-based privileged access. PAM-005 partial — credential management focused on session injection rather than full enterprise vault with rotation. PAM-007 partial — RBAC for PAM sessions, extends Directory Platform groups. PAM-013 partial — supports vendor access scenarios but not dedicated RPAM infrastructure. PAM-014 partial — session isolation via remote browser, not full gateway architecture. PAM-015 partial — session recording available, keystroke logging scope TBD. PAM-031 partial — time-limited access, full JIT with zero standing privilege model in roadmap.",
+        docsUrl: "https://jumpcloud.com/support",
+        addOnOf: "V-013-P-001"
+      }
+    ]
   }
 ];
