@@ -578,5 +578,59 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://learn.microsoft.com/en-us/azure/sentinel/overview"
       }
     ]
+  },
+  {
+    vendorId: "V-010",
+    vendorName: "AWS",
+    products: [
+      {
+        productId: "V-010-P-001",
+        productName: "AWS IAM",
+        capabilities: ["PAM-005", "PAM-015", "PAM-025", "PAM-026", "PAM-027"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004", "PAM-006", "PAM-007", "PAM-008", "PAM-009", "PAM-016", "PAM-017", "PAM-019", "PAM-020", "PAM-031"],
+        notes: "Core AWS access control service — included free in every AWS account. Manages authentication and authorization for all AWS API operations. Core capabilities: IAM policies (identity-based and resource-based), IAM roles (temporary credentials via STS — recommended pattern, no long-lived credentials), IAM users (long-lived credentials — should be minimized), IAM groups, Permission Boundaries (limit maximum permissions any identity can have), Service Control Policies via AWS Organizations (guardrails across all accounts), IAM Access Analyzer (built-in policy analysis). MFA partial — configurable for IAM users and root account; federated users get MFA from IdP. PAM-031 partial — IAM roles with STS provide temporary credentials that automatically expire (session duration configurable), reducing standing access in AWS. PAM-016 partial — permission boundaries and SCPs prevent privilege escalation but require explicit configuration. PAM-019 partial — IAM itself does not provide audit logging; CloudTrail is the separate service that captures all IAM API calls. Root account must be protected with MFA and credentials secured in a PAM vault — AWS explicitly recommends a third-party PAM solution for root account credential management.",
+        docsUrl: "https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html"
+      },
+      {
+        productId: "V-010-P-002",
+        productName: "AWS IAM Identity Center",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-015", "PAM-017", "PAM-018"],
+        partialCapabilities: ["PAM-004", "PAM-005", "PAM-011", "PAM-012", "PAM-019"],
+        notes: "Formerly AWS Single Sign-On. Free workforce identity service for multi-account AWS access. Centrally manages user access across multiple AWS accounts via permission sets. Integrates with external identity providers (Okta, Azure AD, Microsoft AD, Ping) via SAML or SCIM. Users authenticate through their IdP and receive temporary AWS credentials per account. Built-in user store available if no external IdP. MFA enforced via integrated IdP or AWS native MFA. Trusted identity propagation passes user identity to AWS managed applications for user-level audit trails. PAM-004 partial — MFA enforcement depends on IdP or Identity Center policy configuration. PAM-011/PAM-012 partial — SCIM provisioning enables user lifecycle automation from IdP. PAM-019 partial — Identity Center activity logged via CloudTrail.",
+        docsUrl: "https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html"
+      },
+      {
+        productId: "V-010-P-003",
+        productName: "AWS Secrets Manager",
+        capabilities: ["PAM-023", "PAM-024", "PAM-028"],
+        partialCapabilities: ["PAM-006", "PAM-019", "PAM-021"],
+        notes: "Paid secrets management service. Stores and automatically rotates credentials for RDS databases, Redshift, DocumentDB, and custom rotation targets via Lambda functions. Automatic rotation eliminates long-lived static credentials. Encryption via AWS KMS. RBAC via IAM policies controlling who can retrieve which secrets. Audit logging via CloudTrail — all GetSecretValue calls logged. Cross-region replication. Integration with other AWS services (EC2, Lambda, ECS) for runtime secret retrieval. PAM-006 partial — manages service account credentials but no governance workflow layer. PAM-019 partial — audit via CloudTrail, not built into Secrets Manager itself.",
+        docsUrl: "https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html"
+      },
+      {
+        productId: "V-010-P-004",
+        productName: "AWS CloudTrail",
+        capabilities: ["PAM-019", "PAM-020", "PAM-021"],
+        partialCapabilities: ["PAM-032"],
+        notes: "Audit logging service for all AWS API calls and console actions across all AWS services and accounts. First trail per region included free; additional trails and CloudTrail Lake (SQL-based analysis) are paid. Logs are tamper-evident — stored in S3 with optional integrity validation. Covers all IAM, Secrets Manager, KMS, EC2, and other service API calls. CloudTrail Lake provides 7-year immutable audit store with SQL query capability. Organization trail captures activity across all AWS accounts in an organization from a single location. Essential prerequisite for meaningful PAM audit logging in AWS environments — without CloudTrail, no credible audit trail exists.",
+        docsUrl: "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html"
+      },
+      {
+        productId: "V-010-P-005",
+        productName: "AWS GuardDuty",
+        capabilities: ["PAM-032"],
+        partialCapabilities: ["PAM-008", "PAM-010", "PAM-019"],
+        notes: "ML-based threat detection service — paid, 30-day free trial. Continuously analyzes CloudTrail logs, VPC Flow Logs, DNS logs, and other data sources to detect threats. Relevant PAM detections: IAM credential compromise (stolen credentials being used from unusual locations), privilege escalation attempts, brute force attacks, cryptocurrency mining (indicates compromised compute), unusual API call patterns, lateral movement. Detects dormant/unused IAM credentials. Findings integrate with AWS Security Hub and EventBridge for automated response. Does not manage credentials or control access — detection only.",
+        docsUrl: "https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html"
+      },
+      {
+        productId: "V-010-P-006",
+        productName: "AWS IAM Access Analyzer",
+        capabilities: ["PAM-008"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-016", "PAM-017", "PAM-022"],
+        notes: "Policy analysis service — external access analysis is free, unused access analysis is paid. External access analysis: identifies S3 buckets, IAM roles, KMS keys, and other resources that are accessible from outside the account or organization (public or cross-account exposure). Unused access analysis: identifies IAM users and roles with unused permissions and credentials, helping right-size permissions toward least privilege. Policy validation: checks IAM policies against security best practices before deployment. Access reviews: generates findings that can feed into periodic access review processes. Does not control or manage access — analysis and recommendations only.",
+        docsUrl: "https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html"
+      }
+    ]
   }
 ];
