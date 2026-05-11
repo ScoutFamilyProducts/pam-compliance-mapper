@@ -1303,5 +1303,85 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://www.paloaltonetworks.com/cortex/cortex-xsiam"
       }
     ]
+  },
+  {
+    vendorId: "V-039",
+    vendorName: "RSA",
+    products: [
+      {
+        productId: "V-039-P-001",
+        productName: "RSA ID Plus",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004", "PAM-015", "PAM-017", "PAM-018"],
+        partialCapabilities: ["PAM-005", "PAM-008", "PAM-010", "PAM-019", "PAM-025", "PAM-026", "PAM-032"],
+        notes: "Hybrid IAM platform — cloud, hybrid, and on-premises deployment in a single product. Available in tiers: E0 (cloud-only), E1 (hybrid MFA + basic access), E2 (hybrid + adaptive + SSO), E3 (full platform). Distinguishing capabilities: hybrid failover — RSA ID Plus maintains MFA authentication during Microsoft Entra cloud outages (unique in the market); broadest passwordless coverage — FIDO2, QR codes, biometrics, hardware tokens, mobile passkeys, OTP, PKI/CBA, all supporting offline/air-gapped/legacy environments including OT systems, mainframes, macOS, and AD-joined devices that Microsoft Entra cannot reach natively; RSA Help Desk Live Verify — patent-pending technology that stops MFA bypass attacks targeting IT help desk personnel; RSA Risk AI — adaptive access security assessing user risk before granting access; RSA Mobile Lock — detects threats to mobile devices and blocks authentication until resolved; ISPM (Identity Security Posture Management) capabilities; Microsoft integration: RSA ID Plus for Microsoft M1 is a dedicated add-on to Microsoft Entra ID on Azure Marketplace. Trusted by banks, hospitals, government agencies, and power plants. PAM-004 full — phishing-resistant FIDO2, hardware tokens, and PKI/CBA. PAM-032 partial — Risk AI and threat intelligence provide behavioral risk scoring.",
+        docsUrl: "https://www.rsa.com/products/id-plus/"
+      },
+      {
+        productId: "V-039-P-002",
+        productName: "RSA Governance & Lifecycle",
+        capabilities: ["PAM-011", "PAM-012", "PAM-022"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-007", "PAM-021"],
+        notes: "IGA product — identity lifecycle management, access certifications, access request workflows, SOD enforcement, provisioning and deprovisioning. Integrates with RSA ID Plus for unified identity security posture management. Governance and compliance reporting for regulated industries.",
+        docsUrl: "https://www.rsa.com/"
+      }
+    ]
+  },
+  {
+    vendorId: "V-040",
+    vendorName: "Entrust",
+    products: [
+      {
+        productId: "V-040-P-001",
+        productName: "Entrust IDaaS",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004", "PAM-015", "PAM-017", "PAM-018"],
+        partialCapabilities: ["PAM-005", "PAM-019", "PAM-025", "PAM-026"],
+        notes: "Cloud-based IAM platform — SaaS delivery, no infrastructure required. Core capabilities: SSO for cloud and on-premises applications (SAML, OIDC), MFA with the broadest authenticator range including FIDO2/passkeys, PKI/certificate-based authentication, biometrics, grid cards, social logins, OTPs, push notifications, adaptive risk-based authentication (RBA) evaluating location, behavioral biometrics, travel velocity, device integrity, AI-driven biometric verification and deepfake detection, identity orchestration with no-code/low-code journey builder, identity verification (ID proofing with government document scanning and selfie matching for onboarding). Covers workforce, customer (CIAM), and partner (B2B) identities. PAM-004 full — PKI/CBA and FIDO2 are the only two authentication methods recognized as phishing-resistant by US EO 14028; Entrust supports both. Phishing-resistant enforcement configurable via policy.",
+        docsUrl: "https://www.entrust.com/products/iam/identity-as-a-service"
+      },
+      {
+        productId: "V-040-P-002",
+        productName: "Entrust Identity Enterprise",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004", "PAM-015", "PAM-017", "PAM-018"],
+        partialCapabilities: ["PAM-005", "PAM-019", "PAM-025"],
+        notes: "On-premises IAM platform for large organizations with complex security requirements or strict data residency needs. Full feature parity with IDaaS for authentication capabilities. Adds: federation module for on-premises SSO including Office 365, credential-based passwordless workstation login, smart card issuance and management, support for citizen identity use cases (border crossing, licensing, voting — government deployments). Supports Risk-Based Authentication (RBA) with Zero Trust at its core. Available as on-premises software, virtual appliance, or hybrid. Strong in defense and government sectors requiring national-level identity assurance.",
+        docsUrl: "https://www.entrust.com/products/iam/identity-enterprise"
+      }
+    ]
+  },
+  {
+    vendorId: "V-041",
+    vendorName: "Transmit Security",
+    products: [
+      {
+        productId: "V-041-P-001",
+        productName: "Mosaic by Transmit Security",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003"],
+        partialCapabilities: ["PAM-004", "PAM-015", "PAM-017", "PAM-032"],
+        notes: "Unified CIAM platform combining identity management, fraud prevention, and identity verification. Three core services: Authentication Service (passwordless, MFA, passkeys, biometrics, magic links, adaptive risk-based authentication), Orchestration Service (no-code/low-code identity journey builder with drag-and-drop, policy engine for real-time risk decisions), Fraud Prevention (Predictive AI detecting deepfakes, synthetic identities, agentic AI attacks, behavioral anomalies). Identity verification includes document scanning (150+ AI/ML features), selfie biometrics, KYC/AML automation. SaaS-only delivery. PAM-004 partial — phishing-resistant MFA options available including FIDO2 and passkeys. PAM-032 partial — Predictive AI provides behavioral intelligence and identity threat detection for customer accounts. Primary focus is customer identity (CIAM), not workforce or infrastructure PAM. Does not provide credential vaulting, session recording, discovery, or privileged access controls.",
+        docsUrl: "https://transmitsecurity.com/platform"
+      }
+    ]
+  },
+  {
+    vendorId: "V-042",
+    vendorName: "Thales",
+    products: [
+      {
+        productId: "V-042-P-001",
+        productName: "SafeNet Trusted Access",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004", "PAM-015", "PAM-017", "PAM-018"],
+        partialCapabilities: ["PAM-005", "PAM-019", "PAM-025", "PAM-026"],
+        notes: "Cloud-based workforce IAM — SSO, MFA, and adaptive access management. SaaS delivery, no infrastructure required. Distinguishing capability: broadest range of authentication methods of any IAM platform, supporting FIDO2, PKI/CBA, hardware OTP tokens, software tokens, push notifications, biometrics, smart cards, and more — the SafeNet hardware token portfolio spans 30+ years. Granular, scenario-based access policies. Integrates with all major IdPs and applications. SafeNet Trusted Access can extend MFA to legacy on-premises applications and OT environments that other SaaS IAM platforms cannot reach. PAM-004 full — FIDO2 and PKI/CBA both supported, both recognized as phishing-resistant under US EO 14028. Adaptive authentication evaluates device, network, and geographic context for risk-based step-up.",
+        docsUrl: "https://cpl.thalesgroup.com/access-management/safenet-trusted-access"
+      },
+      {
+        productId: "V-042-P-002",
+        productName: "Thales OneWelcome Identity Platform",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-015", "PAM-017", "PAM-018"],
+        partialCapabilities: ["PAM-004", "PAM-005", "PAM-011", "PAM-012", "PAM-019", "PAM-025", "PAM-026"],
+        notes: "CIAM and B2B IAM platform — customer, partner, and supplier identity management. Acquired by Thales from OneWelcome. Modular architecture with identity apps for different use cases: CIAM (consumer), B2B IAM (partners/suppliers), workforce IAM. Supports FIDO2 passkeys, hardware tokens, smart cards, software authenticators. Identity lifecycle management, consent management, GDPR compliance. Strong in regulated financial services (strong customer authentication for PCI SCA compliance) and European organizations requiring GDPR-compliant customer identity.",
+        docsUrl: "https://cpl.thalesgroup.com/access-management/onewelcome-identity-platform"
+      }
+    ]
   }
 ];
