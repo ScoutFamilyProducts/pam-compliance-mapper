@@ -1201,5 +1201,79 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://www.wallix.com/products/"
       }
     ]
+  },
+  {
+    vendorId: "V-034",
+    vendorName: "Securonix",
+    products: [
+      {
+        productId: "V-034-P-001",
+        productName: "Securonix Unified Defense SIEM",
+        capabilities: ["PAM-019", "PAM-020", "PAM-021", "PAM-032"],
+        partialCapabilities: ["PAM-008", "PAM-010"],
+        notes: "Cloud-native Unified Defense SIEM — SIEM, UEBA, SOAR, and TIP in one platform, no separate module fees. Core capabilities: unlimited-scale data ingestion on Snowflake and AWS, advanced behavioral analytics (UEBA) with 3,000+ ML models, risk-based scoring and peer group analysis, Agentic Mesh (AI agents that coordinate detection, investigation, and response across the threat lifecycle with human-in-the-loop oversight), ThreatQuotient-powered threat intelligence integration, MITRE ATT&CK-aligned use case content, automated investigation and response playbooks, compliance reporting. Distinguishing pricing model: DPM Flex (flexible consumption with no per-volume surprises). PAM-032 full — deep UEBA with insider threat, credential misuse, anomalous privilege access detection. PAM-008 partial — surfaces over-privileged or anomalous account behavior. UEBA can also be deployed standalone on top of an existing SIEM (see V-034-P-002).",
+        docsUrl: "https://www.securonix.com/products/siem-solutions/"
+      },
+      {
+        productId: "V-034-P-002",
+        productName: "Securonix UEBA",
+        capabilities: ["PAM-032"],
+        partialCapabilities: ["PAM-008", "PAM-010", "PAM-019", "PAM-020"],
+        notes: "Standalone UEBA add-on deployable on top of any existing SIEM without replacement. Monitors privileged access anomalies, insider threats, credential misuse, and lateral movement using ML behavioral models. Risk-based scoring prioritizes high-risk identities. Can integrate with downstream SIEM, SOAR, and ticketing platforms. Patented identity-based pricing (per user, not per data volume).",
+        docsUrl: "https://www.securonix.com/products/ueba/"
+      }
+    ]
+  },
+  {
+    vendorId: "V-035",
+    vendorName: "CrowdStrike",
+    products: [
+      {
+        productId: "V-035-P-001",
+        productName: "CrowdStrike Falcon Next-Gen SIEM",
+        capabilities: ["PAM-019", "PAM-020", "PAM-021", "PAM-032"],
+        partialCapabilities: ["PAM-008", "PAM-010"],
+        notes: "Cloud-native Next-Gen SIEM integrated natively with the Falcon platform — 150x faster search than legacy SIEMs, over 1PB/day data ingestion. Core capabilities: unified data ingestion from endpoints, identity, cloud, SaaS, and network via single Falcon sensor, AI-driven correlation and detection, Charlotte AI Agentic Detection Triage (autonomously analyzes and prioritizes detections), Falcon Fusion SOAR (1,500+ automated actions), identity-driven case management correlating cross-domain detections in real time, MITRE ATT&CK coverage. Distinguishing capability: identity + endpoint telemetry combined in one platform — behavioral detections have both endpoint and identity context simultaneously, which standalone SIEMs cannot match natively.",
+        docsUrl: "https://www.crowdstrike.com/en-us/platform/next-gen-siem/"
+      },
+      {
+        productId: "V-035-P-002",
+        productName: "CrowdStrike Falcon Next-Gen Identity Security",
+        capabilities: ["PAM-004", "PAM-015", "PAM-031", "PAM-032"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-005", "PAM-008", "PAM-010", "PAM-016", "PAM-017", "PAM-019", "PAM-020"],
+        notes: "Unified identity security solution launched August 2025 — combines initial access prevention, JIT privileged access, ITDR, and SaaS identity security in one platform. Key components: Falcon Identity Protection (ITDR for AD, Entra ID, Okta — real-time detection of credential theft, lateral movement, privilege escalation); Falcon Privileged Access (JIT access GA April 2025 — eliminates standing privileges, dynamically grants and revokes access using real-time endpoint and identity telemetry, risk-aware access decisions, automates MFA enforcement and AD actions via SOAR); FalconID (FIDO2 phishing-resistant passwordless MFA announced Sept 2025); SaaS Identity Security (misconfigurations, risky behaviors, overprovisioned NHI access). Delivered through single Falcon sensor and single console. PAM-031 full — JIT with zero standing privilege is core Falcon Privileged Access design. PAM-004 full via FalconID FIDO2 MFA enforcement. Not a full PAM vault — no credential vaulting, session recording proxy, or password rotation. Positioned as a modern alternative to traditional PAM for organizations already on the Falcon platform.",
+        docsUrl: "https://www.crowdstrike.com/en-us/platform/next-gen-identity-security/"
+      }
+    ]
+  },
+  {
+    vendorId: "V-036",
+    vendorName: "Gurucul",
+    products: [
+      {
+        productId: "V-036-P-001",
+        productName: "Gurucul Next-Gen SIEM",
+        capabilities: ["PAM-019", "PAM-020", "PAM-021", "PAM-032"],
+        partialCapabilities: ["PAM-008", "PAM-010"],
+        notes: "Full Next-Gen SIEM platform with UEBA natively at the foundation — not bolted on. Core capabilities: 3,000+ ML models for behavioral analytics, open big data architecture (not proprietary black box), link chain analysis (automatically stitches threat context into a complete evidence case), dynamic risk scoring 0-100 normalized in real-time, peer group analysis, SOAR automation with customizable playbooks, MITRE ATT&CK framework mapping (83% coverage), Identity & Access Analytics module specifically targeting privilege misuse, open architecture integration via FlexConnector framework. Gurucul Studio — only tool on market allowing security teams to build custom ML behavior models with drag-and-drop. Flexible deployment: cloud-native SaaS or integration with Snowflake as data lake. PAM-032 full — UEBA-native platform with specific privileged access intelligence and insider threat detection models.",
+        docsUrl: "https://gurucul.com/products/next-gen-siem/"
+      },
+      {
+        productId: "V-036-P-002",
+        productName: "Gurucul UEBA",
+        capabilities: ["PAM-032"],
+        partialCapabilities: ["PAM-005", "PAM-008", "PAM-010", "PAM-019", "PAM-020"],
+        notes: "Standalone UEBA deployable on top of existing SIEMs. 3,000+ ML models, dynamic risk scoring, peer baselining, link chain analysis. Specifically monitors privileged account anomalies including unusual access outside baseline, data hoarding, lateral movement, and credential changes. Integrates with IAM systems to verify that access privileges are being used appropriately.",
+        docsUrl: "https://gurucul.com/products/user-and-entity-behavior-analytics-ueba/"
+      },
+      {
+        productId: "V-036-P-003",
+        productName: "Gurucul AI-IRM",
+        capabilities: ["PAM-032"],
+        partialCapabilities: ["PAM-005", "PAM-008", "PAM-010", "PAM-016", "PAM-019"],
+        notes: "AI Insider Risk Management — launched September 2025. Industry's first natively converged insider threat platform combining UEBA, Identity & Access Analytics, intelligent DLP, external risk indicators, and AI-Insider Analyst. Reduces insider risk by 50%+ by minimizing identity and access threat surface. AI-Insider Analyst automates alert triage with bias-free risk scoring. Integrates SOAR-driven playbooks for isolating risky users, revoking access, and blocking exfiltration. Covers human insiders, contractors, NHIs, and AI agents.",
+        docsUrl: "https://gurucul.com/press-releases/gurucul-announces-ai-insider-risk-management/"
+      }
+    ]
   }
 ];
