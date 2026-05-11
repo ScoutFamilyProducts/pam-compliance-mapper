@@ -2048,7 +2048,15 @@
         <div class="vendor-columns">
           <div class="vendor-column">
             <div class="vendor-column-header">Commercial Vendors</div>
-            <div class="vendor-accordion" id="commercial-vendor-list"></div>
+            <div style="color:red;font-size:12px;padding:8px;">DEBUG: If you see this, container exists. JS should replace this.</div>
+            <div class="vendor-accordion" id="commercial-vendor-list">
+              <!-- HARDCODED TEST ROW -->
+              <div class="vendor-row" data-vendor-id="test-V-001">
+                <input type="checkbox" class="vendor-checkbox" id="cb-test-V-001" data-vendor="Test Vendor">
+                <span class="vendor-name">HARDCODED TEST VENDOR</span>
+                <span class="vendor-chevron">&#9654;</span>
+              </div>
+            </div>
           </div>
           <div class="vendor-column">
             <div class="vendor-column-header">Freeware & Open Source</div>
@@ -3458,11 +3466,28 @@
     document.addEventListener('DOMContentLoaded', function() {
       console.log('DOMContentLoaded fired');
 
-      // Load vendors
-      console.log('VENDOR_DATA:', VENDOR_DATA);
-      console.log('Commercial vendors count:', VENDOR_DATA.commercial.length);
-      console.log('Freeware vendors count:', VENDOR_DATA.freeware.length);
-      loadVendors();
+      // Visible debug output
+      const debugDiv = document.createElement('div');
+      debugDiv.id = 'visible-debug';
+      debugDiv.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#ff0;color:#000;padding:10px;font-size:12px;z-index:9999;font-family:monospace;';
+      document.body.prepend(debugDiv);
+
+      function debugLog(msg) {
+        console.log(msg);
+        debugDiv.innerHTML += msg + '<br>';
+      }
+
+      debugLog('DOMContentLoaded fired');
+      debugLog('VENDOR_DATA exists: ' + (typeof VENDOR_DATA !== 'undefined'));
+      debugLog('Commercial count: ' + (VENDOR_DATA ? VENDOR_DATA.commercial.length : 'N/A'));
+      debugLog('Freeware count: ' + (VENDOR_DATA ? VENDOR_DATA.freeware.length : 'N/A'));
+
+      try {
+        loadVendors();
+        debugLog('loadVendors() completed without error');
+      } catch (e) {
+        debugLog('ERROR in loadVendors: ' + e.message);
+      }
 
       // Methodology tooltip toggle
       const methodologyPill = document.getElementById('methodology-pill');
