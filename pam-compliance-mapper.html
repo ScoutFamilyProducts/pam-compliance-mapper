@@ -2736,6 +2736,10 @@
   </footer>
 
   <script>
+    // API configuration - must be at top before any function references
+    const API_BASE = 'https://pam-compliance-mapper-api-production.up.railway.app';
+    let lastAnalysisResult = null;
+
     // Question definitions
     const questions = {
       q1: { controls: ["PAM-001","PAM-002","PAM-003"], processFlag: false, hasThreshold: false },
@@ -3870,20 +3874,23 @@
     }
 
     // Event delegation for info icon clicks on results table
-    document.getElementById('results-table').addEventListener('click', function(event) {
-      const infoIcon = event.target.closest('.info-icon');
-      if (infoIcon) {
-        event.stopPropagation();
-        const popoverId = infoIcon.getAttribute('data-popover');
-        if (popoverId) {
-          if (currentOpenPopover === popoverId) {
-            closeAllPopovers();
-          } else {
-            openPopover(popoverId);
+    const resultsTable = document.getElementById('results-table');
+    if (resultsTable) {
+      resultsTable.addEventListener('click', function(event) {
+        const infoIcon = event.target.closest('.info-icon');
+        if (infoIcon) {
+          event.stopPropagation();
+          const popoverId = infoIcon.getAttribute('data-popover');
+          if (popoverId) {
+            if (currentOpenPopover === popoverId) {
+              closeAllPopovers();
+            } else {
+              openPopover(popoverId);
+            }
           }
         }
-      }
-    });
+      });
+    }
 
     // Close popovers when clicking outside
     document.addEventListener('click', function(event) {
@@ -3926,10 +3933,6 @@
     function cancelPrint() {
       document.getElementById('print-instructions').style.display = 'none';
     }
-
-    // API for compliance mapping only
-    const API_BASE = 'https://pam-compliance-mapper-api-production.up.railway.app';
-    let lastAnalysisResult = null;
 
     // Export vendor results
     function exportVendorResults(format) {
