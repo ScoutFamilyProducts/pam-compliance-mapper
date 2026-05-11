@@ -983,5 +983,19 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://docs.rapid7.com/insightcloudsec/"
       }
     ]
+  },
+  {
+    vendorId: "V-023",
+    vendorName: "Quest Software",
+    products: [
+      {
+        productId: "V-023-P-001",
+        productName: "Quest ChangeAuditor",
+        capabilities: ["PAM-019", "PAM-020", "PAM-021", "PAM-032"],
+        partialCapabilities: ["PAM-008", "PAM-010", "PAM-015", "PAM-016"],
+        notes: "Real-time AD and hybrid Microsoft environment change auditing — covers AD, Entra ID, Exchange, Office 365, SharePoint, SQL Server, and file servers. Core distinguishing capabilities: captures audit data WITHOUT relying on native Windows event logs — a privileged user clearing the event log cannot defeat ChangeAuditor's audit trail (different technical approach from Semperis DSP replication stream; both close the same gap via different methods); Protection Templates actively block malicious changes to critical groups, GPO settings, and AD-database exfiltration even from hijacked privileged accounts — prevention, not just detection; Threat Detection module uses unsupervised ML and behavior correlation to model individual user patterns and detect anomalous activity including brute force, lateral movement, and compromised account indicators; tamper-evident normalized audit events in who-what-when-where format with originating workstation and before/after values; account lockout detection with originating IP and workstation, related logon attempt timeline; forensic threat timelines correlating change events with other security events chronologically; SIEM integration with Splunk, ArcSight, and QRadar. Integrates with Active Roles (One Identity) for initiator attribution on delegated AD changes. PAM-019 full — tamper-evident audit trail not dependent on native event logs. PAM-032 full — Threat Detection module with ML behavioral analytics and IOC detection. PAM-016 partial — identifies risky privilege configurations and blocks critical object modification but does not enforce general least privilege access controls.",
+        docsUrl: "https://www.quest.com/change-auditor/"
+      }
+    ]
   }
 ];
