@@ -1091,5 +1091,55 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://www.elastic.co/security"
       }
     ]
+  },
+  {
+    vendorId: "V-029",
+    vendorName: "SpecterOps",
+    products: [
+      {
+        productId: "V-029-P-001",
+        productName: "BloodHound Enterprise",
+        capabilities: ["PAM-008", "PAM-016"],
+        partialCapabilities: ["PAM-005", "PAM-010", "PAM-017", "PAM-019", "PAM-020", "PAM-021"],
+        notes: "Identity Attack Path Management (APM) platform — distinct from PAM, IGA, and ITDR. Continuously maps and prioritizes identity attack paths to mission-critical Tier 0 assets in AD, Entra ID, and (2026) Okta, GitHub, macOS/Jamf via OpenGraph extensions. Core distinguishing capabilities: attack path graph analysis — maps every privilege relationship, trust, and inheritance chain (not just assigned permissions) to reveal how attackers chain access across identities; automated choke point analysis quantifies impact of each remediation and identifies which fixes break the highest percentage of attack paths; Privilege Zones segment critical assets and enforce segmentation by visualizing all attack paths into those zones; risk exposure scoring — most organizations start at 70-100% exposure, goal is below 20%; SIEM/SOAR integrations — BloodHound attack path data enriches Microsoft Sentinel, Palo Alto Cortex XSOAR, and ServiceNow VRM with identity context. Available as SaaS and on-premises (air-gapped environments). PAM-008 full — discovers all privileged identities and the attack paths through which they can reach Tier 0 assets. PAM-016 full — identifies every privilege escalation path and quantifies remediation impact. Does not provide credential vaulting, session recording, MFA, or access control — proactive attack surface reduction only. BloodHound CE (free open source tool) is the community edition and will be covered in the freeware section.",
+        docsUrl: "https://specterops.io/bloodhound-enterprise/"
+      }
+    ]
+  },
+  {
+    vendorId: "V-030",
+    vendorName: "SentinelOne",
+    products: [
+      {
+        productId: "V-030-P-001",
+        productName: "SentinelOne Singularity Identity",
+        capabilities: ["PAM-032"],
+        partialCapabilities: ["PAM-008", "PAM-010", "PAM-016", "PAM-017", "PAM-019", "PAM-020"],
+        notes: "ITDR integrated with SentinelOne's Singularity XDR platform — derived from Attivo Networks acquisition. Unifies identity and endpoint protection in a single agent and platform. Core capabilities: proactive exposure discovery — continuously uncovers misconfigurations and vulnerabilities in AD, Entra ID, Okta, and Ping Identity; real-time attack detection — detects credential-based attacks, lateral movement, privilege escalation, and directory attacks as they happen; advanced deception technology (honeypots and decoy credentials that attract and expose attackers — Attivo heritage distinguishing capability); automated remediation of identity exposures; NHI security (service accounts, AI agents) expanded in 2026; endpoint + identity correlation provides context ITDR tools without endpoint visibility lack. Singularity Identity for Identity Providers covers AD, Entra ID, Okta, Ping Identity. Not a PAM product — does not vault credentials, record sessions, or manage access. Detection and posture management only.",
+        docsUrl: "https://www.sentinelone.com/platform/identity/"
+      }
+    ]
+  },
+  {
+    vendorId: "V-031",
+    vendorName: "Tenable",
+    products: [
+      {
+        productId: "V-031-P-001",
+        productName: "Tenable Identity Exposure",
+        capabilities: ["PAM-032"],
+        partialCapabilities: ["PAM-008", "PAM-010", "PAM-016", "PAM-017", "PAM-019"],
+        notes: "Identity Security Posture Management (ISPM) for AD, Entra ID, and Okta — formerly Tenable AD. Key distinguishing architectural capability: does NOT require deployment on domain controllers, endpoints, or Entra ID environments — agentless, requires only a standard user account. This significantly reduces deployment complexity and attack surface compared to solutions requiring DC sensors. Two core detection layers: Indicators of Exposure (IoEs) — continuously measures security maturity and identifies misconfigurations, excessive privileges, risky trust relationships, and insecure configurations before attackers exploit them; Indicators of Attack (IoAs) — detects active attack techniques in real-time including DCShadow, DCSync, Brute Force, Password Spraying, Golden Ticket, Kerberoasting, and lateral movement. Integrates with Tenable's broader Exposure Management platform for unified vulnerability and identity risk view. SIEM integration — IoA Attack IDs exported via Syslog for cross-reference. Available as SaaS and on-premises. PAM-032 full — real-time attack detection with IoAs. PAM-016 partial — identifies privilege escalation paths but detection and posture only, no enforcement.",
+        docsUrl: "https://docs.tenable.com/identity-exposure/"
+      },
+      {
+        productId: "V-031-P-002",
+        productName: "Tenable CIEM",
+        capabilities: ["PAM-008"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-016", "PAM-017"],
+        notes: "Cloud Infrastructure Entitlement Management — acquired Ermetic in 2023, now part of Tenable CNAPP platform. Provides visibility into all identities (IAM, federated, third-party), entitlements, resources, and configurations across AWS, Azure, and GCP. Enforces least privilege using built-in and custom templates. Identifies riskiest permissions and misconfigurations across identity, network, compute, and data resources.",
+        docsUrl: "https://www.tenable.com/products/tenable-ciem"
+      }
+    ]
   }
 ];
