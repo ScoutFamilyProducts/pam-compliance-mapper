@@ -92,7 +92,7 @@
 
     /* Main content */
     .page-wrap {
-      max-width: 860px;
+      max-width: 960px;
       margin: 0 auto;
       padding: 3.5rem 1.5rem 5rem;
     }
@@ -810,96 +810,129 @@
       margin-bottom: 1rem;
     }
 
-    .vendor-group {
+    /* Two-column vendor layout */
+    .vendor-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
       margin-bottom: 1.5rem;
     }
 
-    .vendor-group-title {
-      font-size: 0.68rem;
-      font-weight: 600;
-      color: var(--text-very-muted);
+    .vendor-column {
+      min-width: 0;
+    }
+
+    .vendor-column-header {
+      font-size: 0.65rem;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
+      color: var(--accent-green);
       margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-standard);
     }
 
-    .vendor-grid {
+    .vendor-accordion {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+      flex-direction: column;
+      gap: 1px;
     }
 
-    .vendor-item {
+    /* Vendor row (accordion header) */
+    .vendor-row {
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      padding: 0.6rem 0.75rem;
+      background: rgba(255,255,255,0.01);
       border: 1px solid var(--border-nav);
-      border-radius: 6px;
-      padding: 0.55rem 0.75rem;
+      border-radius: 4px;
       cursor: pointer;
       transition: all 0.15s;
+      margin-bottom: 2px;
     }
 
-    .vendor-item:hover {
+    .vendor-row:hover {
       border-color: var(--border-hover);
+      background: rgba(255,255,255,0.02);
     }
 
-    .vendor-item input[type="checkbox"] {
+    .vendor-row.expanded {
+      border-left: 2px solid var(--accent-green);
+      border-radius: 4px 4px 0 0;
+      margin-bottom: 0;
+    }
+
+    .vendor-row.has-selection .vendor-name {
+      color: var(--text-primary);
+    }
+
+    .vendor-row input[type="checkbox"] {
       accent-color: var(--accent-green);
       cursor: pointer;
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
     }
 
-    .vendor-item label {
-      font-size: 0.75rem;
+    .vendor-name {
+      flex: 1;
+      font-size: 0.78rem;
       color: var(--text-secondary);
-      cursor: pointer;
+      transition: color 0.15s;
     }
 
-    .vendor-placeholder {
-      text-align: center;
-      padding: 2rem;
-      border: 1px solid var(--border-standard);
-      border-radius: 8px;
+    .vendor-chevron {
       color: var(--text-very-muted);
-      font-size: 0.85rem;
+      font-size: 0.7rem;
+      transition: transform 0.2s;
+      flex-shrink: 0;
     }
 
-    .vendor-type-tabs {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
+    .vendor-row.expanded .vendor-chevron {
+      transform: rotate(90deg);
     }
 
-    .vendor-type-tab {
-      background: transparent;
-      border: 1px solid var(--border-hover);
-      color: var(--text-very-muted);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .vendor-type-tab:hover {
-      border-color: rgba(255,255,255,0.15);
-      color: var(--text-secondary);
-    }
-
-    .vendor-type-tab.active {
-      background: rgba(157,255,0,0.1);
-      border-color: rgba(157,255,0,0.3);
-      color: var(--accent-green);
-    }
-
-    .vendor-type-content {
+    /* Product list (accordion content) */
+    .vendor-products {
       display: none;
+      padding: 0.5rem 0.75rem 0.75rem 2rem;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid var(--border-nav);
+      border-top: none;
+      border-left: 2px solid var(--accent-green);
+      border-radius: 0 0 4px 4px;
+      margin-bottom: 2px;
     }
 
-    .vendor-type-content.active {
+    .vendor-products.expanded {
       display: block;
+    }
+
+    .product-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0;
+    }
+
+    .product-item input[type="checkbox"] {
+      accent-color: var(--accent-green);
+      cursor: pointer;
+      width: 13px;
+      height: 13px;
+    }
+
+    .product-item label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+
+    .product-item input[type="checkbox"]:checked + label {
+      color: var(--text-secondary);
     }
 
     .vendor-list-loading {
@@ -1479,33 +1512,17 @@
         max-width: 100%;
       }
 
-      .mode-toggle-container {
-        flex-direction: column;
-        border-radius: 8px;
-        width: 100%;
+      .vendor-columns {
+        grid-template-columns: 1fr;
+        gap: 2rem;
       }
 
-      .mode-btn {
-        width: 100%;
-        padding: 0.6rem 1rem;
-        border-radius: 5px;
+      .vendor-column:first-child {
+        order: 0;
       }
 
-      .vendor-type-tabs {
-        flex-direction: column;
-      }
-
-      .vendor-type-tab {
-        width: 100%;
-        text-align: center;
-      }
-
-      .vendor-grid {
-        flex-direction: column;
-      }
-
-      .vendor-item {
-        width: 100%;
+      .vendor-column:last-child {
+        order: 1;
       }
 
       .framework-filter {
@@ -1951,7 +1968,7 @@
       }
 
       .callout-note::before {
-        content: "▪ ";
+        content: "â–ª ";
         color: #4d8c00;
       }
 
@@ -1995,7 +2012,7 @@
 <body>
   <nav>
     <a href="/" class="nav-brand">THE PAM INSIDER</a>
-    <a href="/apps" class="nav-back">‹ PAM Apps</a>
+    <a href="/apps" class="nav-back">â€¹ PAM Apps</a>
   </nav>
 
   <main class="page-wrap">
@@ -2021,998 +2038,36 @@
       <div class="hero-updated">Vendor and framework data last updated May 2026</div>
       <button type="button" class="disclaimer-btn" onclick="toggleDisclaimer()">Disclaimer</button>
       <div class="disclaimer-panel" id="disclaimer-panel">
-        <p>The capabilities matrix was assembled from publicly available documentation and professional experience. It is assumed incomplete and may contain errors. If you spot something incorrect or missing, please let us know — <a href="mailto:thepaminsider@gmail.com">thepaminsider@gmail.com</a></p>
+        <p>The capabilities matrix was assembled from publicly available documentation and professional experience. It is assumed incomplete and may contain errors. If you spot something incorrect or missing, please let us know â€” <a href="mailto:thepaminsider@gmail.com">thepaminsider@gmail.com</a></p>
       </div>
     </section>
 
-    <div class="mode-toggle">
-      <div class="mode-toggle-container">
-        <button class="mode-btn active" onclick="switchMode('assess')">Assess My Controls</button>
-        <button class="mode-btn" onclick="switchMode('vendor')">Map My Vendors</button>
-      </div>
-    </div>
-
-    <!-- Assess My Controls Mode -->
-    <div id="mode-assess" class="mode-content active">
-      <form id="assessment-form" onsubmit="generateReport(); return false;">
-
-        <!-- Authentication -->
-        <div class="question-category">
-          <div class="category-title">Authentication</div>
-
-          <div class="question-row" data-qid="q1">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Does your organization enforce MFA for all users accessing systems and applications?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q1', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q1', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q1', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q1-note-wrap">
-              <textarea class="partial-note" id="q1-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q1')"></textarea>
-              <div class="char-counter" id="q1-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q1-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q1-config" onchange="updateConfigStatus('q1')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q2">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Is your MFA policy configured with no fallback options or bypass mechanisms for privileged access paths?</span>
-                <span class="process-pill">Process</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q2', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q2', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q2', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q2-note-wrap">
-              <textarea class="partial-note" id="q2-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q2')"></textarea>
-              <div class="char-counter" id="q2-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q2-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q2-config" onchange="updateConfigStatus('q2')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Privileged Account Management -->
-        <div class="question-category">
-          <div class="category-title">Privileged Account Management</div>
-
-          <div class="question-row" data-qid="q3">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Are all privileged accounts — including admin, service, and local accounts — discovered, inventoried, and vaulted in a PAM solution?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q3', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q3', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q3', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q3-note-wrap">
-              <textarea class="partial-note" id="q3-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q3')"></textarea>
-              <div class="char-counter" id="q3-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q3-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q3-config" onchange="updateConfigStatus('q3')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q4">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Is automated password rotation configured and verified as running — not just available — for privileged accounts?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q4', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q4', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q4', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q4-note-wrap">
-              <textarea class="partial-note" id="q4-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q4')"></textarea>
-              <div class="char-counter" id="q4-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q4-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q4-config" onchange="updateConfigStatus('q4')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q5">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Does every privileged account — human and non-human — have a named owner accountable for its existence and permissions?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q5', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q5', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q5', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q5-note-wrap">
-              <textarea class="partial-note" id="q5-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q5')"></textarea>
-              <div class="char-counter" id="q5-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q5-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q5-config" onchange="updateConfigStatus('q5')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q6">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Are inactive privileged accounts identified and disabled after a defined inactivity threshold?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q6', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q6', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q6', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q6-note-wrap">
-              <textarea class="partial-note" id="q6-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q6')"></textarea>
-              <div class="char-counter" id="q6-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q6-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q6-config" onchange="updateConfigStatus('q6')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-            <div class="threshold-wrap" id="q6-threshold-wrap">
-              <div class="threshold-label">What is your inactivity threshold before an account is disabled?</div>
-              <select class="threshold-select" id="q6-threshold" onchange="updateThreshold('q6')">
-                <option value="">Select threshold...</option>
-                <option value="30">30 days or less</option>
-                <option value="45">45 days</option>
-                <option value="60">60 days</option>
-                <option value="90">90 days</option>
-                <option value="90+">More than 90 days</option>
-                <option value="none">Not defined</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Access Controls -->
-        <div class="question-category">
-          <div class="category-title">Access Controls</div>
-
-          <div class="question-row" data-qid="q7">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Is least privilege enforced through RBAC or group-based access scoping for privileged accounts?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q7', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q7', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q7', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q7-note-wrap">
-              <textarea class="partial-note" id="q7-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q7')"></textarea>
-              <div class="char-counter" id="q7-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q7-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q7-config" onchange="updateConfigStatus('q7')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q8">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Are critical systems configured to accept only privileged accounts, with general user accounts explicitly excluded from direct access?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q8', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q8', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q8', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q8-note-wrap">
-              <textarea class="partial-note" id="q8-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q8')"></textarea>
-              <div class="char-counter" id="q8-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q8-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q8-config" onchange="updateConfigStatus('q8')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q9">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Is separation of duties documented and enforced for privileged access — approver and requester are different people?</span>
-                <span class="process-pill">Process</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q9', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q9', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q9', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q9-note-wrap">
-              <textarea class="partial-note" id="q9-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q9')"></textarea>
-              <div class="char-counter" id="q9-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q9-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q9-config" onchange="updateConfigStatus('q9')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q10">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Are privilege escalation attempts prevented and logged across endpoints, servers, and cloud environments?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q10', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q10', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q10', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q10-note-wrap">
-              <textarea class="partial-note" id="q10-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q10')"></textarea>
-              <div class="char-counter" id="q10-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q10-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q10-config" onchange="updateConfigStatus('q10')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Session and Remote Access -->
-        <div class="question-category">
-          <div class="category-title">Session and Remote Access</div>
-
-          <div class="question-row" data-qid="q11">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Are privileged sessions recorded — including direct connections to target systems not launched through the PAM broker?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q11', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q11', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q11', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q11-note-wrap">
-              <textarea class="partial-note" id="q11-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q11')"></textarea>
-              <div class="char-counter" id="q11-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q11-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q11-config" onchange="updateConfigStatus('q11')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q12">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Are target system firewalls scoped to only accept connections from PAM engine or gateway addresses, preventing direct access?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q12', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q12', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q12', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q12-note-wrap">
-              <textarea class="partial-note" id="q12-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q12')"></textarea>
-              <div class="char-counter" id="q12-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q12-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q12-config" onchange="updateConfigStatus('q12')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q13">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Are vendor and third-party accounts disabled by default and enabled only for time-limited, recorded sessions?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q13', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q13', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q13', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q13-note-wrap">
-              <textarea class="partial-note" id="q13-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q13')"></textarea>
-              <div class="char-counter" id="q13-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q13-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q13-config" onchange="updateConfigStatus('q13')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q14">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Are session idle timeouts configured and enforced across all privileged access systems?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q14', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q14', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q14', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q14-note-wrap">
-              <textarea class="partial-note" id="q14-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q14')"></textarea>
-              <div class="char-counter" id="q14-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q14-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q14-config" onchange="updateConfigStatus('q14')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-            <div class="threshold-wrap" id="q14-threshold-wrap">
-              <div class="threshold-label">What is your session idle timeout threshold?</div>
-              <select class="threshold-select" id="q14-threshold" onchange="updateThreshold('q14')">
-                <option value="">Select threshold...</option>
-                <option value="5">5 minutes</option>
-                <option value="10">10 minutes</option>
-                <option value="15">15 minutes</option>
-                <option value="30">30 minutes</option>
-                <option value="60">60 minutes</option>
-                <option value="60+">More than 60 minutes</option>
-                <option value="none">Not defined</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q15">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Is privileged access granted on demand for a defined time window with capability scoping — specific applications and commands only?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q15', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q15', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q15', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q15-note-wrap">
-              <textarea class="partial-note" id="q15-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q15')"></textarea>
-              <div class="char-counter" id="q15-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q15-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q15-config" onchange="updateConfigStatus('q15')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Audit and Logging -->
-        <div class="question-category">
-          <div class="category-title">Audit and Logging</div>
-
-          <div class="question-row" data-qid="q16">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Are privileged session and credential audit logs stored in a tamper-protected immutable store separate from the systems they monitor?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q16', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q16', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q16', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q16-note-wrap">
-              <textarea class="partial-note" id="q16-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q16')"></textarea>
-              <div class="char-counter" id="q16-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q16-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q16-config" onchange="updateConfigStatus('q16')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q17">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Is all privileged user activity captured — including non-interactive sessions through OS, database, and cloud provider logs — and aggregated into a SIEM?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q17', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q17', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q17', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q17-note-wrap">
-              <textarea class="partial-note" id="q17-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q17')"></textarea>
-              <div class="char-counter" id="q17-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q17-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q17-config" onchange="updateConfigStatus('q17')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q18">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Are audit logs reviewed on a documented schedule with named ownership and evidence of action taken on findings?</span>
-                <span class="process-pill">Process</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q18', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q18', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q18', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q18-note-wrap">
-              <textarea class="partial-note" id="q18-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q18')"></textarea>
-              <div class="char-counter" id="q18-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q18-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q18-config" onchange="updateConfigStatus('q18')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Identity Governance -->
-        <div class="question-category">
-          <div class="category-title">Identity Governance</div>
-
-          <div class="question-row" data-qid="q19">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Is there a documented and auditable process — with service tickets — for granting and revoking privileged access at hire, role change, and termination?</span>
-                <span class="process-pill">Process</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q19', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q19', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q19', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q19-note-wrap">
-              <textarea class="partial-note" id="q19-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q19')"></textarea>
-              <div class="char-counter" id="q19-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q19-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q19-config" onchange="updateConfigStatus('q19')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q20">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Is the employee termination workflow connected to the directory so privileged access is revoked automatically on separation?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q20', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q20', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q20', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q20-note-wrap">
-              <textarea class="partial-note" id="q20-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q20')"></textarea>
-              <div class="char-counter" id="q20-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q20-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q20-config" onchange="updateConfigStatus('q20')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q21">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Are periodic access reviews conducted with signed attestation from named reviewers confirming access remains appropriate?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q21', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q21', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q21', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q21-note-wrap">
-              <textarea class="partial-note" id="q21-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q21')"></textarea>
-              <div class="char-counter" id="q21-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q21-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q21-config" onchange="updateConfigStatus('q21')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Credentials and Policy -->
-        <div class="question-category">
-          <div class="category-title">Credentials and Policy</div>
-
-          <div class="question-row" data-qid="q22">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Are password complexity, history, and lockout policies configured consistently across domain accounts, local accounts, cloud IAM, and vault authentication?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q22', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q22', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q22', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q22-note-wrap">
-              <textarea class="partial-note" id="q22-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q22')"></textarea>
-              <div class="char-counter" id="q22-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q22-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q22-config" onchange="updateConfigStatus('q22')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q23">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Is there a documented process for changing default vendor credentials before systems go to production, with post-deployment scanning to verify?</span>
-                <span class="process-pill">Process</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q23', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q23', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q23', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q23-note-wrap">
-              <textarea class="partial-note" id="q23-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q23')"></textarea>
-              <div class="char-counter" id="q23-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q23-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q23-config" onchange="updateConfigStatus('q23')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q24">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Is there a documented break glass procedure with PAM-managed emergency credentials that rotate automatically on check-in?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q24', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q24', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q24', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q24-note-wrap">
-              <textarea class="partial-note" id="q24-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q24')"></textarea>
-              <div class="char-counter" id="q24-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q24-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q24-config" onchange="updateConfigStatus('q24')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Monitoring and Analytics -->
-        <div class="question-category">
-          <div class="category-title">Monitoring and Analytics</div>
-
-          <div class="question-row" data-qid="q25">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Is privileged user behavior monitored with a defined baseline and anomaly alerting — extending to non-human identities and secrets access patterns?</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q25', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q25', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q25', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q25-note-wrap">
-              <textarea class="partial-note" id="q25-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q25')"></textarea>
-              <div class="char-counter" id="q25-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q25-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q25-config" onchange="updateConfigStatus('q25')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q26">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Are behavioral and security alerts reviewed and actioned with documented response evidence — not just configured and ignored?</span>
-                <span class="process-pill">Process</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q26', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q26', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q26', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q26-note-wrap">
-              <textarea class="partial-note" id="q26-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q26')"></textarea>
-              <div class="char-counter" id="q26-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q26-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q26-config" onchange="updateConfigStatus('q26')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Governance -->
-        <div class="question-category">
-          <div class="category-title">Governance</div>
-
-          <div class="question-row" data-qid="q27">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Is a formal risk analysis conducted at minimum annually that specifically addresses privileged access threats and vulnerabilities?</span>
-                <span class="process-pill">Process</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q27', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q27', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q27', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q27-note-wrap">
-              <textarea class="partial-note" id="q27-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q27')"></textarea>
-              <div class="char-counter" id="q27-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q27-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q27-config" onchange="updateConfigStatus('q27')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="question-row" data-qid="q28">
-            <div class="question-main">
-              <div class="question-text-wrap">
-                <span class="question-text">Are PAM program roles and responsibilities documented with named ownership and annual governance sign-off from leadership?</span>
-                <span class="process-pill">Process</span>
-              </div>
-              <div class="answer-toggle">
-                <button type="button" class="answer-btn" onclick="setAnswer('q28', 'yes')">Yes</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q28', 'partial')">Partial</button>
-                <button type="button" class="answer-btn" onclick="setAnswer('q28', 'no')">No</button>
-              </div>
-            </div>
-            <div class="partial-note-wrap" id="q28-note-wrap">
-              <textarea class="partial-note" id="q28-note" placeholder="Describe the scope of your partial coverage..." maxlength="140" oninput="updateCharCount('q28')"></textarea>
-              <div class="char-counter" id="q28-counter">0 / 140</div>
-            </div>
-            <div class="config-wrap" id="q28-config-wrap">
-              <label class="config-label">Is this fully configured and verified as operational?</label>
-              <select class="config-select" id="q28-config" onchange="updateConfigStatus('q28')">
-                <option value="">Select configuration status...</option>
-                <option value="verified">Fully configured and verified as operational</option>
-                <option value="configured">Configured but not verified</option>
-                <option value="available">Available but not configured</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="submit-wrap">
-          <button type="submit" class="submit-btn">Generate Gap Report</button>
-        </div>
-      </form>
-
-      <!-- Results Panel -->
-      <div class="results-panel" id="results-panel">
-        <div class="results-label">YOUR COMPLIANCE POSTURE</div>
-
-        <div class="legend-row">
-          <div class="legend-item">
-            <div class="legend-badge meets"></div>
-            <span class="legend-text">Meets</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-badge meets"></div>
-            <span class="legend-text">Meets* (unverified)</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-badge partial"></div>
-            <span class="legend-text">Partial</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-badge gap"></div>
-            <span class="legend-text">Gap</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-badge process"></div>
-            <span class="legend-text">Process</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-badge na"></div>
-            <span class="legend-text">N/A</span>
-          </div>
-        </div>
-
-        <div class="button-row">
-          <button type="button" class="btn-download" onclick="downloadReport()">Download Report</button>
-          <button type="button" class="btn-startover" onclick="startOver()">Start Over</button>
-        </div>
-
-        <div class="print-instructions" id="print-instructions">
-          <div class="print-instructions-header">Before you save — two quick steps for a clean PDF</div>
-          <div class="print-step">
-            <span class="print-step-num">1</span>
-            <span>In the print dialog click <strong style="color:#F8FAFC">More settings</strong> and uncheck <strong style="color:#F8FAFC">Headers and footers</strong></span>
-          </div>
-          <div class="print-step">
-            <span class="print-step-num">2</span>
-            <span>Set <strong style="color:#F8FAFC">Destination</strong> to <strong style="color:#F8FAFC">Save as PDF</strong></span>
-          </div>
-          <div class="print-instructions-buttons">
-            <button type="button" class="btn-open-print" onclick="openPrintDialog()">Open Print Dialog</button>
-            <button type="button" class="btn-cancel-print" onclick="cancelPrint()">Cancel</button>
-          </div>
-        </div>
-
-        <div class="print-header">
-          <div class="print-header-row1">
-            <div class="print-header-left">
-              <h1>PAM Compliance Posture Report</h1>
-              <div class="print-brand">The PAM Insider · thepaminsider.com</div>
-            </div>
-            <div class="print-header-right">
-              <img src="/pam_insider_logo.png" alt="The PAM Insider" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-              <span class="print-logo-fallback" style="display:none;">THE PAM INSIDER</span>
-            </div>
-          </div>
-          <div class="print-header-row2">
-            <span class="print-date" id="print-date">Assessment generated</span>
-            <span class="print-updated">Vendor and framework data last updated May 2026</span>
-          </div>
-        </div>
-
-        <div class="print-disclaimer">
-          This report was generated using publicly available compliance framework documentation and professional experience. It is assumed incomplete and may contain errors. · thepaminsider@gmail.com
-        </div>
-
-        <div class="print-legend">
-          <span class="print-legend-label">Legend:</span>
-          <span class="print-legend-item"><span class="print-legend-badge meets">MEETS</span></span>
-          <span class="print-legend-item"><span class="print-legend-badge partial">PARTIAL</span></span>
-          <span class="print-legend-item"><span class="print-legend-badge gap">GAP</span></span>
-          <span class="print-legend-item"><span class="print-legend-badge process">PROCESS</span></span>
-          <span class="print-legend-item"><span class="print-legend-badge na">N/A</span></span>
-          <span class="print-legend-suffix">(OB) = Outcomes-based · (Addr.) = Addressable</span>
-        </div>
-
-        <div class="framework-filter" id="framework-filter">
-          <button type="button" class="framework-pill active" data-fw="nist_800_53" onclick="toggleFrameworkColumn('nist_800_53')">NIST 800-53</button>
-          <button type="button" class="framework-pill active" data-fw="nist_800_171" onclick="toggleFrameworkColumn('nist_800_171')">NIST 800-171</button>
-          <button type="button" class="framework-pill active" data-fw="cmmc" onclick="toggleFrameworkColumn('cmmc')">CMMC</button>
-          <button type="button" class="framework-pill active" data-fw="cis_v8" onclick="toggleFrameworkColumn('cis_v8')">CIS v8</button>
-          <button type="button" class="framework-pill active" data-fw="pci_dss_401" onclick="toggleFrameworkColumn('pci_dss_401')">PCI DSS 4.0.1</button>
-          <button type="button" class="framework-pill active" data-fw="hipaa" onclick="toggleFrameworkColumn('hipaa')">HIPAA</button>
-          <button type="button" class="framework-pill active" data-fw="nist_csf_20" onclick="toggleFrameworkColumn('nist_csf_20')">NIST CSF 2.0</button>
-        </div>
-
-        <div class="results-table-wrap">
-          <table class="results-table" id="results-table">
-            <colgroup>
-              <col class="col-control" style="width: 21%;">
-              <col class="col-framework" style="width: 11.28%;">
-              <col class="col-framework" style="width: 11.28%;">
-              <col class="col-framework" style="width: 11.28%;">
-              <col class="col-framework" style="width: 11.28%;">
-              <col class="col-framework" style="width: 11.28%;">
-              <col class="col-framework" style="width: 11.28%;">
-              <col class="col-framework" style="width: 11.28%;">
-            </colgroup>
-            <thead>
-              <tr>
-                <th class="control-cell">Control</th>
-                <th data-fw="nist_800_53">NIST 800-53</th>
-                <th data-fw="nist_800_171">NIST 800-171</th>
-                <th data-fw="cmmc">CMMC</th>
-                <th data-fw="cis_v8">CIS v8</th>
-                <th data-fw="pci_dss_401">PCI DSS 4.0.1</th>
-                <th data-fw="hipaa">HIPAA</th>
-                <th data-fw="nist_csf_20">NIST CSF 2.0</th>
-              </tr>
-            </thead>
-            <tbody id="results-tbody">
-            </tbody>
-          </table>
-        </div>
-
-        <div class="threshold-callouts" id="threshold-callouts">
-        </div>
-
-        <div class="print-footer">
-          <span class="print-footer-left">© 2026 The PAM Insider llc · Vendor-neutral · No agenda · No vendor sponsorship</span>
-          <span class="print-footer-right">PAM Compliance Mapper · thepaminsider.com</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Map My Vendors Mode -->
-    <div id="mode-vendor" class="mode-content">
+    <!-- Vendor Selection -->
+    <div id="mode-vendor">
       <div class="vendor-section">
         <div class="vendor-section-label">SELECT YOUR DEPLOYED PRODUCTS</div>
-        <div class="vendor-section-sub">Select every PAM and identity product deployed in your environment.</div>
+        <div class="vendor-section-sub">Select the PAM and identity products deployed in your environment.</div>
 
-        <div class="vendor-type-tabs">
-          <button type="button" class="vendor-type-tab active" onclick="switchVendorType('commercial')">Commercial</button>
-          <button type="button" class="vendor-type-tab" onclick="switchVendorType('freeware')">Freeware & Open Source</button>
-        </div>
-
-        <div id="vendor-type-commercial" class="vendor-type-content active">
-          <div id="commercial-vendor-list">
-            <div class="vendor-list-loading">
-              <span class="loading-spinner"></span>Loading vendors...
+        <div class="vendor-columns">
+          <div class="vendor-column">
+            <div class="vendor-column-header">Commercial Vendors</div>
+            <div class="vendor-accordion" id="commercial-vendor-list">
+              <div class="vendor-list-loading">
+                <span class="loading-spinner"></span>Loading vendors...
+              </div>
             </div>
           </div>
-        </div>
-
-        <div id="vendor-type-freeware" class="vendor-type-content">
-          <div class="freeware-note">
-            <strong>Note:</strong> Free and open-source tools can provide PAM capabilities but may require more configuration and lack enterprise support. Consider integration complexity and maintenance burden when building your compliance posture.
-          </div>
-          <div id="freeware-vendor-list">
-            <div class="vendor-list-loading">
-              <span class="loading-spinner"></span>Loading vendors...
+          <div class="vendor-column">
+            <div class="vendor-column-header">Freeware & Open Source</div>
+            <div class="vendor-accordion" id="freeware-vendor-list">
+              <div class="vendor-list-loading">
+                <span class="loading-spinner"></span>Loading vendors...
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="vendor-mfa-note" style="font-size: 0.72rem; color: #334155; line-height: 1.7; margin-top: 1rem;">
-          MFA capability is provided by most PAM and identity platforms. If you have selected a product from the PAM Platforms or Identity and Access Management groups, MFA capability is already included in your coverage analysis. The configuration question is handled in the Assess My Controls mode.
         </div>
       </div>
+    
 
       <div class="vendor-section">
         <div class="vendor-section-label">SELECT TARGET FRAMEWORKS</div>
@@ -3082,18 +2137,18 @@
       <div class="callout-block">
         <div class="callout-title">This tool runs on a backend service</div>
         <div class="callout-text">The AI-powered vendor mapping runs on a paid API. If this saved you time or helped make a better argument to your auditor, consider buying a coffee.</div>
-        <a href="https://buymeacoffee.com/thepaminsider" target="_blank" class="callout-link">Buy Me a Coffee ↗</a>
+        <a href="https://buymeacoffee.com/thepaminsider" target="_blank" class="callout-link">Buy Me a Coffee â†—</a>
       </div>
       <div class="callout-block">
         <div class="callout-title">Now that you know your posture</div>
         <div class="callout-text">See how it holds up under pressure. Phantom Privilege puts you in the defender's seat across a real attack campaign.</div>
-        <a href="/phantom-privilege" class="callout-link">Explore Phantom Privilege ↗</a>
+        <a href="/phantom-privilege" class="callout-link">Explore Phantom Privilege â†—</a>
       </div>
     </div>
   </main>
 
   <footer>
-    <div class="footer-copy">© 2026 The PAM Insider llc</div>
+    <div class="footer-copy">Â© 2026 The PAM Insider llc</div>
     <div class="footer-links">
       <a href="/apps">PAM Apps</a>
       <a href="/articles">Articles & Thoughts</a>
@@ -3520,24 +2575,6 @@
       questionState[qid] = { answer: null, note: '', threshold: null, configStatus: null };
     });
 
-    function switchMode(mode) {
-      const assessMode = document.getElementById('mode-assess');
-      const vendorMode = document.getElementById('mode-vendor');
-      const btns = document.querySelectorAll('.mode-btn');
-
-      btns.forEach(btn => btn.classList.remove('active'));
-
-      if (mode === 'assess') {
-        assessMode.classList.add('active');
-        vendorMode.classList.remove('active');
-        btns[0].classList.add('active');
-      } else {
-        assessMode.classList.remove('active');
-        vendorMode.classList.add('active');
-        btns[1].classList.add('active');
-      }
-    }
-
     function setAnswer(qid, value) {
       const row = document.querySelector(`[data-qid="${qid}"]`);
       const btns = row.querySelectorAll('.answer-btn');
@@ -3702,7 +2739,7 @@
           if (coverage === 'not_stated') {
             td.innerHTML = '<span class="status-badge na">N/A</span>';
           } else if (!scoreData) {
-            td.innerHTML = '<span class="status-badge na na-unanswered">—</span>';
+            td.innerHTML = '<span class="status-badge na na-unanswered">â€”</span>';
           } else {
             let badgeClass = '';
             let badgeText = '';
@@ -3740,7 +2777,7 @@
             const printRef = refData ? refData.ref : '';
 
             td.innerHTML = `<div class="badge-wrap">
-              <span class="status-badge ${badgeClass}${impliedClass}">${badgeText}${suffix}</span><span class="print-ref">${printRef}</span><span class="info-icon" data-popover="${popoverId}">ⓘ</span>
+              <span class="status-badge ${badgeClass}${impliedClass}">${badgeText}${suffix}</span><span class="print-ref">${printRef}</span><span class="info-icon" data-popover="${popoverId}">â“˜</span>
               <div class="ref-popover" id="${popoverId}">${popoverHtml}</div>
             </div>`;
           }
@@ -3772,8 +2809,8 @@
       let callouts = [];
 
       callouts.push('PCI DSS 4.0.1 replaced v4.0 which was retired December 31 2024. All assessments reference v4.0.1.');
-      callouts.push('NIST CSF 2.0 is a voluntary outcomes-based framework — no hard pass/fail. Results indicate alignment, not certification.');
-      callouts.push('HIPAA addressable specifications are not optional — organizations must implement or document an equivalent alternative.');
+      callouts.push('NIST CSF 2.0 is a voluntary outcomes-based framework â€” no hard pass/fail. Results indicate alignment, not certification.');
+      callouts.push('HIPAA addressable specifications are not optional â€” organizations must implement or document an equivalent alternative.');
 
       // Q6 threshold
       if (questionState.q6.answer && questionState.q6.threshold) {
@@ -3886,13 +2923,13 @@
       // Clear previous errors
       errorDiv.textContent = '';
 
-      // Collect selected vendors from both commercial and freeware
-      const vendorCheckboxes = document.querySelectorAll('#mode-vendor .vendor-item input[type="checkbox"]:checked');
-      const selectedVendors = Array.from(vendorCheckboxes).map(cb => {
-        return cb.getAttribute('data-vendor') || cb.nextElementSibling?.textContent?.trim() || '';
+      // Collect selected vendors from product checkboxes
+      const productCheckboxes = document.querySelectorAll('.product-checkbox:checked');
+      const selectedVendors = Array.from(productCheckboxes).map(cb => {
+        return cb.getAttribute('data-vendor') || '';
       }).filter(v => v);
 
-      // Deduplicate vendor names (in case same vendor selected via multiple products)
+      // Deduplicate vendor names
       const uniqueVendors = [...new Set(selectedVendors)];
 
       // Collect selected frameworks
@@ -3966,7 +3003,7 @@
       if (analysis.strengths && analysis.strengths.length > 0) {
         strengthsList.innerHTML = analysis.strengths.map(s => `
           <div class="strength-item">
-            <span class="strength-check">✓</span>
+            <span class="strength-check">âœ“</span>
             <div class="strength-content">
               <span class="strength-name">${escapeHtml(s.controlName)}</span>
               <span class="strength-covered">Covered by: ${escapeHtml(s.coveredBy.join(', '))}</span>
@@ -3981,7 +3018,7 @@
       const gapsList = document.getElementById('vendor-gaps-list');
       if (analysis.gaps && analysis.gaps.length > 0) {
         gapsList.innerHTML = analysis.gaps.map(g => {
-          const frameworkNames = g.frameworks.map(f => frameworkDisplayMap[f] || f).join(' · ');
+          const frameworkNames = g.frameworks.map(f => frameworkDisplayMap[f] || f).join(' Â· ');
           return `
             <div class="gap-item severity-${g.severity}">
               <div class="gap-header">
@@ -4053,11 +3090,11 @@
 
       // Add coverage type notes
       if (refData.covered === 'addressable') {
-        html += `<div class="ref-popover-addressable">Addressable — implement or document equivalent alternative</div>`;
+        html += `<div class="ref-popover-addressable">Addressable â€” implement or document equivalent alternative</div>`;
       } else if (refData.covered === 'outcomes_based') {
-        html += `<div class="ref-popover-outcomes">Outcomes-based framework — no hard pass/fail</div>`;
+        html += `<div class="ref-popover-outcomes">Outcomes-based framework â€” no hard pass/fail</div>`;
       } else if (refData.covered === 'implied') {
-        html += `<div class="ref-popover-implied">Implied by framework requirements — not explicitly stated</div>`;
+        html += `<div class="ref-popover-implied">Implied by framework requirements â€” not explicitly stated</div>`;
       }
 
       return html;
@@ -4157,23 +3194,6 @@
       }
     });
 
-    // Vendor type switching
-    function switchVendorType(type) {
-      const tabs = document.querySelectorAll('.vendor-type-tab');
-      const contents = document.querySelectorAll('.vendor-type-content');
-
-      tabs.forEach(tab => tab.classList.remove('active'));
-      contents.forEach(content => content.classList.remove('active'));
-
-      if (type === 'commercial') {
-        tabs[0].classList.add('active');
-        document.getElementById('vendor-type-commercial').classList.add('active');
-      } else {
-        tabs[1].classList.add('active');
-        document.getElementById('vendor-type-freeware').classList.add('active');
-      }
-    }
-
     // Load vendors from API
     const API_BASE = 'https://pam-compliance-mapper-api-production.up.railway.app';
     let loadedVendors = { commercial: [], freeware: [] };
@@ -4191,14 +3211,18 @@
           throw new Error(data.error || 'Failed to load vendors');
         }
 
-        loadedVendors.commercial = data.commercial || [];
-        loadedVendors.freeware = data.freeware || [];
+        // Sort vendors alphabetically
+        loadedVendors.commercial = (data.commercial || []).sort((a, b) =>
+          a.vendorName.localeCompare(b.vendorName));
+        loadedVendors.freeware = (data.freeware || []).sort((a, b) =>
+          a.vendorName.localeCompare(b.vendorName));
 
-        // Render commercial vendors
-        commercialContainer.innerHTML = renderVendorList(loadedVendors.commercial, 'commercial');
+        // Render vendor accordions
+        commercialContainer.innerHTML = renderVendorAccordion(loadedVendors.commercial, 'commercial');
+        freewareContainer.innerHTML = renderVendorAccordion(loadedVendors.freeware, 'freeware');
 
-        // Render freeware vendors
-        freewareContainer.innerHTML = renderVendorList(loadedVendors.freeware, 'freeware');
+        // Attach event listeners
+        attachAccordionListeners();
 
       } catch (error) {
         console.error('Failed to load vendors:', error);
@@ -4213,25 +3237,106 @@
       }
     }
 
-    function renderVendorList(vendors, prefix) {
+    function renderVendorAccordion(vendors, prefix) {
       if (!vendors || vendors.length === 0) {
         return '<div class="vendor-results-empty">No vendors available.</div>';
       }
 
-      let html = '<div class="vendor-grid">';
-      vendors.forEach((vendor, index) => {
-        vendor.products.forEach((product, pIndex) => {
-          const id = `${prefix}-${vendor.vendorId}-${product.productId}`;
+      let html = '';
+      vendors.forEach((vendor) => {
+        const vendorId = `${prefix}-${vendor.vendorId}`;
+        html += `
+          <div class="vendor-row" data-vendor-id="${vendorId}">
+            <input type="checkbox" class="vendor-checkbox" id="cb-${vendorId}" data-vendor="${escapeHtml(vendor.vendorName)}">
+            <span class="vendor-name">${escapeHtml(vendor.vendorName)}</span>
+            <span class="vendor-chevron">&#9654;</span>
+          </div>
+          <div class="vendor-products" data-vendor-id="${vendorId}">
+        `;
+        vendor.products.forEach((product) => {
+          const productId = `${vendorId}-${product.productId}`;
           html += `
-            <div class="vendor-item">
-              <input type="checkbox" id="${id}" data-vendor="${escapeHtml(vendor.vendorName)}" data-product="${escapeHtml(product.productName)}">
-              <label for="${id}">${escapeHtml(product.productName)}</label>
+            <div class="product-item">
+              <input type="checkbox" class="product-checkbox" id="${productId}"
+                data-vendor="${escapeHtml(vendor.vendorName)}"
+                data-product="${escapeHtml(product.productName)}"
+                data-parent="${vendorId}">
+              <label for="${productId}">${escapeHtml(product.productName)}</label>
             </div>
           `;
         });
+        html += '</div>';
       });
-      html += '</div>';
       return html;
+    }
+
+    function attachAccordionListeners() {
+      // Vendor row click - toggle accordion
+      document.querySelectorAll('.vendor-row').forEach(row => {
+        row.addEventListener('click', function(e) {
+          if (e.target.type === 'checkbox') return; // Don't toggle on checkbox click
+
+          const vendorId = this.dataset.vendorId;
+          const products = document.querySelector(`.vendor-products[data-vendor-id="${vendorId}"]`);
+
+          this.classList.toggle('expanded');
+          products.classList.toggle('expanded');
+        });
+      });
+
+      // Vendor checkbox - select/deselect all products
+      document.querySelectorAll('.vendor-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+          const vendorId = this.id.replace('cb-', '');
+          const productCheckboxes = document.querySelectorAll(`.product-checkbox[data-parent="${vendorId}"]`);
+
+          productCheckboxes.forEach(cb => {
+            cb.checked = this.checked;
+          });
+
+          updateVendorRowState(vendorId);
+        });
+      });
+
+      // Product checkbox - update vendor state
+      document.querySelectorAll('.product-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+          const vendorId = this.dataset.parent;
+          updateVendorCheckboxState(vendorId);
+          updateVendorRowState(vendorId);
+        });
+      });
+    }
+
+    function updateVendorCheckboxState(vendorId) {
+      const vendorCheckbox = document.getElementById(`cb-${vendorId}`);
+      const productCheckboxes = document.querySelectorAll(`.product-checkbox[data-parent="${vendorId}"]`);
+
+      const total = productCheckboxes.length;
+      const checked = Array.from(productCheckboxes).filter(cb => cb.checked).length;
+
+      if (checked === 0) {
+        vendorCheckbox.checked = false;
+        vendorCheckbox.indeterminate = false;
+      } else if (checked === total) {
+        vendorCheckbox.checked = true;
+        vendorCheckbox.indeterminate = false;
+      } else {
+        vendorCheckbox.checked = false;
+        vendorCheckbox.indeterminate = true;
+      }
+    }
+
+    function updateVendorRowState(vendorId) {
+      const vendorRow = document.querySelector(`.vendor-row[data-vendor-id="${vendorId}"]`);
+      const productCheckboxes = document.querySelectorAll(`.product-checkbox[data-parent="${vendorId}"]`);
+      const hasSelection = Array.from(productCheckboxes).some(cb => cb.checked);
+
+      if (hasSelection) {
+        vendorRow.classList.add('has-selection');
+      } else {
+        vendorRow.classList.remove('has-selection');
+      }
     }
 
     // Export vendor results
