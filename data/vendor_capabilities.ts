@@ -435,5 +435,46 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://www.silverfort.com/"
       }
     ]
+  },
+  {
+    vendorId: "V-007",
+    vendorName: "Okta",
+    products: [
+      {
+        productId: "V-007-P-001",
+        productName: "Okta Workforce Identity Cloud",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004", "PAM-015", "PAM-017", "PAM-018", "PAM-025", "PAM-026", "PAM-027"],
+        partialCapabilities: ["PAM-005", "PAM-011", "PAM-012", "PAM-032"],
+        notes: "Core identity platform. SSO for applications via SAML and OIDC. Adaptive MFA — risk-based with multiple factors including FIDO2, biometric, OTP, push, SMS. Universal Directory — centralized identity store with AD and LDAP integration. Lifecycle Management — joiner-mover-leaver automation, SCIM provisioning. Okta Workflows — no-code automation for identity processes. Policy-based conditional access. Federation with external IdPs. Okta FastPass — phishing-resistant authentication on managed devices. PAM-004 full — phishing-resistant enforcement available via FastPass. Partial lifecycle management covers basic joiner-mover-leaver but full IGA requires Okta Identity Governance add-on. Identity Threat Protection with Okta AI (add-on) provides risk-based threat detection but not included in base WIC.",
+        docsUrl: "https://help.okta.com/oie/en-us/content/topics/identity-engine/oie-index.htm"
+      },
+      {
+        productId: "V-007-P-002",
+        productName: "Okta Identity Governance",
+        capabilities: ["PAM-011", "PAM-012", "PAM-022"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-007", "PAM-035"],
+        notes: "IGA add-on to Workforce Identity Cloud. Three components: Lifecycle Management (extended provisioning and deprovisioning automation), Workflows (no-code automation for access processes), and Access Governance (access certifications, access requests, entitlement management). Access Certifications include contextual information such as sign-in frequency and resource last-accessed date to make reviews more meaningful. Joiner-mover-leaver automation for human and non-human identities. Box uses Okta Identity Governance to enforce zero standing privileges. Subscription add-on — not included in base WIC.",
+        docsUrl: "https://help.okta.com/oie/en-us/content/topics/identity-governance/iga.htm",
+        addOnOf: "V-007-P-001"
+      },
+      {
+        productId: "V-007-P-003",
+        productName: "Okta Privileged Access",
+        capabilities: ["PAM-005", "PAM-007", "PAM-015", "PAM-019", "PAM-020", "PAM-023", "PAM-025", "PAM-026", "PAM-027", "PAM-029", "PAM-031", "PAM-033"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-006", "PAM-008", "PAM-013", "PAM-014", "PAM-030"],
+        notes: "PAM add-on to Workforce Identity Cloud. Architecture is fundamentally different from traditional vault-first PAM — built on Okta identity platform rather than a separate credential management system. Core capabilities: JIT infrastructure access via on-demand server accounts created per session and deleted after (true JIT, zero standing server access), gateway-based access proxying (no direct server connections, client device never receives usable credentials), SSH session recording via gateway, credential vaulting for privileged accounts and secrets, service account governance (eliminates standing access for non-federated service accounts in SaaS apps), access request workflows with approvals, compliance reporting. RDP session recording in development as of September 2025 announcements. MFA enforced via Okta WIC — not separate. Session recording partial — SSH via gateway, RDP in progress. Service account coverage partial — focused on SaaS service accounts. Narrower infrastructure coverage than traditional PAM vaults — optimized for cloud-native server access rather than full enterprise credential lifecycle.",
+        docsUrl: "https://help.okta.com/oie/en-us/content/topics/privileged-access/pam-overview.htm",
+        addOnOf: "V-007-P-001"
+      },
+      {
+        productId: "V-007-P-004",
+        productName: "Okta Device Access",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003"],
+        partialCapabilities: ["PAM-005", "PAM-009", "PAM-031"],
+        notes: "Extends Okta identity and MFA to device sign-in experience. Desktop MFA for Windows and macOS — enforces MFA at device login using same authenticators as Okta-protected apps. Password sync for macOS — keeps local account password synchronized with Okta. JIT local account creation for macOS — creates accounts from Okta identity at login, useful for shared devices and multi-user workstations. Device Logout — admins can remotely sign users out of devices. Desktop MFA recovery — time-limited recovery PIN for users locked out without MFA access. Not a full endpoint privilege management solution — does not provide application control, local account discovery, or privilege escalation controls.",
+        docsUrl: "https://help.okta.com/oie/en-us/content/topics/oda/oda-overview.htm",
+        addOnOf: "V-007-P-001"
+      }
+    ]
   }
 ];
