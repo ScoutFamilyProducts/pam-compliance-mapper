@@ -3259,6 +3259,9 @@
       const commercialContainer = document.getElementById('commercial-vendor-list');
       const freewareContainer = document.getElementById('freeware-vendor-list');
 
+      // IMMEDIATE TEST: If this appears, JS is running and container is accessible
+      commercialContainer.innerHTML = '<div style="background:lime;padding:10px;color:black;font-weight:bold;">JS EXECUTED - STEP 1</div>';
+
       try {
         // Check VENDOR_DATA exists
         const debugInfo = 'typeof VENDOR_DATA: ' + typeof VENDOR_DATA +
@@ -3266,13 +3269,22 @@
           ', freeware.length: ' + (VENDOR_DATA ? VENDOR_DATA.freeware.length : 'N/A');
         console.log(debugInfo);
 
+        // TEST: Update with step 2
+        commercialContainer.innerHTML = '<div style="background:lime;padding:10px;color:black;font-weight:bold;">JS EXECUTED - STEP 2 (VENDOR_DATA: ' + (VENDOR_DATA ? 'exists' : 'missing') + ')</div>';
+
         // Use static data - already sorted alphabetically
         loadedVendors.commercial = VENDOR_DATA.commercial;
         loadedVendors.freeware = VENDOR_DATA.freeware;
 
+        // TEST: Update with step 3
+        commercialContainer.innerHTML = '<div style="background:lime;padding:10px;color:black;font-weight:bold;">JS EXECUTED - STEP 3 (commercial count: ' + loadedVendors.commercial.length + ')</div>';
+
         // Render vendor accordions
         const commercialHtml = renderVendorAccordion(loadedVendors.commercial, 'commercial');
         const freewareHtml = renderVendorAccordion(loadedVendors.freeware, 'freeware');
+
+        // TEST: Update with step 4
+        commercialContainer.innerHTML = '<div style="background:lime;padding:10px;color:black;font-weight:bold;">JS EXECUTED - STEP 4 (commercialHtml length: ' + commercialHtml.length + ')</div>';
 
         commercialContainer.innerHTML = commercialHtml;
         freewareContainer.innerHTML = freewareHtml;
@@ -3282,7 +3294,7 @@
       } catch (e) {
         const errMsg = 'loadVendors ERROR: ' + e.message + ' at ' + e.stack;
         console.error(errMsg);
-        commercialContainer.innerHTML = '<div style="color:red;padding:10px;">' + errMsg + '</div>';
+        commercialContainer.innerHTML = '<div style="color:red;padding:10px;background:yellow;">' + errMsg + '</div>';
       }
     }
 
