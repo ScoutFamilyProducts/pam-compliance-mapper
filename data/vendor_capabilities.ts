@@ -916,5 +916,36 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://www.ibm.com/products/verify-identity-protection"
       }
     ]
+  },
+  {
+    vendorId: "V-020",
+    vendorName: "Ping Identity",
+    products: [
+      {
+        productId: "V-020-P-001",
+        productName: "PingOne Advanced Identity Cloud",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-015", "PAM-017", "PAM-018"],
+        partialCapabilities: ["PAM-004", "PAM-005", "PAM-011", "PAM-012", "PAM-019", "PAM-025", "PAM-026", "PAM-032"],
+        notes: "Core SaaS IAM platform. Gartner MQ Leader for Access Management 9 consecutive years, top scores in Workforce, Partner, and Machine Access Management use cases in 2025 Critical Capabilities. Core capabilities: SSO via SAML and OIDC for thousands of applications, MFA including TOTP, push, FIDO2 hardware keys, passkeys, and biometrics, adaptive risk-based authentication via PingOne Protect (AI-driven risk signals, bot detection, deepfake threat detection, identity fraud), identity orchestration via PingOne DaVinci (no-code identity journey builder), identity verification (PingOne Verify), user lifecycle management with SCIM provisioning, password policy enforcement. PingOne Governance add-on provides full IGA: access certifications, lifecycle automation, SOD enforcement. PAM-004 partial — phishing-resistant MFA enforceable but depends on policy configuration. PAM-032 partial — PingOne Protect provides risk-based authentication signals and AI-driven ITDR-adjacent threat detection including agentic automation detection.",
+        docsUrl: "https://docs.pingidentity.com/pingone/latest/"
+      },
+      {
+        productId: "V-020-P-002",
+        productName: "PingOne Privilege",
+        capabilities: ["PAM-005", "PAM-007", "PAM-019", "PAM-020", "PAM-029", "PAM-030", "PAM-031", "PAM-033"],
+        partialCapabilities: ["PAM-001", "PAM-003", "PAM-006", "PAM-013", "PAM-014", "PAM-015", "PAM-023"],
+        notes: "JIT privileged access product — launched August 2025. Distinguishing architecture: credential-less runtime PAM with Zero Standing Privilege. ~95% of human privileged access use cases do not require static credentials per Ping's design philosophy — PingOne Privilege eliminates static credentials for those use cases and reserves vault integration only for break glass and bootstrap scenarios. Core capabilities: JIT time-bound access for cloud environments (AWS, GCP, Azure), on-premises servers, databases, Kubernetes, and other critical resources via self-service portal; Zero Standing Privilege — permissions granted only when needed and revoked automatically when the session ends; TPM-backed device assurance — cryptographic keys stored in tamper-resistant hardware on the endpoint, privileged sessions bound to trusted devices so stolen credentials cannot be replayed from unauthorized endpoints (distinguishing capability vs traditional PAM); agent-based deployments for deep session control (SSH, RDP, databases) and agentless for cloud console and CLI access; passwordless access — no credential exposure to end users; full session recording and audit trail; approval workflows. PAM-023 partial — vault integration present for break glass and bootstrap scenarios only, not the primary access model. PAM-013 partial — supports vendor/contractor JIT access but not a dedicated RPAM product.",
+        docsUrl: "https://www.pingidentity.com/en/product/pingone-privilege.html",
+        addOnOf: "V-020-P-001"
+      },
+      {
+        productId: "V-020-P-003",
+        productName: "PingFederate",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-015", "PAM-017", "PAM-018"],
+        partialCapabilities: ["PAM-004", "PAM-005", "PAM-019", "PAM-025"],
+        notes: "Enterprise federation server — self-managed on-premises deployment. Provides SSO via OAuth 2.0, OIDC, and SAML for organizations with on-premises requirements or strict data residency controls. Strong presence in regulated industries (banking, insurance, financial services, healthcare). Integrates with existing identity directories (AD, LDAP). MFA via integrated adapters or external MFA providers. PAM-004 partial — phishing-resistant enforcement depends on adapter configuration. Deployed by organizations that cannot use SaaS identity platforms due to regulatory or security requirements.",
+        docsUrl: "https://docs.pingidentity.com/pingfederate/latest/"
+      }
+    ]
   }
 ];
