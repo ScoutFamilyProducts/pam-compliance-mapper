@@ -421,5 +421,19 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://docs.oneidentity.com/"
       }
     ]
+  },
+  {
+    vendorId: "V-006",
+    vendorName: "Silverfort",
+    products: [
+      {
+        productId: "V-006-P-001",
+        productName: "Silverfort Identity Security Platform",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004", "PAM-017", "PAM-019", "PAM-020", "PAM-027", "PAM-032"],
+        partialCapabilities: ["PAM-006", "PAM-008", "PAM-010", "PAM-015"],
+        notes: "IMPORTANT: Silverfort's technical documentation is customer-gated. This capability mapping is based on public-facing materials including whitepapers, solution briefs, and website content — less authoritative than product documentation. Silverfort is a fundamentally different product category from PAM vaults — it operates at the authentication protocol layer, not credential management or session management. Runtime Access Protection (RAP) technology integrates inline with existing IAM infrastructure (AD, RADIUS, LDAP) without requiring agents, proxies, or code changes on any system. Core capabilities: universal MFA enforcement across ALL authentication protocols including those typically excluded by other MFA solutions (PsExec, WMI, Remote PowerShell, NTLM, Kerberos, LDAP) — PAM-004 is the key differentiator, closing MFA bypass gaps that exist in every other solution; risk-based conditional access policies; service account discovery and monitoring including classification of pure machine-to-machine accounts versus interactively-used accounts; identity threat detection including compromised account detection and lateral movement detection; AI-based risk assessment and anomaly detection; complete authentication event logging across the environment. Does NOT provide: credential vaulting, password rotation, session recording, JIT access, break glass, or jump box capabilities — Silverfort augments existing PAM infrastructure but does not replace vault-based PAM.",
+        docsUrl: "https://www.silverfort.com/"
+      }
+    ]
   }
 ];
