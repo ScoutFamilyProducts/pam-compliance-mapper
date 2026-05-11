@@ -1275,5 +1275,33 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://gurucul.com/press-releases/gurucul-announces-ai-insider-risk-management/"
       }
     ]
+  },
+  {
+    vendorId: "V-037",
+    vendorName: "Fortinet",
+    products: [
+      {
+        productId: "V-037-P-001",
+        productName: "FortiSIEM",
+        capabilities: ["PAM-019", "PAM-020", "PAM-021"],
+        partialCapabilities: ["PAM-008", "PAM-010", "PAM-032"],
+        notes: "Full-featured SIEM with unique IT/OT convergence capabilities. Core capabilities: unified IT and OT event collection and correlation, built-in CMDB with automatic asset discovery and performance monitoring (distinguishing capability — eliminates the need for a separate CMDB), AI-driven detection analytics with UEBA powered by FortiGuard threat intelligence, native SOAR automation (FortiSOAR integration and built-in playbooks), agentic AI investigation assistant (v7.5), link graph technology for visualizing relationships between users, devices, and incidents, MITRE ATT&CK mapping, compliance reporting. Flexible deployment: SaaS, cloud, on-premises, and hardware appliance. Free Windows agent for IT/OT endpoint monitoring (v7.5). Federated data lake search across independent data sources. PAM-032 partial — UEBA capabilities present but narrower behavioral analytics depth than dedicated UEBA Leaders. Fortinet Security Fabric customers benefit from native integration across FortiGate firewalls, FortiNAC, FortiEDR — richer correlated context than SIEM-only deployments.",
+        docsUrl: "https://www.fortinet.com/products/siem/fortisiem"
+      }
+    ]
+  },
+  {
+    vendorId: "V-038",
+    vendorName: "Palo Alto Networks",
+    products: [
+      {
+        productId: "V-038-P-001",
+        productName: "Cortex XSIAM",
+        capabilities: ["PAM-019", "PAM-020", "PAM-021", "PAM-032"],
+        partialCapabilities: ["PAM-008", "PAM-010", "PAM-015", "PAM-017"],
+        notes: "AI-powered SecOps platform — SIEM, XDR, SOAR, ASM, TIP, CDR, and ITDR unified in a single platform. Positioned as a SIEM replacement rather than a traditional SIEM. Core capabilities: Precision AI-powered log management, correlation, and alerting (all common SIEM functions); XDR for endpoint, cloud, and network threat detection; Cortex XSOAR SOAR integration (600+ integrations, 800+ prebuilt playbooks, GenAI assistance); Attack Surface Management (ASM); Threat Intelligence Platform; AgentiX agentic AI framework trained on 1.2B real-world playbook executions; intelligent alert stitching reducing thousands of alerts to high-priority incidents; ITDR capabilities (identity threat detection and response). QRadar migration path: no-cost migration services via IBM Consulting for eligible former QRadar SaaS customers. PAM-032 full — behavioral analytics and identity threat detection via ITDR capabilities. PAM-015 partial — MFA enforcement through policy, not a native MFA provider. Customers on Palo Alto's broader platform (Prisma Access, Strata NGFW) gain richer correlated context.",
+        docsUrl: "https://www.paloaltonetworks.com/cortex/cortex-xsiam"
+      }
+    ]
   }
 ];
