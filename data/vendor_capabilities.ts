@@ -718,5 +718,19 @@ export const vendorCapabilities: VendorCapability[] = [
         addOnOf: "V-013-P-001"
       }
     ]
+  },
+  {
+    vendorId: "V-014",
+    vendorName: "Splunk",
+    products: [
+      {
+        productId: "V-014-P-001",
+        productName: "Splunk Enterprise Security",
+        capabilities: ["PAM-019", "PAM-020", "PAM-021"],
+        partialCapabilities: ["PAM-032"],
+        notes: "SIEM built on Splunk platform — available on-premises (Splunk Enterprise + ES) or SaaS (Splunk Cloud Platform + ES). As of ES 8.0, integrates SIEM, SOAR (playbook automation), and UEBA into a unified threat detection, investigation, and response solution. Cisco acquired Splunk March 2024. Core PAM-relevant capabilities: centralized log collection and indexing from any source including PAM platforms (Delinea, CyberArk, BeyondTrust, etc.), AD, cloud infrastructure, endpoints, and network devices; correlation rules and analytics for privileged access activity; investigation workbench for incident analysis; dashboards and reports for audit log review and compliance reporting; Mission Control for unified SOC workflow. PAM-032 partial — UEBA in Premier edition (formerly standalone Splunk UBA, which hit end-of-sale December 2025 and EOL January 2027) provides behavioral analytics detecting anomalous user and entity behavior, but requires privileged access data ingestion from connected PAM sources to provide meaningful privileged user analytics. Does not provide credential management, session recording, access control, JIT access, discovery, or any PAM-specific controls — value is entirely dependent on what log sources are connected.",
+        docsUrl: "https://help.splunk.com/en/splunk-enterprise-security-8"
+      }
+    ]
   }
 ];
