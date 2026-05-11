@@ -506,5 +506,77 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://developer.hashicorp.com/hcp/docs/vault-radar"
       }
     ]
+  },
+  {
+    vendorId: "V-009",
+    vendorName: "Microsoft",
+    products: [
+      {
+        productId: "V-009-P-001",
+        productName: "Microsoft Entra ID P1",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004", "PAM-015", "PAM-017", "PAM-018", "PAM-025", "PAM-026", "PAM-027"],
+        partialCapabilities: ["PAM-005", "PAM-011", "PAM-019"],
+        notes: "Core cloud identity platform (formerly Azure Active Directory). Included in Microsoft 365 E3 and Business Premium. Capabilities: SSO for thousands of applications (SAML, OIDC), Multi-Factor Authentication (Microsoft Authenticator, FIDO2, passwordless, SMS), Conditional Access policies (device compliance, location, application sensitivity, sign-in risk), Self-Service Password Reset, AD Connect sync for hybrid environments, Universal Directory, RBAC for application access. PAM-004 full — Conditional Access enforces MFA with no bypass available when properly configured. PAM-019 partial — audit logs via Azure Monitor/Log Analytics, 30-day default retention. P1 does not include PIM (JIT), Identity Protection (risk-based policies), or IGA. These require P2 or ID Governance licenses.",
+        docsUrl: "https://learn.microsoft.com/en-us/entra/fundamentals/whats-new"
+      },
+      {
+        productId: "V-009-P-002",
+        productName: "Microsoft Entra ID P2",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004", "PAM-015", "PAM-017", "PAM-018", "PAM-025", "PAM-026", "PAM-027", "PAM-031", "PAM-032"],
+        partialCapabilities: ["PAM-005", "PAM-007", "PAM-008", "PAM-010", "PAM-011", "PAM-019"],
+        notes: "Includes all P1 capabilities plus Privileged Identity Management (PIM) and Microsoft Entra ID Protection. Included in Microsoft 365 E5. PIM capabilities: JIT time-bound role activation for Microsoft Entra roles, Azure resource roles, and Groups; approval workflows for role activation; MFA required on activation via Conditional Access authentication context; access reviews for privileged roles; assignment expiration with notifications. PIM scope is limited to Microsoft/Azure roles — not general infrastructure or third-party application PAM. ID Protection capabilities: risk-based Conditional Access using ML-driven user and sign-in risk signals; behavioral analytics and anomaly detection; automated risk remediation. PAM-031 scoped to Microsoft Entra and Azure roles only — not infrastructure servers, databases, or third-party applications.",
+        docsUrl: "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-configure",
+        addOnOf: "V-009-P-001"
+      },
+      {
+        productId: "V-009-P-003",
+        productName: "Microsoft Entra ID Governance",
+        capabilities: ["PAM-011", "PAM-012", "PAM-022"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-007", "PAM-031", "PAM-035"],
+        notes: "Full IGA add-on — requires P1 or P2 as prerequisite. Includes all P2 PIM capabilities plus: Lifecycle Workflows (joiner-mover-leaver automation via no-code workflows triggered by HR system events), Entitlement Management (access packages bundling resources for request and assignment), Access Reviews (automated campaigns for users, groups, applications, privileged roles), machine learning-driven access recommendations in reviews. PAM-031 partial — PIM included covers JIT for Microsoft roles. PAM-006 partial — service account lifecycle limited to Entra-managed identities. Also available as part of Microsoft Entra Suite which bundles ID Governance with Private Access, Internet Access, ID Protection, and Verified ID.",
+        docsUrl: "https://learn.microsoft.com/en-us/entra/id-governance/licensing-fundamentals",
+        addOnOf: "V-009-P-001"
+      },
+      {
+        productId: "V-009-P-004",
+        productName: "Microsoft Entra Permissions Management",
+        capabilities: ["PAM-008"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-016", "PAM-017"],
+        notes: "Cloud Infrastructure Entitlement Management (CIEM) — formerly CloudKnox, acquired by Microsoft. Discovers, remediates, and continuously monitors permissions across AWS, Azure, and GCP. Identifies over-privileged identities, unused permissions, and misconfigured roles across all three major cloud providers. Provides Permissions Creep Index (PCI) scoring for risk ranking. Automated least privilege remediation recommendations. Authentication system inventory across connected cloud platforms. Standalone product — not bundled with Entra ID licenses.",
+        docsUrl: "https://learn.microsoft.com/en-us/entra/permissions-management/"
+      },
+      {
+        productId: "V-009-P-005",
+        productName: "Microsoft Purview Privileged Access Management",
+        capabilities: ["PAM-007", "PAM-031"],
+        partialCapabilities: ["PAM-005", "PAM-019", "PAM-020"],
+        notes: "JIT PAM specifically for Microsoft 365 administrative tasks — Exchange Online, SharePoint Online, Teams admin operations. Scoped exclusively to M365 admin tasks, not general infrastructure PAM. Zero standing access model for M365 admin roles — administrators must request and receive approval before executing elevated M365 tasks. Time-bound approvals. All approved tasks logged. Separate from Entra PIM — Purview PAM governs task execution within M365, PIM governs role assignment eligibility. Often overlooked but important for organizations with strict M365 compliance requirements (SOX, HIPAA for covered entities using M365).",
+        docsUrl: "https://learn.microsoft.com/en-us/purview/privileged-access-management"
+      },
+      {
+        productId: "V-009-P-006",
+        productName: "Azure Key Vault",
+        capabilities: ["PAM-023", "PAM-024", "PAM-028"],
+        partialCapabilities: ["PAM-006", "PAM-019", "PAM-021"],
+        notes: "Secrets, key, and certificate management for Azure workloads. Hardware Security Module (HSM) backed option available. Stores API keys, passwords, certificates, cryptographic keys. Automatic key rotation for supported services. RBAC via Azure RBAC or legacy access policies. Audit logging via Azure Monitor and Diagnostic Logs. Integrates natively with Azure services — Azure VMs, Azure Functions, Azure App Service retrieve secrets at runtime without credential exposure. Not a general PAM vault — designed for cloud workload secrets, not human privileged access management. No checkout workflows, session recording, or access request workflows. PAM-006 partial — manages service account secrets but no governance layer.",
+        docsUrl: "https://learn.microsoft.com/en-us/azure/key-vault/general/overview"
+      },
+      {
+        productId: "V-009-P-007",
+        productName: "Microsoft Defender for Identity",
+        capabilities: ["PAM-032"],
+        partialCapabilities: ["PAM-008", "PAM-010", "PAM-019", "PAM-020"],
+        notes: "ITDR for Active Directory and Microsoft Entra ID. Monitors AD traffic and signals to detect credential-based attacks in real time. Detects: pass-the-hash, pass-the-ticket, Kerberoasting, DCSync, Golden Ticket, lateral movement, privilege escalation paths, account enumeration, brute force, credential stuffing. Identifies dormant and vulnerable accounts. Generates risk alerts integrated with Microsoft Sentinel and Microsoft 365 Defender. Requires sensor deployment on domain controllers (on-premises) and/or integration with Entra ID. Does not perform credential management, session recording, or access control — detection and response only.",
+        docsUrl: "https://learn.microsoft.com/en-us/defender-for-identity/what-is"
+      },
+      {
+        productId: "V-009-P-008",
+        productName: "Microsoft Sentinel",
+        capabilities: ["PAM-019", "PAM-020", "PAM-021"],
+        partialCapabilities: ["PAM-032"],
+        notes: "Cloud-native SIEM and SOAR. Collects logs from any source including Entra ID, Azure Key Vault, Microsoft Defender products, and third-party PAM solutions. Provides analytics rules, threat intelligence, workbooks, and automated playbooks. PAM-019 full — centralized immutable audit log when connected to log sources. PAM-020 full — privileged user activity logging when Entra ID and PAM sources are connected. PAM-021 full — audit log review via workbooks, analytics rules, and investigation tools. PAM-032 partial — UEBA capabilities and behavioral analytics, but requires data ingestion from identity sources. Not a PAM product — a SIEM that receives PAM telemetry.",
+        docsUrl: "https://learn.microsoft.com/en-us/azure/sentinel/overview"
+      }
+    ]
   }
 ];
