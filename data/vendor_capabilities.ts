@@ -13,6 +13,7 @@ export interface VendorCapability {
   vendorId: string;
   vendorName: string;
   products: VendorProduct[];
+  isFreeware?: boolean;
 }
 
 export const vendorDataLastUpdated = "2026-05";
@@ -1625,6 +1626,165 @@ export const vendorCapabilities: VendorCapability[] = [
         partialCapabilities: ["PAM-015", "PAM-019"],
         notes: "Workforce identity verification platform for high-risk identity moments — helpdesk verification, self-service account recovery, secure employee onboarding, and AI agent action verification. Core capabilities: Deepfake Defense™ (cryptographic attestation validates device/OS/sensor integrity before any biometric data is collected — blocks injection attacks that fool camera-based systems; distinguishing capability, not available from browser-based solutions), Adaptive Document Verification (government-issued ID verification across thousands of document types in 140+ countries with 99% accuracy), biometric liveness detection, Spatial Selfie (3D depth mapping to detect 2D photo and video spoofing). Verification request sent via any support channel (ServiceNow, email, self-service microsite); user verifies in under 30 seconds on their smartphone without pre-enrollment. Full audit trail — Proof of Verification records with customizable visibility into decision-making for compliance and audit purposes. Integrations: Okta (External Authentication Method), Microsoft Entra ID, ServiceNow ITSM, Beyond Identity. Addresses the Scattered Spider attack pattern: attackers social engineering help desk agents into resetting admin MFA or SSPR credentials by impersonating legitimate employees. PAM-015 partial — verifies real-world identity at privileged account recovery and onboarding events, ensuring that the individual receiving or recovering privileged credentials is the genuine, verified employee. PAM-019 partial — Proof of Verification provides audit records of every identity verification decision for compliance review.",
         docsUrl: "https://getnametag.com/platform/"
+      }
+    ]
+  }
+];
+
+// =============================================================
+// FREEWARE / OPEN SOURCE TOOLS
+// =============================================================
+// These are free or open source tools that provide PAM-relevant capabilities.
+// Vendor IDs use FW-XXX prefix to distinguish from commercial entries.
+
+export const freewareCapabilities: VendorCapability[] = [
+  {
+    vendorId: "FW-001",
+    vendorName: "BloodHound Community Edition",
+    isFreeware: true,
+    products: [
+      {
+        productId: "FW-001-P-001",
+        productName: "BloodHound CE",
+        capabilities: [],
+        partialCapabilities: ["PAM-008", "PAM-016"],
+        notes: "Free open source Active Directory and Entra ID attack path visualization. Discovers all identity relationships, trust paths, and privilege inheritance chains in AD and Entra ID environments. Visualizes attack paths from any identity to Tier 0 assets. Key limitation vs Enterprise: manual or scheduled collection runs — no continuous monitoring, no automated choke point analysis, no Okta/GitHub/macOS coverage, no SaaS management layer. PAM-008 partial — discovers privileged identities and their access paths on-demand. PAM-016 partial — identifies privilege escalation paths but no automated remediation prioritization. No full capabilities — CE requires manual analyst effort to translate findings into action. GitHub: github.com/SpecterOps/BloodHound.",
+        docsUrl: "https://support.bloodhoundenterprise.io/hc/en-us/categories/9895588985627-BloodHound-Community-Edition"
+      }
+    ]
+  },
+  {
+    vendorId: "FW-002",
+    vendorName: "Purple Knight",
+    isFreeware: true,
+    products: [
+      {
+        productId: "FW-002-P-001",
+        productName: "Purple Knight",
+        capabilities: [],
+        partialCapabilities: ["PAM-008", "PAM-032"],
+        notes: "Free AD/Entra ID security posture assessment by Semperis. Scans for misconfigurations, risky delegations, stale accounts, insecure ACLs, Kerberos weaknesses, and other privilege-related vulnerabilities across 100+ indicators. Generates a security score (0-100) with prioritized findings and remediation steps. Point-in-time only — must be re-run manually to track changes over time. No agent, no continuous monitoring, no alerting. Complements BloodHound CE (attack paths) with configuration and posture assessment. PAM-008 partial — identifies privileged accounts and misconfigurations on-demand scan. PAM-032 partial — detects indicators of attack patterns and misconfigurations that enable identity attacks. Download from semperis.com/purple-knight.",
+        docsUrl: "https://www.semperis.com/purple-knight/"
+      }
+    ]
+  },
+  {
+    vendorId: "FW-003",
+    vendorName: "Forest Druid",
+    isFreeware: true,
+    products: [
+      {
+        productId: "FW-003-P-001",
+        productName: "Forest Druid",
+        capabilities: [],
+        partialCapabilities: ["PAM-008", "PAM-016"],
+        notes: "Free Tier 0 attack path discovery tool by Semperis. Identifies all assets that constitute Tier 0 (domain controllers, admin accounts, GPO links, critical OUs, privileged groups), maps every identity with a path to those assets, and visualizes the blast radius of any identity compromise. Helps organizations understand and reduce Tier 0 exposure. Point-in-time, not continuous. PAM-008 partial — discovers Tier 0 assets and the identities with access paths to them. PAM-016 partial — identifies privilege escalation paths into Tier 0. Download from semperis.com/forest-druid.",
+        docsUrl: "https://www.semperis.com/forest-druid/"
+      }
+    ]
+  },
+  {
+    vendorId: "FW-004",
+    vendorName: "Windows LAPS",
+    isFreeware: true,
+    products: [
+      {
+        productId: "FW-004-P-001",
+        productName: "Windows LAPS",
+        capabilities: ["PAM-023", "PAM-029", "PAM-030"],
+        partialCapabilities: ["PAM-005", "PAM-009", "PAM-019"],
+        notes: "Built-in Windows feature for automated local administrator password management. Core capabilities: automatic password generation and rotation on a configurable schedule, encrypted password storage in AD DS attributes or Azure AD (Entra ID), role-based access control for password retrieval (who can see which machine's local admin password), password history, post-authentication reset (password automatically rotates after checkout if configured), audit logging of all password access events, support for Directory Services Repair Mode (DSRM) passwords on domain controllers. Available on Windows Server 2019+, Windows 10 22H2+, Windows 11, and Server Core. PAM-005 partial — enforces unique local admin passwords per machine (eliminates pass-the-hash lateral movement risk) but not a full least privilege enforcement platform. PAM-009 partial — separates local admin credentials into managed vault but does not enforce admin account separation at an enterprise policy level. PAM-019 partial — audit logs via Windows Event Log and AD; full SIEM-grade centralized logging requires integration with Sentinel, Splunk, or similar. CRITICAL NOTE: Windows LAPS is one of the most impactful and underutilized free security controls available. Eliminating shared local admin passwords across an estate removes a major lateral movement vector. Any Windows-heavy organization that has not deployed LAPS is leaving a significant attack surface open.",
+        docsUrl: "https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview"
+      }
+    ]
+  },
+  {
+    vendorId: "FW-005",
+    vendorName: "Teleport Community Edition",
+    isFreeware: true,
+    products: [
+      {
+        productId: "FW-005-P-001",
+        productName: "Teleport Community Edition",
+        capabilities: ["PAM-007", "PAM-015", "PAM-019", "PAM-020", "PAM-033"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-005", "PAM-013", "PAM-014"],
+        notes: "Open source identity-native PAM for infrastructure access. AGPL-3.0 license. Secretless architecture — short-lived X.509 certificates replace all shared secrets (passwords, SSH keys, tokens). Certificates are issued per-session and expire automatically. Core capabilities: SSH access with certificate-based auth and full session recording, Kubernetes cluster access, PostgreSQL/MySQL/MongoDB database access via certificate-based proxy, Windows desktop access (RDP via certificate), internal web application access, unified audit log across all protocols and resources, MFA at login enforced via hardware security keys or TOTP, SSO integration via OIDC/SAML (Okta, Azure AD, GitHub, etc.), RBAC via Teleport roles. All sessions recorded with full audit trail including interactive commands, queries, and screen captures. No credential vault — eliminates passwords rather than storing them. PAM-007 full — proxied access without exposing target credentials. PAM-015 full — all sessions tied to individual user identity via short-lived certificates. PAM-013 partial — supports vendor/contractor access patterns but no dedicated RPAM product. PAM-014 partial — session timeout configurable. Note: Enterprise adds JIT Access Requests, device trust, and enhanced RBAC. Docs at goteleport.com/docs.",
+        docsUrl: "https://goteleport.com/docs/"
+      }
+    ]
+  },
+  {
+    vendorId: "FW-006",
+    vendorName: "CyberArk Conjur Open Source",
+    isFreeware: true,
+    products: [
+      {
+        productId: "FW-006-P-001",
+        productName: "Conjur Open Source",
+        capabilities: ["PAM-023", "PAM-028"],
+        partialCapabilities: ["PAM-006", "PAM-019", "PAM-024"],
+        notes: "Open source secrets management for machine identities and DevOps pipelines by CyberArk. Apache 2.0 license. Core capabilities: machine identity authentication via Conjur policy (workloads authenticate using certificates, IAM roles, or Kubernetes service accounts — no static secrets required), secrets storage and retrieval with RBAC policies, native Kubernetes integration (Secrets Provider for K8s, Secrets Store CSI driver), Ansible, Jenkins, Terraform, AWS, Azure, GCP integrations, audit logging of all secrets access. Eliminates hardcoded credentials in code and configuration files. PAM-028 full — secrets stored in Conjur rather than hardcoded; rotation managed via policy. PAM-023 full — centralized encrypted secrets store with policy-based access. PAM-006 partial — manages machine/service account credentials but no full lifecycle governance. PAM-024 partial — certificate-based machine identity but not a full certificate lifecycle management platform. GitHub: github.com/cyberark/conjur.",
+        docsUrl: "https://docs.conjur.org/Latest/en/Content/Overview/Conjur-OSS-Suite-Overview.html"
+      }
+    ]
+  },
+  {
+    vendorId: "FW-007",
+    vendorName: "Passbolt Community Edition",
+    isFreeware: true,
+    products: [
+      {
+        productId: "FW-007-P-001",
+        productName: "Passbolt CE",
+        capabilities: [],
+        partialCapabilities: ["PAM-023", "PAM-024", "PAM-030"],
+        notes: "Open source team password manager — self-hosted, end-to-end encrypted with OpenPGP. AGPL-3.0 license. Shared credential storage with folder-based RBAC, activity logs, and secure sharing. Browser extension-based UX. No session recording, no privileged session proxying, no automated rotation — primarily a credential storage and sharing tool. PAM-023 partial — encrypted credential storage but not a privileged vault with checkout workflows. PAM-030 partial — credentials retrievable by authorized users with audit trail. Most relevant for SMB environments that need basic shared password management without budget for commercial PAM. Docs at docs.passbolt.com.",
+        docsUrl: "https://docs.passbolt.com/"
+      }
+    ]
+  },
+  {
+    vendorId: "FW-008",
+    vendorName: "Ansible Vault",
+    isFreeware: true,
+    products: [
+      {
+        productId: "FW-008-P-001",
+        productName: "Ansible Vault",
+        capabilities: [],
+        partialCapabilities: ["PAM-023", "PAM-028"],
+        notes: "Built-in secrets encryption for Ansible automation by Red Hat. Free — part of open source Ansible. Encrypts variables, files, and playbooks at rest with AES-256 symmetric encryption. Protects sensitive values (API keys, passwords, certificates) within Ansible projects. Not a secrets management platform — no dynamic secrets, no rotation, no audit logging, no RBAC beyond file-system level controls. Best used in combination with a dedicated secrets manager (HashiCorp Vault, AWS Secrets Manager, CyberArk Conjur) for production environments. PAM-023 partial — encrypts secrets at rest in Ansible, prevents plaintext credentials in playbooks. PAM-028 partial — reduces hardcoded credential exposure in automation code.",
+        docsUrl: "https://docs.ansible.com/ansible/latest/vault_guide/vault.html"
+      }
+    ]
+  },
+  {
+    vendorId: "FW-009",
+    vendorName: "OpenSSH",
+    isFreeware: true,
+    products: [
+      {
+        productId: "FW-009-P-001",
+        productName: "OpenSSH",
+        capabilities: [],
+        partialCapabilities: ["PAM-007", "PAM-013", "PAM-015", "PAM-019"],
+        notes: "The de facto standard for secure remote access to Unix/Linux/macOS systems. Free and open source (BSD license). Maintained by the OpenBSD project. Pre-installed on virtually all Linux distributions, macOS, and Windows 10+ (optional feature). Key capabilities: SSH public key authentication (eliminates password-based SSH), SSH certificate authority (SSH CA) for short-lived certificate-based access — eliminates the need to distribute individual public keys, host key verification, port forwarding and tunneling, SFTP for secure file transfer, audit logging via syslog. SSH certificates (via SSH CA) provide JIT-adjacent access by issuing short-lived signed certificates that automatically expire. No session recording, no credential vaulting, no MFA enforcement (requires PAM module or external IdP integration). PAM-007 partial — proxied access possible with bastion host architecture but not built-in. PAM-015 partial — individual attribution via key or certificate, though shared key usage undermines accountability. PAM-019 partial — access events logged via syslog; centralized correlation requires SIEM. Note: OpenSSH with SSH CA is the free foundation that Teleport CE, BeyondTrust, CyberArk, and other commercial tools build upon.",
+        docsUrl: "https://www.openssh.com/manual.html"
+      }
+    ]
+  },
+  {
+    vendorId: "FW-010",
+    vendorName: "Keycloak",
+    isFreeware: true,
+    products: [
+      {
+        productId: "FW-010-P-001",
+        productName: "Keycloak",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-015", "PAM-017", "PAM-018"],
+        partialCapabilities: ["PAM-004", "PAM-005", "PAM-011", "PAM-012", "PAM-019", "PAM-025", "PAM-026"],
+        notes: "Open source IAM platform — self-hosted. Apache 2.0 license. Originally developed by Red Hat, now a CNCF project. Full-featured identity provider covering: SSO via SAML, OIDC, and OAuth 2.0 for all connected applications, MFA (TOTP, WebAuthn/FIDO2, OTP, SMS via extension), adaptive authentication with conditional policies, user federation (LDAP, Active Directory sync), social login, identity brokering with external IdPs, RBAC and fine-grained authorization policies, user lifecycle management (registration, password reset, email verification), session management with configurable timeouts and idle logout, audit logging via event listeners (Syslog, Elasticsearch, custom handlers). Keycloak is the free self-managed equivalent of commercial IdP products like Okta or Microsoft Entra ID P1. PAM-004 partial — FIDO2/WebAuthn available and enforceable via policy, but phishing-resistant enforcement requires correct policy configuration. PAM-011/PAM-012 partial — user lifecycle management capabilities present but no automated HR trigger integration out of the box. PAM-019 partial — event logging available but requires configuration and external SIEM integration for enterprise-grade retention. Most relevant for organizations that want enterprise IAM capabilities without commercial licensing cost.",
+        docsUrl: "https://www.keycloak.org/documentation"
       }
     ]
   }
