@@ -2051,19 +2051,11 @@
         <div class="vendor-columns">
           <div class="vendor-column">
             <div class="vendor-column-header">Commercial Vendors</div>
-            <div class="vendor-accordion" id="commercial-vendor-list">
-              <div class="vendor-list-loading">
-                <span class="loading-spinner"></span>Loading vendors...
-              </div>
-            </div>
+            <div class="vendor-accordion" id="commercial-vendor-list"></div>
           </div>
           <div class="vendor-column">
             <div class="vendor-column-header">Freeware & Open Source</div>
-            <div class="vendor-accordion" id="freeware-vendor-list">
-              <div class="vendor-list-loading">
-                <span class="loading-spinner"></span>Loading vendors...
-              </div>
-            </div>
+            <div class="vendor-accordion" id="freeware-vendor-list"></div>
           </div>
         </div>
       </div>
@@ -3194,47 +3186,99 @@
       }
     });
 
-    // Load vendors from API
+    // Static vendor data (updated May 2026)
+    const VENDOR_DATA = {
+      commercial: [
+        { vendorId: "V-053", vendorName: "1Kosmos", products: [{ productId: "V-053-P-001", productName: "1Kosmos BlockID" }] },
+        { vendorId: "V-024", vendorName: "ARCON", products: [{ productId: "V-024-P-001", productName: "ARCON PAM" }, { productId: "V-024-P-002", productName: "ARCON EPM" }] },
+        { vendorId: "V-010", vendorName: "AWS", products: [{ productId: "V-010-P-001", productName: "AWS IAM" }, { productId: "V-010-P-002", productName: "AWS IAM Identity Center" }, { productId: "V-010-P-003", productName: "AWS Secrets Manager" }, { productId: "V-010-P-004", productName: "AWS CloudTrail" }, { productId: "V-010-P-005", productName: "AWS GuardDuty" }, { productId: "V-010-P-006", productName: "AWS IAM Access Analyzer" }] },
+        { vendorId: "V-048", vendorName: "Beyond Identity", products: [{ productId: "V-048-P-001", productName: "Beyond Identity Secure Workforce" }, { productId: "V-048-P-002", productName: "Beyond Identity Secure DevOps" }] },
+        { vendorId: "V-003", vendorName: "BeyondTrust", products: [{ productId: "V-003-P-001", productName: "BeyondTrust Password Safe" }, { productId: "V-003-P-002", productName: "BeyondTrust Privileged Remote Access" }, { productId: "V-003-P-003", productName: "BeyondTrust EPM for Windows and Mac" }, { productId: "V-003-P-004", productName: "BeyondTrust EPM for Unix and Linux" }, { productId: "V-003-P-005", productName: "BeyondTrust Identity Security Insights" }, { productId: "V-003-P-006", productName: "BeyondTrust Entitle" }, { productId: "V-003-P-007", productName: "BeyondTrust AD Bridge" }] },
+        { vendorId: "V-046", vendorName: "Broadcom", products: [{ productId: "V-046-P-001", productName: "Symantec IGA" }] },
+        { vendorId: "V-025", vendorName: "Cisco Duo", products: [{ productId: "V-025-P-001", productName: "Cisco Duo" }] },
+        { vendorId: "V-035", vendorName: "CrowdStrike", products: [{ productId: "V-035-P-001", productName: "CrowdStrike Falcon Next-Gen SIEM" }, { productId: "V-035-P-002", productName: "CrowdStrike Falcon Next-Gen Identity Security" }] },
+        { vendorId: "V-002", vendorName: "CyberArk", products: [{ productId: "V-002-P-001", productName: "CyberArk Privilege Cloud" }, { productId: "V-002-P-002", productName: "CyberArk PAM Self-Hosted" }, { productId: "V-002-P-003", productName: "CyberArk Secure Infrastructure Access" }, { productId: "V-002-P-004", productName: "CyberArk Remote Access" }, { productId: "V-002-P-005", productName: "CyberArk Endpoint Privilege Manager" }, { productId: "V-002-P-006", productName: "CyberArk Identity" }, { productId: "V-002-P-007", productName: "CyberArk IGA" }, { productId: "V-002-P-008", productName: "CyberArk Secrets Manager SaaS" }, { productId: "V-002-P-009", productName: "CyberArk Secrets Manager Self-Hosted" }, { productId: "V-002-P-010", productName: "CyberArk Secrets Hub" }, { productId: "V-002-P-011", productName: "CyberArk Secure Cloud Access" }, { productId: "V-002-P-012", productName: "CyberArk Cloud Visibility" }, { productId: "V-002-P-013", productName: "CyberArk Identity Security Intelligence" }, { productId: "V-002-P-014", productName: "CyberArk Identity Compliance" }, { productId: "V-002-P-015", productName: "CyberArk Secure Web Sessions" }, { productId: "V-002-P-016", productName: "CyberArk Workforce Password Management" }, { productId: "V-002-P-017", productName: "CyberArk Discovery and Context" }, { productId: "V-002-P-018", productName: "CyberArk Secure Browser" }] },
+        { vendorId: "V-001", vendorName: "Delinea", products: [{ productId: "V-001-P-001", productName: "Secret Server On-Premises" }, { productId: "V-001-P-002", productName: "Secret Server Cloud" }, { productId: "V-001-P-003", productName: "Delinea Platform" }, { productId: "V-001-P-004", productName: "Privilege Control for Servers" }, { productId: "V-001-P-005", productName: "Server Suite" }, { productId: "V-001-P-006", productName: "Delinea Cloud Suite" }, { productId: "V-001-P-007", productName: "Privilege Manager" }, { productId: "V-001-P-008", productName: "Delinea StrongDM" }, { productId: "V-001-P-009", productName: "Delinea Fastpath" }, { productId: "V-001-P-010", productName: "Delinea Credential Manager" }] },
+        { vendorId: "V-028", vendorName: "Elastic Security", products: [{ productId: "V-028-P-001", productName: "Elastic Security" }] },
+        { vendorId: "V-040", vendorName: "Entrust", products: [{ productId: "V-040-P-001", productName: "Entrust IDaaS" }, { productId: "V-040-P-002", productName: "Entrust Identity Enterprise" }] },
+        { vendorId: "V-027", vendorName: "Exabeam", products: [{ productId: "V-027-P-001", productName: "Exabeam Security Operations Platform" }, { productId: "V-027-P-002", productName: "Exabeam New-Scale Analytics" }] },
+        { vendorId: "V-037", vendorName: "Fortinet", products: [{ productId: "V-037-P-001", productName: "FortiSIEM" }] },
+        { vendorId: "V-018", vendorName: "Google", products: [{ productId: "V-018-P-001", productName: "Google Cloud IAM" }, { productId: "V-018-P-002", productName: "Google Cloud Privileged Access Manager" }, { productId: "V-018-P-003", productName: "Google Cloud Identity" }, { productId: "V-018-P-004", productName: "Google Security Command Center" }, { productId: "V-018-P-005", productName: "Google Security Operations" }, { productId: "V-018-P-006", productName: "Google Workspace Admin" }] },
+        { vendorId: "V-036", vendorName: "Gurucul", products: [{ productId: "V-036-P-001", productName: "Gurucul Next-Gen SIEM" }, { productId: "V-036-P-002", productName: "Gurucul UEBA" }, { productId: "V-036-P-003", productName: "Gurucul AI-IRM" }] },
+        { vendorId: "V-008", vendorName: "HashiCorp", products: [{ productId: "V-008-P-001", productName: "HashiCorp Vault" }, { productId: "V-008-P-002", productName: "HashiCorp Boundary" }, { productId: "V-008-P-003", productName: "HashiCorp Vault Radar" }] },
+        { vendorId: "V-052", vendorName: "HID Global", products: [{ productId: "V-052-P-001", productName: "HID DigitalPersona" }, { productId: "V-052-P-002", productName: "HID Crescendo Cards and Keys" }] },
+        { vendorId: "V-050", vendorName: "HYPR", products: [{ productId: "V-050-P-001", productName: "HYPR Identity Assurance Platform" }] },
+        { vendorId: "V-019", vendorName: "IBM", products: [{ productId: "V-019-P-001", productName: "IBM Verify" }, { productId: "V-019-P-002", productName: "IBM Verify Privilege Vault" }, { productId: "V-019-P-003", productName: "IBM Verify Privilege Manager" }, { productId: "V-019-P-004", productName: "IBM Verify Governance" }, { productId: "V-019-P-005", productName: "IBM Verify Identity Protection" }] },
+        { vendorId: "V-013", vendorName: "JumpCloud", products: [{ productId: "V-013-P-001", productName: "JumpCloud Directory Platform" }, { productId: "V-013-P-002", productName: "JumpCloud PAM" }] },
+        { vendorId: "V-004", vendorName: "KeeperPAM", products: [{ productId: "V-004-P-001", productName: "KeeperPAM" }, { productId: "V-004-P-002", productName: "Keeper Endpoint Privilege Manager" }] },
+        { vendorId: "V-021", vendorName: "ManageEngine", products: [{ productId: "V-021-P-001", productName: "ManageEngine PAM360" }] },
+        { vendorId: "V-009", vendorName: "Microsoft", products: [{ productId: "V-009-P-001", productName: "Microsoft Entra ID P1" }, { productId: "V-009-P-002", productName: "Microsoft Entra ID P2" }, { productId: "V-009-P-003", productName: "Microsoft Entra ID Governance" }, { productId: "V-009-P-004", productName: "Microsoft Entra Permissions Management" }, { productId: "V-009-P-005", productName: "Microsoft Purview Privileged Access Management" }, { productId: "V-009-P-006", productName: "Azure Key Vault" }, { productId: "V-009-P-007", productName: "Microsoft Defender for Identity" }, { productId: "V-009-P-008", productName: "Microsoft Sentinel" }] },
+        { vendorId: "V-056", vendorName: "Nametag", products: [{ productId: "V-056-P-001", productName: "Nametag Identity Verification Platform" }] },
+        { vendorId: "V-016", vendorName: "Netwrix", products: [{ productId: "V-016-P-001", productName: "Netwrix Privilege Secure" }, { productId: "V-016-P-002", productName: "Netwrix Auditor" }, { productId: "V-016-P-003", productName: "Netwrix Access Analyzer" }, { productId: "V-016-P-004", productName: "Netwrix Identity Manager" }, { productId: "V-016-P-005", productName: "Netwrix Password Secure" }] },
+        { vendorId: "V-007", vendorName: "Okta", products: [{ productId: "V-007-P-001", productName: "Okta Workforce Identity Cloud" }, { productId: "V-007-P-002", productName: "Okta Identity Governance" }, { productId: "V-007-P-003", productName: "Okta Privileged Access" }, { productId: "V-007-P-004", productName: "Okta Device Access" }] },
+        { vendorId: "V-026", vendorName: "Omada", products: [{ productId: "V-026-P-001", productName: "Omada Identity Cloud" }, { productId: "V-026-P-002", productName: "Omada Identity On-Premises" }] },
+        { vendorId: "V-005", vendorName: "One Identity", products: [{ productId: "V-005-P-001", productName: "One Identity Safeguard for Privileged Passwords" }, { productId: "V-005-P-002", productName: "One Identity Safeguard for Privileged Sessions" }, { productId: "V-005-P-003", productName: "One Identity Safeguard for Privileged Analytics" }, { productId: "V-005-P-004", productName: "One Identity Safeguard On Demand" }, { productId: "V-005-P-005", productName: "One Identity Manager" }, { productId: "V-005-P-006", productName: "One Identity Safeguard Authentication Services" }, { productId: "V-005-P-007", productName: "One Identity Privilege Manager for Unix Linux macOS" }, { productId: "V-005-P-008", productName: "OneLogin Workforce Identity" }, { productId: "V-005-P-009", productName: "One Identity Active Roles" }] },
+        { vendorId: "V-047", vendorName: "OpenText", products: [{ productId: "V-047-P-001", productName: "OpenText Identity Manager" }, { productId: "V-047-P-002", productName: "OpenText NetIQ Access Manager" }] },
+        { vendorId: "V-043", vendorName: "Oracle", products: [{ productId: "V-043-P-001", productName: "Oracle Identity Governance (OIG)" }, { productId: "V-043-P-002", productName: "Oracle Access Governance" }] },
+        { vendorId: "V-038", vendorName: "Palo Alto Networks", products: [{ productId: "V-038-P-001", productName: "Cortex XSIAM" }] },
+        { vendorId: "V-045", vendorName: "Pathlock", products: [{ productId: "V-045-P-001", productName: "Pathlock Cloud" }] },
+        { vendorId: "V-020", vendorName: "Ping Identity", products: [{ productId: "V-020-P-001", productName: "PingOne Advanced Identity Cloud" }, { productId: "V-020-P-002", productName: "PingOne Privilege" }, { productId: "V-020-P-003", productName: "PingFederate" }] },
+        { vendorId: "V-023", vendorName: "Quest Software", products: [{ productId: "V-023-P-001", productName: "Quest ChangeAuditor" }] },
+        { vendorId: "V-022", vendorName: "Rapid7", products: [{ productId: "V-022-P-001", productName: "Rapid7 InsightIDR" }, { productId: "V-022-P-002", productName: "Rapid7 InsightCloudSec" }] },
+        { vendorId: "V-039", vendorName: "RSA", products: [{ productId: "V-039-P-001", productName: "RSA ID Plus" }, { productId: "V-039-P-002", productName: "RSA Governance & Lifecycle" }] },
+        { vendorId: "V-044", vendorName: "SAP", products: [{ productId: "V-044-P-001", productName: "SAP Cloud Identity Access Governance" }, { productId: "V-044-P-002", productName: "SAP Access Control" }] },
+        { vendorId: "V-011", vendorName: "SailPoint", products: [{ productId: "V-011-P-001", productName: "SailPoint Identity Security Cloud" }, { productId: "V-011-P-002", productName: "SailPoint IdentityIQ" }, { productId: "V-011-P-003", productName: "SailPoint Non-Employee Risk Management" }, { productId: "V-011-P-004", productName: "SailPoint Machine Identity Security" }, { productId: "V-011-P-005", productName: "SailPoint Cloud Access" }] },
+        { vendorId: "V-012", vendorName: "Saviynt", products: [{ productId: "V-012-P-001", productName: "Saviynt Identity Cloud" }] },
+        { vendorId: "V-051", vendorName: "SecureAuth", products: [{ productId: "V-051-P-001", productName: "SecureAuth Identity Platform" }] },
+        { vendorId: "V-034", vendorName: "Securonix", products: [{ productId: "V-034-P-001", productName: "Securonix Unified Defense SIEM" }, { productId: "V-034-P-002", productName: "Securonix UEBA" }] },
+        { vendorId: "V-032", vendorName: "Segura", products: [{ productId: "V-032-P-001", productName: "Segura PAM Core" }, { productId: "V-032-P-002", productName: "Segura Endpoint Privilege Manager" }, { productId: "V-032-P-003", productName: "Segura DevOps Secret Manager" }] },
+        { vendorId: "V-015", vendorName: "Semperis", products: [{ productId: "V-015-P-001", productName: "Semperis Directory Services Protector" }, { productId: "V-015-P-002", productName: "Semperis Active Directory Forest Recovery" }] },
+        { vendorId: "V-030", vendorName: "SentinelOne", products: [{ productId: "V-030-P-001", productName: "SentinelOne Singularity Identity" }] },
+        { vendorId: "V-049", vendorName: "ServiceNow", products: [{ productId: "V-049-P-001", productName: "ServiceNow Identity Security (Veza)" }] },
+        { vendorId: "V-006", vendorName: "Silverfort", products: [{ productId: "V-006-P-001", productName: "Silverfort Identity Security Platform" }] },
+        { vendorId: "V-029", vendorName: "SpecterOps", products: [{ productId: "V-029-P-001", productName: "BloodHound Enterprise" }] },
+        { vendorId: "V-014", vendorName: "Splunk", products: [{ productId: "V-014-P-001", productName: "Splunk Enterprise Security" }] },
+        { vendorId: "V-031", vendorName: "Tenable", products: [{ productId: "V-031-P-001", productName: "Tenable Identity Exposure" }, { productId: "V-031-P-002", productName: "Tenable CIEM" }] },
+        { vendorId: "V-042", vendorName: "Thales", products: [{ productId: "V-042-P-001", productName: "SafeNet Trusted Access" }, { productId: "V-042-P-002", productName: "Thales OneWelcome Identity Platform" }] },
+        { vendorId: "V-041", vendorName: "Transmit Security", products: [{ productId: "V-041-P-001", productName: "Mosaic by Transmit Security" }] },
+        { vendorId: "V-055", vendorName: "Trusona", products: [{ productId: "V-055-P-001", productName: "Trusona Authentication Cloud" }] },
+        { vendorId: "V-017", vendorName: "Varonis", products: [{ productId: "V-017-P-001", productName: "Varonis Data Security Platform" }] },
+        { vendorId: "V-033", vendorName: "WALLIX", products: [{ productId: "V-033-P-001", productName: "WALLIX Bastion" }, { productId: "V-033-P-002", productName: "WALLIX Remote Access" }, { productId: "V-033-P-003", productName: "WALLIX IDaaS" }] },
+        { vendorId: "V-054", vendorName: "Yubico", products: [{ productId: "V-054-P-001", productName: "YubiKey" }, { productId: "V-054-P-002", productName: "YubiHSM 2" }] }
+      ],
+      freeware: [
+        { vendorId: "FW-008", vendorName: "Ansible Vault", products: [{ productId: "FW-008-P-001", productName: "Ansible Vault" }] },
+        { vendorId: "FW-001", vendorName: "BloodHound Community Edition", products: [{ productId: "FW-001-P-001", productName: "BloodHound CE" }] },
+        { vendorId: "FW-006", vendorName: "CyberArk Conjur Open Source", products: [{ productId: "FW-006-P-001", productName: "Conjur Open Source" }] },
+        { vendorId: "FW-003", vendorName: "Forest Druid", products: [{ productId: "FW-003-P-001", productName: "Forest Druid" }] },
+        { vendorId: "FW-010", vendorName: "Keycloak", products: [{ productId: "FW-010-P-001", productName: "Keycloak" }] },
+        { vendorId: "FW-009", vendorName: "OpenSSH", products: [{ productId: "FW-009-P-001", productName: "OpenSSH" }] },
+        { vendorId: "FW-007", vendorName: "Passbolt Community Edition", products: [{ productId: "FW-007-P-001", productName: "Passbolt CE" }] },
+        { vendorId: "FW-002", vendorName: "Purple Knight", products: [{ productId: "FW-002-P-001", productName: "Purple Knight" }] },
+        { vendorId: "FW-005", vendorName: "Teleport Community Edition", products: [{ productId: "FW-005-P-001", productName: "Teleport Community Edition" }] },
+        { vendorId: "FW-004", vendorName: "Windows LAPS", products: [{ productId: "FW-004-P-001", productName: "Windows LAPS" }] }
+      ]
+    };
+
+    // API for compliance mapping only
     const API_BASE = 'https://pam-compliance-mapper-api-production.up.railway.app';
     let loadedVendors = { commercial: [], freeware: [] };
     let lastAnalysisResult = null;
 
-    async function loadVendors() {
+    function loadVendors() {
       const commercialContainer = document.getElementById('commercial-vendor-list');
       const freewareContainer = document.getElementById('freeware-vendor-list');
 
-      try {
-        const response = await fetch(`${API_BASE}/api/vendors`);
-        const data = await response.json();
+      // Use static data - already sorted alphabetically
+      loadedVendors.commercial = VENDOR_DATA.commercial;
+      loadedVendors.freeware = VENDOR_DATA.freeware;
 
-        if (!response.ok || !data.success) {
-          throw new Error(data.error || 'Failed to load vendors');
-        }
+      // Render vendor accordions
+      commercialContainer.innerHTML = renderVendorAccordion(loadedVendors.commercial, 'commercial');
+      freewareContainer.innerHTML = renderVendorAccordion(loadedVendors.freeware, 'freeware');
 
-        // Sort vendors alphabetically
-        loadedVendors.commercial = (data.commercial || []).sort((a, b) =>
-          a.vendorName.localeCompare(b.vendorName));
-        loadedVendors.freeware = (data.freeware || []).sort((a, b) =>
-          a.vendorName.localeCompare(b.vendorName));
-
-        // Render vendor accordions
-        commercialContainer.innerHTML = renderVendorAccordion(loadedVendors.commercial, 'commercial');
-        freewareContainer.innerHTML = renderVendorAccordion(loadedVendors.freeware, 'freeware');
-
-        // Attach event listeners
-        attachAccordionListeners();
-
-      } catch (error) {
-        console.error('Failed to load vendors:', error);
-        const errorHtml = `
-          <div class="vendor-list-error">
-            Unable to load vendor list. Please refresh the page or try again later.
-            <br><button onclick="loadVendors()">Retry</button>
-          </div>
-        `;
-        commercialContainer.innerHTML = errorHtml;
-        freewareContainer.innerHTML = errorHtml;
-      }
+      // Attach event listeners
+      attachAccordionListeners();
     }
 
     function renderVendorAccordion(vendors, prefix) {
