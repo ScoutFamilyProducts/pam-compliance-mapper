@@ -2154,6 +2154,11 @@
   </footer>
 
   <script>
+    document.title = "JS RUNNING";
+    window.onerror = function(msg, url, line, col, error) {
+      document.body.innerHTML = '<div style="background:red;color:white;padding:20px;font-size:16px;">SCRIPT ERROR: ' + msg + ' at line ' + line + '</div>' + document.body.innerHTML;
+      return false;
+    };
     // Question definitions
     const questions = {
       q1: { controls: ["PAM-001","PAM-002","PAM-003"], processFlag: false, hasThreshold: false },
