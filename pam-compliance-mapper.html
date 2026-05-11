@@ -158,6 +158,58 @@
       border: 1px solid var(--na-border);
     }
 
+    .pill-methodology {
+      background: rgba(139,92,246,0.1);
+      color: #8B5CF6;
+      border: 1px solid rgba(139,92,246,0.2);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .pill-methodology:hover {
+      background: rgba(139,92,246,0.18);
+      border-color: rgba(139,92,246,0.35);
+    }
+
+    .methodology-tooltip {
+      display: none;
+      position: relative;
+      background: rgba(15,15,20,0.98);
+      border: 1px solid rgba(139,92,246,0.25);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-top: 0.75rem;
+      max-width: 520px;
+    }
+
+    .methodology-tooltip.visible {
+      display: block;
+    }
+
+    .methodology-tooltip-header {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #8B5CF6;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+
+    .methodology-tooltip-content p {
+      font-size: 0.78rem;
+      color: #94A3B8;
+      line-height: 1.7;
+      margin-bottom: 0.65rem;
+    }
+
+    .methodology-tooltip-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .methodology-tooltip-content strong {
+      color: #CBD5E1;
+    }
+
     .hero-updated {
       font-size: 0.68rem;
       color: var(--text-dim);
@@ -812,6 +864,140 @@
       font-size: 0.85rem;
     }
 
+    .vendor-type-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .vendor-type-tab {
+      background: transparent;
+      border: 1px solid var(--border-hover);
+      color: var(--text-very-muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .vendor-type-tab:hover {
+      border-color: rgba(255,255,255,0.15);
+      color: var(--text-secondary);
+    }
+
+    .vendor-type-tab.active {
+      background: rgba(157,255,0,0.1);
+      border-color: rgba(157,255,0,0.3);
+      color: var(--accent-green);
+    }
+
+    .vendor-type-content {
+      display: none;
+    }
+
+    .vendor-type-content.active {
+      display: block;
+    }
+
+    .vendor-list-loading {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .vendor-list-loading .loading-spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(157,255,0,0.2);
+      border-top-color: #9DFF00;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 0.65rem;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .vendor-list-error {
+      text-align: center;
+      padding: 2rem;
+      color: #ef4444;
+      font-size: 0.82rem;
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 8px;
+      background: rgba(239,68,68,0.05);
+    }
+
+    .vendor-list-error button {
+      background: transparent;
+      border: 1px solid rgba(239,68,68,0.3);
+      color: #ef4444;
+      font-size: 0.72rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 0.75rem;
+    }
+
+    .vendor-list-error button:hover {
+      background: rgba(239,68,68,0.1);
+    }
+
+    .freeware-note {
+      font-size: 0.72rem;
+      color: #475569;
+      line-height: 1.7;
+      padding: 0.75rem 1rem;
+      border: 1px solid rgba(139,92,246,0.15);
+      border-radius: 6px;
+      background: rgba(139,92,246,0.05);
+      margin-bottom: 1.25rem;
+    }
+
+    .freeware-note strong {
+      color: #8B5CF6;
+    }
+
+    .export-buttons {
+      display: flex;
+      gap: 0.65rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .export-btn {
+      background: transparent;
+      border: 1px solid var(--border-hover);
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.5rem 0.9rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .export-btn:hover {
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    .export-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
     /* Vendor mode error and loading */
     .vendor-error {
       color: #ef4444;
@@ -1268,6 +1454,92 @@
     .btn-cancel-print:hover {
       border-color: rgba(255,255,255,0.14);
       color: #64748B;
+    }
+
+    /* Mobile responsive styles */
+    @media (max-width: 640px) {
+      .page-wrap {
+        padding: 2rem 1rem 4rem;
+      }
+
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+
+      .pills-row {
+        gap: 0.35rem;
+      }
+
+      .pill {
+        font-size: 0.58rem;
+        padding: 0.2rem 0.5rem;
+      }
+
+      .methodology-tooltip {
+        max-width: 100%;
+      }
+
+      .mode-toggle-container {
+        flex-direction: column;
+        border-radius: 8px;
+        width: 100%;
+      }
+
+      .mode-btn {
+        width: 100%;
+        padding: 0.6rem 1rem;
+        border-radius: 5px;
+      }
+
+      .vendor-type-tabs {
+        flex-direction: column;
+      }
+
+      .vendor-type-tab {
+        width: 100%;
+        text-align: center;
+      }
+
+      .vendor-grid {
+        flex-direction: column;
+      }
+
+      .vendor-item {
+        width: 100%;
+      }
+
+      .framework-filter {
+        gap: 0.35rem;
+      }
+
+      .framework-pill {
+        font-size: 0.58rem;
+        padding: 0.35rem 0.5rem;
+      }
+
+      .export-buttons {
+        flex-direction: column;
+      }
+
+      .export-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .gap-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .footer-callouts {
+        margin-top: 2.5rem;
+      }
+
+      footer {
+        flex-direction: column;
+        text-align: center;
+      }
     }
 
     /* Print-only elements - hidden on screen */
@@ -1735,6 +2007,16 @@
         <span class="pill pill-green">Live</span>
         <span class="pill pill-green">Free</span>
         <span class="pill pill-dim">No account required</span>
+        <span class="pill pill-methodology" id="methodology-pill">Methodology</span>
+      </div>
+      <div class="methodology-tooltip" id="methodology-tooltip">
+        <div class="methodology-tooltip-header">How This Works</div>
+        <div class="methodology-tooltip-content">
+          <p><strong>Control Matrix:</strong> 35 PAM-specific controls mapped to 7 compliance frameworks using official documentation.</p>
+          <p><strong>Vendor Data:</strong> Capabilities curated from public documentation and professional experience. Assumed incomplete.</p>
+          <p><strong>AI Analysis:</strong> When mapping vendors, Claude analyzes your stack against control requirements. Results are guidance, not certification.</p>
+          <p><strong>Independence:</strong> No vendor relationships. No affiliate links. Just an honest picture.</p>
+        </div>
       </div>
       <div class="hero-updated">Vendor and framework data last updated May 2026</div>
       <button type="button" class="disclaimer-btn" onclick="toggleDisclaimer()">Disclaimer</button>
@@ -2703,104 +2985,27 @@
         <div class="vendor-section-label">SELECT YOUR DEPLOYED PRODUCTS</div>
         <div class="vendor-section-sub">Select every PAM and identity product deployed in your environment.</div>
 
-        <div class="vendor-group">
-          <div class="vendor-group-title">Privileged Access Management</div>
-          <div class="vendor-grid">
-            <div class="vendor-item"><input type="checkbox" id="v-01"><label for="v-01">ARCON</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-02"><label for="v-02">BeyondTrust</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-03"><label for="v-03">CyberArk</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-04"><label for="v-04">Delinea</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-05"><label for="v-05">KeeperPAM</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-06"><label for="v-06">ManageEngine PAM360</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-07"><label for="v-07">Microsoft LAPS</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-08"><label for="v-08">Netwrix Privilege Secure</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-09"><label for="v-09">One Identity</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-10"><label for="v-10">Silverfort</label></div>
+        <div class="vendor-type-tabs">
+          <button type="button" class="vendor-type-tab active" onclick="switchVendorType('commercial')">Commercial</button>
+          <button type="button" class="vendor-type-tab" onclick="switchVendorType('freeware')">Freeware & Open Source</button>
+        </div>
+
+        <div id="vendor-type-commercial" class="vendor-type-content active">
+          <div id="commercial-vendor-list">
+            <div class="vendor-list-loading">
+              <span class="loading-spinner"></span>Loading vendors...
+            </div>
           </div>
         </div>
 
-        <div class="vendor-group">
-          <div class="vendor-group-title">Identity and Access Management</div>
-          <div class="vendor-grid">
-            <div class="vendor-item"><input type="checkbox" id="v-11"><label for="v-11">AWS IAM Identity Center</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-12"><label for="v-12">Beyond Identity</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-13"><label for="v-13">Cisco Duo</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-14"><label for="v-14">Google Workspace</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-15"><label for="v-15">IBM Security Verify</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-16"><label for="v-16">JumpCloud</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-17"><label for="v-17">Keycloak</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-18"><label for="v-18">Microsoft Entra ID</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-19"><label for="v-19">Okta</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-20"><label for="v-20">Ping Identity</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-21"><label for="v-21">RSA SecurID</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-22"><label for="v-22">SecureAuth</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-23"><label for="v-23">Thales SafeNet</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-24"><label for="v-24">Yubico</label></div>
+        <div id="vendor-type-freeware" class="vendor-type-content">
+          <div class="freeware-note">
+            <strong>Note:</strong> Free and open-source tools can provide PAM capabilities but may require more configuration and lack enterprise support. Consider integration complexity and maintenance burden when building your compliance posture.
           </div>
-        </div>
-
-        <div class="vendor-group">
-          <div class="vendor-group-title">Identity Governance and Administration</div>
-          <div class="vendor-grid">
-            <div class="vendor-item"><input type="checkbox" id="v-25"><label for="v-25">Delinea Fastpath</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-26"><label for="v-26">Omada</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-27"><label for="v-27">Pathlock</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-28"><label for="v-28">SailPoint</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-29"><label for="v-29">Saviynt</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-30"><label for="v-30">ServiceNow Identity Governance</label></div>
-          </div>
-        </div>
-
-        <div class="vendor-group">
-          <div class="vendor-group-title">Secrets Management</div>
-          <div class="vendor-grid">
-            <div class="vendor-item"><input type="checkbox" id="v-31"><label for="v-31">AWS Secrets Manager</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-32"><label for="v-32">Azure Key Vault</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-33"><label for="v-33">Bitwarden Secrets Manager</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-34"><label for="v-34">CyberArk Conjur</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-35"><label for="v-35">Delinea StrongDM</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-36"><label for="v-36">HashiCorp Vault</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-37"><label for="v-37">Keeper Secrets Manager</label></div>
-          </div>
-        </div>
-
-        <div class="vendor-group">
-          <div class="vendor-group-title">SIEM and Analytics</div>
-          <div class="vendor-grid">
-            <div class="vendor-item"><input type="checkbox" id="v-38"><label for="v-38">Delinea Platform Behavior Analytics</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-39"><label for="v-39">Elastic Security</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-40"><label for="v-40">Exabeam</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-41"><label for="v-41">Google Chronicle</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-42"><label for="v-42">IBM QRadar</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-43"><label for="v-43">Microsoft Sentinel</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-44"><label for="v-44">Rapid7 InsightIDR</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-45"><label for="v-45">Securonix</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-46"><label for="v-46">Splunk</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-47"><label for="v-47">Varonis</label></div>
-          </div>
-        </div>
-
-        <div class="vendor-group">
-          <div class="vendor-group-title">Identity Threat and Discovery</div>
-          <div class="vendor-grid">
-            <div class="vendor-item"><input type="checkbox" id="v-48"><label for="v-48">BloodHound Enterprise</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-49"><label for="v-49">Delinea Continuous Identity Discovery</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-50"><label for="v-50">ManageEngine ADAudit Plus</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-51"><label for="v-51">Netwrix Auditor</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-52"><label for="v-52">Quest Change Auditor</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-53"><label for="v-53">Semperis</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-54"><label for="v-54">SentinelOne Singularity Identity</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-55"><label for="v-55">Tenable Identity Exposure</label></div>
-          </div>
-        </div>
-
-        <div class="vendor-group">
-          <div class="vendor-group-title">GRC and Risk</div>
-          <div class="vendor-grid">
-            <div class="vendor-item"><input type="checkbox" id="v-56"><label for="v-56">OneTrust</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-57"><label for="v-57">Pathlock GRC</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-58"><label for="v-58">RSA Archer</label></div>
-            <div class="vendor-item"><input type="checkbox" id="v-59"><label for="v-59">ServiceNow GRC</label></div>
+          <div id="freeware-vendor-list">
+            <div class="vendor-list-loading">
+              <span class="loading-spinner"></span>Loading vendors...
+            </div>
           </div>
         </div>
 
@@ -2858,6 +3063,17 @@
         </div>
 
         <div class="vendor-disclaimer" id="vendor-disclaimer-text"></div>
+
+        <div class="export-buttons">
+          <button type="button" class="export-btn" onclick="exportVendorResults('json')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Export JSON
+          </button>
+          <button type="button" class="export-btn" onclick="exportVendorResults('csv')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Export CSV
+          </button>
+        </div>
       </div>
     </div>
 
@@ -3670,12 +3886,14 @@
       // Clear previous errors
       errorDiv.textContent = '';
 
-      // Collect selected vendors
+      // Collect selected vendors from both commercial and freeware
       const vendorCheckboxes = document.querySelectorAll('#mode-vendor .vendor-item input[type="checkbox"]:checked');
       const selectedVendors = Array.from(vendorCheckboxes).map(cb => {
-        const label = cb.nextElementSibling || document.querySelector(`label[for="${cb.id}"]`);
-        return label ? label.textContent.trim() : '';
+        return cb.getAttribute('data-vendor') || cb.nextElementSibling?.textContent?.trim() || '';
       }).filter(v => v);
+
+      // Deduplicate vendor names (in case same vendor selected via multiple products)
+      const uniqueVendors = [...new Set(selectedVendors)];
 
       // Collect selected frameworks
       const frameworkPills = document.querySelectorAll('#mode-vendor .framework-pill.active');
@@ -3685,7 +3903,7 @@
       }).filter(f => f);
 
       // Validation
-      if (selectedVendors.length === 0) {
+      if (uniqueVendors.length === 0) {
         errorDiv.textContent = 'Please select at least one vendor.';
         return;
       }
@@ -3702,10 +3920,10 @@
       resultsPanel.classList.remove('visible');
 
       try {
-        const response = await fetch('https://pam-compliance-mapper-api-production.up.railway.app/api/analyze-vendors', {
+        const response = await fetch(`${API_BASE}/api/analyze-vendors`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ vendors: selectedVendors, frameworks: selectedFrameworks })
+          body: JSON.stringify({ vendors: uniqueVendors, frameworks: selectedFrameworks })
         });
 
         const data = await response.json();
@@ -3713,6 +3931,9 @@
         if (!response.ok || !data.success) {
           throw new Error(data.error || 'Analysis failed');
         }
+
+        // Store result for export
+        lastAnalysisResult = data.analysis;
 
         // Render results
         renderVendorResults(data.analysis);
@@ -3920,6 +4141,180 @@
     function cancelPrint() {
       document.getElementById('print-instructions').style.display = 'none';
     }
+
+    // Methodology tooltip toggle
+    document.getElementById('methodology-pill').addEventListener('click', function() {
+      const tooltip = document.getElementById('methodology-tooltip');
+      tooltip.classList.toggle('visible');
+    });
+
+    // Close methodology tooltip when clicking outside
+    document.addEventListener('click', function(event) {
+      const tooltip = document.getElementById('methodology-tooltip');
+      const pill = document.getElementById('methodology-pill');
+      if (tooltip.classList.contains('visible') && !tooltip.contains(event.target) && !pill.contains(event.target)) {
+        tooltip.classList.remove('visible');
+      }
+    });
+
+    // Vendor type switching
+    function switchVendorType(type) {
+      const tabs = document.querySelectorAll('.vendor-type-tab');
+      const contents = document.querySelectorAll('.vendor-type-content');
+
+      tabs.forEach(tab => tab.classList.remove('active'));
+      contents.forEach(content => content.classList.remove('active'));
+
+      if (type === 'commercial') {
+        tabs[0].classList.add('active');
+        document.getElementById('vendor-type-commercial').classList.add('active');
+      } else {
+        tabs[1].classList.add('active');
+        document.getElementById('vendor-type-freeware').classList.add('active');
+      }
+    }
+
+    // Load vendors from API
+    const API_BASE = 'https://pam-compliance-mapper-api-production.up.railway.app';
+    let loadedVendors = { commercial: [], freeware: [] };
+    let lastAnalysisResult = null;
+
+    async function loadVendors() {
+      const commercialContainer = document.getElementById('commercial-vendor-list');
+      const freewareContainer = document.getElementById('freeware-vendor-list');
+
+      try {
+        const response = await fetch(`${API_BASE}/api/vendors`);
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.error || 'Failed to load vendors');
+        }
+
+        loadedVendors.commercial = data.commercial || [];
+        loadedVendors.freeware = data.freeware || [];
+
+        // Render commercial vendors
+        commercialContainer.innerHTML = renderVendorList(loadedVendors.commercial, 'commercial');
+
+        // Render freeware vendors
+        freewareContainer.innerHTML = renderVendorList(loadedVendors.freeware, 'freeware');
+
+      } catch (error) {
+        console.error('Failed to load vendors:', error);
+        const errorHtml = `
+          <div class="vendor-list-error">
+            Unable to load vendor list. Please refresh the page or try again later.
+            <br><button onclick="loadVendors()">Retry</button>
+          </div>
+        `;
+        commercialContainer.innerHTML = errorHtml;
+        freewareContainer.innerHTML = errorHtml;
+      }
+    }
+
+    function renderVendorList(vendors, prefix) {
+      if (!vendors || vendors.length === 0) {
+        return '<div class="vendor-results-empty">No vendors available.</div>';
+      }
+
+      let html = '<div class="vendor-grid">';
+      vendors.forEach((vendor, index) => {
+        vendor.products.forEach((product, pIndex) => {
+          const id = `${prefix}-${vendor.vendorId}-${product.productId}`;
+          html += `
+            <div class="vendor-item">
+              <input type="checkbox" id="${id}" data-vendor="${escapeHtml(vendor.vendorName)}" data-product="${escapeHtml(product.productName)}">
+              <label for="${id}">${escapeHtml(product.productName)}</label>
+            </div>
+          `;
+        });
+      });
+      html += '</div>';
+      return html;
+    }
+
+    // Export vendor results
+    function exportVendorResults(format) {
+      if (!lastAnalysisResult) {
+        alert('No analysis results to export. Please run an analysis first.');
+        return;
+      }
+
+      const timestamp = new Date().toISOString().split('T')[0];
+      const filename = `pam-compliance-analysis-${timestamp}`;
+
+      if (format === 'json') {
+        const jsonStr = JSON.stringify(lastAnalysisResult, null, 2);
+        downloadFile(jsonStr, `${filename}.json`, 'application/json');
+      } else if (format === 'csv') {
+        const csv = convertToCSV(lastAnalysisResult);
+        downloadFile(csv, `${filename}.csv`, 'text/csv');
+      }
+    }
+
+    function convertToCSV(analysis) {
+      let csv = '';
+
+      // Summary
+      csv += 'SUMMARY\n';
+      csv += `"${(analysis.summary || '').replace(/"/g, '""')}"\n\n`;
+
+      // Gaps
+      csv += 'COMPLIANCE GAPS\n';
+      csv += 'Control ID,Control Name,Severity,Frameworks,Recommendation\n';
+      if (analysis.gaps && analysis.gaps.length > 0) {
+        analysis.gaps.forEach(g => {
+          csv += `"${g.controlId}","${g.controlName}","${g.severity}","${g.frameworks.join('; ')}","${(g.recommendation || '').replace(/"/g, '""')}"\n`;
+        });
+      }
+      csv += '\n';
+
+      // Strengths
+      csv += 'COVERAGE STRENGTHS\n';
+      csv += 'Control ID,Control Name,Covered By\n';
+      if (analysis.strengths && analysis.strengths.length > 0) {
+        analysis.strengths.forEach(s => {
+          csv += `"${s.controlId}","${s.controlName}","${s.coveredBy.join('; ')}"\n`;
+        });
+      }
+      csv += '\n';
+
+      // Vendor Coverage
+      csv += 'VENDOR COVERAGE DETAIL\n';
+      csv += 'Vendor,Controls Covered,Notes\n';
+      if (analysis.vendorCoverage && analysis.vendorCoverage.length > 0) {
+        analysis.vendorCoverage.forEach(v => {
+          csv += `"${v.vendorName}","${v.controls.length}","${(v.notes || '').replace(/"/g, '""')}"\n`;
+        });
+      }
+      csv += '\n';
+
+      // Recommendations
+      csv += 'RECOMMENDATIONS\n';
+      if (analysis.recommendations && analysis.recommendations.length > 0) {
+        analysis.recommendations.forEach((r, i) => {
+          csv += `${i + 1}. "${r.replace(/"/g, '""')}"\n`;
+        });
+      }
+
+      return csv;
+    }
+
+    function downloadFile(content, filename, mimeType) {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // Load vendors on page load
+    document.addEventListener('DOMContentLoaded', loadVendors);
 
     function startOver() {
       // Reset all question states
