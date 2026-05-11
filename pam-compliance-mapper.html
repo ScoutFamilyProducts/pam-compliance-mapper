@@ -2027,12 +2027,9 @@
         <span class="pill pill-methodology" id="methodology-pill">Methodology</span>
       </div>
       <div class="methodology-tooltip" id="methodology-tooltip">
-        <div class="methodology-tooltip-header">How This Works</div>
+        <div class="methodology-tooltip-header">Data Sources</div>
         <div class="methodology-tooltip-content">
-          <p><strong>Control Matrix:</strong> 35 PAM-specific controls mapped to 7 compliance frameworks using official documentation.</p>
-          <p><strong>Vendor Data:</strong> Capabilities curated from public documentation and professional experience. Assumed incomplete.</p>
-          <p><strong>AI Analysis:</strong> When mapping vendors, Claude analyzes your stack against control requirements. Results are guidance, not certification.</p>
-          <p><strong>Independence:</strong> No vendor relationships. No affiliate links. Just an honest picture.</p>
+          <p>Capability mappings are based on publicly available vendor documentation. In limited cases where vendors restrict technical documentation to authenticated customers, mappings were developed from public product information, analyst reports, and industry sources.</p>
         </div>
       </div>
       <div class="hero-updated">Vendor and framework data last updated May 2026</div>
@@ -3171,21 +3168,6 @@
       document.getElementById('print-instructions').style.display = 'none';
     }
 
-    // Methodology tooltip toggle
-    document.getElementById('methodology-pill').addEventListener('click', function() {
-      const tooltip = document.getElementById('methodology-tooltip');
-      tooltip.classList.toggle('visible');
-    });
-
-    // Close methodology tooltip when clicking outside
-    document.addEventListener('click', function(event) {
-      const tooltip = document.getElementById('methodology-tooltip');
-      const pill = document.getElementById('methodology-pill');
-      if (tooltip.classList.contains('visible') && !tooltip.contains(event.target) && !pill.contains(event.target)) {
-        tooltip.classList.remove('visible');
-      }
-    });
-
     // Static vendor data (updated May 2026)
     const VENDOR_DATA = {
       commercial: [
@@ -3266,22 +3248,32 @@
     let lastAnalysisResult = null;
 
     function loadVendors() {
+      console.log('loadVendors() called');
       const commercialContainer = document.getElementById('commercial-vendor-list');
       const freewareContainer = document.getElementById('freeware-vendor-list');
+      console.log('commercialContainer:', commercialContainer);
+      console.log('freewareContainer:', freewareContainer);
 
       // Use static data - already sorted alphabetically
       loadedVendors.commercial = VENDOR_DATA.commercial;
       loadedVendors.freeware = VENDOR_DATA.freeware;
 
       // Render vendor accordions
-      commercialContainer.innerHTML = renderVendorAccordion(loadedVendors.commercial, 'commercial');
-      freewareContainer.innerHTML = renderVendorAccordion(loadedVendors.freeware, 'freeware');
+      const commercialHtml = renderVendorAccordion(loadedVendors.commercial, 'commercial');
+      const freewareHtml = renderVendorAccordion(loadedVendors.freeware, 'freeware');
+      console.log('Commercial HTML length:', commercialHtml.length);
+      console.log('Freeware HTML length:', freewareHtml.length);
+
+      commercialContainer.innerHTML = commercialHtml;
+      freewareContainer.innerHTML = freewareHtml;
 
       // Attach event listeners
       attachAccordionListeners();
+      console.log('loadVendors() complete');
     }
 
     function renderVendorAccordion(vendors, prefix) {
+      console.log('renderVendorAccordion called with', vendors?.length, 'vendors, prefix:', prefix);
       if (!vendors || vendors.length === 0) {
         return '<div class="vendor-results-empty">No vendors available.</div>';
       }
@@ -3462,8 +3454,36 @@
       URL.revokeObjectURL(url);
     }
 
-    // Load vendors on page load
-    document.addEventListener('DOMContentLoaded', loadVendors);
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOMContentLoaded fired');
+
+      // Load vendors
+      console.log('VENDOR_DATA:', VENDOR_DATA);
+      console.log('Commercial vendors count:', VENDOR_DATA.commercial.length);
+      console.log('Freeware vendors count:', VENDOR_DATA.freeware.length);
+      loadVendors();
+
+      // Methodology tooltip toggle
+      const methodologyPill = document.getElementById('methodology-pill');
+      const methodologyTooltip = document.getElementById('methodology-tooltip');
+
+      if (methodologyPill && methodologyTooltip) {
+        methodologyPill.addEventListener('click', function(event) {
+          event.stopPropagation();
+          methodologyTooltip.classList.toggle('visible');
+        });
+
+        // Close methodology tooltip when clicking outside
+        document.addEventListener('click', function(event) {
+          if (methodologyTooltip.classList.contains('visible') &&
+              !methodologyTooltip.contains(event.target) &&
+              !methodologyPill.contains(event.target)) {
+            methodologyTooltip.classList.remove('visible');
+          }
+        });
+      }
+    });
 
     function startOver() {
       // Reset all question states
