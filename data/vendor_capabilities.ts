@@ -342,5 +342,84 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://docs.keeper.io/en/keeperpam/endpoint-privilege-manager/overview"
       }
     ]
+  },
+  {
+    vendorId: "V-005",
+    vendorName: "One Identity",
+    products: [
+      {
+        productId: "V-005-P-001",
+        productName: "One Identity Safeguard for Privileged Passwords",
+        capabilities: ["PAM-005", "PAM-007", "PAM-008", "PAM-009", "PAM-010", "PAM-015", "PAM-019", "PAM-020", "PAM-021", "PAM-022", "PAM-023", "PAM-024", "PAM-025", "PAM-026", "PAM-027", "PAM-029"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-013", "PAM-031"],
+        notes: "Hardened appliance or virtual appliance credential vault. Hardware appliance approach protects PAM software from attack. Core capabilities: asset and account discovery, password rotation and management across broad platform support (Windows, Unix, Linux, databases, network devices, mainframe, cloud platforms, VMware, SAN), access request workflow with approvals and review cycles, SSH key and API key management, RBAC, dual control, break glass, checkout with time limits, tamper-proof audit log. Session recording NOT included in SPP alone — requires joining with Safeguard for Privileged Sessions (SPS). MFA via external IdP integration. Partial JIT via checkout model. Partial vendor access via access request workflows. Available on-premises (hardware appliance or virtual) and cloud (AWS, Azure).",
+        docsUrl: "https://support.oneidentity.com/one-identity-safeguard-for-privileged-passwords/"
+      },
+      {
+        productId: "V-005-P-002",
+        productName: "One Identity Safeguard for Privileged Sessions",
+        capabilities: ["PAM-014", "PAM-015", "PAM-019", "PAM-020", "PAM-030", "PAM-033"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-005", "PAM-013"],
+        notes: "Dedicated session proxy and recording appliance. Distinguishing capabilities vs other session recording products: (1) transparent or non-transparent interception — SPS operates independently of PAM vault, can intercept existing sessions without requiring vault integration; (2) protocol-level inspection — SPS inspects traffic at the application layer and can reject traffic that violates protocol rules, acting as active defense not just passive recording; (3) OCR full-text search of session content including screen text; (4) keystroke logging and search. All sessions proxied through SPS — no direct connections to target systems. Real-time alerts and automatic blocking of unsafe protocol actions. Can be used standalone or joined with SPP to combine credential management with session recording. When joined with SPP, all sessions from SPP are automatically proxied through SPS.",
+        docsUrl: "https://support.oneidentity.com/one-identity-safeguard-for-privileged-sessions/"
+      },
+      {
+        productId: "V-005-P-003",
+        productName: "One Identity Safeguard for Privileged Analytics",
+        capabilities: ["PAM-032"],
+        partialCapabilities: ["PAM-019", "PAM-020", "PAM-021"],
+        notes: "ML-based user behavior analytics for privileged sessions. Requires Safeguard for Privileged Sessions as data source — cannot operate standalone. Algorithms: keystroke dynamics (user authentication via typing patterns), FIS (frequent itemset mining for behavioral patterns like typical access times and source IPs), window title analysis (unusual application usage), mouse movement analysis, scripted session detection. Generates individual user behavior profiles continuously updated via ML. Detects anomalies and ranks by risk. Real-time alerts on suspicious activity.",
+        docsUrl: "https://support.oneidentity.com/one-identity-safeguard-for-privileged-sessions/",
+        dependsOn: "V-005-P-002"
+      },
+      {
+        productId: "V-005-P-004",
+        productName: "One Identity Safeguard On Demand",
+        capabilities: ["PAM-005", "PAM-007", "PAM-008", "PAM-009", "PAM-010", "PAM-014", "PAM-015", "PAM-019", "PAM-020", "PAM-021", "PAM-022", "PAM-023", "PAM-024", "PAM-025", "PAM-026", "PAM-027", "PAM-029", "PAM-030", "PAM-032", "PAM-033"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-013", "PAM-031"],
+        notes: "SaaS-delivered combination of SPP, SPS, and SPA — all three Safeguard products delivered as a managed cloud service. Full capability set of all three products: credential vaulting, rotation, discovery, access workflows, session proxy and recording with protocol-level inspection, OCR full-text search, ML-based behavior analytics. Does not require on-premises appliances. MFA via external IdP. Partial JIT via checkout model — not true zero standing privilege.",
+        docsUrl: "https://www.oneidentity.com/products/safeguard-on-demand/"
+      },
+      {
+        productId: "V-005-P-005",
+        productName: "One Identity Manager",
+        capabilities: ["PAM-011", "PAM-012", "PAM-022"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-007", "PAM-035"],
+        notes: "Enterprise IGA platform. Identity governance and administration covering joiner-mover-leaver lifecycle automation, access request and provisioning workflows, access certifications and attestation, role management, SOD policy enforcement across applications. Integrates with Safeguard products for privileged account governance. One Identity's core IGA product separate from the PAM Safeguard family.",
+        docsUrl: "https://docs.oneidentity.com/"
+      },
+      {
+        productId: "V-005-P-006",
+        productName: "One Identity Safeguard Authentication Services",
+        capabilities: ["PAM-005", "PAM-015", "PAM-016", "PAM-020"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-008"],
+        notes: "AD bridging for Unix, Linux, and macOS — same pattern as Delinea Server Suite and BeyondTrust AD Bridge. Extends Active Directory authentication and policy to non-Windows systems. Centralized authentication via AD. RBAC via AD groups. Privilege controls on Unix/Linux. Audit logging. MFA via AD-integrated identity providers. Formerly Centrify product. Does not include credential vaulting or session recording.",
+        docsUrl: "https://docs.oneidentity.com/"
+      },
+      {
+        productId: "V-005-P-007",
+        productName: "One Identity Privilege Manager for Unix Linux macOS",
+        capabilities: ["PAM-005", "PAM-016", "PAM-019", "PAM-020"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-007", "PAM-008"],
+        notes: "PEDM solution for Unix, Linux, and macOS. Granular delegation of Unix root account and AD administrator accounts. Enterprise-ready sudo management — enhances open source sudo with central policy management, logging, and reporting. Keystroke logging for Unix root activities. Tightly integrated with Safeguard Authentication Services. Privilege escalation controls at command level. MFA via SAML/SSO integration.",
+        docsUrl: "https://support.oneidentity.com/"
+      },
+      {
+        productId: "V-005-P-008",
+        productName: "OneLogin Workforce Identity",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004", "PAM-015", "PAM-017", "PAM-018", "PAM-025", "PAM-026", "PAM-027"],
+        partialCapabilities: ["PAM-005", "PAM-011", "PAM-012", "PAM-032"],
+        notes: "SSO, adaptive MFA, and lifecycle management — acquired by One Identity from OneLogin. SmartFactor Authentication uses AI to adjust security based on current risk context. SAML, OIDC support. Multiple MFA methods including biometrics, FIDO2, OTP. Federation with external IdPs. User provisioning and deprovisioning lifecycle. Directory services. Partial user behavior analytics via SmartFactor risk engine.",
+        docsUrl: "https://www.oneidentity.com/products/onelogin/"
+      },
+      {
+        productId: "V-005-P-009",
+        productName: "One Identity Active Roles",
+        capabilities: ["PAM-005", "PAM-015"],
+        partialCapabilities: ["PAM-008", "PAM-010", "PAM-011", "PAM-012"],
+        notes: "Active Directory management and delegation. Automates and secures AD and Entra ID administration. RBAC-based delegation of AD management tasks. Account discovery and inventory. User and group lifecycle management. Temporal group membership — access granted for specific time windows. Complements Safeguard PAM products by securing the AD management plane.",
+        docsUrl: "https://docs.oneidentity.com/"
+      }
+    ]
   }
 ];
