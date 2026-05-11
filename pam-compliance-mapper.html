@@ -3256,62 +3256,80 @@
     let lastAnalysisResult = null;
 
     function loadVendors() {
-      console.log('loadVendors() called');
       const commercialContainer = document.getElementById('commercial-vendor-list');
       const freewareContainer = document.getElementById('freeware-vendor-list');
-      console.log('commercialContainer:', commercialContainer);
-      console.log('freewareContainer:', freewareContainer);
 
-      // Use static data - already sorted alphabetically
-      loadedVendors.commercial = VENDOR_DATA.commercial;
-      loadedVendors.freeware = VENDOR_DATA.freeware;
+      try {
+        // Check VENDOR_DATA exists
+        const debugInfo = 'typeof VENDOR_DATA: ' + typeof VENDOR_DATA +
+          ', commercial.length: ' + (VENDOR_DATA ? VENDOR_DATA.commercial.length : 'N/A') +
+          ', freeware.length: ' + (VENDOR_DATA ? VENDOR_DATA.freeware.length : 'N/A');
+        console.log(debugInfo);
 
-      // Render vendor accordions
-      const commercialHtml = renderVendorAccordion(loadedVendors.commercial, 'commercial');
-      const freewareHtml = renderVendorAccordion(loadedVendors.freeware, 'freeware');
-      console.log('Commercial HTML length:', commercialHtml.length);
-      console.log('Freeware HTML length:', freewareHtml.length);
+        // Use static data - already sorted alphabetically
+        loadedVendors.commercial = VENDOR_DATA.commercial;
+        loadedVendors.freeware = VENDOR_DATA.freeware;
 
-      commercialContainer.innerHTML = commercialHtml;
-      freewareContainer.innerHTML = freewareHtml;
+        // Render vendor accordions
+        const commercialHtml = renderVendorAccordion(loadedVendors.commercial, 'commercial');
+        const freewareHtml = renderVendorAccordion(loadedVendors.freeware, 'freeware');
 
-      // Attach event listeners
-      attachAccordionListeners();
-      console.log('loadVendors() complete');
+        commercialContainer.innerHTML = commercialHtml;
+        freewareContainer.innerHTML = freewareHtml;
+
+        // Attach event listeners
+        attachAccordionListeners();
+      } catch (e) {
+        const errMsg = 'loadVendors ERROR: ' + e.message + ' at ' + e.stack;
+        console.error(errMsg);
+        commercialContainer.innerHTML = '<div style="color:red;padding:10px;">' + errMsg + '</div>';
+      }
     }
 
     function renderVendorAccordion(vendors, prefix) {
-      console.log('renderVendorAccordion called with', vendors?.length, 'vendors, prefix:', prefix);
-      if (!vendors || vendors.length === 0) {
-        return '<div class="vendor-results-empty">No vendors available.</div>';
-      }
+      try {
+        console.log('renderVendorAccordion: vendors=' + (vendors ? vendors.length : 'null') + ', prefix=' + prefix);
 
-      let html = '';
-      vendors.forEach((vendor) => {
-        const vendorId = `${prefix}-${vendor.vendorId}`;
-        html += `
-          <div class="vendor-row" data-vendor-id="${vendorId}">
-            <input type="checkbox" class="vendor-checkbox" id="cb-${vendorId}" data-vendor="${escapeHtml(vendor.vendorName)}">
-            <span class="vendor-name">${escapeHtml(vendor.vendorName)}</span>
-            <span class="vendor-chevron">&#9654;</span>
-          </div>
-          <div class="vendor-products" data-vendor-id="${vendorId}">
-        `;
-        vendor.products.forEach((product) => {
-          const productId = `${vendorId}-${product.productId}`;
-          html += `
-            <div class="product-item">
-              <input type="checkbox" class="product-checkbox" id="${productId}"
-                data-vendor="${escapeHtml(vendor.vendorName)}"
-                data-product="${escapeHtml(product.productName)}"
-                data-parent="${vendorId}">
-              <label for="${productId}">${escapeHtml(product.productName)}</label>
-            </div>
-          `;
-        });
-        html += '</div>';
-      });
-      return html;
+        if (!vendors || vendors.length === 0) {
+          return '<div class="vendor-results-empty">No vendors available.</div>';
+        }
+
+        let html = '';
+        for (let i = 0; i < vendors.length; i++) {
+          const vendor = vendors[i];
+          const vendorId = prefix + '-' + vendor.vendorId;
+          const vendorNameSafe = escapeHtml(vendor.vendorName);
+
+          html += '<div class="vendor-row" data-vendor-id="' + vendorId + '">' +
+            '<input type="checkbox" class="vendor-checkbox" id="cb-' + vendorId + '" data-vendor="' + vendorNameSafe + '">' +
+            '<span class="vendor-name">' + vendorNameSafe + '</span>' +
+            '<span class="vendor-chevron">&#9654;</span>' +
+            '</div>' +
+            '<div class="vendor-products" data-vendor-id="' + vendorId + '">';
+
+          for (let j = 0; j < vendor.products.length; j++) {
+            const product = vendor.products[j];
+            const productId = vendorId + '-' + product.productId;
+            const productNameSafe = escapeHtml(product.productName);
+
+            html += '<div class="product-item">' +
+              '<input type="checkbox" class="product-checkbox" id="' + productId + '" ' +
+              'data-vendor="' + vendorNameSafe + '" ' +
+              'data-product="' + productNameSafe + '" ' +
+              'data-parent="' + vendorId + '">' +
+              '<label for="' + productId + '">' + productNameSafe + '</label>' +
+              '</div>';
+          }
+          html += '</div>';
+        }
+
+        console.log('renderVendorAccordion: generated ' + html.length + ' chars for ' + prefix);
+        return html;
+      } catch (e) {
+        const errMsg = 'renderVendorAccordion ERROR (' + prefix + '): ' + e.message;
+        console.error(errMsg, e);
+        return '<div style="color:red;padding:10px;">' + errMsg + '</div>';
+      }
     }
 
     function attachAccordionListeners() {
