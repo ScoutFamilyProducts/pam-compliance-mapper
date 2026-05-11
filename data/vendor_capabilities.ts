@@ -1383,5 +1383,99 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://cpl.thalesgroup.com/access-management/onewelcome-identity-platform"
       }
     ]
+  },
+  {
+    vendorId: "V-043",
+    vendorName: "Oracle",
+    products: [
+      {
+        productId: "V-043-P-001",
+        productName: "Oracle Identity Governance (OIG)",
+        capabilities: ["PAM-011", "PAM-012", "PAM-022"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-007", "PAM-008", "PAM-021"],
+        notes: "Enterprise IGA platform — on-premises or Oracle Cloud Infrastructure (OCI) containerized deployment. Full-featured legacy enterprise IGA: identity lifecycle management, access certifications with AI-driven intelligent role mining, access request workflows, provisioning and deprovisioning via connectors, SOD policy enforcement, compliance reporting (SOX, GDPR). Oracle Identity Role Intelligence uses AI/ML for role optimization and peer group analysis. Available as Docker/Kubernetes images for cloud deployment. IMPORTANT: OIG premier support ends December 2026. Oracle is migrating customers to Oracle Access Governance (OAG). Existing deployments will continue on extended support but new implementations should use OAG.",
+        docsUrl: "https://www.oracle.com/security/identity-management/governance/"
+      },
+      {
+        productId: "V-043-P-002",
+        productName: "Oracle Access Governance",
+        capabilities: ["PAM-011", "PAM-012", "PAM-022"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-007", "PAM-008", "PAM-021", "PAM-031"],
+        notes: "Cloud-native SaaS IGA — the strategic successor to OIG. Modern architecture with prescriptive analytics using AI/ML for anomaly detection and access recommendations. Key capabilities: identity lifecycle management, access certifications with AI-driven recommendations, access request workflows, SOD enforcement, integration with OCI IAM and major cloud/SaaS applications. OAG integrates with OIG for hybrid governance. Peer group analysis and outlier detection. Access reviews with usage data and risk context. PAM-031 partial — supports JIT provisioning patterns and time-bound access grants. Broader connector coverage than OIG via cloud-native integrations.",
+        docsUrl: "https://www.oracle.com/security/cloud-security/access-governance/"
+      }
+    ]
+  },
+  {
+    vendorId: "V-044",
+    vendorName: "SAP",
+    products: [
+      {
+        productId: "V-044-P-001",
+        productName: "SAP Cloud Identity Access Governance",
+        capabilities: ["PAM-012", "PAM-022"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-007", "PAM-009", "PAM-011", "PAM-019", "PAM-021"],
+        notes: "Cloud-native SaaS access governance on SAP Business Technology Platform (BTP). Core SAP IAG services: Access Analysis (SoD risk analysis and mitigation for SAP and select non-SAP systems), Access Request (approval workflows and compliant provisioning), Role Design (role optimization), Access Certification (user access reviews and periodic review campaigns), Privileged Access Management (super-user access management, log consolidation for SAP systems, automated log assessment). PAM-009 partial — PAM module manages super-user access in SAP applications, not general infrastructure. Best fit for organizations running SAP S/4HANA Cloud, SuccessFactors, Ariba, Concur. Supports 16+ SAP cloud solutions and select on-premises systems via IAG Bridge. Limited governance coverage outside the SAP application ecosystem.",
+        docsUrl: "https://help.sap.com/docs/cloud-identity-access-governance"
+      },
+      {
+        productId: "V-044-P-002",
+        productName: "SAP Access Control",
+        capabilities: ["PAM-012", "PAM-022"],
+        partialCapabilities: ["PAM-005", "PAM-007", "PAM-009", "PAM-011", "PAM-019", "PAM-021"],
+        notes: "On-premises SAP GRC product for access governance. Part of SAP GRC suite alongside Process Control and Risk Management. Core capabilities: SoD (segregation of duties) risk analysis and mitigation, compliant provisioning workflows, emergency access management (firefighter/super-user access with full audit trail), access certification campaigns, role management. Strong SOD enforcement for SAP ERP environments (R/3, S/4HANA, ECC). Mainstream support ends December 2027, extended support to 2030. SAP GRC Edition for HANA (expected Q1 2026) is the successor. Scope limited to SAP application layer — not a general enterprise IGA or infrastructure PAM solution.",
+        docsUrl: "https://www.sap.com/products/financial-management/access-control.html"
+      }
+    ]
+  },
+  {
+    vendorId: "V-045",
+    vendorName: "Pathlock",
+    products: [
+      {
+        productId: "V-045-P-001",
+        productName: "Pathlock Cloud",
+        capabilities: ["PAM-012", "PAM-022"],
+        partialCapabilities: ["PAM-005", "PAM-007", "PAM-008", "PAM-011", "PAM-016", "PAM-021", "PAM-031"],
+        notes: "Application Access Governance platform — cloud-native SaaS. Core capabilities: fine-grained SoD analysis across 140+ applications (SAP, Oracle, Workday, Salesforce, ServiceNow, NetSuite, and more), user access reviews enriched with HR data, usage history, and risk context (drives 20-30% revocation rates vs 2-3% typical of role-only reviews), compliant provisioning workflows, elevated access management (JIT-like emergency and temporary access requests with automatic time-based revocation and full audit trail of all activity during elevated session), continuous controls monitoring, transaction monitoring for sensitive activities, audit preparation automation (SOX, PCI DSS, HIPAA, GDPR, ITAR, EAR). PAM-031 partial — elevated access management provides time-bound privileged access with automatic revocation, but not zero standing privilege infrastructure access. PAM-016 partial — identifies excessive permissions and SoD violations across application landscape. Not a general IGA platform or infrastructure PAM — specialized for ERP/SaaS application governance.",
+        docsUrl: "https://pathlock.com/products/application-access-governance/"
+      }
+    ]
+  },
+  {
+    vendorId: "V-046",
+    vendorName: "Broadcom",
+    products: [
+      {
+        productId: "V-046-P-001",
+        productName: "Symantec IGA",
+        capabilities: ["PAM-011", "PAM-012", "PAM-022"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-007", "PAM-021"],
+        notes: "Legacy IGA platform — formerly CA Identity Manager, acquired by Broadcom via CA Technologies (2018). User provisioning and deprovisioning, access request workflows, access certifications, SOD policy enforcement, role management, compliance reporting. Deployed at large enterprises with long-standing CA investments. Broadcom has made minimal product investment post-acquisition — limited roadmap. On-premises deployment only. Organizations with existing deployments are evaluating migration to modern IGA platforms (SailPoint, Saviynt, One Identity). Not recommended for new IGA implementations.",
+        docsUrl: "https://www.broadcom.com/products/cyber-security/identity/symantec-iga"
+      }
+    ]
+  },
+  {
+    vendorId: "V-047",
+    vendorName: "OpenText",
+    products: [
+      {
+        productId: "V-047-P-001",
+        productName: "OpenText Identity Manager",
+        capabilities: ["PAM-011", "PAM-012", "PAM-022"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-007", "PAM-021"],
+        notes: "Enterprise IGA platform — formerly Micro Focus Identity Manager (NetIQ Identity Manager, originally Novell Identity Manager). One of the oldest and most established IGA products in the market with 30+ years of history. Strengths: deep integration with heterogeneous on-premises environments (LDAP, AD, eDirectory, HR systems, databases, mainframes), complex workflow engine, extensive connector library. Identity lifecycle management, access certifications, access request workflows, provisioning and deprovisioning, role management, SOD enforcement. Particularly strong in complex multi-directory environments typical of legacy enterprise infrastructure. Available as on-premises software and SaaS. Still actively maintained by OpenText post-Micro Focus acquisition.",
+        docsUrl: "https://www.opentext.com/products/identity-manager"
+      },
+      {
+        productId: "V-047-P-002",
+        productName: "OpenText NetIQ Access Manager",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-015", "PAM-017", "PAM-018"],
+        partialCapabilities: ["PAM-004", "PAM-005", "PAM-019", "PAM-025"],
+        notes: "Access management platform — formerly Micro Focus/NetIQ Access Manager. On-premises and cloud access management with SSO (SAML, OAuth, OIDC, Kerberos, RADIUS), MFA, adaptive access policies, federation. Strong in organizations requiring deep integration with Novell/NetIQ/eDirectory directory infrastructure. Primarily relevant for organizations already in the OpenText/Micro Focus ecosystem.",
+        docsUrl: "https://www.opentext.com/products/netiq-access-manager"
+      }
+    ]
   }
 ];
