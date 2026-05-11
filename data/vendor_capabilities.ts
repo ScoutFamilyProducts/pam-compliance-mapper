@@ -947,5 +947,19 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://docs.pingidentity.com/pingfederate/latest/"
       }
     ]
+  },
+  {
+    vendorId: "V-021",
+    vendorName: "ManageEngine",
+    products: [
+      {
+        productId: "V-021-P-001",
+        productName: "ManageEngine PAM360",
+        capabilities: ["PAM-005", "PAM-007", "PAM-008", "PAM-009", "PAM-013", "PAM-016", "PAM-019", "PAM-020", "PAM-021", "PAM-023", "PAM-024", "PAM-025", "PAM-026", "PAM-028", "PAM-029", "PAM-030", "PAM-031", "PAM-033"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004", "PAM-006", "PAM-010", "PAM-014", "PAM-015", "PAM-017", "PAM-027", "PAM-032"],
+        notes: "Full-stack unified PAM platform — single product covering credential vaulting, JIT access, endpoint privilege management, session recording, CIEM, and certificate lifecycle management. Every capability built organically from scratch; no acquired products in the codebase. Deployment: on-premises, cloud, or hybrid; most enterprises fully deployed in four weeks or less. Core capabilities: Enterprise Credential Vault — encrypted vaulting with automated rotation and zero credential exposure to users or applications; JIT Privilege Elevation and Zero Standing Privilege — time-bound, policy-based, purpose-specific access with ZSP model; Endpoint Privilege Management (EPM) — removes local admin rights, application allowlisting/blocklisting, child process controls; Privilege Elevation and Delegation Management (PEDM) — application and command-level controls for Windows and Linux; Session Recording — real-time recording archived as searchable video files; Session Shadowing — dual control, supervisors can shadow or terminate sessions in real time; Proxied Remote Access — RDP, VNC, SSH, SQL, and web sessions proxied through PAM360 (users never directly reach target systems); Continuous Discovery — automatic discovery, onboarding, and management of all privileged accounts and resources; CIEM — cloud permissions management and remediation across AWS, Azure, and GCP; Certificate Lifecycle Management (CLM) — SSL/TLS certificates, SSH keys, PGP keys end-to-end lifecycle; UEBA — AI/ML-driven anomaly detection for privileged user behavior; Zero Trust Controls — real-time trust scoring for users and devices, policy-based access control (PBAC); ITSM Integration — ticket ID validation gates credential retrieval to verified service requests; Compliance Reporting — built-in reports for NIST, PCI-DSS, FISMA, HIPAA, SOX, ISO/IEC 27001, NIS2, GDPR, NERC CIP. Integrates with ManageEngine SIEM, ITSM, IGA, and over 800 business applications via Zoho Flow. PAM-001-003 partial — MFA via integrated 2FA adapters (Duo, TOTP, etc.) not native MFA. PAM-032 partial — UEBA/anomaly detection built in but not a dedicated ITDR product.",
+        docsUrl: "https://www.manageengine.com/privileged-access-management/help/"
+      }
+    ]
   }
 ];
