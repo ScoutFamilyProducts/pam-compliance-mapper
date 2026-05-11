@@ -320,5 +320,27 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://docs.beyondtrust.com/adb/docs/ad-bridge-landing"
       }
     ]
+  },
+  {
+    vendorId: "V-004",
+    vendorName: "KeeperPAM",
+    products: [
+      {
+        productId: "V-004-P-001",
+        productName: "KeeperPAM",
+        capabilities: ["PAM-005", "PAM-007", "PAM-008", "PAM-015", "PAM-019", "PAM-020", "PAM-021", "PAM-023", "PAM-024", "PAM-025", "PAM-026", "PAM-027", "PAM-029", "PAM-030", "PAM-031", "PAM-033"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004", "PAM-006", "PAM-009", "PAM-010", "PAM-013", "PAM-014", "PAM-022", "PAM-028"],
+        notes: "Cloud-native unified PAM platform. Consolidates enterprise password management, secrets management, connection management, zero-trust network access, remote browser isolation and cloud-based access control in one product. Architecture: lightweight Gateway deployed in customer environment communicates outbound only via WebSocket to Keeper cloud. Zero-knowledge encryption — Keeper servers cannot decrypt vault data. No VPN, no agents on endpoints, no inbound firewall rules required. Key capabilities: credential vaulting (zero-knowledge encrypted), automated password rotation (AD accounts, Windows/Linux users, databases, AWS/Azure/GCP IAM, SSH keys, Windows services and scheduled tasks updated automatically on rotation), discovery (via Commander CLI — network discovery across Windows, Linux, AD, databases, cloud; UI coming soon), session recording and playback (full recording of all connections), true JIT with zero standing privilege (ephemeral account creation for duration of session, time-bounded access with automatic rotation on check-in, single-user checkout mode, approval workflows with force check-in), RBAC via roles and enforcement policies, Secrets Manager for DevOps (built in), tunneling, remote browser isolation. ARAM (Advanced Reporting and Alerts Module) for audit and compliance reporting with SIEM integration (Splunk, Sumo Logic, syslog, Azure LA). Break glass via workflow override. PAM-008 partial for UI — discovery currently Commander CLI only. Available as KeeperPAM license or Keeper Enterprise with PAM add-on.",
+        docsUrl: "https://docs.keeper.io/en/keeperpam"
+      },
+      {
+        productId: "V-004-P-002",
+        productName: "Keeper Endpoint Privilege Manager",
+        capabilities: ["PAM-005", "PAM-009", "PAM-016", "PAM-019", "PAM-020", "PAM-031"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-007", "PAM-008", "PAM-021", "PAM-025", "PAM-028"],
+        notes: "Separately licensed Privileged Elevation and Delegation Management (PEDM) solution. Agent-based across Windows, macOS, Linux. Distinguishing capability vs other EPM products: process-level ephemeral accounts — privileged commands execute under a Keeper-managed ephemeral account that is created and destroyed per-execution (true zero standing privilege at the endpoint level, not just task-scoped elevation). Removes users from local admin groups on Windows and removes sudo on macOS/Linux. JIT at both process and machine levels. Elevation requests with approval and escalation workflows. Flexible policy management — application control, file access policies, granular enforcement by user, machine, collection, execution context. Monitoring mode allows observation before enforcement. Cannot be installed on Windows Domain Controllers. Requires Keeper Enterprise subscription with EPM seats.",
+        docsUrl: "https://docs.keeper.io/en/keeperpam/endpoint-privilege-manager/overview"
+      }
+    ]
   }
 ];
