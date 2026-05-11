@@ -1078,6 +1078,34 @@
       display: block;
     }
 
+    .cyberinsurance-disclaimer {
+      display: none;
+      background: rgba(234,179,8,0.08);
+      border: 1px solid rgba(234,179,8,0.25);
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .cyberinsurance-disclaimer.visible {
+      display: block;
+    }
+
+    .cyberinsurance-disclaimer-title {
+      color: #eab308;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+
+    .cyberinsurance-disclaimer-text {
+      color: #94A3B8;
+      font-size: 0.78rem;
+      line-height: 1.65;
+    }
+
     .vendor-results-label {
       color: var(--accent-green);
       font-size: 0.65rem;
@@ -2623,6 +2651,8 @@
           <button type="button" class="framework-pill active" data-vfw="nist_csf_20">NIST CSF 2.0</button>
           <button type="button" class="framework-pill active" data-vfw="iso27001">ISO 27001</button>
           <button type="button" class="framework-pill active" data-vfw="soc2">SOC 2</button>
+          <button type="button" class="framework-pill active" data-vfw="soxitgc">SOX ITGC</button>
+          <button type="button" class="framework-pill active" data-vfw="cyberinsurance">Cyber Insurance</button>
         </div>
       </div>
 
@@ -2637,6 +2667,10 @@
       </div>
 
       <div class="vendor-results-panel" id="vendor-results">
+        <div class="cyberinsurance-disclaimer" id="cyberinsurance-disclaimer">
+          <div class="cyberinsurance-disclaimer-title">Cyber Insurance Disclaimer</div>
+          <div class="cyberinsurance-disclaimer-text">Cyber insurance requirements vary significantly by carrier, policy type, and underwriting criteria. The mappings shown here represent common control requirements but are not guaranteed to match your specific policy. Always verify requirements directly with your carrier or broker.</div>
+        </div>
         <div class="vendor-results-section" id="vendor-summary-section">
           <div class="vendor-results-label">ANALYSIS SUMMARY</div>
           <div class="vendor-results-summary" id="vendor-summary-text"></div>
@@ -2736,41 +2770,41 @@
 
     // Control to framework mapping
     const controlFrameworks = {
-      "PAM-001": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "MFA on Privileged Accounts" },
-      "PAM-002": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "MFA for All System Access" },
-      "PAM-003": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "MFA for Remote Access" },
-      "PAM-004": { nist_800_53: "required", nist_800_171: "not_stated", cmmc: "not_stated", cis_v8: "not_stated", pci_dss_401: "required", hipaa: "not_stated", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "MFA Anti-Bypass Controls" },
-      "PAM-005": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Least Privilege and RBAC" },
-      "PAM-006": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Service Account Least Privilege" },
-      "PAM-007": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Separation of Duties" },
-      "PAM-008": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Privileged Account Discovery and Inventory" },
-      "PAM-009": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Dedicated Admin Accounts" },
-      "PAM-010": { nist_800_53: "required", nist_800_171: "implied", cmmc: "implied", cis_v8: "required", pci_dss_401: "required", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Dormant Account Management" },
-      "PAM-011": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Access Granting and Revoking Process" },
-      "PAM-012": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Terminated User Access Revocation" },
-      "PAM-013": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Third Party and Vendor Account Controls" },
-      "PAM-014": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "implied", pci_dss_401: "required", hipaa: "addressable", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Session Idle Timeout" },
-      "PAM-015": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Unique User Identification" },
-      "PAM-016": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Prevent Privilege Escalation" },
-      "PAM-017": { nist_800_53: "required", nist_800_171: "implied", cmmc: "implied", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Authentication System Inventory" },
-      "PAM-018": { nist_800_53: "implied", nist_800_171: "implied", cmmc: "implied", cis_v8: "required", pci_dss_401: "implied", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Centralized Access Control and SSO" },
-      "PAM-019": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Immutable Audit Log" },
-      "PAM-020": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Privileged User Audit Logging" },
-      "PAM-021": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Audit Log Review" },
-      "PAM-022": { nist_800_53: "required", nist_800_171: "implied", cmmc: "implied", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Periodic Access Review" },
-      "PAM-023": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Credential Management and Password Rotation" },
-      "PAM-024": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "implied", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Service Account Password Rotation" },
-      "PAM-025": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Password Complexity" },
-      "PAM-026": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Password History and No Reuse" },
-      "PAM-027": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "implied", pci_dss_401: "required", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Unsuccessful Logon Limiting" },
-      "PAM-028": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "implied", pci_dss_401: "required", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Default Credential Prohibition" },
-      "PAM-029": { nist_800_53: "required", nist_800_171: "not_stated", cmmc: "not_stated", cis_v8: "not_stated", pci_dss_401: "not_stated", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Emergency Access and Break Glass" },
-      "PAM-030": { nist_800_53: "required", nist_800_171: "implied", cmmc: "implied", cis_v8: "implied", pci_dss_401: "implied", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Session Recording" },
-      "PAM-031": { nist_800_53: "implied", nist_800_171: "implied", cmmc: "implied", cis_v8: "implied", pci_dss_401: "implied", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Just-In-Time and Just-Enough Access" },
-      "PAM-032": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "implied", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Privileged User Behavior Analytics" },
-      "PAM-033": { nist_800_53: "implied", nist_800_171: "implied", cmmc: "implied", cis_v8: "implied", pci_dss_401: "implied", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Jump Box and Privileged Workstation Isolation" },
-      "PAM-034": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "implied", pci_dss_401: "implied", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Annual Risk Analysis" },
-      "PAM-035": { nist_800_53: "required", nist_800_171: "implied", cmmc: "implied", cis_v8: "implied", pci_dss_401: "implied", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", name: "Cybersecurity Roles and Governance" }
+      "PAM-001": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "MFA on Privileged Accounts" },
+      "PAM-002": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "MFA for All System Access" },
+      "PAM-003": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "MFA for Remote Access" },
+      "PAM-004": { nist_800_53: "required", nist_800_171: "not_stated", cmmc: "not_stated", cis_v8: "not_stated", pci_dss_401: "required", hipaa: "not_stated", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "MFA Anti-Bypass Controls" },
+      "PAM-005": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Least Privilege and RBAC" },
+      "PAM-006": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Service Account Least Privilege" },
+      "PAM-007": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Separation of Duties" },
+      "PAM-008": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Privileged Account Discovery and Inventory" },
+      "PAM-009": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Dedicated Admin Accounts" },
+      "PAM-010": { nist_800_53: "required", nist_800_171: "implied", cmmc: "implied", cis_v8: "required", pci_dss_401: "required", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Dormant Account Management" },
+      "PAM-011": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Access Granting and Revoking Process" },
+      "PAM-012": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Terminated User Access Revocation" },
+      "PAM-013": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Third Party and Vendor Account Controls" },
+      "PAM-014": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "implied", pci_dss_401: "required", hipaa: "addressable", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Session Idle Timeout" },
+      "PAM-015": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Unique User Identification" },
+      "PAM-016": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Prevent Privilege Escalation" },
+      "PAM-017": { nist_800_53: "required", nist_800_171: "implied", cmmc: "implied", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Authentication System Inventory" },
+      "PAM-018": { nist_800_53: "implied", nist_800_171: "implied", cmmc: "implied", cis_v8: "required", pci_dss_401: "implied", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "implied", name: "Centralized Access Control and SSO" },
+      "PAM-019": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Immutable Audit Log" },
+      "PAM-020": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Privileged User Audit Logging" },
+      "PAM-021": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Audit Log Review" },
+      "PAM-022": { nist_800_53: "required", nist_800_171: "implied", cmmc: "implied", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Periodic Access Review" },
+      "PAM-023": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Credential Management and Password Rotation" },
+      "PAM-024": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "implied", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Service Account Password Rotation" },
+      "PAM-025": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Password Complexity" },
+      "PAM-026": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "required", pci_dss_401: "required", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Password History and No Reuse" },
+      "PAM-027": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "implied", pci_dss_401: "required", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Unsuccessful Logon Limiting" },
+      "PAM-028": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "implied", pci_dss_401: "required", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Default Credential Prohibition" },
+      "PAM-029": { nist_800_53: "required", nist_800_171: "not_stated", cmmc: "not_stated", cis_v8: "not_stated", pci_dss_401: "not_stated", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Emergency Access and Break Glass" },
+      "PAM-030": { nist_800_53: "required", nist_800_171: "implied", cmmc: "implied", cis_v8: "implied", pci_dss_401: "implied", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Session Recording" },
+      "PAM-031": { nist_800_53: "implied", nist_800_171: "implied", cmmc: "implied", cis_v8: "implied", pci_dss_401: "implied", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "implied", name: "Just-In-Time and Just-Enough Access" },
+      "PAM-032": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "implied", pci_dss_401: "required", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Privileged User Behavior Analytics" },
+      "PAM-033": { nist_800_53: "implied", nist_800_171: "implied", cmmc: "implied", cis_v8: "implied", pci_dss_401: "implied", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "implied", name: "Jump Box and Privileged Workstation Isolation" },
+      "PAM-034": { nist_800_53: "required", nist_800_171: "required", cmmc: "required", cis_v8: "implied", pci_dss_401: "implied", hipaa: "required", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Annual Risk Analysis" },
+      "PAM-035": { nist_800_53: "required", nist_800_171: "implied", cmmc: "implied", cis_v8: "implied", pci_dss_401: "implied", hipaa: "implied", nist_csf_20: "outcomes_based", iso27001: "required", soc2: "required", soxitgc: "required", cyberinsurance: "required", name: "Cybersecurity Roles and Governance" }
     };
 
     // Control reference data for popovers
@@ -2784,7 +2818,9 @@
         hipaa: { ref: "164.312(d)", covered: "required" },
         nist_csf_20: { ref: "PR.AA-03", covered: "outcomes_based" },
         iso27001: { ref: "A.8.5", covered: "required" },
-        soc2: { ref: "CC6.1, CC6.6", covered: "required" }
+        soc2: { ref: "CC6.1, CC6.6", covered: "required" },
+        soxitgc: { ref: "AC-4", covered: "required" },
+        cyberinsurance: { ref: "CI-001", covered: "required" }
       },
       "PAM-002": {
         nist_800_53: { ref: "IA-2", covered: "required" },
@@ -2795,7 +2831,9 @@
         hipaa: { ref: "164.312(d)", covered: "required" },
         nist_csf_20: { ref: "PR.AA-03", covered: "outcomes_based" },
         iso27001: { ref: "A.8.5", covered: "required" },
-        soc2: { ref: "CC6.1, CC6.6", covered: "required" }
+        soc2: { ref: "CC6.1, CC6.6", covered: "required" },
+        soxitgc: { ref: "AC-4, AC-7", covered: "required" },
+        cyberinsurance: { ref: "CI-001", covered: "required" }
       },
       "PAM-003": {
         nist_800_53: { ref: "AC-17", covered: "required" },
@@ -2806,7 +2844,9 @@
         hipaa: { ref: "164.312(d)", covered: "implied" },
         nist_csf_20: { ref: "PR.AA-03", covered: "outcomes_based" },
         iso27001: { ref: "A.5.15, A.8.5", covered: "required" },
-        soc2: { ref: "CC6.1", covered: "required" }
+        soc2: { ref: "CC6.1", covered: "required" },
+        soxitgc: { ref: "AC-1", covered: "required" },
+        cyberinsurance: { ref: "CI-002", covered: "required" }
       },
       "PAM-004": {
         nist_800_53: { ref: "IA-2", covered: "required" },
@@ -2817,7 +2857,9 @@
         hipaa: { ref: "N/A", covered: "not_stated" },
         nist_csf_20: { ref: "PR.AA-04", covered: "outcomes_based" },
         iso27001: { ref: "A.8.5", covered: "required" },
-        soc2: { ref: "CC6.6", covered: "required" }
+        soc2: { ref: "CC6.6", covered: "required" },
+        soxitgc: { ref: "AC-4", covered: "required" },
+        cyberinsurance: { ref: "CI-001", covered: "required" }
       },
       "PAM-005": {
         nist_800_53: { ref: "AC-6", covered: "required" },
@@ -2828,7 +2870,9 @@
         hipaa: { ref: "164.308(a)(4)", covered: "required" },
         nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" },
         iso27001: { ref: "A.8.2, A.5.15, A.5.18", covered: "required" },
-        soc2: { ref: "CC6.1, CC6.3", covered: "required" }
+        soc2: { ref: "CC6.1, CC6.3", covered: "required" },
+        soxitgc: { ref: "AC-4, AC-6", covered: "required" },
+        cyberinsurance: { ref: "CI-003", covered: "required" }
       },
       "PAM-006": {
         nist_800_53: { ref: "AC-6", covered: "required" },
@@ -2839,7 +2883,9 @@
         hipaa: { ref: "164.308(a)(4)", covered: "required" },
         nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" },
         iso27001: { ref: "A.5.16, A.8.2", covered: "required" },
-        soc2: { ref: "CC6.1, CC6.3", covered: "required" }
+        soc2: { ref: "CC6.1, CC6.3", covered: "required" },
+        soxitgc: { ref: "AC-4", covered: "required" },
+        cyberinsurance: { ref: "CI-003", covered: "required" }
       },
       "PAM-007": {
         nist_800_53: { ref: "AC-5", covered: "required" },
@@ -2850,7 +2896,9 @@
         hipaa: { ref: "164.308(a)(3)", covered: "required" },
         nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" },
         iso27001: { ref: "A.8.2, A.8.5", covered: "required" },
-        soc2: { ref: "CC6.6, CC6.7", covered: "required" }
+        soc2: { ref: "CC6.6, CC6.7", covered: "required" },
+        soxitgc: { ref: "AC-4", covered: "required" },
+        cyberinsurance: { ref: "CI-003", covered: "required" }
       },
       "PAM-008": {
         nist_800_53: { ref: "AC-2", covered: "required" },
@@ -2861,7 +2909,9 @@
         hipaa: { ref: "164.308(a)(3)", covered: "required" },
         nist_csf_20: { ref: "ID.AM-01", covered: "outcomes_based" },
         iso27001: { ref: "A.5.16, A.5.18", covered: "required" },
-        soc2: { ref: "CC6.1", covered: "required" }
+        soc2: { ref: "CC6.1", covered: "required" },
+        soxitgc: { ref: "AC-4", covered: "required" },
+        cyberinsurance: { ref: "CI-003", covered: "required" }
       },
       "PAM-009": {
         nist_800_53: { ref: "AC-6(2)", covered: "required" },
@@ -2872,7 +2922,9 @@
         hipaa: { ref: "164.308(a)(4)", covered: "required" },
         nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" },
         iso27001: { ref: "A.8.2", covered: "required" },
-        soc2: { ref: "CC6.1", covered: "required" }
+        soc2: { ref: "CC6.1", covered: "required" },
+        soxitgc: { ref: "AC-4, AC-6", covered: "required" },
+        cyberinsurance: { ref: "CI-005", covered: "required" }
       },
       "PAM-010": {
         nist_800_53: { ref: "AC-2(3)", covered: "required" },
@@ -2883,7 +2935,9 @@
         hipaa: { ref: "164.308(a)(3)", covered: "implied" },
         nist_csf_20: { ref: "PR.AA-01", covered: "outcomes_based" },
         iso27001: { ref: "A.5.18", covered: "required" },
-        soc2: { ref: "CC6.3", covered: "required" }
+        soc2: { ref: "CC6.3", covered: "required" },
+        soxitgc: { ref: "AC-3", covered: "required" },
+        cyberinsurance: { ref: "CI-007", covered: "required" }
       },
       "PAM-011": {
         nist_800_53: { ref: "AC-2", covered: "required" },
@@ -2894,7 +2948,9 @@
         hipaa: { ref: "164.308(a)(4)", covered: "required" },
         nist_csf_20: { ref: "PR.AA-01", covered: "outcomes_based" },
         iso27001: { ref: "A.5.16, A.5.18", covered: "required" },
-        soc2: { ref: "CC6.2, CC6.3", covered: "required" }
+        soc2: { ref: "CC6.2, CC6.3", covered: "required" },
+        soxitgc: { ref: "AC-2, AC-3", covered: "required" },
+        cyberinsurance: { ref: "CI-007", covered: "required" }
       },
       "PAM-012": {
         nist_800_53: { ref: "AC-2", covered: "required" },
@@ -2905,7 +2961,9 @@
         hipaa: { ref: "164.308(a)(3)", covered: "required" },
         nist_csf_20: { ref: "PR.AA-01", covered: "outcomes_based" },
         iso27001: { ref: "A.5.18", covered: "required" },
-        soc2: { ref: "CC6.2", covered: "required" }
+        soc2: { ref: "CC6.2", covered: "required" },
+        soxitgc: { ref: "AC-2", covered: "required" },
+        cyberinsurance: { ref: "CI-007", covered: "required" }
       },
       "PAM-013": {
         nist_800_53: { ref: "AC-2(6)", covered: "required" },
@@ -2916,7 +2974,9 @@
         hipaa: { ref: "164.308(a)(4)", covered: "required" },
         nist_csf_20: { ref: "PR.AA-01", covered: "outcomes_based" },
         iso27001: { ref: "A.5.19, A.5.20", covered: "required" },
-        soc2: { ref: "CC9.2", covered: "required" }
+        soc2: { ref: "CC9.2", covered: "required" },
+        soxitgc: { ref: "AC-1", covered: "required" },
+        cyberinsurance: { ref: "CI-008", covered: "required" }
       },
       "PAM-014": {
         nist_800_53: { ref: "AC-11", covered: "required" },
@@ -2927,7 +2987,9 @@
         hipaa: { ref: "164.312(a)(2)(iii)", covered: "addressable" },
         nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" },
         iso27001: { ref: "A.8.5", covered: "required" },
-        soc2: { ref: "CC6.7", covered: "required" }
+        soc2: { ref: "CC6.7", covered: "required" },
+        soxitgc: { ref: "AC-7", covered: "required" },
+        cyberinsurance: { ref: "CI-006", covered: "required" }
       },
       "PAM-015": {
         nist_800_53: { ref: "AC-2", covered: "required" },
@@ -2938,7 +3000,9 @@
         hipaa: { ref: "164.312(a)(2)(i)", covered: "required" },
         nist_csf_20: { ref: "PR.AA-01", covered: "outcomes_based" },
         iso27001: { ref: "A.5.16, A.8.15", covered: "required" },
-        soc2: { ref: "CC6.1", covered: "required" }
+        soc2: { ref: "CC6.1", covered: "required" },
+        soxitgc: { ref: "AC-4, AC-8", covered: "required" },
+        cyberinsurance: { ref: "CI-003, CI-005", covered: "required" }
       },
       "PAM-016": {
         nist_800_53: { ref: "AC-6(10)", covered: "required" },
@@ -2949,7 +3013,9 @@
         hipaa: { ref: "164.308(a)(4)", covered: "required" },
         nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" },
         iso27001: { ref: "A.8.2, A.8.18", covered: "required" },
-        soc2: { ref: "CC6.1, CC6.6", covered: "required" }
+        soc2: { ref: "CC6.1, CC6.6", covered: "required" },
+        soxitgc: { ref: "AC-6", covered: "required" },
+        cyberinsurance: { ref: "CI-003", covered: "required" }
       },
       "PAM-017": {
         nist_800_53: { ref: "AC-2", covered: "required" },
@@ -2960,7 +3026,9 @@
         hipaa: { ref: "164.308(a)(4)", covered: "required" },
         nist_csf_20: { ref: "ID.AM-01", covered: "outcomes_based" },
         iso27001: { ref: "A.5.17", covered: "required" },
-        soc2: { ref: "CC6.1", covered: "required" }
+        soc2: { ref: "CC6.1", covered: "required" },
+        soxitgc: { ref: "AC-7", covered: "required" },
+        cyberinsurance: { ref: "CI-003", covered: "required" }
       },
       "PAM-018": {
         nist_800_53: { ref: "AC-2", covered: "implied" },
@@ -2971,7 +3039,9 @@
         hipaa: { ref: "N/A", covered: "implied" },
         nist_csf_20: { ref: "PR.AA-03", covered: "outcomes_based" },
         iso27001: { ref: "A.5.17, A.8.24", covered: "required" },
-        soc2: { ref: "CC6.1", covered: "required" }
+        soc2: { ref: "CC6.1", covered: "required" },
+        soxitgc: { ref: "AC-7", covered: "required" },
+        cyberinsurance: { ref: "CI-003", covered: "implied" }
       },
       "PAM-019": {
         nist_800_53: { ref: "AU-9", covered: "required" },
@@ -2982,7 +3052,9 @@
         hipaa: { ref: "164.312(b)", covered: "required" },
         nist_csf_20: { ref: "DE.CM-01", covered: "outcomes_based" },
         iso27001: { ref: "A.8.15", covered: "required" },
-        soc2: { ref: "CC7.2", covered: "required" }
+        soc2: { ref: "CC7.2", covered: "required" },
+        soxitgc: { ref: "AC-8", covered: "required" },
+        cyberinsurance: { ref: "CI-006", covered: "required" }
       },
       "PAM-020": {
         nist_800_53: { ref: "AU-2", covered: "required" },
@@ -2993,7 +3065,9 @@
         hipaa: { ref: "164.312(b)", covered: "required" },
         nist_csf_20: { ref: "DE.CM-03", covered: "outcomes_based" },
         iso27001: { ref: "A.8.15, A.8.16", covered: "required" },
-        soc2: { ref: "CC7.2", covered: "required" }
+        soc2: { ref: "CC7.2", covered: "required" },
+        soxitgc: { ref: "AC-8", covered: "required" },
+        cyberinsurance: { ref: "CI-006", covered: "required" }
       },
       "PAM-021": {
         nist_800_53: { ref: "AU-6", covered: "required" },
@@ -3004,7 +3078,9 @@
         hipaa: { ref: "164.308(a)(1)(ii)(D)", covered: "required" },
         nist_csf_20: { ref: "DE.AE-02", covered: "outcomes_based" },
         iso27001: { ref: "A.8.16", covered: "required" },
-        soc2: { ref: "CC7.2", covered: "required" }
+        soc2: { ref: "CC7.2", covered: "required" },
+        soxitgc: { ref: "AC-8", covered: "required" },
+        cyberinsurance: { ref: "CI-006", covered: "required" }
       },
       "PAM-022": {
         nist_800_53: { ref: "AC-2(7)", covered: "required" },
@@ -3015,7 +3091,9 @@
         hipaa: { ref: "164.308(a)(4)", covered: "required" },
         nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" },
         iso27001: { ref: "A.5.18", covered: "required" },
-        soc2: { ref: "CC6.1", covered: "required" }
+        soc2: { ref: "CC6.1", covered: "required" },
+        soxitgc: { ref: "AC-5", covered: "required" },
+        cyberinsurance: { ref: "CI-007", covered: "required" }
       },
       "PAM-023": {
         nist_800_53: { ref: "IA-5", covered: "required" },
@@ -3026,7 +3104,9 @@
         hipaa: { ref: "164.312(d)", covered: "required" },
         nist_csf_20: { ref: "PR.AA-01", covered: "outcomes_based" },
         iso27001: { ref: "A.5.17, A.8.24", covered: "required" },
-        soc2: { ref: "CC6.1", covered: "required" }
+        soc2: { ref: "CC6.1", covered: "required" },
+        soxitgc: { ref: "AC-7", covered: "required" },
+        cyberinsurance: { ref: "CI-009", covered: "required" }
       },
       "PAM-024": {
         nist_800_53: { ref: "IA-5", covered: "required" },
@@ -3037,7 +3117,9 @@
         hipaa: { ref: "164.312(d)", covered: "required" },
         nist_csf_20: { ref: "PR.AA-01", covered: "outcomes_based" },
         iso27001: { ref: "A.8.24", covered: "required" },
-        soc2: { ref: "CC6.1", covered: "required" }
+        soc2: { ref: "CC6.1", covered: "required" },
+        soxitgc: { ref: "AC-7", covered: "required" },
+        cyberinsurance: { ref: "CI-009", covered: "required" }
       },
       "PAM-025": {
         nist_800_53: { ref: "IA-5(1)", covered: "required" },
@@ -3048,7 +3130,9 @@
         hipaa: { ref: "N/A", covered: "implied" },
         nist_csf_20: { ref: "PR.AA-03", covered: "outcomes_based" },
         iso27001: { ref: "A.8.5", covered: "required" },
-        soc2: { ref: "CC6.6", covered: "required" }
+        soc2: { ref: "CC6.6", covered: "required" },
+        soxitgc: { ref: "AC-7", covered: "required" },
+        cyberinsurance: { ref: "CI-009", covered: "required" }
       },
       "PAM-026": {
         nist_800_53: { ref: "IA-5(1)", covered: "required" },
@@ -3059,7 +3143,9 @@
         hipaa: { ref: "N/A", covered: "implied" },
         nist_csf_20: { ref: "PR.AA-03", covered: "outcomes_based" },
         iso27001: { ref: "A.8.5, A.8.15", covered: "required" },
-        soc2: { ref: "CC6.6, CC7.2", covered: "required" }
+        soc2: { ref: "CC6.6, CC7.2", covered: "required" },
+        soxitgc: { ref: "AC-7, AC-8", covered: "required" },
+        cyberinsurance: { ref: "CI-009", covered: "required" }
       },
       "PAM-027": {
         nist_800_53: { ref: "AC-7", covered: "required" },
@@ -3070,7 +3156,9 @@
         hipaa: { ref: "N/A", covered: "implied" },
         nist_csf_20: { ref: "PR.AA-03", covered: "outcomes_based" },
         iso27001: { ref: "A.5.3", covered: "required" },
-        soc2: { ref: "CC5.2, CC1.4", covered: "required" }
+        soc2: { ref: "CC5.2, CC1.4", covered: "required" },
+        soxitgc: { ref: "AC-6", covered: "required" },
+        cyberinsurance: { ref: "CI-009", covered: "required" }
       },
       "PAM-028": {
         nist_800_53: { ref: "IA-5", covered: "required" },
@@ -3081,7 +3169,9 @@
         hipaa: { ref: "N/A", covered: "implied" },
         nist_csf_20: { ref: "PR.AA-01", covered: "outcomes_based" },
         iso27001: { ref: "A.5.17, A.8.9", covered: "required" },
-        soc2: { ref: "CC6.6", covered: "required" }
+        soc2: { ref: "CC6.6", covered: "required" },
+        soxitgc: { ref: "AC-7", covered: "required" },
+        cyberinsurance: { ref: "CI-009", covered: "required" }
       },
       "PAM-029": {
         nist_800_53: { ref: "AC-2(2)", covered: "required" },
@@ -3092,7 +3182,9 @@
         hipaa: { ref: "164.312(a)(2)(ii)", covered: "required" },
         nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" },
         iso27001: { ref: "A.8.2, A.5.17", covered: "required" },
-        soc2: { ref: "CC6.1", covered: "required" }
+        soc2: { ref: "CC6.1", covered: "required" },
+        soxitgc: { ref: "AC-4", covered: "required" },
+        cyberinsurance: { ref: "CI-003", covered: "required" }
       },
       "PAM-030": {
         nist_800_53: { ref: "AU-2", covered: "required" },
@@ -3103,7 +3195,9 @@
         hipaa: { ref: "164.312(b)", covered: "implied" },
         nist_csf_20: { ref: "DE.CM-03", covered: "outcomes_based" },
         iso27001: { ref: "A.5.16, A.8.2", covered: "required" },
-        soc2: { ref: "CC7.2", covered: "required" }
+        soc2: { ref: "CC7.2", covered: "required" },
+        soxitgc: { ref: "AC-4, AC-8", covered: "required" },
+        cyberinsurance: { ref: "CI-006", covered: "required" }
       },
       "PAM-031": {
         nist_800_53: { ref: "AC-6", covered: "implied" },
@@ -3114,7 +3208,9 @@
         hipaa: { ref: "N/A", covered: "implied" },
         nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" },
         iso27001: { ref: "A.8.2", covered: "required" },
-        soc2: { ref: "CC6.1, CC6.3", covered: "required" }
+        soc2: { ref: "CC6.1, CC6.3", covered: "required" },
+        soxitgc: { ref: "AC-4", covered: "required" },
+        cyberinsurance: { ref: "CI-003", covered: "implied" }
       },
       "PAM-032": {
         nist_800_53: { ref: "SI-4", covered: "required" },
@@ -3125,7 +3221,9 @@
         hipaa: { ref: "164.308(a)(1)(ii)(D)", covered: "required" },
         nist_csf_20: { ref: "DE.CM-03", covered: "outcomes_based" },
         iso27001: { ref: "A.8.16", covered: "required" },
-        soc2: { ref: "CC7.2, CC7.3", covered: "required" }
+        soc2: { ref: "CC7.2, CC7.3", covered: "required" },
+        soxitgc: { ref: "AC-8", covered: "required" },
+        cyberinsurance: { ref: "CI-006", covered: "required" }
       },
       "PAM-033": {
         nist_800_53: { ref: "AC-17", covered: "implied" },
@@ -3136,7 +3234,9 @@
         hipaa: { ref: "N/A", covered: "implied" },
         nist_csf_20: { ref: "PR.AA-05", covered: "outcomes_based" },
         iso27001: { ref: "A.8.15, A.8.16", covered: "required" },
-        soc2: { ref: "CC7.2", covered: "required" }
+        soc2: { ref: "CC7.2", covered: "required" },
+        soxitgc: { ref: "AC-4, AC-8", covered: "required" },
+        cyberinsurance: { ref: "CI-010", covered: "implied" }
       },
       "PAM-034": {
         nist_800_53: { ref: "RA-3", covered: "required" },
@@ -3147,7 +3247,9 @@
         hipaa: { ref: "164.308(a)(1)", covered: "required" },
         nist_csf_20: { ref: "ID.RA", covered: "outcomes_based" },
         iso27001: { ref: "A.8.2", covered: "required" },
-        soc2: { ref: "CC6.1", covered: "required" }
+        soc2: { ref: "CC6.1", covered: "required" },
+        soxitgc: { ref: "AC-2, AC-4", covered: "required" },
+        cyberinsurance: { ref: "CI-007", covered: "required" }
       },
       "PAM-035": {
         nist_800_53: { ref: "PM-2", covered: "required" },
@@ -3158,7 +3260,9 @@
         hipaa: { ref: "N/A", covered: "implied" },
         nist_csf_20: { ref: "GV.RR-02", covered: "outcomes_based" },
         iso27001: { ref: "A.5.3", covered: "required" },
-        soc2: { ref: "CC1.4, CC5.2", covered: "required" }
+        soc2: { ref: "CC1.4, CC5.2", covered: "required" },
+        soxitgc: { ref: "AC-6", covered: "required" },
+        cyberinsurance: { ref: "CI-003", covered: "required" }
       }
     };
 
@@ -3172,7 +3276,9 @@
       hipaa: "HIPAA Security Rule",
       nist_csf_20: "NIST CSF 2.0",
       iso27001: "ISO 27001:2022",
-      soc2: "SOC 2 Type II"
+      soc2: "SOC 2 Type II",
+      soxitgc: "SOX ITGC",
+      cyberinsurance: "Cyber Insurance"
     };
 
     // State
@@ -3186,7 +3292,9 @@
       hipaa: true,
       nist_csf_20: true,
       iso27001: true,
-      soc2: true
+      soc2: true,
+      soxitgc: true,
+      cyberinsurance: true
     };
 
     // Initialize state
@@ -3522,7 +3630,9 @@
       'HIPAA': 'hipaa',
       'NIST CSF 2.0': 'nist_csf_20',
       'ISO 27001': 'iso27001',
-      'SOC 2': 'soc2'
+      'SOC 2': 'soc2',
+      'SOX ITGC': 'soxitgc',
+      'Cyber Insurance': 'cyberinsurance'
     };
 
     const frameworkDisplayMap = {
@@ -3534,7 +3644,9 @@
       'hipaa': 'HIPAA',
       'nist_csf_20': 'NIST CSF 2.0',
       'iso27001': 'ISO 27001',
-      'soc2': 'SOC 2'
+      'soc2': 'SOC 2',
+      'soxitgc': 'SOX ITGC',
+      'cyberinsurance': 'Cyber Insurance'
     };
 
     async function mapVendors() {
@@ -3602,6 +3714,14 @@
 
         // Render results
         renderVendorResults(data.analysis);
+
+        // Show/hide cyber insurance disclaimer based on framework selection
+        const cyberDisclaimer = document.getElementById('cyberinsurance-disclaimer');
+        if (selectedFrameworks.includes('cyberinsurance')) {
+          cyberDisclaimer.classList.add('visible');
+        } else {
+          cyberDisclaimer.classList.remove('visible');
+        }
 
         // Show results panel
         resultsPanel.classList.add('visible');
