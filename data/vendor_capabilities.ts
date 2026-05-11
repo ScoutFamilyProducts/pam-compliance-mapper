@@ -814,5 +814,60 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://www.varonis.com/data-security-platform"
       }
     ]
+  },
+  {
+    vendorId: "V-018",
+    vendorName: "Google",
+    products: [
+      {
+        productId: "V-018-P-001",
+        productName: "Google Cloud IAM",
+        capabilities: ["PAM-005", "PAM-015"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004", "PAM-007", "PAM-008", "PAM-016", "PAM-017", "PAM-019", "PAM-020", "PAM-031"],
+        notes: "Core GCP access control — included free in every GCP project and organization. Manages authentication and authorization for all GCP API operations. Core capabilities: IAM policies (allow and deny), predefined and custom roles, service accounts for workload identities, workload identity federation (federate external identities to GCP without service account keys), IAM Conditions (attribute-based access control), Organization Policies (guardrails across GCP resources), IAM Recommender (ML-generated least privilege recommendations identifying unused permissions), Principal Access Boundary (limits resources any principal can access regardless of IAM policies — preview). PAM-031 partial — IAM roles with short-lived credentials via workload identity federation reduce standing access but no JIT workflow without Cloud PAM. PAM-016 partial — IAM Recommender identifies privilege escalation risk but remediation is manual. PAM-019 partial — Cloud Audit Logs capture IAM API calls but are a separate service (Cloud Logging). Root/owner account must be protected — Google recommends securing organization admin accounts with hardware security keys.",
+        docsUrl: "https://cloud.google.com/iam/docs/overview"
+      },
+      {
+        productId: "V-018-P-002",
+        productName: "Google Cloud Privileged Access Manager",
+        capabilities: ["PAM-005", "PAM-007", "PAM-019", "PAM-020", "PAM-029", "PAM-031"],
+        partialCapabilities: ["PAM-003", "PAM-013", "PAM-014", "PAM-015"],
+        notes: "Native GCP JIT privileged access management — reached General Availability 2025. Manages just-in-time temporary privilege elevation for GCP roles at project, folder, and organization scope. Core capabilities: entitlements define who can request access to which resources; time-bound access elevations with configurable maximum duration; approval-based workflows with up to two approval levels and multiple approvers per level; grant customization to scope entitlements to specific resource subsets; full audit logs of all access requests, approvals, and active grants; VPC Service Controls integration; alerting on external IAM modifications outside of PAM; Pub/Sub integration for custom alerting. Scope is limited to GCP roles and resources — not general enterprise infrastructure, on-premises systems, or third-party applications. PAM-013 partial — can be used for vendor/contractor GCP access but not a dedicated RPAM product. PAM-029 full — emergency access entitlements support break glass scenarios with audit trail.",
+        docsUrl: "https://cloud.google.com/iam/docs/pam-overview",
+        addOnOf: "V-018-P-001"
+      },
+      {
+        productId: "V-018-P-003",
+        productName: "Google Cloud Identity",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-015", "PAM-017", "PAM-018"],
+        partialCapabilities: ["PAM-004", "PAM-005", "PAM-011", "PAM-012", "PAM-019", "PAM-025", "PAM-026"],
+        notes: "Google's workforce identity platform — available as free tier and Cloud Identity Premium. Separate from Google Workspace (can be deployed without Workspace). Core capabilities: SSO via SAML and OIDC for third-party applications, MFA including TOTP, push notifications, hardware security keys (FIDO2), and passkeys, Context-Aware Access (BeyondCorp) enforces access based on user identity, device health, location, and risk signals (Premium), device management for Windows/macOS/Linux/Android/iOS (Premium), user lifecycle management with SCIM provisioning, password policy enforcement. PAM-004 partial — phishing-resistant MFA enforcement via security keys/passkeys configurable but not on by default. Context-Aware Access in Premium tier adds continuous access evaluation.",
+        docsUrl: "https://cloud.google.com/identity/docs/overview"
+      },
+      {
+        productId: "V-018-P-004",
+        productName: "Google Security Command Center",
+        capabilities: ["PAM-008"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-010", "PAM-016", "PAM-017", "PAM-019", "PAM-020", "PAM-032"],
+        notes: "CSPM, CIEM, and threat detection for GCP — with multicloud CIEM in Enterprise tier covering AWS IAM and Entra ID/Okta identities on GCP. Core PAM-relevant capabilities: CIEM identifies excessive permissions, unused access, and over-privileged service accounts across GCP (and multicloud in Enterprise); IAM Recommender integration surfaces least privilege recommendations; threat detection identifies compromised identities, credential misuse, data exfiltration, and misconfigurations; DSPM (Data Security Posture Management) with 150+ AI-driven classifiers; attack path simulation prioritizes high-risk findings. PAM-032 partial — threat detection for identity-based attacks in GCP environment, UEBA-like signals. Available as Standard (free), Premium, and Enterprise tiers — most PAM-relevant capabilities require Premium or Enterprise.",
+        docsUrl: "https://cloud.google.com/security/products/security-command-center"
+      },
+      {
+        productId: "V-018-P-005",
+        productName: "Google Security Operations",
+        capabilities: ["PAM-019", "PAM-020", "PAM-021"],
+        partialCapabilities: ["PAM-032"],
+        notes: "Cloud-native SIEM and SOAR — formerly Chronicle. Gartner Magic Quadrant Leader for SIEM 2025. Collects and correlates security telemetry from GCP, Google Workspace, and third-party sources including PAM platforms. Petabyte-scale log ingestion with long retention. AI-powered threat detection using Gemini with curated detections maintained by Google threat researchers. YARA-L custom detection language. Integrated SOAR with playbook automation. Pre-packaged playbooks for GCP-based alerts from Security Command Center. PAM-032 partial — UEBA capabilities with entity risk scoring, anomaly detection for user behavior. Like Splunk, value is dependent on what log sources are connected.",
+        docsUrl: "https://cloud.google.com/security/products/security-operations"
+      },
+      {
+        productId: "V-018-P-006",
+        productName: "Google Workspace Admin",
+        capabilities: [],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-019", "PAM-020", "PAM-025", "PAM-026", "PAM-027"],
+        notes: "Google's productivity suite admin controls — not a PAM product. Scope limited to Google Workspace applications (Gmail, Drive, Docs, Meet, etc.) and does not extend to GCP infrastructure or general enterprise access management. Admin controls: MFA enforcement for all users (TOTP, push, hardware keys, passkeys), SSO configuration, password policy enforcement (complexity, length, history, reuse prevention), account lockout settings, Admin Audit Log (tracks all admin actions), Drive Audit Log, Login Audit Log. Context-Aware Access for Workspace apps (BeyondCorp) adds device trust and location controls. Relevant for organizations where Workspace is a significant part of their privileged data environment. All capabilities are partial — narrowly scoped to Workspace application layer.",
+        docsUrl: "https://support.google.com/a/topic/7570177"
+      }
+    ]
   }
 ];
