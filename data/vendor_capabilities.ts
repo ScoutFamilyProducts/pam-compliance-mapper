@@ -869,5 +869,52 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://support.google.com/a/topic/7570177"
       }
     ]
+  },
+  {
+    vendorId: "V-019",
+    vendorName: "IBM",
+    products: [
+      {
+        productId: "V-019-P-001",
+        productName: "IBM Verify",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-015", "PAM-017", "PAM-018"],
+        partialCapabilities: ["PAM-004", "PAM-005", "PAM-011", "PAM-012", "PAM-019", "PAM-025", "PAM-026"],
+        notes: "Unified IAM SaaS platform — Gartner MQ Leader for Access Management 2025, TrustRadius Buyer's Choice 2026. Core capabilities: SSO via SAML and OIDC, MFA including TOTP, push, hardware keys, adaptive risk-based authentication, user lifecycle governance, delegation, consent management, continuous audit. IBM Verify Gateway for RADIUS extends authentication to Unix/Linux SSH and other services. IBM Verify Bridge for Directory Sync integrates with on-premises directories. Blocking suspicious users via threat-based access policy. PAM-004 partial — adaptive MFA can enforce phishing-resistant methods but depends on policy configuration. PAM-011/PAM-012 partial — lifecycle governance included but full IGA requires IBM Verify Governance.",
+        docsUrl: "https://www.ibm.com/products/verify"
+      },
+      {
+        productId: "V-019-P-002",
+        productName: "IBM Verify Privilege Vault",
+        capabilities: ["PAM-005", "PAM-019", "PAM-020", "PAM-023", "PAM-024", "PAM-025", "PAM-026", "PAM-028", "PAM-029", "PAM-030", "PAM-031", "PAM-033"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-006", "PAM-007", "PAM-008", "PAM-009", "PAM-013", "PAM-014", "PAM-015", "PAM-021"],
+        notes: "Formerly IBM Secret Server — explicitly labeled as such on ibm.com. This is Delinea Secret Server distributed and supported by IBM. Capability profile is identical to Delinea Secret Server On-Premises (V-001-P-001) and Secret Server Cloud (V-001-P-002). Core capabilities: encrypted credential vaulting, automated password rotation, session recording and proxying, privileged account discovery, checkout workflows, RBAC, dual control approvals, SIEM integration, compliance reporting. IBM ecosystem integration: connects with IBM Verify (SaaS) for MFA enforcement and IBM Verify Governance for unified lifecycle management. Available as on-premises or IBM-hosted cloud deployment.",
+        docsUrl: "https://www.ibm.com/products/verify-privileged-identity"
+      },
+      {
+        productId: "V-019-P-003",
+        productName: "IBM Verify Privilege Manager",
+        capabilities: ["PAM-004", "PAM-005", "PAM-009", "PAM-016"],
+        partialCapabilities: ["PAM-006", "PAM-007", "PAM-008", "PAM-010", "PAM-019", "PAM-020", "PAM-021", "PAM-027"],
+        notes: "Endpoint privilege management (PEDM) — rebranded Delinea Privilege Manager distributed by IBM. Capability profile mirrors Delinea Privilege Manager (V-001-P-007). Core capabilities: application control and allowlisting, least privilege enforcement on endpoints (Windows, macOS), privilege elevation workflows for specific applications, blocking unauthorized software execution, local admin account management. Identifies endpoints with administrative privileges. Reduces attack surface by removing standing local admin rights.",
+        docsUrl: "https://www.ibm.com/products/verify-privileged-identity",
+        addOnOf: "V-019-P-002"
+      },
+      {
+        productId: "V-019-P-004",
+        productName: "IBM Verify Governance",
+        capabilities: ["PAM-011", "PAM-012", "PAM-022"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-007", "PAM-021", "PAM-035"],
+        notes: "IGA platform — formerly IBM Security Identity Governance and Intelligence (IGI). Full identity lifecycle management for employees, business partners, customers, system IDs, robots, and IoT devices. Access certifications with SOD violation detection. Integration with Verify Privilege Vault for unified lifecycle management of privileged accounts — prevents toxic combinations of access across both privileged and standard business user accounts. Data Access Governance (DAG) integration. Available as SaaS and on-premises (IBM Security Verify On-Premises FlexPoints bundle).",
+        docsUrl: "https://www.ibm.com/products/verify-governance"
+      },
+      {
+        productId: "V-019-P-005",
+        productName: "IBM Verify Identity Protection",
+        capabilities: ["PAM-032"],
+        partialCapabilities: ["PAM-008", "PAM-010", "PAM-016", "PAM-019", "PAM-020"],
+        notes: "ITDR product — advanced identity threat detection and response with detailed contextual analysis across identity infrastructure. Monitors cloud IdPs, on-premises and hybrid directories, MFA solutions, SSO, and PAM solutions for identity-based threats. Detects: identity system misconfigurations, shadow assets, unauthorized local accounts, missing MFA enforcement, usage of unauthorized SaaS apps, hazardous deviations from identity policy. Identifies and enables remediation of identity-related vulnerabilities. IDC MarketScape 2025 recognized. Not a PAM product — detection and posture management only.",
+        docsUrl: "https://www.ibm.com/products/verify-identity-protection"
+      }
+    ]
   }
 ];
