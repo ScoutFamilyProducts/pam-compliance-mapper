@@ -754,5 +754,51 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://www.semperis.com/active-directory-forest-recovery/"
       }
     ]
+  },
+  {
+    vendorId: "V-016",
+    vendorName: "Netwrix",
+    products: [
+      {
+        productId: "V-016-P-001",
+        productName: "Netwrix Privilege Secure",
+        capabilities: ["PAM-005", "PAM-007", "PAM-008", "PAM-013", "PAM-019", "PAM-020", "PAM-023", "PAM-029", "PAM-030", "PAM-031", "PAM-033"],
+        partialCapabilities: ["PAM-001", "PAM-003", "PAM-006", "PAM-009", "PAM-010", "PAM-014", "PAM-015", "PAM-021"],
+        notes: "Core PAM product — Zero Standing Privilege by design since 2019. Key distinguishing capabilities: Activity Token login accounts generate ephemeral credentials on demand, scoped to the specific task, automatically revoked at session end — no persistent privileged accounts exist in the environment between uses; Bring Your Own Vault (BYOV) — integrates with existing PAM vaults (Delinea, CyberArk, etc.) via out-of-the-box connectors to extend JIT protections without rip-and-replace; post-session cleanup removes Kerberos tickets, disables RDP, and clears session artifacts after every session; Secure Remote Access for VPN-less RPAM covering third-party and workforce access; session recording with searchable video playback; granular SSH command restrictions; real-time session termination and lock; continuous discovery of privileged accounts. JIT access scope covers desktops, servers, directories, cloud resources, network devices, and databases. PAM-001 partial — MFA via integrated IdP or built-in MFA at session initiation. PAM-006 partial — discovers and manages service and task accounts. PAM-015 partial — individual attribution enforced via ephemeral accounts.",
+        docsUrl: "https://netwrix.com/en/products/privilege-secure/"
+      },
+      {
+        productId: "V-016-P-002",
+        productName: "Netwrix Auditor",
+        capabilities: ["PAM-019", "PAM-020", "PAM-021"],
+        partialCapabilities: ["PAM-008", "PAM-010", "PAM-022"],
+        notes: "IT auditing and compliance reporting platform. Collects and correlates audit data across AD, file systems, Exchange, SharePoint, SQL Server, VMware, cloud platforms, and network devices. Pre-built compliance reports mapped to NIST, PCI-DSS, HIPAA, SOX, and other frameworks — reduces manual effort at audit time. Tamper-evident audit trail. Behavior anomaly detection for identifying unusual access patterns. PAM-008 partial — identifies accounts with excessive access rights. PAM-010 partial — identifies dormant accounts and stale access. PAM-022 partial — access review reporting capabilities. Not a PAM product — audit and compliance reporting only.",
+        docsUrl: "https://netwrix.com/en/products/auditor/"
+      },
+      {
+        productId: "V-016-P-003",
+        productName: "Netwrix Access Analyzer",
+        capabilities: ["PAM-008"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-010", "PAM-016", "PAM-017", "PAM-022"],
+        notes: "Access rights analysis and entitlement visibility. Discovers and analyzes access rights across AD, file systems, SharePoint, Exchange, cloud platforms, and other systems. Identifies over-privileged accounts, orphaned accounts, and misconfigured access. Provides entitlement intelligence to support least privilege enforcement and access review processes. Not a PAM product — analysis and visibility only.",
+        docsUrl: "https://netwrix.com/en/products/access-analyzer/"
+      },
+      {
+        productId: "V-016-P-004",
+        productName: "Netwrix Identity Manager",
+        capabilities: ["PAM-011", "PAM-012"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-007", "PAM-022", "PAM-035"],
+        notes: "IGA product for identity lifecycle management. Automates joiner-mover-leaver workflows, access requests, and provisioning. SOD policy enforcement. Access certifications. Lighter-weight IGA compared to SailPoint or Saviynt — positioned for organizations that need governance without enterprise IGA complexity.",
+        docsUrl: "https://netwrix.com/en/products/identity-manager/"
+      },
+      {
+        productId: "V-016-P-005",
+        productName: "Netwrix Password Secure",
+        capabilities: ["PAM-023", "PAM-024", "PAM-028"],
+        partialCapabilities: ["PAM-001", "PAM-005", "PAM-006", "PAM-019", "PAM-021"],
+        notes: "Credential management and password vaulting. Centralized, role-based access to privileged credentials. Password rotation, complexity policy enforcement, MFA at credential checkout. Secure sharing with audit trails. Compliance reporting. Complements Privilege Secure — Password Secure handles credential storage and rotation while Privilege Secure handles JIT access and session management.",
+        docsUrl: "https://netwrix.com/en/products/password-secure/"
+      }
+    ]
   }
 ];
