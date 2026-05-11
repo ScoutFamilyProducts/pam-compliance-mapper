@@ -632,5 +632,54 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html"
       }
     ]
+  },
+  {
+    vendorId: "V-011",
+    vendorName: "SailPoint",
+    products: [
+      {
+        productId: "V-011-P-001",
+        productName: "SailPoint Identity Security Cloud",
+        capabilities: ["PAM-011", "PAM-012", "PAM-022"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-007", "PAM-008", "PAM-021", "PAM-031", "PAM-035"],
+        notes: "SaaS IGA platform built on SailPoint Atlas. Trusted by 53% of the Fortune 500. Core capabilities: Lifecycle Management (joiner-mover-leaver automation triggered by HR system events), access certification campaigns (AI-driven recommendations using sign-in frequency and entitlement usage data), access request workflows with approval automation, provisioning and deprovisioning to connected applications, SOD policy enforcement with preventative controls, compliance management with continuous audit readiness. Accelerated Application Management reduces application onboarding time. SAP IAG integration for preventative SOD checks in SAP environments. AI-driven access recommendations improve certification quality. Privilege Security Posture Management (PSPM) emerging within ISC as of March 2026: privilege discovery and classification, privilege insights, JIT access (in development), privilege governance, alert and respond capabilities — not yet fully GA. PAM-031 partial — JIT component of PSPM in development. PAM-006 partial — machine identity and service account governance improving with PSPM. Does not provide credential vaulting, session recording, MFA, or infrastructure access management.",
+        docsUrl: "https://documentation.sailpoint.com/"
+      },
+      {
+        productId: "V-011-P-002",
+        productName: "SailPoint IdentityIQ",
+        capabilities: ["PAM-011", "PAM-012", "PAM-022"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-007", "PAM-008", "PAM-021", "PAM-035"],
+        notes: "On-premises IGA platform — legacy product, still actively maintained and deployed in large enterprises. Identical core capability set to Identity Security Cloud: lifecycle management, access certifications, access requests, provisioning, SOD enforcement, compliance. Customer-managed deployment — greater customization but higher operational overhead. PSPM capabilities are being delivered through ISC (SaaS) first.",
+        docsUrl: "https://documentation.sailpoint.com/"
+      },
+      {
+        productId: "V-011-P-003",
+        productName: "SailPoint Non-Employee Risk Management",
+        capabilities: ["PAM-012"],
+        partialCapabilities: ["PAM-011", "PAM-013", "PAM-022"],
+        notes: "Add-on to Identity Security Cloud. Governs third-party and contractor identity lifecycle — onboarding, access assignment, access reviews, and offboarding for non-employees. Manages the full lifecycle of vendor, contractor, and partner identities separately from employee identities. PAM-013 partial — manages vendor identity governance but not session-level privileged access controls.",
+        docsUrl: "https://documentation.sailpoint.com/",
+        addOnOf: "V-011-P-001"
+      },
+      {
+        productId: "V-011-P-004",
+        productName: "SailPoint Machine Identity Security",
+        capabilities: ["PAM-008"],
+        partialCapabilities: ["PAM-006", "PAM-010", "PAM-022"],
+        notes: "Add-on to Identity Security Cloud for non-human identity (NHI) governance. Discovers and governs service accounts, machine accounts, AI agents, and other non-human identities. Machine Account Migration capability transfers machine accounts into proper governance. Connectors for AI agents from Microsoft 365 Copilot, Databricks, Amazon Bedrock, Google Vertex AI, Salesforce Agentforce, ServiceNow AI Platform. Identifies dormant machine accounts and over-privileged service identities. Does not rotate credentials or provide vault — governance and visibility only.",
+        docsUrl: "https://documentation.sailpoint.com/",
+        addOnOf: "V-011-P-001"
+      },
+      {
+        productId: "V-011-P-005",
+        productName: "SailPoint Cloud Access",
+        capabilities: ["PAM-008"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-016", "PAM-017", "PAM-022"],
+        notes: "CIEM add-on to Identity Security Cloud. Discovers and governs access to cloud entitlements and certifications with an identity-focused approach. Identifies over-privileged cloud identities, unused entitlements, and misconfigured access in cloud environments. Integrates cloud entitlement data into access certification campaigns.",
+        docsUrl: "https://documentation.sailpoint.com/",
+        addOnOf: "V-011-P-001"
+      }
+    ]
   }
 ];
