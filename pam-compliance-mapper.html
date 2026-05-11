@@ -833,60 +833,45 @@
       border-bottom: 1px solid var(--border-standard);
     }
 
-    .vendor-accordion {
+    .vendor-list {
       display: flex;
       flex-direction: column;
-      gap: 1px;
+      gap: 0.75rem;
+      max-height: 500px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
     }
 
-    /* Vendor row (accordion header) */
-    .vendor-row {
+    .vendor-group {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 0.75rem;
-      background: rgba(255,255,255,0.01);
-      border: 1px solid var(--border-nav);
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.15s;
-      margin-bottom: 2px;
-    }
-
-    .vendor-row:hover {
-      border-color: var(--border-hover);
-      background: rgba(255,255,255,0.02);
-    }
-
-    .vendor-row.expanded {
-      border-left: 2px solid var(--accent-green);
-      border-radius: 4px 4px 0 0;
-      margin-bottom: 0;
-    }
-
-    .vendor-row.has-selection .vendor-name {
-      color: var(--text-primary);
-    }
-
-    .vendor-row input[type="checkbox"] {
-      accent-color: var(--accent-green);
-      cursor: pointer;
-      width: 14px;
-      height: 14px;
-      flex-shrink: 0;
+      flex-direction: column;
+      gap: 0.25rem;
     }
 
     .vendor-name {
-      flex: 1;
-      font-size: 0.78rem;
-      color: var(--text-secondary);
-      transition: color 0.15s;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-primary);
     }
 
-    .vendor-chevron {
-      color: var(--text-very-muted);
-      font-size: 0.7rem;
-      transition: transform 0.2s;
+    .product-select {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--border-nav);
+      border-radius: 4px;
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      padding: 0.25rem;
+      min-height: 60px;
+      width: 100%;
+    }
+
+    .product-select option {
+      padding: 0.25rem 0.5rem;
+    }
+
+    .product-select option:checked {
+      background: var(--accent-green);
+      color: #000;
       flex-shrink: 0;
     }
 
@@ -2024,13 +2009,10 @@
         <span class="pill pill-green">Live</span>
         <span class="pill pill-green">Free</span>
         <span class="pill pill-dim">No account required</span>
-        <span class="pill pill-methodology" id="methodology-pill">Methodology</span>
+        <span class="pill pill-methodology" onclick="var t=document.getElementById('methodology-tip');t.style.display=t.style.display==='none'?'block':'none'">METHODOLOGY</span>
       </div>
-      <div class="methodology-tooltip" id="methodology-tooltip">
-        <div class="methodology-tooltip-header">Data Sources</div>
-        <div class="methodology-tooltip-content">
-          <p>Capability mappings are based on publicly available vendor documentation. In limited cases where vendors restrict technical documentation to authenticated customers, mappings were developed from public product information, analyst reports, and industry sources.</p>
-        </div>
+      <div id="methodology-tip" style="display:none; background:#0f1923; border:1px solid rgba(157,255,0,0.2); color:#94A3B8; font-size:0.8rem; line-height:1.7; padding:1rem 1.25rem; margin-top:0.5rem; max-width:560px; border-radius:4px;">
+        Capability mappings are based on publicly available vendor documentation. In limited cases where vendors restrict technical documentation to authenticated customers, mappings were developed from public product information, analyst reports, and industry sources.
       </div>
       <div class="hero-updated">Vendor and framework data last updated May 2026</div>
       <button type="button" class="disclaimer-btn" onclick="toggleDisclaimer()">Disclaimer</button>
@@ -2048,19 +2030,510 @@
         <div class="vendor-columns">
           <div class="vendor-column">
             <div class="vendor-column-header">Commercial Vendors</div>
-            <div style="color:red;font-size:12px;padding:8px;">DEBUG: If you see this, container exists. JS should replace this.</div>
-            <div class="vendor-accordion" id="commercial-vendor-list">
-              <!-- HARDCODED TEST ROW -->
-              <div class="vendor-row" data-vendor-id="test-V-001">
-                <input type="checkbox" class="vendor-checkbox" id="cb-test-V-001" data-vendor="Test Vendor">
-                <span class="vendor-name">HARDCODED TEST VENDOR</span>
-                <span class="vendor-chevron">&#9654;</span>
+            <div class="vendor-list">
+              <div class="vendor-group">
+                <div class="vendor-name">1Kosmos</div>
+                <select class="product-select" data-vendor="1Kosmos" multiple>
+                  <option value="V-053-P-001">1Kosmos BlockID</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">ARCON</div>
+                <select class="product-select" data-vendor="ARCON" multiple>
+                  <option value="V-024-P-001">ARCON PAM</option>
+                  <option value="V-024-P-002">ARCON EPM</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">AWS</div>
+                <select class="product-select" data-vendor="AWS" multiple>
+                  <option value="V-010-P-001">AWS IAM</option>
+                  <option value="V-010-P-002">AWS IAM Identity Center</option>
+                  <option value="V-010-P-003">AWS Secrets Manager</option>
+                  <option value="V-010-P-004">AWS CloudTrail</option>
+                  <option value="V-010-P-005">AWS GuardDuty</option>
+                  <option value="V-010-P-006">AWS IAM Access Analyzer</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Beyond Identity</div>
+                <select class="product-select" data-vendor="Beyond Identity" multiple>
+                  <option value="V-048-P-001">Beyond Identity Secure Workforce</option>
+                  <option value="V-048-P-002">Beyond Identity Secure DevOps</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">BeyondTrust</div>
+                <select class="product-select" data-vendor="BeyondTrust" multiple>
+                  <option value="V-003-P-001">BeyondTrust Password Safe</option>
+                  <option value="V-003-P-002">BeyondTrust Privileged Remote Access</option>
+                  <option value="V-003-P-003">BeyondTrust EPM for Windows and Mac</option>
+                  <option value="V-003-P-004">BeyondTrust EPM for Unix and Linux</option>
+                  <option value="V-003-P-005">BeyondTrust Identity Security Insights</option>
+                  <option value="V-003-P-006">BeyondTrust Entitle</option>
+                  <option value="V-003-P-007">BeyondTrust AD Bridge</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Broadcom</div>
+                <select class="product-select" data-vendor="Broadcom" multiple>
+                  <option value="V-046-P-001">Symantec IGA</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Cisco Duo</div>
+                <select class="product-select" data-vendor="Cisco Duo" multiple>
+                  <option value="V-025-P-001">Cisco Duo</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">CrowdStrike</div>
+                <select class="product-select" data-vendor="CrowdStrike" multiple>
+                  <option value="V-035-P-001">CrowdStrike Falcon Next-Gen SIEM</option>
+                  <option value="V-035-P-002">CrowdStrike Falcon Next-Gen Identity Security</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">CyberArk</div>
+                <select class="product-select" data-vendor="CyberArk" multiple>
+                  <option value="V-002-P-001">CyberArk Privilege Cloud</option>
+                  <option value="V-002-P-002">CyberArk PAM Self-Hosted</option>
+                  <option value="V-002-P-003">CyberArk Secure Infrastructure Access</option>
+                  <option value="V-002-P-004">CyberArk Remote Access</option>
+                  <option value="V-002-P-005">CyberArk Endpoint Privilege Manager</option>
+                  <option value="V-002-P-006">CyberArk Identity</option>
+                  <option value="V-002-P-007">CyberArk IGA</option>
+                  <option value="V-002-P-008">CyberArk Secrets Manager SaaS</option>
+                  <option value="V-002-P-009">CyberArk Secrets Manager Self-Hosted</option>
+                  <option value="V-002-P-010">CyberArk Secrets Hub</option>
+                  <option value="V-002-P-011">CyberArk Secure Cloud Access</option>
+                  <option value="V-002-P-012">CyberArk Cloud Visibility</option>
+                  <option value="V-002-P-013">CyberArk Identity Security Intelligence</option>
+                  <option value="V-002-P-014">CyberArk Identity Compliance</option>
+                  <option value="V-002-P-015">CyberArk Secure Web Sessions</option>
+                  <option value="V-002-P-016">CyberArk Workforce Password Management</option>
+                  <option value="V-002-P-017">CyberArk Discovery and Context</option>
+                  <option value="V-002-P-018">CyberArk Secure Browser</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Delinea</div>
+                <select class="product-select" data-vendor="Delinea" multiple>
+                  <option value="V-001-P-001">Secret Server On-Premises</option>
+                  <option value="V-001-P-002">Secret Server Cloud</option>
+                  <option value="V-001-P-003">Delinea Platform</option>
+                  <option value="V-001-P-004">Privilege Control for Servers</option>
+                  <option value="V-001-P-005">Server Suite</option>
+                  <option value="V-001-P-006">Delinea Cloud Suite</option>
+                  <option value="V-001-P-007">Privilege Manager</option>
+                  <option value="V-001-P-008">Delinea StrongDM</option>
+                  <option value="V-001-P-009">Delinea Fastpath</option>
+                  <option value="V-001-P-010">Delinea Credential Manager</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Elastic Security</div>
+                <select class="product-select" data-vendor="Elastic Security" multiple>
+                  <option value="V-028-P-001">Elastic Security</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Entrust</div>
+                <select class="product-select" data-vendor="Entrust" multiple>
+                  <option value="V-040-P-001">Entrust IDaaS</option>
+                  <option value="V-040-P-002">Entrust Identity Enterprise</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Exabeam</div>
+                <select class="product-select" data-vendor="Exabeam" multiple>
+                  <option value="V-027-P-001">Exabeam Security Operations Platform</option>
+                  <option value="V-027-P-002">Exabeam New-Scale Analytics</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Fortinet</div>
+                <select class="product-select" data-vendor="Fortinet" multiple>
+                  <option value="V-037-P-001">FortiSIEM</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Google</div>
+                <select class="product-select" data-vendor="Google" multiple>
+                  <option value="V-018-P-001">Google Cloud IAM</option>
+                  <option value="V-018-P-002">Google Cloud Privileged Access Manager</option>
+                  <option value="V-018-P-003">Google Cloud Identity</option>
+                  <option value="V-018-P-004">Google Security Command Center</option>
+                  <option value="V-018-P-005">Google Security Operations</option>
+                  <option value="V-018-P-006">Google Workspace Admin</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Gurucul</div>
+                <select class="product-select" data-vendor="Gurucul" multiple>
+                  <option value="V-036-P-001">Gurucul Next-Gen SIEM</option>
+                  <option value="V-036-P-002">Gurucul UEBA</option>
+                  <option value="V-036-P-003">Gurucul AI-IRM</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">HashiCorp</div>
+                <select class="product-select" data-vendor="HashiCorp" multiple>
+                  <option value="V-008-P-001">HashiCorp Vault</option>
+                  <option value="V-008-P-002">HashiCorp Boundary</option>
+                  <option value="V-008-P-003">HashiCorp Vault Radar</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">HID Global</div>
+                <select class="product-select" data-vendor="HID Global" multiple>
+                  <option value="V-052-P-001">HID DigitalPersona</option>
+                  <option value="V-052-P-002">HID Crescendo Cards and Keys</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">HYPR</div>
+                <select class="product-select" data-vendor="HYPR" multiple>
+                  <option value="V-050-P-001">HYPR Identity Assurance Platform</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">IBM</div>
+                <select class="product-select" data-vendor="IBM" multiple>
+                  <option value="V-019-P-001">IBM Verify</option>
+                  <option value="V-019-P-002">IBM Verify Privilege Vault</option>
+                  <option value="V-019-P-003">IBM Verify Privilege Manager</option>
+                  <option value="V-019-P-004">IBM Verify Governance</option>
+                  <option value="V-019-P-005">IBM Verify Identity Protection</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">JumpCloud</div>
+                <select class="product-select" data-vendor="JumpCloud" multiple>
+                  <option value="V-013-P-001">JumpCloud Directory Platform</option>
+                  <option value="V-013-P-002">JumpCloud PAM</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">KeeperPAM</div>
+                <select class="product-select" data-vendor="KeeperPAM" multiple>
+                  <option value="V-004-P-001">KeeperPAM</option>
+                  <option value="V-004-P-002">Keeper Endpoint Privilege Manager</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">ManageEngine</div>
+                <select class="product-select" data-vendor="ManageEngine" multiple>
+                  <option value="V-021-P-001">ManageEngine PAM360</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Microsoft</div>
+                <select class="product-select" data-vendor="Microsoft" multiple>
+                  <option value="V-009-P-001">Microsoft Entra ID P1</option>
+                  <option value="V-009-P-002">Microsoft Entra ID P2</option>
+                  <option value="V-009-P-003">Microsoft Entra ID Governance</option>
+                  <option value="V-009-P-004">Microsoft Entra Permissions Management</option>
+                  <option value="V-009-P-005">Microsoft Purview Privileged Access Management</option>
+                  <option value="V-009-P-006">Azure Key Vault</option>
+                  <option value="V-009-P-007">Microsoft Defender for Identity</option>
+                  <option value="V-009-P-008">Microsoft Sentinel</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Nametag</div>
+                <select class="product-select" data-vendor="Nametag" multiple>
+                  <option value="V-056-P-001">Nametag Identity Verification Platform</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Netwrix</div>
+                <select class="product-select" data-vendor="Netwrix" multiple>
+                  <option value="V-016-P-001">Netwrix Privilege Secure</option>
+                  <option value="V-016-P-002">Netwrix Auditor</option>
+                  <option value="V-016-P-003">Netwrix Access Analyzer</option>
+                  <option value="V-016-P-004">Netwrix Identity Manager</option>
+                  <option value="V-016-P-005">Netwrix Password Secure</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Okta</div>
+                <select class="product-select" data-vendor="Okta" multiple>
+                  <option value="V-007-P-001">Okta Workforce Identity Cloud</option>
+                  <option value="V-007-P-002">Okta Identity Governance</option>
+                  <option value="V-007-P-003">Okta Privileged Access</option>
+                  <option value="V-007-P-004">Okta Device Access</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Omada</div>
+                <select class="product-select" data-vendor="Omada" multiple>
+                  <option value="V-026-P-001">Omada Identity Cloud</option>
+                  <option value="V-026-P-002">Omada Identity On-Premises</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">One Identity</div>
+                <select class="product-select" data-vendor="One Identity" multiple>
+                  <option value="V-005-P-001">One Identity Safeguard for Privileged Passwords</option>
+                  <option value="V-005-P-002">One Identity Safeguard for Privileged Sessions</option>
+                  <option value="V-005-P-003">One Identity Safeguard for Privileged Analytics</option>
+                  <option value="V-005-P-004">One Identity Safeguard On Demand</option>
+                  <option value="V-005-P-005">One Identity Manager</option>
+                  <option value="V-005-P-006">One Identity Safeguard Authentication Services</option>
+                  <option value="V-005-P-007">One Identity Privilege Manager for Unix Linux macOS</option>
+                  <option value="V-005-P-008">OneLogin Workforce Identity</option>
+                  <option value="V-005-P-009">One Identity Active Roles</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">OpenText</div>
+                <select class="product-select" data-vendor="OpenText" multiple>
+                  <option value="V-047-P-001">OpenText Identity Manager</option>
+                  <option value="V-047-P-002">OpenText NetIQ Access Manager</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Oracle</div>
+                <select class="product-select" data-vendor="Oracle" multiple>
+                  <option value="V-043-P-001">Oracle Identity Governance (OIG)</option>
+                  <option value="V-043-P-002">Oracle Access Governance</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Palo Alto Networks</div>
+                <select class="product-select" data-vendor="Palo Alto Networks" multiple>
+                  <option value="V-038-P-001">Cortex XSIAM</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Pathlock</div>
+                <select class="product-select" data-vendor="Pathlock" multiple>
+                  <option value="V-045-P-001">Pathlock Cloud</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Ping Identity</div>
+                <select class="product-select" data-vendor="Ping Identity" multiple>
+                  <option value="V-020-P-001">PingOne Advanced Identity Cloud</option>
+                  <option value="V-020-P-002">PingOne Privilege</option>
+                  <option value="V-020-P-003">PingFederate</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Quest Software</div>
+                <select class="product-select" data-vendor="Quest Software" multiple>
+                  <option value="V-023-P-001">Quest ChangeAuditor</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Rapid7</div>
+                <select class="product-select" data-vendor="Rapid7" multiple>
+                  <option value="V-022-P-001">Rapid7 InsightIDR</option>
+                  <option value="V-022-P-002">Rapid7 InsightCloudSec</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">RSA</div>
+                <select class="product-select" data-vendor="RSA" multiple>
+                  <option value="V-039-P-001">RSA ID Plus</option>
+                  <option value="V-039-P-002">RSA Governance &amp; Lifecycle</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">SAP</div>
+                <select class="product-select" data-vendor="SAP" multiple>
+                  <option value="V-044-P-001">SAP Cloud Identity Access Governance</option>
+                  <option value="V-044-P-002">SAP Access Control</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">SailPoint</div>
+                <select class="product-select" data-vendor="SailPoint" multiple>
+                  <option value="V-011-P-001">SailPoint Identity Security Cloud</option>
+                  <option value="V-011-P-002">SailPoint IdentityIQ</option>
+                  <option value="V-011-P-003">SailPoint Non-Employee Risk Management</option>
+                  <option value="V-011-P-004">SailPoint Machine Identity Security</option>
+                  <option value="V-011-P-005">SailPoint Cloud Access</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Saviynt</div>
+                <select class="product-select" data-vendor="Saviynt" multiple>
+                  <option value="V-012-P-001">Saviynt Identity Cloud</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">SecureAuth</div>
+                <select class="product-select" data-vendor="SecureAuth" multiple>
+                  <option value="V-051-P-001">SecureAuth Identity Platform</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Securonix</div>
+                <select class="product-select" data-vendor="Securonix" multiple>
+                  <option value="V-034-P-001">Securonix Unified Defense SIEM</option>
+                  <option value="V-034-P-002">Securonix UEBA</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Segura</div>
+                <select class="product-select" data-vendor="Segura" multiple>
+                  <option value="V-032-P-001">Segura PAM Core</option>
+                  <option value="V-032-P-002">Segura Endpoint Privilege Manager</option>
+                  <option value="V-032-P-003">Segura DevOps Secret Manager</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Semperis</div>
+                <select class="product-select" data-vendor="Semperis" multiple>
+                  <option value="V-015-P-001">Semperis Directory Services Protector</option>
+                  <option value="V-015-P-002">Semperis Active Directory Forest Recovery</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">SentinelOne</div>
+                <select class="product-select" data-vendor="SentinelOne" multiple>
+                  <option value="V-030-P-001">SentinelOne Singularity Identity</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">ServiceNow</div>
+                <select class="product-select" data-vendor="ServiceNow" multiple>
+                  <option value="V-049-P-001">ServiceNow Identity Security (Veza)</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Silverfort</div>
+                <select class="product-select" data-vendor="Silverfort" multiple>
+                  <option value="V-006-P-001">Silverfort Identity Security Platform</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">SpecterOps</div>
+                <select class="product-select" data-vendor="SpecterOps" multiple>
+                  <option value="V-029-P-001">BloodHound Enterprise</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Splunk</div>
+                <select class="product-select" data-vendor="Splunk" multiple>
+                  <option value="V-014-P-001">Splunk Enterprise Security</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Tenable</div>
+                <select class="product-select" data-vendor="Tenable" multiple>
+                  <option value="V-031-P-001">Tenable Identity Exposure</option>
+                  <option value="V-031-P-002">Tenable CIEM</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Thales</div>
+                <select class="product-select" data-vendor="Thales" multiple>
+                  <option value="V-042-P-001">SafeNet Trusted Access</option>
+                  <option value="V-042-P-002">Thales OneWelcome Identity Platform</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Transmit Security</div>
+                <select class="product-select" data-vendor="Transmit Security" multiple>
+                  <option value="V-041-P-001">Mosaic by Transmit Security</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Trusona</div>
+                <select class="product-select" data-vendor="Trusona" multiple>
+                  <option value="V-055-P-001">Trusona Authentication Cloud</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Varonis</div>
+                <select class="product-select" data-vendor="Varonis" multiple>
+                  <option value="V-017-P-001">Varonis Data Security Platform</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">WALLIX</div>
+                <select class="product-select" data-vendor="WALLIX" multiple>
+                  <option value="V-033-P-001">WALLIX Bastion</option>
+                  <option value="V-033-P-002">WALLIX Remote Access</option>
+                  <option value="V-033-P-003">WALLIX IDaaS</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Yubico</div>
+                <select class="product-select" data-vendor="Yubico" multiple>
+                  <option value="V-054-P-001">YubiKey</option>
+                  <option value="V-054-P-002">YubiHSM 2</option>
+                </select>
               </div>
             </div>
           </div>
           <div class="vendor-column">
-            <div class="vendor-column-header">Freeware & Open Source</div>
-            <div class="vendor-accordion" id="freeware-vendor-list"></div>
+            <div class="vendor-column-header">Freeware &amp; Open Source</div>
+            <div class="vendor-list">
+              <div class="vendor-group">
+                <div class="vendor-name">Ansible Vault</div>
+                <select class="product-select" data-vendor="Ansible Vault" multiple>
+                  <option value="FW-008-P-001">Ansible Vault</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">BloodHound Community Edition</div>
+                <select class="product-select" data-vendor="BloodHound Community Edition" multiple>
+                  <option value="FW-001-P-001">BloodHound CE</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">CyberArk Conjur Open Source</div>
+                <select class="product-select" data-vendor="CyberArk Conjur Open Source" multiple>
+                  <option value="FW-006-P-001">Conjur Open Source</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Forest Druid</div>
+                <select class="product-select" data-vendor="Forest Druid" multiple>
+                  <option value="FW-003-P-001">Forest Druid</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Keycloak</div>
+                <select class="product-select" data-vendor="Keycloak" multiple>
+                  <option value="FW-010-P-001">Keycloak</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">OpenSSH</div>
+                <select class="product-select" data-vendor="OpenSSH" multiple>
+                  <option value="FW-009-P-001">OpenSSH</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Passbolt Community Edition</div>
+                <select class="product-select" data-vendor="Passbolt Community Edition" multiple>
+                  <option value="FW-007-P-001">Passbolt CE</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Purple Knight</div>
+                <select class="product-select" data-vendor="Purple Knight" multiple>
+                  <option value="FW-002-P-001">Purple Knight</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Teleport Community Edition</div>
+                <select class="product-select" data-vendor="Teleport Community Edition" multiple>
+                  <option value="FW-005-P-001">Teleport Community Edition</option>
+                </select>
+              </div>
+              <div class="vendor-group">
+                <div class="vendor-name">Windows LAPS</div>
+                <select class="product-select" data-vendor="Windows LAPS" multiple>
+                  <option value="FW-004-P-001">Windows LAPS</option>
+                </select>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -2154,11 +2627,6 @@
   </footer>
 
   <script>
-    document.title = "JS RUNNING";
-    window.onerror = function(msg, url, line, col, error) {
-      document.body.innerHTML = '<div style="background:red;color:white;padding:20px;font-size:16px;">SCRIPT ERROR: ' + msg + ' at line ' + line + '</div>' + document.body.innerHTML;
-      return false;
-    };
     // Question definitions
     const questions = {
       q1: { controls: ["PAM-001","PAM-002","PAM-003"], processFlag: false, hasThreshold: false },
@@ -2925,11 +3393,16 @@
       // Clear previous errors
       errorDiv.textContent = '';
 
-      // Collect selected vendors from product checkboxes
-      const productCheckboxes = document.querySelectorAll('.product-checkbox:checked');
-      const selectedVendors = Array.from(productCheckboxes).map(cb => {
-        return cb.getAttribute('data-vendor') || '';
-      }).filter(v => v);
+      // Collect selected vendors from product selects
+      const productSelects = document.querySelectorAll('.product-select');
+      const selectedVendors = [];
+      productSelects.forEach(select => {
+        const vendor = select.getAttribute('data-vendor');
+        const hasSelection = Array.from(select.selectedOptions).length > 0;
+        if (vendor && hasSelection) {
+          selectedVendors.push(vendor);
+        }
+      });
 
       // Deduplicate vendor names
       const uniqueVendors = [...new Set(selectedVendors)];
@@ -3181,242 +3654,9 @@
       document.getElementById('print-instructions').style.display = 'none';
     }
 
-    // Static vendor data (updated May 2026)
-    const VENDOR_DATA = {
-      commercial: [
-        { vendorId: "V-053", vendorName: "1Kosmos", products: [{ productId: "V-053-P-001", productName: "1Kosmos BlockID" }] },
-        { vendorId: "V-024", vendorName: "ARCON", products: [{ productId: "V-024-P-001", productName: "ARCON PAM" }, { productId: "V-024-P-002", productName: "ARCON EPM" }] },
-        { vendorId: "V-010", vendorName: "AWS", products: [{ productId: "V-010-P-001", productName: "AWS IAM" }, { productId: "V-010-P-002", productName: "AWS IAM Identity Center" }, { productId: "V-010-P-003", productName: "AWS Secrets Manager" }, { productId: "V-010-P-004", productName: "AWS CloudTrail" }, { productId: "V-010-P-005", productName: "AWS GuardDuty" }, { productId: "V-010-P-006", productName: "AWS IAM Access Analyzer" }] },
-        { vendorId: "V-048", vendorName: "Beyond Identity", products: [{ productId: "V-048-P-001", productName: "Beyond Identity Secure Workforce" }, { productId: "V-048-P-002", productName: "Beyond Identity Secure DevOps" }] },
-        { vendorId: "V-003", vendorName: "BeyondTrust", products: [{ productId: "V-003-P-001", productName: "BeyondTrust Password Safe" }, { productId: "V-003-P-002", productName: "BeyondTrust Privileged Remote Access" }, { productId: "V-003-P-003", productName: "BeyondTrust EPM for Windows and Mac" }, { productId: "V-003-P-004", productName: "BeyondTrust EPM for Unix and Linux" }, { productId: "V-003-P-005", productName: "BeyondTrust Identity Security Insights" }, { productId: "V-003-P-006", productName: "BeyondTrust Entitle" }, { productId: "V-003-P-007", productName: "BeyondTrust AD Bridge" }] },
-        { vendorId: "V-046", vendorName: "Broadcom", products: [{ productId: "V-046-P-001", productName: "Symantec IGA" }] },
-        { vendorId: "V-025", vendorName: "Cisco Duo", products: [{ productId: "V-025-P-001", productName: "Cisco Duo" }] },
-        { vendorId: "V-035", vendorName: "CrowdStrike", products: [{ productId: "V-035-P-001", productName: "CrowdStrike Falcon Next-Gen SIEM" }, { productId: "V-035-P-002", productName: "CrowdStrike Falcon Next-Gen Identity Security" }] },
-        { vendorId: "V-002", vendorName: "CyberArk", products: [{ productId: "V-002-P-001", productName: "CyberArk Privilege Cloud" }, { productId: "V-002-P-002", productName: "CyberArk PAM Self-Hosted" }, { productId: "V-002-P-003", productName: "CyberArk Secure Infrastructure Access" }, { productId: "V-002-P-004", productName: "CyberArk Remote Access" }, { productId: "V-002-P-005", productName: "CyberArk Endpoint Privilege Manager" }, { productId: "V-002-P-006", productName: "CyberArk Identity" }, { productId: "V-002-P-007", productName: "CyberArk IGA" }, { productId: "V-002-P-008", productName: "CyberArk Secrets Manager SaaS" }, { productId: "V-002-P-009", productName: "CyberArk Secrets Manager Self-Hosted" }, { productId: "V-002-P-010", productName: "CyberArk Secrets Hub" }, { productId: "V-002-P-011", productName: "CyberArk Secure Cloud Access" }, { productId: "V-002-P-012", productName: "CyberArk Cloud Visibility" }, { productId: "V-002-P-013", productName: "CyberArk Identity Security Intelligence" }, { productId: "V-002-P-014", productName: "CyberArk Identity Compliance" }, { productId: "V-002-P-015", productName: "CyberArk Secure Web Sessions" }, { productId: "V-002-P-016", productName: "CyberArk Workforce Password Management" }, { productId: "V-002-P-017", productName: "CyberArk Discovery and Context" }, { productId: "V-002-P-018", productName: "CyberArk Secure Browser" }] },
-        { vendorId: "V-001", vendorName: "Delinea", products: [{ productId: "V-001-P-001", productName: "Secret Server On-Premises" }, { productId: "V-001-P-002", productName: "Secret Server Cloud" }, { productId: "V-001-P-003", productName: "Delinea Platform" }, { productId: "V-001-P-004", productName: "Privilege Control for Servers" }, { productId: "V-001-P-005", productName: "Server Suite" }, { productId: "V-001-P-006", productName: "Delinea Cloud Suite" }, { productId: "V-001-P-007", productName: "Privilege Manager" }, { productId: "V-001-P-008", productName: "Delinea StrongDM" }, { productId: "V-001-P-009", productName: "Delinea Fastpath" }, { productId: "V-001-P-010", productName: "Delinea Credential Manager" }] },
-        { vendorId: "V-028", vendorName: "Elastic Security", products: [{ productId: "V-028-P-001", productName: "Elastic Security" }] },
-        { vendorId: "V-040", vendorName: "Entrust", products: [{ productId: "V-040-P-001", productName: "Entrust IDaaS" }, { productId: "V-040-P-002", productName: "Entrust Identity Enterprise" }] },
-        { vendorId: "V-027", vendorName: "Exabeam", products: [{ productId: "V-027-P-001", productName: "Exabeam Security Operations Platform" }, { productId: "V-027-P-002", productName: "Exabeam New-Scale Analytics" }] },
-        { vendorId: "V-037", vendorName: "Fortinet", products: [{ productId: "V-037-P-001", productName: "FortiSIEM" }] },
-        { vendorId: "V-018", vendorName: "Google", products: [{ productId: "V-018-P-001", productName: "Google Cloud IAM" }, { productId: "V-018-P-002", productName: "Google Cloud Privileged Access Manager" }, { productId: "V-018-P-003", productName: "Google Cloud Identity" }, { productId: "V-018-P-004", productName: "Google Security Command Center" }, { productId: "V-018-P-005", productName: "Google Security Operations" }, { productId: "V-018-P-006", productName: "Google Workspace Admin" }] },
-        { vendorId: "V-036", vendorName: "Gurucul", products: [{ productId: "V-036-P-001", productName: "Gurucul Next-Gen SIEM" }, { productId: "V-036-P-002", productName: "Gurucul UEBA" }, { productId: "V-036-P-003", productName: "Gurucul AI-IRM" }] },
-        { vendorId: "V-008", vendorName: "HashiCorp", products: [{ productId: "V-008-P-001", productName: "HashiCorp Vault" }, { productId: "V-008-P-002", productName: "HashiCorp Boundary" }, { productId: "V-008-P-003", productName: "HashiCorp Vault Radar" }] },
-        { vendorId: "V-052", vendorName: "HID Global", products: [{ productId: "V-052-P-001", productName: "HID DigitalPersona" }, { productId: "V-052-P-002", productName: "HID Crescendo Cards and Keys" }] },
-        { vendorId: "V-050", vendorName: "HYPR", products: [{ productId: "V-050-P-001", productName: "HYPR Identity Assurance Platform" }] },
-        { vendorId: "V-019", vendorName: "IBM", products: [{ productId: "V-019-P-001", productName: "IBM Verify" }, { productId: "V-019-P-002", productName: "IBM Verify Privilege Vault" }, { productId: "V-019-P-003", productName: "IBM Verify Privilege Manager" }, { productId: "V-019-P-004", productName: "IBM Verify Governance" }, { productId: "V-019-P-005", productName: "IBM Verify Identity Protection" }] },
-        { vendorId: "V-013", vendorName: "JumpCloud", products: [{ productId: "V-013-P-001", productName: "JumpCloud Directory Platform" }, { productId: "V-013-P-002", productName: "JumpCloud PAM" }] },
-        { vendorId: "V-004", vendorName: "KeeperPAM", products: [{ productId: "V-004-P-001", productName: "KeeperPAM" }, { productId: "V-004-P-002", productName: "Keeper Endpoint Privilege Manager" }] },
-        { vendorId: "V-021", vendorName: "ManageEngine", products: [{ productId: "V-021-P-001", productName: "ManageEngine PAM360" }] },
-        { vendorId: "V-009", vendorName: "Microsoft", products: [{ productId: "V-009-P-001", productName: "Microsoft Entra ID P1" }, { productId: "V-009-P-002", productName: "Microsoft Entra ID P2" }, { productId: "V-009-P-003", productName: "Microsoft Entra ID Governance" }, { productId: "V-009-P-004", productName: "Microsoft Entra Permissions Management" }, { productId: "V-009-P-005", productName: "Microsoft Purview Privileged Access Management" }, { productId: "V-009-P-006", productName: "Azure Key Vault" }, { productId: "V-009-P-007", productName: "Microsoft Defender for Identity" }, { productId: "V-009-P-008", productName: "Microsoft Sentinel" }] },
-        { vendorId: "V-056", vendorName: "Nametag", products: [{ productId: "V-056-P-001", productName: "Nametag Identity Verification Platform" }] },
-        { vendorId: "V-016", vendorName: "Netwrix", products: [{ productId: "V-016-P-001", productName: "Netwrix Privilege Secure" }, { productId: "V-016-P-002", productName: "Netwrix Auditor" }, { productId: "V-016-P-003", productName: "Netwrix Access Analyzer" }, { productId: "V-016-P-004", productName: "Netwrix Identity Manager" }, { productId: "V-016-P-005", productName: "Netwrix Password Secure" }] },
-        { vendorId: "V-007", vendorName: "Okta", products: [{ productId: "V-007-P-001", productName: "Okta Workforce Identity Cloud" }, { productId: "V-007-P-002", productName: "Okta Identity Governance" }, { productId: "V-007-P-003", productName: "Okta Privileged Access" }, { productId: "V-007-P-004", productName: "Okta Device Access" }] },
-        { vendorId: "V-026", vendorName: "Omada", products: [{ productId: "V-026-P-001", productName: "Omada Identity Cloud" }, { productId: "V-026-P-002", productName: "Omada Identity On-Premises" }] },
-        { vendorId: "V-005", vendorName: "One Identity", products: [{ productId: "V-005-P-001", productName: "One Identity Safeguard for Privileged Passwords" }, { productId: "V-005-P-002", productName: "One Identity Safeguard for Privileged Sessions" }, { productId: "V-005-P-003", productName: "One Identity Safeguard for Privileged Analytics" }, { productId: "V-005-P-004", productName: "One Identity Safeguard On Demand" }, { productId: "V-005-P-005", productName: "One Identity Manager" }, { productId: "V-005-P-006", productName: "One Identity Safeguard Authentication Services" }, { productId: "V-005-P-007", productName: "One Identity Privilege Manager for Unix Linux macOS" }, { productId: "V-005-P-008", productName: "OneLogin Workforce Identity" }, { productId: "V-005-P-009", productName: "One Identity Active Roles" }] },
-        { vendorId: "V-047", vendorName: "OpenText", products: [{ productId: "V-047-P-001", productName: "OpenText Identity Manager" }, { productId: "V-047-P-002", productName: "OpenText NetIQ Access Manager" }] },
-        { vendorId: "V-043", vendorName: "Oracle", products: [{ productId: "V-043-P-001", productName: "Oracle Identity Governance (OIG)" }, { productId: "V-043-P-002", productName: "Oracle Access Governance" }] },
-        { vendorId: "V-038", vendorName: "Palo Alto Networks", products: [{ productId: "V-038-P-001", productName: "Cortex XSIAM" }] },
-        { vendorId: "V-045", vendorName: "Pathlock", products: [{ productId: "V-045-P-001", productName: "Pathlock Cloud" }] },
-        { vendorId: "V-020", vendorName: "Ping Identity", products: [{ productId: "V-020-P-001", productName: "PingOne Advanced Identity Cloud" }, { productId: "V-020-P-002", productName: "PingOne Privilege" }, { productId: "V-020-P-003", productName: "PingFederate" }] },
-        { vendorId: "V-023", vendorName: "Quest Software", products: [{ productId: "V-023-P-001", productName: "Quest ChangeAuditor" }] },
-        { vendorId: "V-022", vendorName: "Rapid7", products: [{ productId: "V-022-P-001", productName: "Rapid7 InsightIDR" }, { productId: "V-022-P-002", productName: "Rapid7 InsightCloudSec" }] },
-        { vendorId: "V-039", vendorName: "RSA", products: [{ productId: "V-039-P-001", productName: "RSA ID Plus" }, { productId: "V-039-P-002", productName: "RSA Governance & Lifecycle" }] },
-        { vendorId: "V-044", vendorName: "SAP", products: [{ productId: "V-044-P-001", productName: "SAP Cloud Identity Access Governance" }, { productId: "V-044-P-002", productName: "SAP Access Control" }] },
-        { vendorId: "V-011", vendorName: "SailPoint", products: [{ productId: "V-011-P-001", productName: "SailPoint Identity Security Cloud" }, { productId: "V-011-P-002", productName: "SailPoint IdentityIQ" }, { productId: "V-011-P-003", productName: "SailPoint Non-Employee Risk Management" }, { productId: "V-011-P-004", productName: "SailPoint Machine Identity Security" }, { productId: "V-011-P-005", productName: "SailPoint Cloud Access" }] },
-        { vendorId: "V-012", vendorName: "Saviynt", products: [{ productId: "V-012-P-001", productName: "Saviynt Identity Cloud" }] },
-        { vendorId: "V-051", vendorName: "SecureAuth", products: [{ productId: "V-051-P-001", productName: "SecureAuth Identity Platform" }] },
-        { vendorId: "V-034", vendorName: "Securonix", products: [{ productId: "V-034-P-001", productName: "Securonix Unified Defense SIEM" }, { productId: "V-034-P-002", productName: "Securonix UEBA" }] },
-        { vendorId: "V-032", vendorName: "Segura", products: [{ productId: "V-032-P-001", productName: "Segura PAM Core" }, { productId: "V-032-P-002", productName: "Segura Endpoint Privilege Manager" }, { productId: "V-032-P-003", productName: "Segura DevOps Secret Manager" }] },
-        { vendorId: "V-015", vendorName: "Semperis", products: [{ productId: "V-015-P-001", productName: "Semperis Directory Services Protector" }, { productId: "V-015-P-002", productName: "Semperis Active Directory Forest Recovery" }] },
-        { vendorId: "V-030", vendorName: "SentinelOne", products: [{ productId: "V-030-P-001", productName: "SentinelOne Singularity Identity" }] },
-        { vendorId: "V-049", vendorName: "ServiceNow", products: [{ productId: "V-049-P-001", productName: "ServiceNow Identity Security (Veza)" }] },
-        { vendorId: "V-006", vendorName: "Silverfort", products: [{ productId: "V-006-P-001", productName: "Silverfort Identity Security Platform" }] },
-        { vendorId: "V-029", vendorName: "SpecterOps", products: [{ productId: "V-029-P-001", productName: "BloodHound Enterprise" }] },
-        { vendorId: "V-014", vendorName: "Splunk", products: [{ productId: "V-014-P-001", productName: "Splunk Enterprise Security" }] },
-        { vendorId: "V-031", vendorName: "Tenable", products: [{ productId: "V-031-P-001", productName: "Tenable Identity Exposure" }, { productId: "V-031-P-002", productName: "Tenable CIEM" }] },
-        { vendorId: "V-042", vendorName: "Thales", products: [{ productId: "V-042-P-001", productName: "SafeNet Trusted Access" }, { productId: "V-042-P-002", productName: "Thales OneWelcome Identity Platform" }] },
-        { vendorId: "V-041", vendorName: "Transmit Security", products: [{ productId: "V-041-P-001", productName: "Mosaic by Transmit Security" }] },
-        { vendorId: "V-055", vendorName: "Trusona", products: [{ productId: "V-055-P-001", productName: "Trusona Authentication Cloud" }] },
-        { vendorId: "V-017", vendorName: "Varonis", products: [{ productId: "V-017-P-001", productName: "Varonis Data Security Platform" }] },
-        { vendorId: "V-033", vendorName: "WALLIX", products: [{ productId: "V-033-P-001", productName: "WALLIX Bastion" }, { productId: "V-033-P-002", productName: "WALLIX Remote Access" }, { productId: "V-033-P-003", productName: "WALLIX IDaaS" }] },
-        { vendorId: "V-054", vendorName: "Yubico", products: [{ productId: "V-054-P-001", productName: "YubiKey" }, { productId: "V-054-P-002", productName: "YubiHSM 2" }] }
-      ],
-      freeware: [
-        { vendorId: "FW-008", vendorName: "Ansible Vault", products: [{ productId: "FW-008-P-001", productName: "Ansible Vault" }] },
-        { vendorId: "FW-001", vendorName: "BloodHound Community Edition", products: [{ productId: "FW-001-P-001", productName: "BloodHound CE" }] },
-        { vendorId: "FW-006", vendorName: "CyberArk Conjur Open Source", products: [{ productId: "FW-006-P-001", productName: "Conjur Open Source" }] },
-        { vendorId: "FW-003", vendorName: "Forest Druid", products: [{ productId: "FW-003-P-001", productName: "Forest Druid" }] },
-        { vendorId: "FW-010", vendorName: "Keycloak", products: [{ productId: "FW-010-P-001", productName: "Keycloak" }] },
-        { vendorId: "FW-009", vendorName: "OpenSSH", products: [{ productId: "FW-009-P-001", productName: "OpenSSH" }] },
-        { vendorId: "FW-007", vendorName: "Passbolt Community Edition", products: [{ productId: "FW-007-P-001", productName: "Passbolt CE" }] },
-        { vendorId: "FW-002", vendorName: "Purple Knight", products: [{ productId: "FW-002-P-001", productName: "Purple Knight" }] },
-        { vendorId: "FW-005", vendorName: "Teleport Community Edition", products: [{ productId: "FW-005-P-001", productName: "Teleport Community Edition" }] },
-        { vendorId: "FW-004", vendorName: "Windows LAPS", products: [{ productId: "FW-004-P-001", productName: "Windows LAPS" }] }
-      ]
-    };
-
     // API for compliance mapping only
     const API_BASE = 'https://pam-compliance-mapper-api-production.up.railway.app';
-    let loadedVendors = { commercial: [], freeware: [] };
     let lastAnalysisResult = null;
-
-    function loadVendors() {
-      const commercialContainer = document.getElementById('commercial-vendor-list');
-      const freewareContainer = document.getElementById('freeware-vendor-list');
-
-      // IMMEDIATE TEST: If this appears, JS is running and container is accessible
-      commercialContainer.innerHTML = '<div style="background:lime;padding:10px;color:black;font-weight:bold;">JS EXECUTED - STEP 1</div>';
-
-      try {
-        // Check VENDOR_DATA exists
-        const debugInfo = 'typeof VENDOR_DATA: ' + typeof VENDOR_DATA +
-          ', commercial.length: ' + (VENDOR_DATA ? VENDOR_DATA.commercial.length : 'N/A') +
-          ', freeware.length: ' + (VENDOR_DATA ? VENDOR_DATA.freeware.length : 'N/A');
-        console.log(debugInfo);
-
-        // TEST: Update with step 2
-        commercialContainer.innerHTML = '<div style="background:lime;padding:10px;color:black;font-weight:bold;">JS EXECUTED - STEP 2 (VENDOR_DATA: ' + (VENDOR_DATA ? 'exists' : 'missing') + ')</div>';
-
-        // Use static data - already sorted alphabetically
-        loadedVendors.commercial = VENDOR_DATA.commercial;
-        loadedVendors.freeware = VENDOR_DATA.freeware;
-
-        // TEST: Update with step 3
-        commercialContainer.innerHTML = '<div style="background:lime;padding:10px;color:black;font-weight:bold;">JS EXECUTED - STEP 3 (commercial count: ' + loadedVendors.commercial.length + ')</div>';
-
-        // Render vendor accordions
-        const commercialHtml = renderVendorAccordion(loadedVendors.commercial, 'commercial');
-        const freewareHtml = renderVendorAccordion(loadedVendors.freeware, 'freeware');
-
-        // TEST: Update with step 4
-        commercialContainer.innerHTML = '<div style="background:lime;padding:10px;color:black;font-weight:bold;">JS EXECUTED - STEP 4 (commercialHtml length: ' + commercialHtml.length + ')</div>';
-
-        commercialContainer.innerHTML = commercialHtml;
-        freewareContainer.innerHTML = freewareHtml;
-
-        // Attach event listeners
-        attachAccordionListeners();
-      } catch (e) {
-        const errMsg = 'loadVendors ERROR: ' + e.message + ' at ' + e.stack;
-        console.error(errMsg);
-        commercialContainer.innerHTML = '<div style="color:red;padding:10px;background:yellow;">' + errMsg + '</div>';
-      }
-    }
-
-    function renderVendorAccordion(vendors, prefix) {
-      try {
-        console.log('renderVendorAccordion: vendors=' + (vendors ? vendors.length : 'null') + ', prefix=' + prefix);
-
-        if (!vendors || vendors.length === 0) {
-          return '<div class="vendor-results-empty">No vendors available.</div>';
-        }
-
-        let html = '';
-        for (let i = 0; i < vendors.length; i++) {
-          const vendor = vendors[i];
-          const vendorId = prefix + '-' + vendor.vendorId;
-          const vendorNameSafe = escapeHtml(vendor.vendorName);
-
-          html += '<div class="vendor-row" data-vendor-id="' + vendorId + '">' +
-            '<input type="checkbox" class="vendor-checkbox" id="cb-' + vendorId + '" data-vendor="' + vendorNameSafe + '">' +
-            '<span class="vendor-name">' + vendorNameSafe + '</span>' +
-            '<span class="vendor-chevron">&#9654;</span>' +
-            '</div>' +
-            '<div class="vendor-products" data-vendor-id="' + vendorId + '">';
-
-          for (let j = 0; j < vendor.products.length; j++) {
-            const product = vendor.products[j];
-            const productId = vendorId + '-' + product.productId;
-            const productNameSafe = escapeHtml(product.productName);
-
-            html += '<div class="product-item">' +
-              '<input type="checkbox" class="product-checkbox" id="' + productId + '" ' +
-              'data-vendor="' + vendorNameSafe + '" ' +
-              'data-product="' + productNameSafe + '" ' +
-              'data-parent="' + vendorId + '">' +
-              '<label for="' + productId + '">' + productNameSafe + '</label>' +
-              '</div>';
-          }
-          html += '</div>';
-        }
-
-        console.log('renderVendorAccordion: generated ' + html.length + ' chars for ' + prefix);
-        return html;
-      } catch (e) {
-        const errMsg = 'renderVendorAccordion ERROR (' + prefix + '): ' + e.message;
-        console.error(errMsg, e);
-        return '<div style="color:red;padding:10px;">' + errMsg + '</div>';
-      }
-    }
-
-    function attachAccordionListeners() {
-      // Vendor row click - toggle accordion
-      document.querySelectorAll('.vendor-row').forEach(row => {
-        row.addEventListener('click', function(e) {
-          if (e.target.type === 'checkbox') return; // Don't toggle on checkbox click
-
-          const vendorId = this.dataset.vendorId;
-          const products = document.querySelector(`.vendor-products[data-vendor-id="${vendorId}"]`);
-
-          this.classList.toggle('expanded');
-          products.classList.toggle('expanded');
-        });
-      });
-
-      // Vendor checkbox - select/deselect all products
-      document.querySelectorAll('.vendor-checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-          const vendorId = this.id.replace('cb-', '');
-          const productCheckboxes = document.querySelectorAll(`.product-checkbox[data-parent="${vendorId}"]`);
-
-          productCheckboxes.forEach(cb => {
-            cb.checked = this.checked;
-          });
-
-          updateVendorRowState(vendorId);
-        });
-      });
-
-      // Product checkbox - update vendor state
-      document.querySelectorAll('.product-checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-          const vendorId = this.dataset.parent;
-          updateVendorCheckboxState(vendorId);
-          updateVendorRowState(vendorId);
-        });
-      });
-    }
-
-    function updateVendorCheckboxState(vendorId) {
-      const vendorCheckbox = document.getElementById(`cb-${vendorId}`);
-      const productCheckboxes = document.querySelectorAll(`.product-checkbox[data-parent="${vendorId}"]`);
-
-      const total = productCheckboxes.length;
-      const checked = Array.from(productCheckboxes).filter(cb => cb.checked).length;
-
-      if (checked === 0) {
-        vendorCheckbox.checked = false;
-        vendorCheckbox.indeterminate = false;
-      } else if (checked === total) {
-        vendorCheckbox.checked = true;
-        vendorCheckbox.indeterminate = false;
-      } else {
-        vendorCheckbox.checked = false;
-        vendorCheckbox.indeterminate = true;
-      }
-    }
-
-    function updateVendorRowState(vendorId) {
-      const vendorRow = document.querySelector(`.vendor-row[data-vendor-id="${vendorId}"]`);
-      const productCheckboxes = document.querySelectorAll(`.product-checkbox[data-parent="${vendorId}"]`);
-      const hasSelection = Array.from(productCheckboxes).some(cb => cb.checked);
-
-      if (hasSelection) {
-        vendorRow.classList.add('has-selection');
-      } else {
-        vendorRow.classList.remove('has-selection');
-      }
-    }
 
     // Export vendor results
     function exportVendorResults(format) {
@@ -3497,53 +3737,6 @@
       URL.revokeObjectURL(url);
     }
 
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('DOMContentLoaded fired');
-
-      // Visible debug output
-      const debugDiv = document.createElement('div');
-      debugDiv.id = 'visible-debug';
-      debugDiv.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#ff0;color:#000;padding:10px;font-size:12px;z-index:9999;font-family:monospace;';
-      document.body.prepend(debugDiv);
-
-      function debugLog(msg) {
-        console.log(msg);
-        debugDiv.innerHTML += msg + '<br>';
-      }
-
-      debugLog('DOMContentLoaded fired');
-      debugLog('VENDOR_DATA exists: ' + (typeof VENDOR_DATA !== 'undefined'));
-      debugLog('Commercial count: ' + (VENDOR_DATA ? VENDOR_DATA.commercial.length : 'N/A'));
-      debugLog('Freeware count: ' + (VENDOR_DATA ? VENDOR_DATA.freeware.length : 'N/A'));
-
-      try {
-        loadVendors();
-        debugLog('loadVendors() completed without error');
-      } catch (e) {
-        debugLog('ERROR in loadVendors: ' + e.message);
-      }
-
-      // Methodology tooltip toggle
-      const methodologyPill = document.getElementById('methodology-pill');
-      const methodologyTooltip = document.getElementById('methodology-tooltip');
-
-      if (methodologyPill && methodologyTooltip) {
-        methodologyPill.addEventListener('click', function(event) {
-          event.stopPropagation();
-          methodologyTooltip.classList.toggle('visible');
-        });
-
-        // Close methodology tooltip when clicking outside
-        document.addEventListener('click', function(event) {
-          if (methodologyTooltip.classList.contains('visible') &&
-              !methodologyTooltip.contains(event.target) &&
-              !methodologyPill.contains(event.target)) {
-            methodologyTooltip.classList.remove('visible');
-          }
-        });
-      }
-    });
 
     function startOver() {
       // Reset all question states
