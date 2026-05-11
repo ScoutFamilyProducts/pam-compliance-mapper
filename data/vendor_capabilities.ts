@@ -1141,5 +1141,65 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://www.tenable.com/products/tenable-ciem"
       }
     ]
+  },
+  {
+    vendorId: "V-032",
+    vendorName: "Segura",
+    products: [
+      {
+        productId: "V-032-P-001",
+        productName: "Segura PAM Core",
+        capabilities: ["PAM-005", "PAM-007", "PAM-008", "PAM-009", "PAM-013", "PAM-015", "PAM-019", "PAM-020", "PAM-021", "PAM-023", "PAM-024", "PAM-025", "PAM-026", "PAM-027", "PAM-029", "PAM-030", "PAM-031", "PAM-033"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-006", "PAM-010", "PAM-014", "PAM-017", "PAM-032"],
+        notes: "Full-stack PAM platform — available as on-premises software and SaaS. Core capabilities: agentless credential vaulting, automated password rotation with 174+ system connectors, session recording with full-color video and metadata, JIT access, approval workflows (four-eyes principle), account discovery and onboarding, RBAC, break glass, SSH key management, AAPM (Application-to-Application Password Management), remote access proxying, compliance-ready automated reporting (PCI DSS, SOX, ISO 27001, HIPAA, NIST, GDPR, SAMA, NCA, NTC). Quantum Connector enables unified coverage across cloud providers, OT environments (ICS/SCADA), IoT devices, and on-premises systems — distinguishing capability for industrial and critical infrastructure environments. AI-driven auditing and session analysis features. Quick deployment — customers report same-day operationality. Highest customer growth rate among all 12 vendors in the 2025 Gartner MQ.",
+        docsUrl: "https://segura.security/products/privileged-access-management/"
+      },
+      {
+        productId: "V-032-P-002",
+        productName: "Segura Endpoint Privilege Manager",
+        capabilities: ["PAM-005", "PAM-009", "PAM-016"],
+        partialCapabilities: ["PAM-006", "PAM-007", "PAM-008", "PAM-019", "PAM-020"],
+        notes: "Endpoint privilege management (PEDM) for workstations and servers. Removes unnecessary local admin rights, application allowlisting/blocklisting, privilege elevation workflows.",
+        docsUrl: "https://segura.security/products/"
+      },
+      {
+        productId: "V-032-P-003",
+        productName: "Segura DevOps Secret Manager",
+        capabilities: ["PAM-023", "PAM-024", "PAM-028"],
+        partialCapabilities: ["PAM-006", "PAM-019", "PAM-021"],
+        notes: "Secrets management for DevOps and CI/CD pipelines. Scan Discovery for secrets sprawl detection. Centralized secrets lifecycle management with full audit trail. Compatible with all major operating systems, web applications, network devices, databases, directory systems, mobile devices, and browsers.",
+        docsUrl: "https://segura.security/products/devops-secret-manager/"
+      }
+    ]
+  },
+  {
+    vendorId: "V-033",
+    vendorName: "WALLIX",
+    products: [
+      {
+        productId: "V-033-P-001",
+        productName: "WALLIX Bastion",
+        capabilities: ["PAM-005", "PAM-007", "PAM-009", "PAM-015", "PAM-019", "PAM-020", "PAM-021", "PAM-023", "PAM-024", "PAM-025", "PAM-026", "PAM-027", "PAM-029", "PAM-030", "PAM-033"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-006", "PAM-008", "PAM-010", "PAM-014", "PAM-017", "PAM-031", "PAM-032"],
+        notes: "Core PAM product — the foundation of the WALLIX One platform. Available on-premises, SaaS (hosted on Microsoft Azure, ISO/IEC 27001 certified), and hardware appliance. Three integrated components: Session Manager (authenticated users granted access to authorized targets only, full-color video audit trail with transcript and metadata), Password Manager (encrypted vault AES-256, password complexity management, rotation, SSH key rotation, AAPM for application-to-application credential management, check-in/check-out), Access Manager (access request workflows, approval routing, role-based access governance). Covers IT and OT environments — IEC 62443 compliant for industrial control systems and SCADA. WALLIX One Console provides centralized management for large and distributed environments. BSI (Germany) and ANSSI (France) certified. Strong NIS2 and DORA compliance capabilities for European regulated organizations. Acquired Malizen for AI-driven behavioral anomaly detection in 2025. PAM-031 partial — JIT via approval workflows and time-limited access grants, not zero standing privilege architecture. PAM-032 partial — Malizen integration adds AI anomaly detection capabilities.",
+        docsUrl: "https://www.wallix.com/products/privileged-access-management/"
+      },
+      {
+        productId: "V-033-P-002",
+        productName: "WALLIX Remote Access",
+        capabilities: ["PAM-013", "PAM-015", "PAM-019", "PAM-020", "PAM-033"],
+        partialCapabilities: ["PAM-001", "PAM-003", "PAM-030"],
+        notes: "Dedicated secure remote access for vendors, contractors, and third-party providers. VPN-less access with full session monitoring and auditing. Controls privileged access for external parties without exposing the internal network. Session recording for third-party activity. MFA enforced via WALLIX IDaaS or integrated IdP.",
+        docsUrl: "https://www.wallix.com/products/"
+      },
+      {
+        productId: "V-033-P-003",
+        productName: "WALLIX IDaaS",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-015", "PAM-017", "PAM-018"],
+        partialCapabilities: ["PAM-004", "PAM-025", "PAM-026"],
+        notes: "Identity-as-a-Service — cloud-hosted SSO and MFA. Centralizes and encrypts sensitive identity data for secure sharing. SAML, OIDC support. MFA methods including hardware tokens, OTP, push. Streamlines access across applications while enforcing consistent authentication policies.",
+        docsUrl: "https://www.wallix.com/products/"
+      }
+    ]
   }
 ];
