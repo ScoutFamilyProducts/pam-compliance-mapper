@@ -1513,5 +1513,69 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://www.servicenow.com/products/autonomous-security-risk.html"
       }
     ]
+  },
+  {
+    vendorId: "V-050",
+    vendorName: "HYPR",
+    products: [
+      {
+        productId: "V-050-P-001",
+        productName: "HYPR Identity Assurance Platform",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004"],
+        partialCapabilities: ["PAM-015", "PAM-019", "PAM-032"],
+        notes: "Enterprise passwordless authentication platform covering workforce and customers. Three integrated components: HYPR Authenticate (passkeys-based phishing-resistant MFA — transforms smartphones into FIDO2 Enterprise Passkeys, 300% faster than legacy MFA, eliminates push bombing; non-syncable, device-bound credentials that cannot leave the device), HYPR Adapt (continuous risk monitoring — collects device posture, mobile/web/browser context, real-time events, user behavior and CrowdStrike EDR telemetry to dynamically adjust security controls mid-session, not just at login), HYPR Affirm (identity verification orchestration — verifies real identity at account recovery, step-up, and help desk workflows, preventing MFA bypass attacks). Enterprise Passkeys for Microsoft Entra ID: Microsoft-validated FIDO2, covers both web apps and Windows desktop login simultaneously (distinguishing — many competitors cover one or the other but not both). Partnership with Yubico: HYPR Affirm can provision YubiKeys to remotely verified users via an automated, auditable workflow eliminating manual handoffs. Supports PIV-compliant authentication for government and compliance use cases. PAM-004 full — device-bound non-syncable Enterprise Passkeys, no phishable fallback. PAM-032 partial — HYPR Adapt provides continuous behavioral risk assessment integrated with EDR telemetry.",
+        docsUrl: "https://docs.hypr.com/"
+      }
+    ]
+  },
+  {
+    vendorId: "V-051",
+    vendorName: "SecureAuth",
+    products: [
+      {
+        productId: "V-051-P-001",
+        productName: "SecureAuth Identity Platform",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-015", "PAM-017", "PAM-018"],
+        partialCapabilities: ["PAM-004", "PAM-019", "PAM-032"],
+        notes: "Unified identity security platform — workforce IAM, customer IAM (CIAM), and AI agent identity governance. Deployable hybrid, on-premises, or cloud without capability differences. Core capabilities: nearly 30 MFA methods (broadest range of any adaptive auth platform), adaptive authentication with more risk check categories than any competitor per KuppingerCole (device, location, IP reputation, behavioral biometrics, geovelocity, dynamic perimeter), continuous authentication throughout session not just at login (session-aware authorization — re-verifies identity on sensitive actions and adjusts controls in real-time), AI-driven risk scoring, SSO with federation protocol support including legacy and homegrown applications (broad protocol support distinguishes from newer SaaS-only platforms), identity orchestration, AI agent governance (discovery, registration, governance, and detection for NHIs and AI agents in a unified control plane), token-bound sessions and fine-grained API scope enforcement. PAM-004 partial — FIDO2 and phishing-resistant options available but not the exclusive authentication method (supports full range including less phishing-resistant methods for backwards compatibility). PAM-032 partial — behavioral analytics and continuous risk assessment provide UEBA-adjacent identity threat monitoring.",
+        docsUrl: "https://docs.secureauth.com/"
+      }
+    ]
+  },
+  {
+    vendorId: "V-052",
+    vendorName: "HID Global",
+    products: [
+      {
+        productId: "V-052-P-001",
+        productName: "HID DigitalPersona",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004", "PAM-015"],
+        partialCapabilities: ["PAM-005", "PAM-017", "PAM-019", "PAM-025"],
+        notes: "Enterprise multi-factor authentication platform — industry-leading desktop MFA with the widest array of authentication methods and form factors. Core capabilities: passwordless desktop authentication for Windows (workstation and server), SSO to web, legacy, and cloud applications via federation, RADIUS-based MFA for VPN and RDP Gateway, ADFS extension for biometric and smart card MFA, AD and AD LDS (LDAP) deployment models. Authentication methods: fingerprint biometrics, facial recognition, contactless ID cards (physical access badge as IT authenticator — distinguishing physical-logical convergence capability), smart cards and security keys (HID Crescendo — FIDO2, PKI, OATH), OTP tokens, NFC devices, mobile authenticators. Compliance capabilities: leverages Microsoft event forwarding and Power BI for compliance reporting; designed to meet CJIS, NIS2, HIPAA, PCI DSS, and NIST requirements. Supports shared workstation environments (banking tellers, healthcare clinical workstations, manufacturing floor) where multiple users share one Windows machine. Microsoft Entra ID External Authentication Method (EAM) support allows contactless cards and fingerprints as additional factors beyond native Entra capabilities. PAM-004 full — FIDO2 and PKI/CBA both supported (both phishing-resistant per US EO 14028). PAM-015 full — individual accountability enforced even on shared workstations via biometric-bound authentication.",
+        docsUrl: "https://docs.hidglobal.com/"
+      },
+      {
+        productId: "V-052-P-002",
+        productName: "HID Crescendo Cards and Keys",
+        capabilities: ["PAM-004"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-015"],
+        notes: "Hardware smart cards and FIDO2 security keys — the HID Crescendo product family includes smart cards, USB keys, and contactless credentials supporting FIDO2, PKI/CBA, and OATH. Available in multiple form factors: smart cards, USB-A/C security keys, NFC-enabled contactless cards. Used independently or in combination with HID DigitalPersona or any compatible FIDO2 relying party. HID Crescendo C2300 supports both FIDO2 and PKI (dual protocol — same credential covers phishing-resistant web authentication and digital signing/encryption). Widely deployed in government, defense, and regulated financial services requiring hardware-backed, certificate-based authentication.",
+        docsUrl: "https://docs.hidglobal.com/"
+      }
+    ]
+  },
+  {
+    vendorId: "V-053",
+    vendorName: "1Kosmos",
+    products: [
+      {
+        productId: "V-053-P-001",
+        productName: "1Kosmos BlockID",
+        capabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-004", "PAM-015"],
+        partialCapabilities: ["PAM-017", "PAM-019"],
+        notes: "Identity verification and passwordless authentication platform — workforce and customer use cases. Core distinguishing capability: government-verified identity binding at enrollment — users present government-issued ID and complete liveness biometric check (verified to 99% accuracy across 140 countries), which is then cryptographically bound to a FIDO2 credential via a zero-knowledge, privacy-preserving architecture (no centralized PII honeypot). Authentication capabilities: FIDO2 passkeys (device-bound via LiveID biometrics), NIST 800-63-3 AAL2/AAL3 compliant, no passwords, no OTPs. The 1Key physical token (FIDO2/CTAP2) extends phishing-resistant authentication to restricted environments where mobile devices are prohibited: call centers, clean rooms, manufacturing floors, shared workstations. Certifications: NIST 800-63-3 (Kantara), FIDO2, UK DIATF, iBeta ISO/IEC 30107-3, FedRAMP High, DoD IL4. 1B+ daily authentications on the platform. PAM-004 full — device-bound FIDO2 with identity-proofed enrollment eliminates both credential theft and enrollment impersonation. PAM-015 full — every authentication is bound to a government-verified biometric — highest assurance individual accountability of any vendor in this dataset.",
+        docsUrl: "https://docs.1kosmos.com/"
+      }
+    ]
   }
 ];
