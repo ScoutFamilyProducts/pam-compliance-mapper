@@ -2626,6 +2626,7 @@
 
       <div class="submit-wrap">
         <button type="button" class="submit-btn" id="vendor-submit-btn" onclick="mapVendors()">Map My Vendors</button>
+        <a href="#" onclick="document.querySelectorAll('.product-select').forEach(s=>{Array.from(s.options).forEach(o=>o.selected=false)});return false" style="display:block;margin-top:0.5rem;font-size:0.7rem;color:var(--text-dim);text-decoration:none;">Clear all selections</a>
         <div class="vendor-error" id="vendor-error"></div>
         <div class="vendor-loading" id="vendor-loading">
           <span style="color: #94A3B8; font-size: 0.8rem;">Analyzing your stack...</span>
