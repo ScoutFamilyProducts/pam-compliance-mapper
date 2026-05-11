@@ -1055,5 +1055,41 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://omadaidentity.com/"
       }
     ]
+  },
+  {
+    vendorId: "V-027",
+    vendorName: "Exabeam",
+    products: [
+      {
+        productId: "V-027-P-001",
+        productName: "Exabeam Security Operations Platform",
+        capabilities: ["PAM-019", "PAM-020", "PAM-021", "PAM-032"],
+        partialCapabilities: ["PAM-008", "PAM-010"],
+        notes: "Cloud-native SIEM with integrated UEBA and SOAR (Fusion edition). Covers New-Scale SIEM and Exabeam Fusion. Core capabilities: scalable log collection from 680+ product integrations across 350+ vendors, 190+ pre-built correlation rules, AI-driven behavioral analytics with automated investigation timelines, MITRE ATT&CK coverage (199 techniques, 379 sub-techniques), risk-based alert prioritization, SOAR-driven playbooks, Agent Behavior Analytics (ABA) for AI agent monitoring, peer group analysis (compares user activity against role-based peer groups), Threat Center and Outcomes Navigator for benchmarking SOC performance. PAM-032 full — industry-leading UEBA detects insider threats, lateral movement, credential misuse, privilege abuse, and anomalous privileged access patterns. PAM-008 partial — identifies accounts with risky or anomalous access patterns. PAM-010 partial — detects dormant account activity anomalies. Value is dependent on what log sources are connected. Also available as LogRhythm SIEM for on-premises deployments (same core UEBA capabilities).",
+        docsUrl: "https://www.exabeam.com/product/"
+      },
+      {
+        productId: "V-027-P-002",
+        productName: "Exabeam New-Scale Analytics",
+        capabilities: ["PAM-032"],
+        partialCapabilities: ["PAM-008", "PAM-010", "PAM-019", "PAM-020"],
+        notes: "Standalone UEBA add-on — the only UEBA product that runs on top of a third-party SIEM or data lake (Splunk, QRadar, Microsoft Sentinel, etc.) without replacing it. Ingests, parses, and normalizes data using a Common Information Model (CIM). Builds behavioral baselines and uses ML to detect anomalies. Risk-based scoring highlights suspicious privileged access and credential misuse. Automated investigation timelines correlate related events. Customers can add Exabeam's behavioral analytics to their existing SIEM investment without migration.",
+        docsUrl: "https://www.exabeam.com/product/"
+      }
+    ]
+  },
+  {
+    vendorId: "V-028",
+    vendorName: "Elastic Security",
+    products: [
+      {
+        productId: "V-028-P-001",
+        productName: "Elastic Security",
+        capabilities: ["PAM-019", "PAM-020", "PAM-021", "PAM-032"],
+        partialCapabilities: ["PAM-008", "PAM-010"],
+        notes: "Unified SIEM, XDR, and SOAR platform. Single contract includes all three without add-on fees. Core capabilities: any-source data ingestion with automatic schema mapping, built-in detection rules from Elastic Security Labs mapped to MITRE ATT&CK, AI-powered agentic security operations (autonomous agents for correlation, enrichment, and investigation), UEBA as native SIEM component (advanced entity analytics — not a bolt-on), risk-based entity scoring with organizational context via Entity Analytics Watchlists (inject custom risk weightings for high-value entities like privileged admins, departing employees), Elastic Workflows for automated response, generative AI security assistant, SIEM migration support converting Splunk and QRadar detection rules automatically. Open platform — no data rehydration fees, any LLM including on-prem models for air-gapped environments. PAM-032 full — advanced entity analytics natively integrated with risk scoring, behavioral baselining, and Watchlists for privileged user monitoring. PAM-008 partial — entity risk scoring surfaces over-privileged and anomalous accounts. Value dependent on data source connections.",
+        docsUrl: "https://www.elastic.co/security"
+      }
+    ]
   }
 ];
