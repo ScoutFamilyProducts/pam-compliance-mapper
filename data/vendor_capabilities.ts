@@ -258,5 +258,67 @@ export const vendorCapabilities: VendorCapability[] = [
         dependsOn: "V-002-P-006"
       }
     ]
+  },
+  {
+    vendorId: "V-003",
+    vendorName: "BeyondTrust",
+    products: [
+      {
+        productId: "V-003-P-001",
+        productName: "BeyondTrust Password Safe",
+        capabilities: ["PAM-005", "PAM-007", "PAM-008", "PAM-009", "PAM-010", "PAM-013", "PAM-015", "PAM-019", "PAM-020", "PAM-021", "PAM-022", "PAM-023", "PAM-024", "PAM-025", "PAM-026", "PAM-027", "PAM-029"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-006", "PAM-030", "PAM-031"],
+        notes: "Core PAM vault deployed via BeyondInsight platform. BeyondInsight integrates vulnerability management, patch management, PAM, and incident response into a unified solution. Password Safe capabilities: credential vaulting (privileged accounts, SSH keys, cloud admin accounts, DevOps secrets, service accounts), automated password rotation on managed accounts, discovery and asset scanning (automated onboarding profiles all assets), session monitoring and recording (real-time monitoring with ability to pause or terminate suspicious sessions), Secrets Safe (DevOps secrets management built in), Workforce Passwords (business user credential management built in), RBAC via group-based permissions and Smart Groups, access request workflows with JIT model, searchable audit trail for forensics. Available as cloud and on-premises deployment. MFA via integration with identity providers. Session recording partial — records sessions launched through Password Safe, direct connections not captured. Partial JIT via access request workflows and checkout model.",
+        docsUrl: "https://docs.beyondtrust.com/bips/docs/welcome-to-password-safe"
+      },
+      {
+        productId: "V-003-P-002",
+        productName: "BeyondTrust Privileged Remote Access",
+        capabilities: ["PAM-013", "PAM-015", "PAM-019", "PAM-020", "PAM-030", "PAM-033"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-005", "PAM-014", "PAM-031"],
+        notes: "Dedicated vendor and remote worker privileged access management. Jump Technology enables access to any system on any network without pre-installed software on every target. Jumpoint provides gateway-based access to network segments. Jump Policies restrict access to defined schedules with forced session termination at schedule end. Real-time session monitoring — administrators can pause or terminate sessions. Full session recording of all access sessions. RBAC via role-based permissions. MFA support. ServiceNow and Jira Service Management integration for ticketed access workflows. Available as cloud and on-premises. Session recording is full — all sessions recorded regardless of initiation method. PAM-014 partial — session timeout configurable via Jump Policies. PAM-031 partial — Jump Policies enforce time windows but not true zero standing privilege.",
+        docsUrl: "https://docs.beyondtrust.com/pra/docs/welcome-to-privileged-remote-access"
+      },
+      {
+        productId: "V-003-P-003",
+        productName: "BeyondTrust EPM for Windows and Mac",
+        capabilities: ["PAM-005", "PAM-009", "PAM-016", "PAM-019", "PAM-020", "PAM-025", "PAM-028"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-007", "PAM-008", "PAM-010", "PAM-021", "PAM-031"],
+        notes: "Endpoint Privilege Management for Windows and Mac. Least privilege enforcement — removes local admin rights, elevates specific applications only. Application control — allow listing, blocking, elevation policies. Local account discovery and management. RBAC via policy-based controls. Audit logging with SIEM integration. Step-up MFA via SAML/SSO integration for elevation. No session recording by design — endpoint scale makes recording impractical. Partial JIT — elevation policies are task-scoped but without full time-limited session termination.",
+        docsUrl: "https://docs.beyondtrust.com/epm-wm/docs/epm-windows-mac-landing"
+      },
+      {
+        productId: "V-003-P-004",
+        productName: "BeyondTrust EPM for Unix and Linux",
+        capabilities: ["PAM-005", "PAM-016", "PAM-019", "PAM-020"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-007", "PAM-008"],
+        notes: "Endpoint Privilege Management for Unix and Linux. Least privilege enforcement on Unix and Linux systems. Privilege escalation controls — sudo controls, command-level privilege management. Application control on Unix/Linux. Audit logging of privileged activity. MFA via SAML/SSO integration. Does not include credential vaulting, rotation, or session recording.",
+        docsUrl: "https://docs.beyondtrust.com/epm-l/page/epm-landing"
+      },
+      {
+        productId: "V-003-P-005",
+        productName: "BeyondTrust Identity Security Insights",
+        capabilities: ["PAM-008", "PAM-017", "PAM-032"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-010", "PAM-016"],
+        notes: "ITDR and CIEM — identity security posture management. Provides complete view of identities, accounts, effective privileges, escalation paths, and threats from a single lens. Scans AD, Entra ID, AWS, Okta and other platforms. Identifies dormant and inactive accounts, misconfigurations, over-permissive roles, privilege escalation paths, and lateral movement paths. Risk-ranked remediation report with prioritized fixes. Continuous monitoring. Authentication system inventory across connected platforms. Part of the Pathfinder platform umbrella.",
+        docsUrl: "https://docs.beyondtrust.com/insights/docs/identity-security-insights-landing"
+      },
+      {
+        productId: "V-003-P-006",
+        productName: "BeyondTrust Entitle",
+        capabilities: ["PAM-011", "PAM-012", "PAM-022", "PAM-031"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-007"],
+        notes: "Comprehensive identity and access management — IGA for cloud and SaaS environments. Manages entire access authorization process by automating JIT access and permission management. Reduces standing privileges, simplifies access reviews, handles evaluation and approval or denial of permission requests. Joiner-mover-leaver automation. Access certification campaigns. Integrates with Password Safe for PAM-governed JIT access. Focused on cloud and SaaS environments — complements Password Safe for infrastructure.",
+        docsUrl: "https://docs.beyondtrust.com/entitle/docs/entitle-landing"
+      },
+      {
+        productId: "V-003-P-007",
+        productName: "BeyondTrust AD Bridge",
+        capabilities: ["PAM-005", "PAM-015", "PAM-016", "PAM-020"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-008"],
+        notes: "Centralizes and streamlines authentication across Windows, Unix, and Linux using Active Directory. Joins non-Windows systems to AD domain. Centralized authentication via AD. RBAC via AD groups and policies. Privilege escalation controls on Unix/Linux. Audit logging of privileged activity on managed systems. MFA via AD-integrated identity providers. Same pattern as Delinea Server Suite — focused on cross-platform AD integration and Unix/Linux privilege controls. Does not include credential vaulting or session recording.",
+        docsUrl: "https://docs.beyondtrust.com/adb/docs/ad-bridge-landing"
+      }
+    ]
   }
 ];
