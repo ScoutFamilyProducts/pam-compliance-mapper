@@ -961,5 +961,27 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://www.manageengine.com/privileged-access-management/help/"
       }
     ]
+  },
+  {
+    vendorId: "V-022",
+    vendorName: "Rapid7",
+    products: [
+      {
+        productId: "V-022-P-001",
+        productName: "Rapid7 InsightIDR",
+        capabilities: ["PAM-019", "PAM-020", "PAM-021"],
+        partialCapabilities: ["PAM-008", "PAM-010", "PAM-032"],
+        notes: "Cloud-native SIEM and XDR — being rebranded as Incident Command. Collects and correlates security telemetry from endpoints, network, cloud, and identity sources including Microsoft Entra ID (integrated November 2025), PAM platforms, and AD. Core PAM-relevant capabilities: UEBA detects lateral movement, privilege abuse, anomalous access patterns, watched/admin-led password resets, and suspicious authentication activity; User Behavior Analytics (UBA) rules unified into Detection Rule Library; identity posture integration (April 2026) enables pivot from SIEM alert to identity profile showing MFA status, account risk, and group memberships; AI-driven alert triage and dynamic exposure scoring prioritizes high-risk identity events; automated containment of compromised users and assets. PAM-032 partial — strong UEBA for privileged user behavioral analytics but not dedicated ITDR. PAM-008 partial — identity posture visibility identifies accounts with risky configurations. Like Splunk and Google Security Operations, value is entirely dependent on which log sources are connected.",
+        docsUrl: "https://docs.rapid7.com/insightidr/"
+      },
+      {
+        productId: "V-022-P-002",
+        productName: "Rapid7 InsightCloudSec",
+        capabilities: ["PAM-008"],
+        partialCapabilities: ["PAM-005", "PAM-006", "PAM-016", "PAM-017", "PAM-019"],
+        notes: "Cloud security platform — CSPM and CIEM across AWS, Azure, and GCP. Continuously identifies misconfigurations, excessive permissions, and risky cloud entitlements. Risk-aware compliance experience maps findings to compliance frameworks. Remediation Hub prioritizes cloud misconfigurations by asset group. GCP Security Command Center integration. PAM-016 partial — identifies privilege escalation paths in cloud environments but detection only. Integrates with InsightIDR for combined cloud security and SIEM workflows.",
+        docsUrl: "https://docs.rapid7.com/insightcloudsec/"
+      }
+    ]
   }
 ];
