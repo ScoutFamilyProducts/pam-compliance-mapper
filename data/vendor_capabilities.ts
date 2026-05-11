@@ -1577,5 +1577,55 @@ export const vendorCapabilities: VendorCapability[] = [
         docsUrl: "https://docs.1kosmos.com/"
       }
     ]
+  },
+  {
+    vendorId: "V-054",
+    vendorName: "Yubico",
+    products: [
+      {
+        productId: "V-054-P-001",
+        productName: "YubiKey",
+        capabilities: ["PAM-004"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-015", "PAM-023", "PAM-024"],
+        notes: "Hardware security key — the gold standard phishing-resistant hardware authenticator. Multi-protocol support on a single device: FIDO2/WebAuthn (passkeys — device-bound, private key never leaves hardware), FIDO U2F, PIV/Smart Card (X.509 certificates, digital signing, encryption), OATH (HOTP, TOTP), OpenPGP, Yubico OTP. Available in multiple form factors: USB-A, USB-C, Lightning, NFC, nano. YubiKey Bio Series adds fingerprint biometric to FIDO2 and PIV on the same key. YubiKey 5 FIPS Series: FIPS 140-2 and 140-3 validated for government and regulated industries. Enterprise features: Enterprise Attestation (YubiKey serial numbers retrievable by IdP during FIDO2 registration for asset tracking and policy enforcement), PIN complexity enforcement at hardware level (blocks common/simple PINs), CTAP 2.1 implementation. Works out of the box across hundreds of enterprise applications and IdPs (Microsoft, Okta, Ping, Entra, AWS, Google) without agents or software on the authenticating device. IP68 rated, no battery, no cellular connectivity required — works in OT environments and air-gapped systems. PAM-004 full — hardware-backed FIDO2 and PIV/CBA, both phishing-resistant per US EO 14028, NIST 800-63B AAL3 compliant. PAM-001 and PAM-002 partial — YubiKey is the authenticator factor; the IdP or PAM platform enforces the MFA policy. PAM-015 partial — hardware binding and Enterprise Attestation tie each authentication to a specific physical device issued to a specific individual. PAM-023 partial — YubiKey PIV stores private keys and certificates in hardware secure element. PAM-024 partial — manages X.509 certificate lifecycle for PIV-based authentication.",
+        docsUrl: "https://docs.yubico.com/"
+      },
+      {
+        productId: "V-054-P-002",
+        productName: "YubiHSM 2",
+        capabilities: ["PAM-023"],
+        partialCapabilities: ["PAM-024", "PAM-028"],
+        notes: "Hardware Security Module for server-side cryptographic key management and secrets protection. Ultra-compact form factor (USB-A nano). Core capabilities: hardware-protected storage for root CA keys, code signing keys, TLS certificates, and application secrets; cryptographic operations performed inside tamper-resistant hardware (RSA, ECC, AES, HMAC); role-based access control for HSM access; audit logging of all cryptographic operations; wrap and unwrap operations for secure key export/import. Available in FIPS 140-2 Level 3 validated version (YubiHSM 2 FIPS). Used for protecting the cryptographic foundation of PKI infrastructure, code signing pipelines, and application-to-application secret management. Pairs with YubiKey for a hardware-to-hardware trust chain.",
+        docsUrl: "https://docs.yubico.com/hardware/yubihsm-2/"
+      }
+    ]
+  },
+  {
+    vendorId: "V-055",
+    vendorName: "Trusona",
+    products: [
+      {
+        productId: "V-055-P-001",
+        productName: "Trusona Authentication Cloud",
+        capabilities: ["PAM-001", "PAM-002", "PAM-004"],
+        partialCapabilities: ["PAM-003", "PAM-015", "PAM-019"],
+        notes: "Passwordless MFA and account takeover protection platform. Two integrated components: Authentication Cloud (FIDO2/WebAuthn-based passwordless authentication — app-less, no mobile app installation required, uses native browser/device capabilities; passkeys deployable in weeks; mitigates SIM swapping, keylogging, credential stuffing, and session replay attacks) and ATO Protect (account takeover protection for IT help desk and account recovery workflows — verifies real-world identity via government ID scanning + biometric liveness detection + authoritative record cross-check before allowing password reset or MFA recovery; integrates with existing ITSM and identity systems). Patented Anti-Replay Technology (TruAR) invalidates each authentication session after use — captured credentials cannot be replayed. Integrates with Microsoft Azure AD Conditional Access, Okta, and other enterprise IdPs. PAM-004 full — FIDO2-based, phishing-resistant, app-less MFA with anti-replay prevents all common credential theft vectors. PAM-015 partial — ATO Protect verifies real-world identity before privileged account recovery actions, preventing impersonation of privileged users at the help desk.",
+        docsUrl: "https://www.trusona.com/trusona-authentication-cloud"
+      }
+    ]
+  },
+  {
+    vendorId: "V-056",
+    vendorName: "Nametag",
+    products: [
+      {
+        productId: "V-056-P-001",
+        productName: "Nametag Identity Verification Platform",
+        capabilities: [],
+        partialCapabilities: ["PAM-015", "PAM-019"],
+        notes: "Workforce identity verification platform for high-risk identity moments — helpdesk verification, self-service account recovery, secure employee onboarding, and AI agent action verification. Core capabilities: Deepfake Defense™ (cryptographic attestation validates device/OS/sensor integrity before any biometric data is collected — blocks injection attacks that fool camera-based systems; distinguishing capability, not available from browser-based solutions), Adaptive Document Verification (government-issued ID verification across thousands of document types in 140+ countries with 99% accuracy), biometric liveness detection, Spatial Selfie (3D depth mapping to detect 2D photo and video spoofing). Verification request sent via any support channel (ServiceNow, email, self-service microsite); user verifies in under 30 seconds on their smartphone without pre-enrollment. Full audit trail — Proof of Verification records with customizable visibility into decision-making for compliance and audit purposes. Integrations: Okta (External Authentication Method), Microsoft Entra ID, ServiceNow ITSM, Beyond Identity. Addresses the Scattered Spider attack pattern: attackers social engineering help desk agents into resetting admin MFA or SSPR credentials by impersonating legitimate employees. PAM-015 partial — verifies real-world identity at privileged account recovery and onboarding events, ensuring that the individual receiving or recovering privileged credentials is the genuine, verified employee. PAM-019 partial — Proof of Verification provides audit records of every identity verification decision for compliance review.",
+        docsUrl: "https://getnametag.com/platform/"
+      }
+    ]
   }
 ];
