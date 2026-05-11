@@ -476,5 +476,35 @@ export const vendorCapabilities: VendorCapability[] = [
         addOnOf: "V-007-P-001"
       }
     ]
+  },
+  {
+    vendorId: "V-008",
+    vendorName: "HashiCorp",
+    products: [
+      {
+        productId: "V-008-P-001",
+        productName: "HashiCorp Vault",
+        capabilities: ["PAM-006", "PAM-019", "PAM-020", "PAM-023", "PAM-024", "PAM-025", "PAM-026", "PAM-028", "PAM-031"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-005", "PAM-008", "PAM-015", "PAM-021"],
+        notes: "Secrets management platform covering both static secrets (KV store) and dynamic secrets (on-demand generation with automatic revocation). Covers self-hosted (Community, Enterprise) and HCP Vault Dedicated (managed SaaS) — identical capability set, deployment model difference only. Core capabilities: dynamic secrets engines for databases (MySQL, PostgreSQL, Oracle, MongoDB, etc.) generating time-limited credentials per request, cloud IAM credential generation (AWS, Azure, GCP) eliminating long-lived cloud credentials, SSH secrets engine for JIT SSH certificates (zero standing SSH access), PKI and certificate lifecycle management, static secrets rotation, encryption as a service (encrypt/decrypt data without exposing keys), RBAC via policies (fine-grained path-based access control), multiple auth methods (LDAP, AD, OIDC, AWS IAM, Kubernetes, Azure, GitHub, etc.), tamper-evident audit logging of all operations, lease management (automatic expiration and renewal), namespaces for multi-tenancy (Enterprise). PAM-031 full via dynamic secrets — credentials exist only for the duration of the lease, automatically revoked on expiry. Does not provide session recording, access management, or endpoint controls — Boundary handles access management. MFA enforced via integrated auth methods partial.",
+        docsUrl: "https://developer.hashicorp.com/vault/docs"
+      },
+      {
+        productId: "V-008-P-002",
+        productName: "HashiCorp Boundary",
+        capabilities: ["PAM-005", "PAM-007", "PAM-015", "PAM-019", "PAM-020", "PAM-031", "PAM-033"],
+        partialCapabilities: ["PAM-001", "PAM-002", "PAM-003", "PAM-013", "PAM-014", "PAM-021", "PAM-030"],
+        notes: "Zero trust infrastructure access management. Available as Community Edition (free, self-managed), Enterprise (self-managed with commercial features), and HCP Boundary (managed SaaS). Core capabilities: identity-based access without VPN or firewall changes — users authenticate via trusted IdP (Okta, Azure AD, Auth0, Ping) and get access to specific resources only; RBAC via roles, scopes, and composable grants; credential brokering with Vault — Vault generates dynamic credentials per session, users never see credentials and cannot reuse them; JIT access — sessions created on demand, time-limited, automatically expire; automated service discovery for dynamic infrastructure; session monitoring and audit logging; SIEM integration. Session recording: partial for Community Edition, full session recording with session player for Enterprise and HCP Boundary. Integrates with Vault for full zero trust PAM architecture. PAM-013 partial — supports vendor access patterns but not a dedicated RPAM product. PAM-014 partial — session idle timeout configurable. SSO via OIDC enforces MFA from integrated IdP.",
+        docsUrl: "https://developer.hashicorp.com/boundary/docs"
+      },
+      {
+        productId: "V-008-P-003",
+        productName: "HashiCorp Vault Radar",
+        capabilities: [],
+        partialCapabilities: ["PAM-008", "PAM-028"],
+        notes: "Secret scanning product — scans code repositories, configuration files, and infrastructure for leaked, embedded, or hardcoded secrets. Identifies secret sprawl and exposed credentials. Available as HCP managed service. Partial PAM-008 — discovers unmanaged secrets and credentials across the environment. Partial PAM-028 — detects default and hardcoded credentials before they become a breach vector. Does not provide access management or session controls.",
+        docsUrl: "https://developer.hashicorp.com/hcp/docs/vault-radar"
+      }
+    ]
   }
 ];
