@@ -2661,7 +2661,7 @@
         <a href="#" onclick="document.querySelectorAll('.product-select').forEach(s=>{Array.from(s.options).forEach(o=>o.selected=false)});return false" style="display:block;margin-top:0.5rem;font-size:0.7rem;color:var(--text-dim);text-decoration:none;">Clear all selections</a>
         <div class="vendor-error" id="vendor-error"></div>
         <div class="vendor-loading" id="vendor-loading">
-          <span style="color: #94A3B8; font-size: 0.8rem;">Analyzing your stack...</span>
+          <span id="vendor-loading-text" style="color: #94A3B8; font-size: 0.8rem;">Analyzing your stack...</span>
           <div class="vendor-loading-bar"></div>
         </div>
       </div>
@@ -2739,6 +2739,37 @@
     // API configuration - must be at top before any function references
     const API_BASE = 'https://pam-compliance-mapper-api-production.up.railway.app';
     let lastAnalysisResult = null;
+
+    // Loading message rotation
+    const loadingMessages = [
+      'Analyzing your stack...',
+      'Mapping controls to frameworks...',
+      'Identifying coverage gaps...',
+      'Generating remediation guidance...',
+      'This typically takes 30-60 seconds...',
+      'Almost there...'
+    ];
+    let loadingMessageInterval = null;
+    let loadingMessageIndex = 0;
+
+    function startLoadingMessages() {
+      loadingMessageIndex = 0;
+      const textEl = document.getElementById('vendor-loading-text');
+      if (textEl) textEl.textContent = loadingMessages[0];
+      loadingMessageInterval = setInterval(() => {
+        loadingMessageIndex = (loadingMessageIndex + 1) % loadingMessages.length;
+        if (textEl) textEl.textContent = loadingMessages[loadingMessageIndex];
+      }, 4000);
+    }
+
+    function stopLoadingMessages() {
+      if (loadingMessageInterval) {
+        clearInterval(loadingMessageInterval);
+        loadingMessageInterval = null;
+      }
+      const textEl = document.getElementById('vendor-loading-text');
+      if (textEl) textEl.textContent = loadingMessages[0];
+    }
 
     // Question definitions
     const questions = {
@@ -3696,9 +3727,10 @@
 
       // Show loading state
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Analyzing your stack...';
+      submitBtn.textContent = 'Analyzing...';
       loadingDiv.classList.add('visible');
       resultsPanel.classList.remove('visible');
+      startLoadingMessages();
 
       try {
         const response = await fetch(`${API_BASE}/api/analyze-vendors`, {
@@ -3740,6 +3772,7 @@
         errorDiv.textContent = 'Analysis unavailable. Please try again or contact thepaminsider@gmail.com';
       } finally {
         // Reset button state
+        stopLoadingMessages();
         submitBtn.disabled = false;
         submitBtn.textContent = 'Map My Vendors';
         loadingDiv.classList.remove('visible');
