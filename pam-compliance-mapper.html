@@ -1987,7 +1987,7 @@
       }
 
       .callout-note::before {
-        content: "â–ª ";
+        content: "&#9642; ";
         color: #4d8c00;
       }
 
@@ -2031,7 +2031,7 @@
 <body>
   <nav>
     <a href="/" class="nav-brand">THE PAM INSIDER</a>
-    <a href="/apps" class="nav-back">â€¹ PAM Apps</a>
+    <a href="/apps" class="nav-back">&lsaquo; PAM Apps</a>
   </nav>
 
   <main class="page-wrap">
@@ -2051,7 +2051,7 @@
       <div class="hero-updated">Vendor and framework data last updated May 2026</div>
       <button type="button" class="disclaimer-btn" onclick="toggleDisclaimer()">Disclaimer</button>
       <div class="disclaimer-panel" id="disclaimer-panel">
-        <p>The capabilities matrix was assembled from publicly available documentation and professional experience. It is assumed incomplete and may contain errors. If you spot something incorrect or missing, please let us know â€” <a href="mailto:thepaminsider@gmail.com">thepaminsider@gmail.com</a></p>
+        <p>The capabilities matrix was assembled from publicly available documentation and professional experience. It is assumed incomplete and may contain errors. If you spot something incorrect or missing, please let us know &mdash; <a href=”mailto:thepaminsider@gmail.com”>thepaminsider@gmail.com</a></p>
       </div>
     </section>
 
@@ -2716,12 +2716,12 @@
       <div class="callout-block">
         <div class="callout-title">This tool runs on a backend service</div>
         <div class="callout-text">The AI-powered vendor mapping runs on a paid API. If this saved you time or helped make a better argument to your auditor, consider buying a coffee.</div>
-        <a href="https://buymeacoffee.com/thepaminsider" target="_blank" class="callout-link">Buy Me a Coffee â†—</a>
+        <a href="https://buymeacoffee.com/thepaminsider" target="_blank" class="callout-link">Buy Me a Coffee &#8599;</a>
       </div>
       <div class="callout-block">
         <div class="callout-title">Now that you know your posture</div>
         <div class="callout-text">See how it holds up under pressure. Phantom Privilege puts you in the defender's seat across a real attack campaign.</div>
-        <a href="/phantom-privilege" class="callout-link">Explore Phantom Privilege â†—</a>
+        <a href="/phantom-privilege" class="callout-link">Explore Phantom Privilege &#8599;</a>
       </div>
     </div>
   </main>
@@ -3501,7 +3501,7 @@
           if (coverage === 'not_stated') {
             td.innerHTML = '<span class="status-badge na">N/A</span>';
           } else if (!scoreData) {
-            td.innerHTML = '<span class="status-badge na na-unanswered">â€”</span>';
+            td.innerHTML = '<span class=”status-badge na na-unanswered”>&mdash;</span>';
           } else {
             let badgeClass = '';
             let badgeText = '';
@@ -3571,8 +3571,8 @@
       let callouts = [];
 
       callouts.push('PCI DSS 4.0.1 replaced v4.0 which was retired December 31 2024. All assessments reference v4.0.1.');
-      callouts.push('NIST CSF 2.0 is a voluntary outcomes-based framework â€” no hard pass/fail. Results indicate alignment, not certification.');
-      callouts.push('HIPAA addressable specifications are not optional â€” organizations must implement or document an equivalent alternative.');
+      callouts.push('NIST CSF 2.0 is a voluntary outcomes-based framework &mdash; no hard pass/fail. Results indicate alignment, not certification.');
+      callouts.push('HIPAA addressable specifications are not optional &mdash; organizations must implement or document an equivalent alternative.');
 
       // Q6 threshold
       if (questionState.q6.answer && questionState.q6.threshold) {
@@ -3875,11 +3875,11 @@
 
       // Add coverage type notes
       if (refData.covered === 'addressable') {
-        html += `<div class="ref-popover-addressable">Addressable â€” implement or document equivalent alternative</div>`;
+        html += `<div class="ref-popover-addressable">Addressable &mdash; implement or document equivalent alternative</div>`;
       } else if (refData.covered === 'outcomes_based') {
-        html += `<div class="ref-popover-outcomes">Outcomes-based framework â€” no hard pass/fail</div>`;
+        html += `<div class="ref-popover-outcomes">Outcomes-based framework &mdash; no hard pass/fail</div>`;
       } else if (refData.covered === 'implied') {
-        html += `<div class="ref-popover-implied">Implied by framework requirements â€” not explicitly stated</div>`;
+        html += `<div class="ref-popover-implied">Implied by framework requirements &mdash; not explicitly stated</div>`;
       }
 
       return html;
