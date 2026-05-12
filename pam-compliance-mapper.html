@@ -2727,7 +2727,7 @@
   </main>
 
   <footer>
-    <div class="footer-copy">Â© 2026 The PAM Insider llc</div>
+    <div class="footer-copy">&copy; 2026 The PAM Insider llc</div>
     <div class="footer-links">
       <a href="/apps">PAM Apps</a>
       <a href="/articles">Articles & Thoughts</a>
@@ -3755,7 +3755,7 @@
       if (analysis.strengths && analysis.strengths.length > 0) {
         strengthsList.innerHTML = analysis.strengths.map(s => `
           <div class="strength-item">
-            <span class="strength-check">âœ“</span>
+            <span class=”strength-check”>&#10003;</span>
             <div class="strength-content">
               <span class="strength-name">${escapeHtml(s.controlName)}</span>
               <span class="strength-covered">Covered by: ${escapeHtml(s.coveredBy.join(', '))}</span>
@@ -3770,7 +3770,7 @@
       const gapsList = document.getElementById('vendor-gaps-list');
       if (analysis.gaps && analysis.gaps.length > 0) {
         gapsList.innerHTML = analysis.gaps.map(g => {
-          const frameworkNames = g.frameworks.map(f => frameworkDisplayMap[f] || f).join(' Â· ');
+          const frameworkNames = g.frameworks.map(f => frameworkDisplayMap[f] || f).join(' &middot; ');
           return `
             <div class="gap-item severity-${g.severity}">
               <div class="gap-header">
