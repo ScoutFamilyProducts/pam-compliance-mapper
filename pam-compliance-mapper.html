@@ -2671,6 +2671,13 @@
           <div class="cyberinsurance-disclaimer-title">Cyber Insurance Disclaimer</div>
           <div class="cyberinsurance-disclaimer-text">Cyber insurance requirements vary significantly by carrier, policy type, and underwriting criteria. The mappings shown here represent common control requirements but are not guaranteed to match your specific policy. Always verify requirements directly with your carrier or broker.</div>
         </div>
+        <div style="font-size:0.75rem; color:#475569; line-height:1.6;
+                    margin-bottom:1.5rem; padding:0.65rem 0.85rem;
+                    border-left:2px solid rgba(255,255,255,0.08);">
+          Coverage reflects deployed products. Actual compliance posture
+          depends on how those products are configured and enforced in
+          your environment.
+        </div>
         <div class="vendor-results-section" id="vendor-summary-section">
           <div class="vendor-results-label">ANALYSIS SUMMARY</div>
           <div class="vendor-results-summary" id="vendor-summary-text"></div>
@@ -3978,10 +3985,15 @@
       const filename = `pam-compliance-analysis-${timestamp}`;
 
       if (format === 'json') {
-        const jsonStr = JSON.stringify(lastAnalysisResult, null, 2);
+        const exportData = {
+          caveat: "Coverage reflects deployed products. Actual compliance posture depends on how those products are configured and enforced in your environment.",
+          ...lastAnalysisResult
+        };
+        const jsonStr = JSON.stringify(exportData, null, 2);
         downloadFile(jsonStr, `${filename}.json`, 'application/json');
       } else if (format === 'csv') {
-        const csv = convertToCSV(lastAnalysisResult);
+        const caveatLine = '"IMPORTANT: Coverage reflects deployed products. Actual compliance posture depends on how those products are configured and enforced in your environment."\n\n';
+        const csv = caveatLine + convertToCSV(lastAnalysisResult);
         downloadFile(csv, `${filename}.csv`, 'text/csv');
       }
     }
